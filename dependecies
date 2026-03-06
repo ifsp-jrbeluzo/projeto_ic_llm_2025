@@ -1,0 +1,2 @@
+pip install ollama
+pip install ollama chromadb
