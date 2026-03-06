@@ -1,4 +1,5 @@
-import requests
+import os
+from ollama import Client
 
 #log colors
 text_reset      = "\033[0m"
@@ -17,13 +18,19 @@ while True:
     if prompt == "/end":
         break
 
-    r = requests.post(
-    "http://localhost:11434/api/generate",
-    json={
-        "model": "llama3",
-        "prompt": prompt,
-        "stream": False
-    }
+    client = Client(
+        host="https://ollama.com",
+        headers={'Authorization': 'Bearer ' + '3abac4c624ac4438ae50f4e78f5287cd.7CGPF_O-lLdkyXHW-RgFEAYt'}
     )
 
-    print(f"\n{text_green}Response:{text_reset} {r.json()['response']}")
+    messages = [
+      {
+        'role': 'user',
+        'content': prompt,
+      },
+    ]
+    msg = ""
+    for part in client.chat('gemma3:27b', messages=messages, stream=True):
+      msg = msg + f"{part['message']['content']}"
+
+    print(f"\n{text_green}Response:{text_reset} {msg}")
