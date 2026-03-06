@@ -14,7 +14,7 @@ text_white      = "\033[37m"
 while True:
     prompt = input(f"\n{text_yellow}Prompt:{text_reset} ")
 
-    if prompt == "/finalizar":
+    if prompt == "/end":
         break
 
     r = requests.post(
