@@ -21,23 +21,33 @@ text_white      = "\033[37m"
 chroma_client = chromadb.PersistentClient(path="./database")
 
 #get collection
-collection = chroma_client.get_collection("collecA")
+collection = chroma_client.get_collection("papers")
 
-def get_embedding(prompt, n_results=10):
+def get_embedding(prompt, n_results=5):
   query_embedding = ollama.embeddings(
-    model='embeddinggemma',
-    prompt=prompt
-  )['embedding']
+        model='embeddinggemma',
+        prompt=prompt
+    )['embedding']
 
   results = collection.query(
       query_embeddings=[query_embedding],
       n_results=n_results
   )
 
-  context = "\n".join(results['documents'][0])
+  context_chunks = []
+
+  for doc, meta in zip(results["documents"][0], results["metadatas"][0]):
+      source = meta["source"]
+      chunk = meta["chunk"]
+
+      context_chunks.append(
+          f"[Source: {source} | Chunk {chunk}]\n{doc}"
+      )
+
+  context = "\n\n".join(context_chunks)
+
   return context
    
-
 #init ollama client
 ollama_client = Client(
     host="https://ollama.com",
@@ -53,15 +63,27 @@ while True:
   context = get_embedding(prompt)
 
   final_prompt = f"""
-  Utilize o contexto abaixo para responder a pergunta do usuário.
-  Se a informação não estiver no contexto, diga que não sabe.
+You are a scientist working on a Systematic review article
+specialized in answering questions using scientific papers and synthesizing the infortation within it.
 
-  Contexto:
-  {context}
+You'll receive chunks from a model that will do the embedding from several papers
 
-  Pergunta do Usuário:
-  {prompt}
+Instructions:
+- Use ONLY the information provided in the Papers, try to do synthezise and interpret not only spit raw data.
+- If the answer is not contained within the papers, say you don't know.
+- Do not invent information, always use the information provided to give your answer.
+- Answer the question in portuguese even if the context is in english.
+
+<Papers chunks>
+{context}
+</Papers chunks>
+
+<Question>
+{prompt}
+</Question>
   """
+
+  #print(f"\n{text_magenta}Final Prompt:{text_reset} {final_prompt}")
 
   messages = [
     {
