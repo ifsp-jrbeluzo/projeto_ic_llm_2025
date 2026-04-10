@@ -83,7 +83,7 @@ Instructions:
 </Question>
   """
 
-  #print(f"\n{text_magenta}Final Prompt:{text_reset} {final_prompt}")
+  print(f"\n{text_magenta}Final Prompt:{text_reset} {final_prompt}")
 
   messages = [
     {
