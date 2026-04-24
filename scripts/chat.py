@@ -23,7 +23,7 @@ chroma_client = chromadb.PersistentClient(path="./database")
 #get collection
 collection = chroma_client.get_collection("papers")
 
-def get_embedding(prompt, n_results=5):
+def get_embedding(prompt, n_results=3):
   query_embedding = ollama.embeddings(
         model='embeddinggemma',
         prompt=prompt
@@ -93,7 +93,7 @@ Instructions:
   ]
   
   msg = ""
-  for part in ollama_client.chat('gemma3:27b', messages=messages, stream=True):
+  for part in ollama_client.chat('gemma3:27b-cloud', messages=messages, stream=True):
     msg = msg + f"{part['message']['content']}"
 
   print(f"\n{text_green}Response:{text_reset} {msg}")
