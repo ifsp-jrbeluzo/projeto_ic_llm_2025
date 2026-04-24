@@ -1,9 +1,0 @@
-{
-  "chunk_size": 300,
-  "chunk_overlap": 75,
-  "papers_path": "./papers",
-  "files": [
-    "artigo.pdf"
-  ],
-  "collection_name": "papers"
-}

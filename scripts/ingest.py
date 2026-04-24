@@ -3,13 +3,17 @@ import ollama
 import chromadb
 from pathlib import Path
 import json
+import re
 
-# This script reads PDF files, converts them to text,
-# splits into chunks, and stores embeddings in ChromaDB
+# ---------------- CONFIG ---------------- #
 
-def load_config(config_path="ingest_config.json"):
+def load_config(config_path="config.json"):
+    if not Path(config_path).exists():
+        raise FileNotFoundError(f"Config file not found: {config_path}")
     with open(config_path, "r", encoding="utf-8") as f:
         return json.load(f)
+
+# ---------------- PDF ---------------- #
 
 def pdf_to_text(file_path):
     reader = PdfReader(file_path)
@@ -19,6 +23,8 @@ def pdf_to_text(file_path):
         if page_text:
             text += page_text + "\n"
     return text
+
+# ---------------- CHUNK ---------------- #
 
 def chunkify(text, size=250, overlap=50):
     words = text.split()
@@ -31,9 +37,33 @@ def chunkify(text, size=250, overlap=50):
         start += size - overlap
     return chunks
 
+# ---------------- NAMING ---------------- #
+
+def clean_filename(name):
+    name = name.lower()
+    name = name.replace(".pdf", "")
+    
+    name = re.sub(r"\(\d+\)", "", name)
+
+    name = re.sub(r"[^a-z0-9 ]", "", name)
+
+    name = "_".join(name.split())
+
+    return name[:40]
+
+def sanitize_name(name):
+    name = re.sub(r"[^a-zA-Z0-9._-]", "", name)
+    return name
+
+def generate_collection_name(file_path, chunk_size, overlap):
+    base = clean_filename(file_path.name)
+    name = f"{base}_{chunk_size}c_{overlap}o"
+    return sanitize_name(name)
+
+# ---------------- DB ---------------- #
+
 def generate_database():
-    client = chromadb.PersistentClient(path="./database")
-    return client
+    return chromadb.PersistentClient(path="./database")
 
 def add_chunks(collection, text_chunks, file_name):
     for i, chunk in enumerate(text_chunks):
@@ -52,32 +82,69 @@ def add_chunks(collection, text_chunks, file_name):
             }]
         )
 
+# ---------------- FILE SELECT ---------------- #
+
+def select_files(papers_path):
+    pdf_files = list(papers_path.glob("*.pdf"))
+
+    if not pdf_files:
+        print("No PDF files found.")
+        exit()
+
+    print("\nAvailable PDF files:")
+    for i, file in enumerate(pdf_files):
+        print(f"[{i}] {file.name}")
+
+    selection = input("\nSelect files (e.g. 0,2 or 'all'): ").strip()
+
+    if selection.lower() == "all":
+        return pdf_files
+
+    indexes = [int(i) for i in selection.split(",") if i.strip().isdigit()]
+    selected = [pdf_files[i] for i in indexes if i < len(pdf_files)]
+
+    if not selected:
+        print("Invalid selection.")
+        exit()
+
+    return selected
+
+# ---------------- MAIN ---------------- #
+
 def main():
     config = load_config()
 
     chunk_size = config.get("chunk_size", 250)
     chunk_overlap = config.get("chunk_overlap", 50)
     papers_path = Path(config.get("papers_path", "./papers"))
-    files = config.get("files", [])
-    collection_name = config.get("collection_name", "papers")
 
-    database = generate_database()
-    collection = database.get_or_create_collection(name=collection_name)
+    selected_files = select_files(papers_path)
+    db = generate_database()
 
-    for file_name in files:
-        file_path = papers_path / file_name
+    for file_path in selected_files:
+        collection_name = generate_collection_name(
+            file_path,
+            chunk_size,
+            chunk_overlap
+        )
 
-        if not file_path.exists():
-            print(f"File not found: {file_path}")
-            continue
+        print(f"\nCreating collection: {collection_name}")
+        print(f"Processing: {file_path.name}")
 
-        print(f"Processing file: {file_name}")
+        collection = db.get_or_create_collection(
+            name=collection_name,
+            metadata={
+                "chunk_size": chunk_size,
+                "chunk_overlap": chunk_overlap,
+                "num_docs": 1
+            }
+        )
 
-        pdf_text = pdf_to_text(file_path)
-        pdf_chunks = chunkify(pdf_text, size=chunk_size, overlap=chunk_overlap)
-        add_chunks(collection, pdf_chunks, file_name)
+        text = pdf_to_text(file_path)
+        chunks = chunkify(text, chunk_size, chunk_overlap)
+        add_chunks(collection, chunks, file_path.name)
 
-    print("Database created successfully!")
+    print("\nAll databases created successfully!")
 
 if __name__ == "__main__":
     main()

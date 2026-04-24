@@ -1,0 +1,13 @@
+{
+  "chunk_size": 300,
+  "chunk_overlap": 75,
+  "papers_path": "./papers",
+
+  "n_results": 2,
+
+  "embedding_model": "embeddinggemma",
+  "chat_model": "gemma3:27b",
+
+  "ollama_host": "https://ollama.com",
+  "ollama_api_key": "3abac4c624ac4438ae50f4e78f5287cd.7CGPF_O-lLdkyXHW-RgFEAYt"
+}
