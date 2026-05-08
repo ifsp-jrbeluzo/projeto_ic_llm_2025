@@ -1,0 +1,10 @@
+Classifique o artigo em UMA das seguintes categorias principais:
+
+Visão Computacional Clássica
+→ Métodos tradicionais de processamento de imagem, segmentação, transformada de Hough, filtros, OpenCV, extração manual de características, geometria computacional etc.
+Aprendizado de Máquina
+→ Uso de algoritmos clássicos de machine learning como SVM, Random Forest, K-Means, Bayesian methods, Markov Random Fields, regressão etc.
+Redes Neurais
+→ Uso de redes neurais artificiais tradicionais que não sejam CNN profundas.
+Redes Neurais Convolucionais (CNN / Deep Learning)
+→ Uso de CNNs, YOLO, ResNet, VGG, MobileNet, SegNet, U-Net, Faster R-CNN, Transformers visuais, autoencoders convolucionais, transfer learning etc.

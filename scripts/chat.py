@@ -1,145 +1,350 @@
 import ollama
 from ollama import Client
 import chromadb
-import re
 import json
 from pathlib import Path
+from datetime import datetime
+from collections import defaultdict
+import gc
+import time
 
-# ---------------- CONFIG ---------------- #
+# ---------------- LOAD FILES ---------------- #
 
 def load_config(config_path="config.json"):
+
     if not Path(config_path).exists():
-        raise FileNotFoundError(f"Config file not found: {config_path}")
+        raise FileNotFoundError(
+            f"Config file not found: {config_path}"
+        )
+
     with open(config_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
+def load_prompt(path="prompt.txt"):
+
+    if not Path(path).exists():
+        raise FileNotFoundError(
+            f"Prompt file not found: {path}"
+        )
+
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read()
+
+def load_question(path="question.txt"):
+
+    if not Path(path).exists():
+        raise FileNotFoundError(
+            f"Question file not found: {path}"
+        )
+
+    with open(path, "r", encoding="utf-8") as f:
+        return f.read().strip()
+
+# ---------------- LOAD CONTENT ---------------- #
+
 config = load_config()
 
-# ---------------- COLORS ---------------- #
+prompt_template = load_prompt("prompt.txt")
 
-text_reset   = "\033[0m"
-text_yellow  = "\033[33m"
-text_green   = "\033[32m"
-text_magenta = "\033[35m"
+QUESTION = load_question("question.txt")
+
+MAX_CONTEXT_CHARS = config.get(
+    "max_context_chars",
+    6000
+)
+
+# ---------------- LOG DIR ---------------- #
+
+LOG_DIR = Path("logs")
+
+LOG_DIR.mkdir(exist_ok=True)
 
 # ---------------- CHROMA ---------------- #
 
-chroma_client = chromadb.PersistentClient(path="./database")
+chroma_client = chromadb.PersistentClient(
+    path="./database"
+)
+
 collections = chroma_client.list_collections()
 
 if not collections:
-    print("No databases found. Run ingest.py first.")
+
+    print("Nenhum banco encontrado em ./database")
+
     exit()
 
-print("\nAvailable databases:\n")
+# ---------------- MODE ---------------- #
 
-collection_map = []
+print("\nModo:")
+print("[1] Um banco")
+print("[2] Todos os bancos")
 
-for i, col in enumerate(collections):
-    col_name = col.name
-    metadata = col.metadata or {}
+mode = input("Escolha: ").strip()
 
-    chunk_size = metadata.get("chunk_size", "?")
-    overlap = metadata.get("chunk_overlap", "?")
+if mode == "1":
 
-    display_name = re.sub(r"_\d+c_\d+o$", "", col_name)
+    print("\nBancos disponíveis:\n")
 
-    print(f"[{i}] {display_name} <{chunk_size} chunks> <{overlap} overlap>")
+    for i, col in enumerate(collections):
 
-    collection_map.append(col_name)
+        print(f"[{i}] {col.name}")
 
-while True:
-    try:
-        choice = int(input("\nSelect database: "))
-        if 0 <= choice < len(collection_map):
-            break
-        else:
-            print("Invalid option.")
-    except:
-        print("Enter a valid number.")
+    idx = int(input("\nSelecione: "))
 
-collection_name = collection_map[choice]
-collection = chroma_client.get_collection(collection_name)
+    selected_collections = [collections[idx]]
 
-print(f"\nUsing database: {collection_name}")
+else:
+
+    selected_collections = collections
 
 # ---------------- OLLAMA ---------------- #
 
 ollama_client = Client(
-    host=config.get("ollama_host", "https://ollama.com"),
+    host=config.get(
+        "ollama_host",
+        "http://localhost:11434"
+    ),
     headers={
-        "Authorization": "Bearer " + config.get("ollama_api_key", "")
+        "Authorization":
+        "Bearer " + config.get(
+            "ollama_api_key",
+            ""
+        )
     }
 )
 
-# ---------------- CONTEXT ---------------- #
+# ---------------- GET CONTEXT ---------------- #
 
-def get_context(prompt):
+def get_context(collection, query):
+
     n_results = config.get("n_results", 3)
 
-    query_embedding = ollama.embeddings(
-        model=config.get("embedding_model", "embeddinggemma"),
-        prompt=prompt
+    print("\nQUERY RAG:\n")
+    print(query)
+
+    # ---------------- EMBEDDING ---------------- #
+
+    embedding = ollama.embeddings(
+        model=config.get(
+            "embedding_model",
+            "embeddinggemma"
+        ),
+        prompt=query
     )["embedding"]
 
+    # ---------------- VECTOR SEARCH ---------------- #
+
     results = collection.query(
-        query_embeddings=[query_embedding],
+        query_embeddings=[embedding],
         n_results=n_results
     )
 
-    context_chunks = []
+    docs = results.get("documents", [[]])[0]
 
-    for doc, meta in zip(results["documents"][0], results["metadatas"][0]):
-        source = meta["source"]
-        chunk = meta["chunk"]
+    metas = results.get("metadatas", [[]])[0]
 
-        context_chunks.append(
-            f"[Source: {source} | Chunk {chunk}]\n{doc}"
+    grouped = defaultdict(list)
+
+    raw_chunks = []
+
+    # ---------------- ORGANIZE CHUNKS ---------------- #
+
+    for doc, meta in zip(docs, metas):
+
+        source = meta.get("source", "unknown")
+
+        chunk = meta.get("chunk", "?")
+
+        grouped[source].append((chunk, doc))
+
+        raw_chunks.append({
+            "source": source,
+            "chunk": chunk,
+            "text": doc
+        })
+
+    # ---------------- FORMAT CONTEXT ---------------- #
+
+    context_parts = []
+
+    for source, chunks in grouped.items():
+
+        context_parts.append(
+            f"\nDOCUMENTO: {source}\n"
         )
 
-    return "\n\n".join(context_chunks)
+        sorted_chunks = sorted(
+            chunks,
+            key=lambda x:
+            int(x[0])
+            if str(x[0]).isdigit()
+            else x[0]
+        )
 
-# ---------------- CHAT LOOP ---------------- #
+        for chunk, text in sorted_chunks:
 
-while True:
-    prompt = input(f"\n{text_yellow}Prompt:{text_reset} ")
+            context_parts.append(
+                f"- Chunk {chunk}:\n{text}\n"
+            )
 
-    if prompt == "/end":
-        break
+    final_context = "\n".join(context_parts)
 
-    context = get_context(prompt)
+    # ---------------- LIMIT CONTEXT ---------------- #
 
-    final_prompt = f"""
-You are a scientist working on a systematic review.
+    final_context = final_context[
+        :MAX_CONTEXT_CHARS
+    ]
 
-Rules:
-- Use ONLY the provided context
-- Do not hallucinate
-- If unknown, say you don't know
-- Answer in Portuguese
+    return final_context, raw_chunks
 
-<context>
-{context}
-</context>
+# ---------------- MAIN LOOP ---------------- #
 
-<question>
-{prompt}
-</question>
-"""
+for col in selected_collections:
 
-    print(f"\n{text_magenta}Final Prompt:{text_reset} {final_prompt}")
+    # ---------------- LOG FILE ---------------- #
 
-    messages = [{"role": "user", "content": final_prompt}]
+    timestamp = datetime.now().strftime(
+        "%Y%m%d_%H%M%S"
+    )
 
-    response_text = ""
+    safe_name = (
+        col.name
+        .replace(" ", "_")
+        .replace("/", "_")
+        .replace("\\", "_")
+    )
 
-    for part in ollama_client.chat(
-        model=config.get("chat_model", "gemma3:27b"),
-        messages=messages,
-        stream=True
-    ):
-        chunk = part["message"]["content"]
-        response_text += chunk
-        print(chunk, end="", flush=True)
+    log_file = LOG_DIR / (
+        f"{safe_name}_{timestamp}.txt"
+    )
 
-    print(f"\n{text_green}Done{text_reset}")
+    def write_log(text=""):
+
+        with open(
+            log_file,
+            "a",
+            encoding="utf-8"
+        ) as f:
+
+            f.write(text + "\n")
+
+    # ---------------- COLLECTION ---------------- #
+
+    collection = chroma_client.get_collection(
+        col.name
+    )
+
+    print(f"\n{'=' * 80}")
+    print(f"PROCESSANDO: {col.name}")
+    print(f"{'=' * 80}")
+
+    write_log("=" * 80)
+    write_log(f"DATABASE: {col.name}")
+    write_log("=" * 80)
+
+    try:
+
+        # ---------------- RETRIEVE CONTEXT ---------------- #
+
+        context, chunks = get_context(
+            collection,
+            QUESTION
+        )
+
+        # ---------------- LOG QUESTION ---------------- #
+
+        write_log("\nQUESTION:\n")
+
+        write_log(QUESTION)
+
+        # ---------------- LOG CHUNKS ---------------- #
+
+        write_log("\nCHUNKS CAPTURADOS:\n")
+
+        for c in chunks:
+
+            write_log(
+                f"{c['source']} | chunk {c['chunk']}"
+            )
+
+            write_log(c["text"])
+
+            write_log("-" * 40)
+
+        # ---------------- FINAL PROMPT ---------------- #
+
+        final_prompt = prompt_template.format(
+            question=QUESTION,
+            context=context
+        )
+
+        # ---------------- DEBUG ---------------- #
+
+        prompt_size = len(final_prompt)
+
+        print(f"\nTAMANHO PROMPT: {prompt_size}")
+
+        write_log("\nPROMPT SIZE:\n")
+
+        write_log(str(prompt_size))
+
+        # ---------------- LOG PROMPT ---------------- #
+
+        write_log("\nFINAL PROMPT:\n")
+
+        write_log(final_prompt)
+
+        # ---------------- CHAT ---------------- #
+
+        messages = [{
+            "role": "user",
+            "content": final_prompt
+        }]
+
+        response_text = ""
+
+        print("\nGerando resposta...\n")
+
+        for part in ollama_client.chat(
+            model=config.get(
+                "chat_model",
+                "gemma3:27b"
+            ),
+            messages=messages,
+            stream=True
+        ):
+
+            chunk = part["message"]["content"]
+
+            response_text += chunk
+
+            print(chunk, end="", flush=True)
+
+        # ---------------- SAVE OUTPUT ---------------- #
+
+        write_log("\nMODEL OUTPUT:\n")
+
+        write_log(response_text)
+
+        write_log("\n\n")
+
+        print("\n\nConcluído.\n")
+
+    except Exception as e:
+
+        error_msg = f"\nERRO: {str(e)}"
+
+        print(error_msg)
+
+        write_log(error_msg)
+
+    # ---------------- CLEAN MEMORY ---------------- #
+
+    gc.collect()
+
+    time.sleep(2)
+
+# ---------------- END ---------------- #
+
+print("\nProcessamento finalizado.")
+print(f"Logs salvos em: {LOG_DIR}")

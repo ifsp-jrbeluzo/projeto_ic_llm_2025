@@ -3,7 +3,11 @@
   "chunk_overlap": 75,
   "papers_path": "./papers",
 
-  "n_results": 2,
+  "question": "tipos de visão computacional utilizados no artigo",
+
+  "n_results": 7,
+
+  "max_context_chars": 6000,
 
   "embedding_model": "embeddinggemma",
   "chat_model": "gemma3:27b",
