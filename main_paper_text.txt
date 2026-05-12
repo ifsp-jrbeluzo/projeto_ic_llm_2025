@@ -1,0 +1,952 @@
+Revis˜ao Sistem ´atica de Vis ˜ao Computacional para
+Ve´ıculos Autˆonomos Agr´ıcolas*
+Renato Avila
+Universidade Federal do ABC
+Santo Andr ´e, Brasil
+renato.avila@ufabc.edu.br
+Edson Kitani
+FATEC
+Santo Andr ´e, Brasil
+edson.kitani@fatec.sp.gov.br
+Francisco de Assis Zampirolli
+Universidade Federal do ABC
+Santo Andr ´e, Brasil
+fzampirolli@ufabc.edu.br
+Leopoldo Yoshioka
+Universidade de S ˜ao Paulo
+S˜ao Paulo, Brasil
+leopoldo.yoshioka@usp.br
+Luiz Antonio
+Celiberto Junior
+Universidade Federal do ABC
+Santo Andr ´e, Brasil
+luiz.celiberto@ufabc.edu.br
+Ugo Ibusuki
+Universidade Federal do ABC
+Santo Andr ´e, Brasil
+ugo.ibusuki@ufabc.edu.br
+Resumo—Com o aumento da demanda por efici ˆencia na
+agricultura de precis ˜ao, a popularizac ¸˜ao do uso de ve ´ıculos
+agr´ıcolas aut ˆonomos (V AAs) ´e uma tend ˆencia crescente. A
+literatura sobre o assunto ´e vasta e se atualiza rapidamente.
+O objetivo deste trabalho ´e analisar o conhecimento produzido
+sobre V AAs para identificar as melhores t ´ecnicas e estrat ´egias
+de vis˜ao computacional e redes neurais artificiais. Foi realizada
+uma revis ˜ao sistem ´atica abrangendo os ´ultimos 10 anos para
+identificar publicac ¸˜oes cient´ıficas relevantes cuja implementac ¸˜ao
+foi realizada em ve ´ıculos agr´ıcolas autˆonomos. Foram encon-
+trados excelentes resultados em 35 artigos analisados. Dentre
+eles, as soluc ¸˜oes que se utilizam de redes neurais convolucionais
+se destacam, sendo as mais populares nos ´ultimos anos, e com
+abordagens variadas, como aprendizado por transfer ˆencia e
+redes que fazem uso de concatenac ¸˜oes de sensores.
+Index Terms—Agricultura de precis ˜ao, Automac ¸˜ao de Ve´ıculo
+Agr´ıcola, Redes Neurais Convolucionais, Vis˜ao Computacional.
+I. I NTRODUC¸ ˜AO
+Com o aumento da demanda por efici ˆencia na agricul-
+tura de precis ˜ao, o uso de ve ´ıculos agr´ıcolas aut ˆonomos
+(V AAs) est´a se tornando tend ˆencia. No entanto, o aumento
+da utilizac ¸˜ao dessas m ´aquinas tamb ´em aumenta o risco de
+acidentes durante a operac ¸ ˜ao. Para aumentar a seguranc ¸a,
+v´arios sensores, incluindo diferentes tipos de c ˆameras, s ˜ao
+utilizados em conjunto com algoritmos de vis ˜ao computa-
+cional e aprendizado de m ´aquina para detectar obst ´aculos,
+pessoas ou animais e auxiliar na tomada de decis ˜oes do
+ve´ıculo [1].
+Este trabalho consiste em uma revis ˜ao sistem ´atica da
+literatura sobre as t ´ecnicas e estrat ´egias utilizadas em vis ˜ao
+computacional para ve ´ıculos autˆonomos agr ´ıcolas, apresen-
+tado como revis ˜ao bibliogr ´afica. Na sec ¸ ˜ao II, ´e explicada
+a metodologia utilizada na pesquisa e selec ¸ ˜ao dos artigos,
+incluindo pesquisas em bases de dados cient´ıficas, selec ¸˜ao de
+artigos por t ´ıtulo, resumo e palavras-chave relevantes, bem
+como crit ´erios de inclus ˜ao e exclus ˜ao rigorosos. Na sec ¸ ˜ao
+III, s˜ao descritos os conceitos gerais de vis ˜ao computacional,
+aprendizado de m´aquina, redes neurais artificiais e redes neu-
+rais convolucionais. Na sec ¸˜ao IV, s ˜ao descritos e analisados
+Pesquisa financiada pelo Governo Federal Brasileiro por meio da
+Fundac ¸˜ao de Desenvolvimento da Pesquisa – Fundep Rota 2030/Linha V ,
+N. 27192.02.01/2021.02.00.
+os 35 artigos selecionados em termos de m ´etodos, conjuntos
+de dados e resultados. Os resultados da sec ¸ ˜ao V apontam
+que, nos ´ultimos anos, as soluc ¸˜oes mais comumente utiliza-
+das foram aquelas baseadas em redes neurais convolucionais.
+Destaca-se, em particular, o uso frequente de t ´ecnicas de
+aprendizado por transfer ˆencia e concatenac ¸˜ao de diferentes
+sensores. Na sec ¸˜ao VI, s˜ao apresentadas as conclus ˜oes deste
+trabalho, bem como as respostas `as quest ˜oes de pesquisa
+elaboradas para esta revis ˜ao sistem ´atica.
+II. M ETODOLOGIA
+A revis˜ao sistem´atica de literatura (RSL) adotou as diretri-
+zes propostas por [2], as quais incluem quest ˜oes de pesquisa,
+processo de busca, crit ´erios de inclus ˜ao e exclus ˜ao, coleta e
+an´alise de dados, e avaliac ¸˜ao da qualidade. A pergunta central
+que norteou a pesquisa foi:
+Quais s ˜ao as abordagens e aplicac ¸˜oes que inves-
+tigam o uso de vis ˜ao computacional em ve ´ıculos
+autˆonomos agr´ıcolas?
+Essa pergunta resume a motivac ¸˜ao central do trabalho, mas
+tamb´em foram inclu´ıdas quest˜oes adicionais para abordar es-
+pecificidades relevantes, como a reprodutibilidade do estudo,
+que ser ˜ao apresentadas na ´ultima sec ¸˜ao deste artigo.
+A. Processo de busca
+Para realizar essa RSL, foram utilizados como crit ´erios
+de busca os artigos dispon ´ıveis nos sites Peri ´odicos Capes
+(periodicos.capes.gov.br) e Google Scholar (scholar.google.
+com). Para conduzir a pesquisa, foram definidas strings de
+busca que fizeram uso dos recursos de filtragem disponibi-
+lizados pelos buscadores desses sites. As strings de busca
+foram definidas em ingl ˆes e inclu´ıram termos como: ((“com-
+puter vision ” OR “ machine learning ” OR “ deep learning ”
+OR “convolutional neural network ”)) AND ((“ agriculture”
+OR “agricultural”) AND (“vehicle” AND “ autonomous”)).
+Ap´os a aplicac ¸ ˜ao da string de busca definida, foram
+encontrados muitos artigos relacionados ao uso de drones e
+outros tipos de ve ´ıculos autˆonomos que n ˜ao eram relevantes
+para o objetivo desta revis ˜ao. Para excluir esses artigos,
+foram adicionadas as palavras “drone”, “UA V”, “aerial” e
+“underwater” `a string de busca.
+2023 15th IEEE International Conference on Industry Applications Wed3Track B.6
+979-8-3503-1418-2/23/$31.00 ©2023 IEEE 485 ISBN 979-8-3503-1418-2
+2023 15th IEEE International Conference on Industry Applications (INDUSCON) | 979-8-3503-1418-2/23/$31.00 ©2023 IEEE | DOI: 10.1109/INDUSCON58041.2023.10374618
+Authorized licensed use limited to: UNIVERSIDADE DE SAO PAULO. Downloaded on October 07,2025 at 16:55:23 UTC from IEEE Xplore.  Restrictions apply. 
+B. Crit ´erios de selec ¸˜ao
+Os crit ´erios de inclus ˜ao definidos para a selec ¸ ˜ao dos
+artigos foram os seguintes:
+1) Crit ´erio de inclus ˜ao CI1: Os artigos devem relatar
+o uso de t ´ecnicas de vis ˜ao computacional e redes neurais
+artificiais no contexto de utilizac ¸˜ao de ve ´ıculos autˆonomos
+agr´ıcolas.
+2) Crit ´erio de inclus ˜ao CI2: Os artigos devem ter sido
+publicados nas seguintes bases: ScienceDirect [3], Scopus
+[4], Springer [5], Web of Science [6], ACM (Association for
+Computing Machinery) [7], MDPI (Multidisciplinary Digital
+Publishing Institute) [8] e a base da IEEE (Institute of
+Electrical and Electronic Engineers) [9].
+3) Crit ´erio de inclus ˜ao CI3: O per ´ıodo de alcance para
+a escolha dos artigos ficou definido entre 2012 e 2022,
+totalizando pouco mais de dez anos.
+4) Crit ´erio de inclus ˜ao CI4: A pesquisa considerou arti-
+gos escritos em inglˆes e portuguˆes, desconsiderando cap´ıtulos
+de livros, anais e resumos de eventos e semin ´arios.
+C. Crit ´erio de exclus ˜ao
+Para a selec ¸˜ao dos artigos, foi estabelecido o seguinte
+crit´erio de exclus ˜ao:
+Crit´erio de exclus ˜ao CE1: Trabalhos cujo texto completo
+n˜ao esteja dispon ´ıvel para acesso gratuito na Web tamb ´em
+foram desconsiderados.
+D. Coleta e an ´alise de dados
+1) Resultados da primeira busca: Foram encontrados
+1300 artigos na plataforma Google Scholar e 921 na Capes,
+totalizando 2221 artigos selecionados ap ´os atenderem aos
+crit´erios de inclus ˜ao CI3 e CI4, e serem exclu ´ıdos aqueles
+que n ˜ao atenderam ao crit ´erio CE1.
+2) Resultados da segunda busca: Foram descartados os
+artigos que n ˜ao atenderam ao crit ´erio de inclus ˜ao CI2 na
+etapa inicial da pesquisa, restando 464 artigos no Google
+Scholar e 832 no Peri ´odicos Capes. No total, 1296 artigos
+foram selecionados nessa etapa.
+3) Resultados da terceira busca: Os resultados das buscas
+no Google Scholar e Peri ´odicos Capes foram unificados para
+criar uma base ´unica e as duplicac ¸ ˜oes foram removidas,
+resultando em 831 artigos que atenderam aos crit ´erios de
+inclus˜ao CI2, CI3 e CI4.
+Em seguida, os resumos dos artigos foram analisados e os
+que n ˜ao estavam relacionados com o tema objetivo deste
+trabalho e n ˜ao preencheram os requisitos do CI1 foram
+descartados. Al´em disso, foram removidos os artigos que n˜ao
+possu´ıam acesso ao conte ´udo completo (CE1).
+Ap´os essa an ´alise, 782 artigos foram descartados por n ˜ao
+atenderem ao crit ´erio de inclus ˜ao CI1, resultando em 49
+artigos para leitura completa. Esses artigos foram distribu´ıdos
+entre as bases ACM (4), IEEE (14), MPDI (16), ScienceDi-
+rect (12) e SpringerLink (3).
+E. Avaliac ¸˜ao da qualidade
+O crit ´erio de inclus ˜ao CI2 est ´a relacionado com a quali-
+dade das publicac ¸˜oes selecionadas. Al ´em disso, foi avaliado
+se o m ´etodo ´e reprodut´ıvel, ou seja, se o dataset e o c ´odigo
+est˜ao dispon´ıveis para reproduc ¸˜ao.
+III. F UNDAMENTOS
+Nesta sec ¸˜ao, apresentaremos uma introduc ¸ ˜ao aos fun-
+damentos te ´oricos que sustentam o desenvolvimento deste
+trabalho. Abordaremos o Processamento de Imagens, que
+busca desenvolver algoritmos para manipular e transformar
+imagens digitais, a fim de melhorar sua qualidade, extrair
+informac ¸˜oes relevantes ou corrigir distorc ¸ ˜oes. Al ´em disso,
+falaremos sobre a Vis ˜ao Computacional, ´area da intelig ˆencia
+artificial que desenvolve algoritmos para permitir que as
+m´aquinas interpretem imagens e v ´ıdeos, incluindo tarefas
+como reconhecimento de objetos, segmentac ¸˜ao de imagens
+e detecc ¸˜ao de movimento.
+De acordo com Gonzalez e Woods [10], n ˜ao h ´a um
+consenso entre os autores sobre quando o processamento de
+imagens termina e outras ´areas relacionadas, como an ´alise
+de imagens e vis ˜ao computacional, comec ¸am. Neste artigo,
+consideramos como abuso de terminologia a inclus ˜ao de
+trabalhos que utilizam apenas o processamento de imagens
+para segmentar objetos em imagens na ´area de Vis ˜ao Com-
+putacional, embora saibamos que essa ´area se sobrep ˜oe a
+outras, como veremos a seguir.
+A Aprendizagem de M´aquina ´e uma t´ecnica de inteligˆencia
+artificial que possibilita que as m ´aquinas aprendam com
+dados, sem a necessidade de programac ¸˜ao expl´ıcita. Esse pro-
+cesso envolve identificar padr ˜oes nos dados e criar modelos
+matem´aticos para previs ˜oes ou classificac ¸˜oes.
+As Redes Neurais Artificiais s ˜ao modelos matem ´aticos
+inspirados no funcionamento do c ´erebro humano e s ˜ao am-
+plamente utilizadas em Aprendizagem de M ´aquina. A seguir,
+apresentaremos as Redes Neurais Convolucionais (CNN do
+inglˆes Convolutional Neural network ), que s ˜ao um tipo
+especial de Rede Neural amplamente utilizada em tarefas
+de Vis ˜ao Computacional. Por fim, apresentaremos alguns
+Trabalhos Relacionados que serviram como refer ˆencia para
+o desenvolvimento deste estudo.
+A. Vis ˜ao Computacional
+A Vis ˜ao Computacional procura fornecer aos computa-
+dores a capacidade de interpretar informac ¸ ˜oes visuais do
+mundo ao nosso redor [11]. As aplicac ¸ ˜oes desenvolvidas
+nessa ´area, incluindo reconhecimento facial, detecc ¸ ˜ao de
+objetos, ve ´ıculos autˆonomos, imagens m ´edicas e realidade
+aumentada, tˆem o potencial de melhorar diversos aspectos de
+nossas vidas, desde sa´ude at´e transporte e entretenimento. No
+entanto, a complexidade e variabilidade dos dados visuais,
+como condic ¸˜oes de iluminac ¸˜ao, escala, orientac ¸˜ao e contexto,
+apresentam um dos principais desafios da Vis ˜ao Computaci-
+onal, tornando dif´ıcil a interpretac ¸˜ao precisa das informac ¸˜oes
+visuais pelos computadores. T ´ecnicas como aprendizado
+profundo, redes neurais convolucionais e extrac ¸ ˜ao de ca-
+racter´ısticas permitem que os computadores aprendam a
+partir de grandes conjuntos de dados de imagens rotuladas e
+extraiam informac ¸˜oes significativas dos dados visuais.
+B. Aprendizado de M ´aquina
+O Aprendizado de M ´aquina ´e uma sub ´area da intelig ˆencia
+artificial que utiliza algoritmos e modelos estat ´ısticos para
+permitir que sistemas de computador aprendam e melhorem
+com a experi ˆencia [12]. As aplicac ¸˜oes s ˜ao diversas, como
+previs˜ao de comportamento do cliente, diagn ´ostico m´edico e
+486
+Authorized licensed use limited to: UNIVERSIDADE DE SAO PAULO. Downloaded on October 07,2025 at 16:55:23 UTC from IEEE Xplore.  Restrictions apply. 
+detecc ¸˜ao de atividades fraudulentas, melhorando aspectos de
+nossas vidas, como sa ´ude, financ ¸as e seguranc ¸a cibern´etica.
+Uma das principais vantagens do aprendizado de m ´aquina ´e
+a capacidade de processar uma quantidade relevante de dados
+com rapidez e precis ˜ao, identificando padr ˜oes e percepc ¸˜oes
+dif´ıceis de serem detectados pelos humanos. As t ´ecnicas in-
+cluem aprendizado supervisionado, n ˜ao supervisionado e por
+reforc ¸o, permitindo que os computadores aprendam a partir
+de dados rotulados ou n ˜ao rotulados para fazer previs ˜oes ou
+ac ¸˜oes baseadas no aprendizado.
+C. Rede Neural
+Redes neurais artificiais s ˜ao modelos empregados em
+aprendizado de m ´aquina inspirados na estrutura e func ¸˜ao do
+c´erebro humano, com ampla aplicac ¸ ˜ao em reconhecimento
+de imagem, processamento de linguagem natural e rob ´otica.
+O objetivo dessas redes ´e aprender com exemplos e us ´a-
+los para fazer previs ˜oes ou ac ¸˜oes baseadas em novos dados.
+Elas processam e analisam dados complexos, identificando
+padr˜oes e relacionamentos dif´ıceis de serem detectados pelos
+humanos. As t´ecnicas incluem redes feedforward, recorrentes
+e convolucionais, adaptadas para processar diferentes tipos de
+dados, como imagens, fala e texto.
+D. Rede Neural Convolucional
+As Redes Neurais Convolucionais (CNNs) s ˜ao modelos
+empregados em aprendizado profundo projetados para extrair
+automaticamente caracter ´ısticas de imagens e v ´ıdeos [13].
+Elas tˆem diversas aplicac ¸˜oes, como classificac ¸˜ao de imagens,
+detecc ¸˜ao de objetos e segmentac ¸ ˜ao. Uma das principais
+vantagens das CNNs ´e sua capacidade de processar uma
+quantidade relevante de dados visuais com rapidez e pre-
+cis˜ao, usando camadas convolucionais para identificar carac-
+ter´ısticas de baixo n ´ıvel e combin ´a-los em caracter ´ısticas
+de n ´ıvel superior. Isso permite a identificac ¸ ˜ao de objetos
+e cenas complexas em imagens e v ´ıdeos. Para otimizar
+o desempenho da rede, t ´ecnicas como pooling e camadas
+totalmente conectadas s ˜ao utilizadas, bem como o aumento
+de dados para melhorar a capacidade de generalizac ¸ ˜ao e
+evitar o overfitting.
+E. Ve´ıculos Autˆonomos Agr´ıcolas
+Ve´ıculos agr´ıcolas aut ˆonomos s ˜ao m ´aquinas avanc ¸adas
+projetadas para realizar diversas tarefas sem intervenc ¸ ˜ao
+humana. Esses ve´ıculos utilizam tecnologias de ponta, como
+inteligˆencia artificial, sensores e GPS para navegar, operar e
+executar operac ¸˜oes agr´ıcolas de forma autˆonoma. Em seu tra-
+balho [14] destaca que a navegac ¸˜ao baseada na vis ˜ao desem-
+penha um papel crucial ao permitir que os ve ´ıculos agr´ıcolas
+autˆonomos interpretem informac ¸˜oes visuais no seu entorno.
+Sensores de vis ˜ao, como c ˆameras, captam informac ¸˜oes visu-
+ais em tempo real sobre o campo, as culturas e os obst ´aculos.
+Ao empregar t ´ecnicas e algoritmos avanc ¸ados de proces-
+samento de imagem, os ve ´ıculos autˆonomos podem extrair
+dados significativos das imagens capturadas. A utilizac ¸˜ao de
+ve´ıculos agr´ıcolas autˆonomos oferece v ´arios benef ´ıcios aos
+agricultores e `a ind ´ustria agr ´ıcola na totalidade. Aumenta
+a efici ˆencia operacional otimizando tarefas, reduzindo a
+necessidade de m ˜ao de obra e aumentando a produtividade.
+Al´em disso, os ve ´ıculos autˆonomos melhoram a seguranc ¸a,
+minimizando a exposic ¸˜ao humana a condic ¸ ˜oes potencial-
+mente perigosas.
+F . Trabalhos relacionados
+Devido `a import ˆancia do tema, v ´arias revis ˜oes foram
+produzidos visando analisar o tema. Em seu trabalho, [1]
+identificam a aplicabilidade do uso de vis ˜ao computacional
+na agricultura de precis ˜ao para os cinco principais gr ˜aos
+cultivados no mundo: milho, arroz, trigo, soja e cevada.
+S˜ao apresentados nesta revis ˜ao sistem ´atica 25 trabalhos que
+foram selecionados e apresentam diferentes estrat ´egias para
+tratar aspectos relacionados `a detecc ¸˜ao de doenc ¸as, qualidade
+e fenotipagem. Dentre as oportunidades identificadas pela
+revis˜ao, pode-se citar o uso de GPUs e t ´ecnicas avanc ¸adas
+de inteligˆencia artificial, como DBN (Deep Belief Networks)
+na construc ¸˜ao de m ´etodos robustos de vis ˜ao computaci-
+onal aplicados `a agricultura de precis ˜ao. Em seu artigo,
+[14] fornece uma vis ˜ao geral dos desafios associados `a
+navegac ¸˜ao de precis ˜ao de rob ˆos e ve ´ıculos agr´ıcolas em
+ambientes agr´ıcolas complexos. Ele enfatiza o potencial da
+tecnologia de vis ˜ao computacional como uma ferramenta
+promissora para uma navegac ¸˜ao precisa e em tempo real.
+Segundo os autores, o baixo custo do hardware e a riqueza
+de informac ¸˜oes visuais oferecidas pela vis ˜ao computacional
+levaram a extensas pesquisas e ampla adoc ¸˜ao na navegac ¸˜ao
+autˆonoma para rob ˆos agr ´ıcolas. O artigo de [15] foca nas
+tendˆencias de desenvolvimento e nas perspectivas futuras de
+ve´ıculos el´etricos off-road e rob ˆos agr ´ıcolas baseados em
+energia renov´avel. Destaca os desafios enfrentados pelo setor
+agr´ıcola, tais como o crescimento populacional, a procura
+de energia, a escassez de m ˜ao-de-obra e o aquecimento
+global. Discute o desenvolvimento de ve ´ıculos el ´etricos,
+combust´ıveis verdes alternativos e tecnologias energetica-
+mente eficientes, como ve ´ıculos h´ıbridos el´etricos, rob ´oticos
+e aut ˆonomos, que melhoram a qualidade do trabalho e o
+conforto do operador. Al ´em disso, explora tecnologias digi-
+tais, como a comunicac ¸˜ao em rede avanc ¸ada, a inteligˆencia
+artificial e a cadeia de blocos, que desempenham um papel
+na resposta aos desafios e oportunidades da ind ´ustria e da
+investigac ¸˜ao no setor agr ´ıcola. Em sua revis˜ao, [16] avalia a
+literatura existente e as contribuic ¸˜oes hist ´oricas da pesquisa
+relacionadas ao projeto e prototipagem de ve ´ıculos terrestres
+agr´ıcolas autˆonomos. A motivac ¸˜ao desta revis˜ao ´e divulgar as
+principais caracter´ısticas do BOPS-1960, um trator autˆonomo
+conceituado na d´ecada de 1960 na Universidade Alma Mater
+Studiorum de Bolonha (UNIBO). Al´em disso, o estudo avalia
+as principais caracter ´ısticas do moderno ve ´ıculo terrestre
+n˜ao tripulado (UGV) DEDALO projetado para operac ¸ ˜oes
+em pomares e vinhedos. O estudo fornece uma descric ¸ ˜ao
+detalhada dos princ´ıpios fundamentais, tecnologia e sensores
+empregados em ambos os prot´otipos UNIBO. Tamb´em inclui
+uma an ´alise dos UGV desenvolvidos para a agricultura nos
+´ultimos anos por centros de pesquisa em todo o mundo.
+IV. T RABALHOS SELECIONADOS
+Ap´os a conclus˜ao de todas as etapas de selec ¸˜ao descritas na
+sec ¸˜ao II, foram selecionados 49 artigos para leitura detalhada
+e an´alise de conte´udo. Ap´os a leitura desses artigos, 14 foram
+exclu´ıdos, totalizando 35 artigos que ser ˜ao apresentados de
+forma resumida na pr ´oxima sec ¸˜ao. A exclus˜ao foi necess´aria,
+487
+Authorized licensed use limited to: UNIVERSIDADE DE SAO PAULO. Downloaded on October 07,2025 at 16:55:23 UTC from IEEE Xplore.  Restrictions apply. 
+pois alguns artigos eram estudos do tipo survey, outros
+descreviam apenas conjuntos de dados e, principalmente, n˜ao
+abordavam a parte de vis ˜ao computacional. Os artigos sele-
+cionados foram agrupados conforme o algoritmo principal
+utilizado ou a ´area de pesquisa, conforme listado abaixo:
+A. Vis ˜ao Computacional
+Os trabalhos citados abaixo apresentam t ´ecnicas de vis ˜ao
+computacional aplicadas em ve ´ıculos autˆonomos agr ´ıcolas.
+Em seu artigo, [17] prop ˜oe um m ´etodo para guiar rob ˆos em
+plantac ¸˜oes de milho usando vis ˜ao computacional e controle
+baseado em l ´ogica difusa. J ´a [18] utiliza a Transformada de
+Hough para identificar o caminho de navegac ¸˜ao em ambien-
+tes onde existe a ocorrˆencia de plantas daninhas, com efic´acia
+comprovada em testes experimentais. A TransformadaHough
+´e uma t ´ecnica de processamento de imagem amplamente
+utilizada em vis ˜ao computacional, rob ´otica, detecc ¸˜ao de
+objetos e reconhecimento de padr ˜oes [19].
+O m ´etodo descrito em [20] rastreia a direc ¸ ˜ao e o des-
+locamento lateral das linhas de cultivo, dispensando o uso
+de segmentac ¸˜ao bin ´aria e sendo aplic ´avel a campos com
+uma ampla variedade de apar ˆencias. Para isso, o sistema de
+percepc ¸˜ao utiliza a biblioteca OpenCV [21]. Em [22], um
+trator segue um plano de waypoints baseados em coordenadas
+Global Positioning System (GPS), mas usa um sistema de
+detecc ¸˜ao de linhas de cultivo para corrigir incertezas na
+posic ¸˜ao dos pontos e detectar a presenc ¸a de ervas daninhas.
+O algoritmo proposto em [23] superou o m ´etodo padr ˜ao
+de transformada Hough em termos de taxa e precis ˜ao de
+detecc ¸˜ao de linhas de plantio em campos agr ´ıcolas e foi
+combinado com outros dois algoritmos para melhorar seu
+desempenho em dist ˆancias curtas.
+Para detecc ¸˜ao de pedestres, o artigo [24] apresenta um
+sistema que utiliza uma c ˆamera frontal posicionada em um
+trator, com boa precis ˜ao em dist ˆancias de 8 a 20 metros
+e melhorado com a combinac ¸ ˜ao de outros algoritmos em
+distˆancias mais curtas. Ainda em t ´ecnicas de detecc ¸ ˜ao,
+[25] prop ˜oe uma estrat ´egia de an ´alise espac ¸o-temporal para
+detecc ¸˜ao de obst ´aculos est ´aticos e din ˆamicos em ambien-
+tes agr ´ıcolas, sem a necessidade de treinamento pr ´evio. O
+prot´otipo de rob ˆo agr ´ıcola aut ˆonomo descrito em [26] ´e
+equipado com sensores e utiliza GPS e sistema de vis ˜ao para
+gerar mapas de posic ¸˜ao, projetado para semear sementes em
+intervalos predeterminados no campo. Estes trabalhos fazem
+uso do MATLAB [27] para o processamento de imagens.
+O artigo [28] apresenta uma soluc ¸˜ao baseada em vis ˜ao de
+m´aquina para a navegac ¸˜ao autˆonoma de um ve´ıculo utilit´ario
+agr´ıcola, com resultados bem-sucedidos em testes de labo-
+rat´orio e campo, com potencial para guiar pequenos ve ´ıculos
+utilit´arios no pomar. Para isso, faz uso do NI LabVIEW
+(National Instruments Laboratory Virtual Instrument Engine-
+ering Workbench) [29]. O artigo [30] apresenta um sistema de
+rastreamento de trajet´oria para tratores com cˆameras de vis˜ao
+binocular, com alta precis ˜ao de controle e estabilidade em
+experimentos em campo de algod˜ao. Faz uso da transformada
+Census, uma t ´ecnica de processamento de imagens usada
+para comparac ¸˜ao e identificac ¸˜ao de disparidades. J ´a o artigo
+[31] descreve um sistema retrofit de vis ˜ao de m ´aquina para
+tratores usados, com alto desempenho na discriminac ¸ ˜ao de
+plantas daninhas em testes de campo em cultivos de alface
+e br ´ocolis. Foi utilizado MATLAB no processamento das
+imagens. O artigo [32] apresenta um sistema de detecc ¸ ˜ao
+de obst ´aculos baseado em vis ˜ao computacional, com o uso
+de c ˆameras infravermelhas e a biblioteca OpenCV para
+identificar obst´aculos em v ´arias etapas.
+O artigo [33] prop ˜oe um conjunto de algoritmos de vis ˜ao
+computacional para localizar ve ´ıculos no campo com alta
+precis˜ao, que supera os m ´etodos tradicionais de RTK-GPS
+em termos de custo, complexidade e confiabilidade. RTK-
+GPS ( Real-Time Kinematic Global Positioning System ) ´e
+um sistema de posicionamento por sat ´elite que fornece
+informac ¸˜oes de localizac ¸˜ao em tempo real com alta pre-
+cis˜ao. Em seu trabalho [34], prop ˜oe um sistema escal ´avel,
+modular e flex ´ıvel de mapeamento e navegac ¸ ˜ao no solo
+para sistemas agr ´ıcolas aut ˆonomos, usando tecnologia de
+vis˜ao computacional e IoT, que ´e uma rede de dispositivos
+interconectados que s˜ao capazes de coletar e transmitir dados
+sem a necessidade de interac ¸˜ao humana direta. Neste trabalho
+´e utilizado ORB-SLAM2, um sistema de localizac ¸ ˜ao e ma-
+peamento simultˆaneo (SLAM) baseado em vis ˜ao, que utiliza
+a t ´ecnica de recursos visuais de Oriented FAST and Rotated
+BRIEF (ORB) para detectar e descrever caracter ´ısticas em
+imagens. Os dados gerados s ˜ao utilizados para construir um
+mapa do ambiente. Em seu artigo, [35] apresenta um m ´etodo
+de segmentac ¸˜ao para construc ¸˜ao de mapas de obst ´aculos no
+solo usando LIDARs ( Light Detection and Ranging ), que
+s˜ao dispositivos que utilizam lasers para medir dist ˆancias
+e criar mapas tridimensionais do ambiente, para conduc ¸ ˜ao
+automatizada na agricultura em chassi rob ´otico, com foco na
+eficiˆencia computacional para computadores de bordo com
+recursos limitados.
+Por fim, o artigo [36] prop ˜oe uma t ´ecnica para navegac ¸˜ao
+em pomares usando um rob ˆo agr ´ıcola utilizando t ´ecnicas
+como Color Index of Vegetation Extraction(CIVE), Principal
+Component Analysis (PCA) e Maximum Average Accuracy
+(MAA) para processamento das imagens, filtros Gabor para
+detectar padr ˜oes e K-means clustering para agrupamento por
+caracter´ıstica. Enquanto o artigo [37] apresenta um sistema
+para navegar em campos de cultivo sob as copas das ´arvores.
+B. Aprendizado de M ´aquina
+Os artigos apresentados abaixo utilizam t´ecnicas de Apren-
+dizado de M ´aquinas em conjunto com vis ˜ao computacional
+para auxiliar a navegac ¸˜ao de ve´ıculos agr´ıcolas. O artigo [38]
+apresenta uma estrutura de autoaprendizagem para ve ´ıculos
+autˆonomos agr´ıcolas que utiliza um sistema de vis˜ao 3D para
+reconhecer o ambiente e obst ´aculos. Utiliza Expectation-
+Maximization (EM), Bayesian Information Criterion (BIC)
+e dist ˆancia de Mahalanobis no processo. J ´a o artigo [39]
+apresenta um m ´etodo de Detecc ¸˜ao Visual de Obst ´aculos
+baseado em Novidades, enquanto [40] apresenta um sistema
+de classificac ¸˜ao de plantas que faz uso do Random Forest, um
+classificador baseado em ´arvores de decis ˜ao [41] e Markov
+Random Fields [42]. O artigo [43] descreve um m ´etodo para
+localizac ¸˜ao das linhas de cultivo fazendo uso de Support
+Vector Machines (SVMs) [44], enquanto [45] apresenta um
+sistema que combina diferentes t ´ecnicas de vis ˜ao computaci-
+onal para ajudar ve´ıculos autˆonomos a navegar em ambientes
+agr´ıcolas, utilizandoSimultaneous Localization and Mapping
+488
+Authorized licensed use limited to: UNIVERSIDADE DE SAO PAULO. Downloaded on October 07,2025 at 16:55:23 UTC from IEEE Xplore.  Restrictions apply. 
+(SLAM) e algoritmos Multi-View Stereo (MVS) para criar
+mapas 3D detalhados do ambiente.
+C. Rede Neural
+A partir desta subsec ¸ ˜ao, s ˜ao apresentados artigos que
+utilizam redes neurais artificiais como parte principal de
+suas soluc ¸˜oes. Em [46], ´e apresentado um algoritmo de
+detecc ¸˜ao de objetos em tempo real para rob´otica autˆonoma na
+agricultura, que utiliza redes neurais artificiais. O algoritmo
+de m ´aquina de aprendizado extremo de caracter ´ısticas de
+cores multi-especialista (MEC-ELM) foi desenvolvido pelos
+pesquisadores, utilizando uma abordagem em cascata para
+a detecc ¸˜ao de objetos em imagens. Ele usa uma tabela de
+´area somada (SAT) para extrair caracter ´ısticas de cor e uma
+rede neural de aprendizado extremo (ELM) para classificar
+objetos. O algoritmo alcanc ¸ou 84% de precis ˜ao e 91%
+de revocac ¸˜ao na detecc ¸˜ao de ervas daninhas em imagens
+de baixa resoluc ¸˜ao em apenas 0,5 segundos por quadro.
+Para superar as limitac ¸ ˜oes de resoluc ¸˜ao, os pesquisadores
+propuseram uma variante do MEC-ELM que usa uma matriz
+de co-ocorrˆencia ao n´ıvel de cor (CLCM) e an´alise de textura,
+alcanc ¸ando entre 78-85% de precis˜ao e 81-93% de revocac ¸˜ao
+na detecc ¸˜ao das classes gado, ervas daninhas e quadriciclos
+em tempos entre 1 e 2 segundos por quadro.
+D. Rede Neural Convolucional
+Os artigos desta sec ¸˜ao utilizam principalmente Redes Neu-
+rais Convolucionais (CNNs) em suas soluc ¸ ˜oes. O trabalho
+[47] utiliza uma CNN profunda para detectar obst ´aculos
+conforme a norma ISO/DIS 18497 em culturas agr ´ıcolas. O
+artigo [48] descreve o DeepAnomaly, um algoritmo baseado
+em CNNs que utiliza detecc ¸˜ao de anomalias para identificar
+obst´aculos em ve ´ıculos autˆonomos com alto desempenho e
+tempo de processamento mais r ´apido que outros m ´etodos.
+J´a o trabalho [49] apresenta o DaSNet, uma arquitetura
+inspirada em LSTM e GRU que utiliza CNNs para realizar
+detecc ¸˜ao e segmentac ¸˜ao em tempo real de mac ¸ ˜as e galhos
+em pomares.
+O trabalho [50] explora o uso de diferentes modelos
+de redes neurais de aprendizado profundo, incluindo ssd-
+Mobilenet v1 e v2, pednet, multiped e ssd-inception v2,
+em sistemas embarcados NVIDIA Jetson para detecc ¸ ˜ao de
+objetos em ´areas rurais complexas. O Jetson Nano foi sele-
+cionado como unidade de processamento gr ´afico integrado e
+o artigo conclui que o modelo pednet ´e eficaz na detecc ¸˜ao
+de pedestres, enquanto os modelos ssd-mobilenet v2 e ssd-
+inception v2 s ˜ao melhores na detecc ¸ ˜ao de outros objetos
+em cen ´arios complexos. Fazendo uso de v ´arios modelos
+simultaneamente, ´e poss´ıvel melhorar a precis ˜ao e o tempo
+de processamento.
+O artigo [51] apresenta a rede SegNet, que utiliza apren-
+dizado por transfer ˆencia e uma topologia baseada nas pri-
+meiras 13 camadas convolucionais da rede VGG 16 para
+a segmentac ¸˜ao sem ˆantica de imagens em cinco classes:
+vegetac ¸˜ao, grama, terra, campo de colheita e obst ´aculo. O
+artigo [52] ´e uma continuac ¸˜ao do trabalho anterior [49], e
+apresenta um m ´etodo para colheita rob ´otica de mac ¸˜as utili-
+zando aprendizado profundo para detecc ¸˜ao e segmentac ¸˜ao de
+frutas, combinado com o uso de PointNet [53] para estimar a
+pose adequada para cada fruta antes de ser colhida. O artigo
+[54] prop ˜oe um algoritmo de navegac ¸˜ao baseado em vis ˜ao
+computacional e aprendizado profundo para rob ˆos agr´ıcolas,
+utilizando uma rede convolucional em cascata e um m ´etodo
+h´ıbrido de fus ˜ao de convoluc ¸ ˜ao dilatada para processar
+imagens, e um algoritmo aprimorado de transformada de
+Hough para extrair a rota naveg ´avel.
+Em seu artigo, [55] apresenta uma soluc ¸ ˜ao para rob ˆos
+m´oveis em tarefas agr´ıcolas, utilizando cˆameras RGB-D para
+navegar em ambientes externos desafiadores com obst ´aculos
+dinˆamicos e est ´aticos. O m ´etodo proposto consiste em obter
+uma imagem RGB e uma imagem de profundidade, realizar a
+segmentac ¸˜ao semˆantica e construir a nuvem de pontos proje-
+tados na grade 2D utilizada pelo algoritmo de navegac ¸˜ao. J´a
+o artigo [56] apresenta um sistema em tr ˆes unidades para
+operac ¸˜oes agr ´ıcolas aut ˆonomas, incluindo um drone para
+definir a rota do ve´ıculo terrestre, uma unidade de controle re-
+moto e um agrobot autˆonomo multifuncional. Neste trabalho
+foi utilizado Robot Operating System (ROS) [57]. J´a em [58],
+os autores prop ˜oem um sistema de estimativa de rendimento
+de colheita que utiliza apenas uma c ˆamera monocular e uma
+quantidade limitada de informac ¸˜oes de supervis˜ao. O sistema
+detecta, localiza e mapeia frutas e copas das ´arvores para
+estimar o rendimento total da colheita, e pode ser utilizado
+com c ˆameras port ´ateis ou rob ˆos aut ˆonomos, reduzindo o
+tempo de implantac ¸˜ao, o consumo de energia e o custo geral.
+O m ´etodo proposto ´e compar ´avel aos m ´etodos baseados em
+vis˜ao totalmente supervisionados e aos sistemas tradicionais
+que dependem de sensores mais caros e que exigem mais
+energia.
+Uma estrutura utilizando vis ˜ao computacional para co-
+letar e extrair informac ¸ ˜oes de culturas e fenol ´ogicas de
+imagens adquiridas no n ´ıvel da rua, utilizando c ˆameras
+baratas e aprendizado profundo ´e apresentada no artigo
+[59]. A classificac ¸˜ao foi feita utilizando um modelo de
+reconhecimento de imagem baseado em aprendizado por
+transferˆencia com a rede neural convolucional MobileNet,
+e uma metodologia de hypertuning foi desenvolvida para
+obter o modelo de melhor desempenho. O melhor modelo
+classificou o tipo de cultura com uma pontuac ¸ ˜ao Macro F1
+de 88,1% e o est ´agio fenol ´ogico em 86,9%.
+Por fim, em [60], os autores prop ˜oem o uso de autoenco-
+ders convolucionais para detecc ¸˜ao de objetos que oferecem
+risco de colis ˜ao para ve´ıculos agr´ıcolas autˆonomos, uma vez
+que algoritmos baseados em vis ˜ao apresentam limitac ¸˜oes na
+detecc ¸˜ao de classes desconhecidas de objetos. Autoencoders
+convolucionais s ˜ao uma variac ¸˜ao das redes neurais autoen-
+coders, e s ˜ao usados para comprimir imagens em um espac ¸o
+latente de representac ¸˜oes de baixa dimens ˜ao. Isso permite
+que sejam usados para tarefas de reduc ¸ ˜ao de dimensionali-
+dade, onde a representac ¸˜ao de dados ´e reduzida para uma
+dimens˜ao menor sem perda significativa de informac ¸ ˜oes.
+Foram comparados diferentes tipos de autoencoders e um
+detector de objetos de ´ultima gerac ¸˜ao, e os autoencoders
+foram capazes de detectar objetos desconhecidos, enquanto
+o detector de objetos falhou em identificar classes conhecidas
+de objetos em casos espec ´ıficos.
+V. R ESULTADOS E DISCUSS ˜OES
+A Tabela I apresenta uma compilac ¸ ˜ao dos artigos ana-
+lisados na sec ¸˜ao anterior, organizados por ´area e ano de
+489
+Authorized licensed use limited to: UNIVERSIDADE DE SAO PAULO. Downloaded on October 07,2025 at 16:55:23 UTC from IEEE Xplore.  Restrictions apply. 
+Tabela I
+ARTIGOS AVALIADOS . AS SIGLAS EST ˜AO EXPLICADAS NA SEC ¸ ˜AO IV.
+artigo ´area ano base sensores biblioteca/arquitetura soluc ¸ ˜ao citac ¸ ˜oes
+[17] VC 2012 ELSEVIER c ˆamera MATLAB navegac ¸ ˜ao (trajeto) 191
+[18] VC 2014 SPRINGER c ˆamera transformada Hough navegac ¸ ˜ao (trajeto) 8
+[20] VC 2014 IEEE c ˆamera + imu OpenCV navegac ¸ ˜ao (trajeto) 106
+[22] VC 2014 MDPI c ˆamera + gps + imu NI LabView navegac ¸ ˜ao e detecc ¸˜ao 59
+[23] VC 2015 ELSEVIER c ˆamera MATLAB navegac ¸ ˜ao (trajeto) 100
+[24] VC 2016 ELSEVIER c ˆamera MATLAB segmentac ¸ ˜ao e detecc ¸˜ao 17
+[25] VC 2016 ELSEVIER ccd filtro Bayer GR MATLAB segmentac ¸ ˜ao e detecc ¸˜ao 36
+[26] VC 2017 IEEE c ˆamera + outros MATLAB navegac ¸ ˜ao (mapa) 51
+[28] VC 2018 ELSEVIER c ˆamera LabView (NI) navegac ¸ ˜ao (trajeto) 95
+[30] VC 2018 ELSEVIER c ˆamera binocular transformada Census navegac ¸ ˜ao (trajeto) 46
+[31] VC 2018 MDPI c ˆamera MATLAB detecc ¸ ˜ao 20
+[32] VC 2019 ACM c ˆamera binocular IR OpenCV detecc ¸ ˜ao 1
+[33] VC 2020 IEEE c ˆameras + LIDAR c ´odigo pr ´oprio navegac ¸ ˜ao (trajeto) 15
+[34] VC 2020 IEEE c ˆamera ORB-SLAM2 navegac ¸ ˜ao (mapa) 38
+[35] VC 2020 IEEE c ˆamera Opencv detecc ¸ ˜ao 1
+[36] VC 2021 ELSEVIER c ˆamera + outros filtro Gabor e K-means navegac ¸ ˜ao (trajeto) 23
+[37] VC 2021 ELSEVIER c ˆamera ToF c ´odigo pr ´oprio navegac ¸ ˜ao (trajeto) 29
+[38] AM 2012 MDPI c ˆamera est ´ereo c ´odigo pr ´oprio classificac ¸ ˜ao 74
+[39] AM 2014 IEEE c ˆam. est ´ereo + scanner laser ROS detecc ¸ ˜ao 31
+[40] AM 2014 IEEE c ˆamera multiespectral c ´odigo pr ´oprio classificac ¸ ˜ao 167
+[43] AM 2015 IEEE c ˆamera est ´ereo OpenCV SVM navegac ¸ ˜ao (trajeto) 22
+[45] AM 2021 IEEE c ˆamera OpenVSLAM navegac ¸ ˜ao (mapa) 16
+[46] RN 2018 ELSEVIER c ˆamera algoritmo MEC-ELM detecc ¸ ˜ao e classificac ¸˜ao 26
+[47] CNN 2016 MDPI c ˆameras AlexNet + TL detecc ¸ ˜ao e classificac ¸˜ao 72
+[48] CNN 2016 MDPI c ˆamera est ´ereo + outros MATLAB + CNN modificada detecc ¸ ˜ao 145
+[49] CNN 2019 MDPI kinect-v2 DaSNet (Deep CNN) segmentac ¸ ˜ao e detecc ¸˜ao 82
+[50] CNN 2020 MDPI c ˆamera TensorRT detecc ¸ ˜ao e classificac ¸˜ao 64
+[51] CNN 2020 IEEE c ˆamera SegNet segmentac ¸ ˜ao 1
+[52] CNN 2020 MDPI c ˆamera RGB-D mobile-DaSNet + TL segmentac ¸ ˜ao e detecc ¸˜ao 77
+[54] CNN 2021 SPRINGER ccd ResNet101 navegac ¸ ˜ao (trajeto) 14
+[55] CNN 2021 MDPI c ˆamera RGB-D DeepLabV3+ navegac ¸ ˜ao (obst ´aculos) 25
+[56] CNN 2021 MDPI c ˆam. 3D, NIR, t ´ermica CNNs segmentac ¸ ˜ao e detecc ¸˜ao 25
+[58] CNN 2022 ELSEVIER c ˆamera ResNet50 + TL estimativas de produc ¸ ˜ao 7
+[59] CNN 2022 ELSEVIER c ˆamera tensorflow MobileNet classificac ¸ ˜ao 8
+[60] CNN 2022 MDPI c ˆamera Autoencoders VGG19 detecc ¸ ˜ao 5
+publicac ¸˜ao. Em alguns artigos, mais de uma ´area ´e utili-
+zada, como Vis ˜ao Computacional (VC) e Aprendizado de
+M´aquina (AM), mas consideramos apenas a ´area mais rele-
+vante para a obtenc ¸˜ao dos resultados apresentados no artigo.
+Geralmente, Vis ˜ao Computacional ´e utilizada apenas para
+pr´e-processamento, portanto, n ˜ao ´e a ´area mais relevante.
+As outras ´areas incluem CNN e Redes Neurais Artificiais
+(RNA). ´E importante destacar que apenas o artigo [58] dis-
+ponibilizou um conjunto de dados pr ´oprio para a realizac ¸˜ao
+dos experimentos. O pseudo-c ´odigo ´e disponibilizado no
+corpo dos artigos de [25] e [34]. Os artigos restantes n ˜ao
+disponibilizaram o c´odigo utilizado nos experimentos ou suas
+bases, o que pode dificultar a replicac ¸ ˜ao dos resultados. A
+contagem de citac ¸˜oes na ´ultima coluna foi obtida pelo Google
+Scholar em 29 de abril de 2023.
+Ao analisar a Tabela I, ´e poss´ıvel observar que os artigos
+mais recentes sobre o tema est ˜ao relacionados `as redes neu-
+rais convolucionais (CNNs), que aparentemente apresentam
+os melhores resultados. Alguns autores desenvolveram suas
+pr´oprias CNNs, baseadas em redes bem documentadas na
+literatura, tamb´em foi observada a utilizac ¸˜ao de aprendizado
+por transfer ˆencia (TL do ingl ˆes Transfer Learning ) para a
+criac ¸˜ao de soluc ¸˜oes. No entanto, devido `a falta de dispo-
+nibilidade dos conjuntos de dados e c ´odigos utilizados na
+maioria dos artigos, n˜ao ´e poss´ıvel comprovar completamente
+esses resultados. Portanto, ´e fundamental que os autores
+compartilhem seus dados e c ´odigos com a comunidade
+cient´ıfica, a fim de permitir a replicac ¸ ˜ao e validac ¸˜ao dos
+resultados obtidos.
+VI. C ONCLUS ˜OES
+Este trabalho permitiu identificar os avanc ¸os mais promis-
+sores em t ´ecnicas de vis ˜ao computacional e redes neurais
+artificiais para ve ´ıculos agr´ıcolas aut ˆonomos. Segundo os
+resultados desta revis˜ao sistem´atica, as soluc ¸˜oes baseadas em
+redes neurais convolucionais s ˜ao as mais utilizadas atual-
+mente, em especial aquelas que fazem uso de aprendizado
+por transfer ˆencia ou a concatenac ¸˜ao de diferentes sensores.
+Estas abordagens podem ser adotadas por pesquisadores
+e desenvolvedores interessados em aumentar a autonomia e
+precis˜ao dos ve ´ıculos agr´ıcolas. Com o cont ´ınuo progresso
+da vis ˜ao computacional e do aprendizado de m ´aquina, ´e
+prov´avel que ve ´ıculos agr´ıcolas totalmente aut ˆonomos se
+tornem uma realidade em breve, aumentando a efici ˆencia e
+sustentabilidade da agricultura de precis ˜ao.
+Assim, este artigo fornece diretrizes importantes para
+o desenvolvimento de tecnologias essenciais `a revoluc ¸˜ao
+da automac ¸˜ao agr ´ıcola. Ao adotarem as melhores pr ´aticas
+identificadas, os engenheiros podem dar um grande salto em
+direc ¸˜ao a sistemas agr ´ıcolas mais inteligentes, produtivos e
+eco eficazes.
+Respostas `as quest ˜oes de pesquisa
+• Quais dataset foram utilizados? S ˜ao de livre acesso?
+Resposta: A maioria dos autores criou a base de dados
+utilizada na criac ¸˜ao da soluc ¸˜ao e n˜ao as disponibilizaram
+490
+Authorized licensed use limited to: UNIVERSIDADE DE SAO PAULO. Downloaded on October 07,2025 at 16:55:23 UTC from IEEE Xplore.  Restrictions apply. 
+publicamente. O mesmo pode ser dito dos c ´odigos
+produzidos. Alguns artigos utilizaram bases de imagens
+rotuladas p ´ublicas, como o ImageNet [61], Pascal VOC
+[62] e COCO [63];
+• Quais t´ecnicas de redes neurais artificiais foram utiliza-
+das?
+Resposta: As t ´ecnicas mais utilizadas recentemente s ˜ao
+a CNN com aprendizado por transfer ˆencia;
+• Quais s ˜ao as principais motivac ¸˜oes para o uso de vis ˜ao
+computacional em ve ´ıculos autˆonomos agr ´ıcolas? Em
+outras palavras, qual ´e a principal func ¸ ˜ao ou carac-
+ter´ıstica do sistema gerado?
+Resposta: A maioria dos trabalhos busca aprimorar
+os sistemas de navegac ¸ ˜ao e orientac ¸˜ao dos ve ´ıculos
+autˆonomos, resultando em mapas e linhas de trajeto
+mais precisos. A seguranc ¸a das operac ¸ ˜oes ´e uma
+preocupac ¸˜ao recorrente e, por isso, foram desenvolvidos
+sistemas de detecc ¸˜ao de objetos e pedestres, al ´em de
+mapas de obst´aculos. Alguns trabalhos se concentram na
+detecc ¸˜ao e classificac ¸˜ao de produtos agr ´ıcolas para co-
+lheita ou estimativas de produc ¸˜ao, tornando a detecc ¸˜ao
+e classificac ¸˜ao a principal caracter ´ıstica do sistema
+gerado;
+• Quais s ˜ao os tipos de c ˆameras mais utilizados?
+Resposta: A maioria dos trabalhos utilizou c ˆameras mo-
+noculares RGB de baixo custo. Alguns autores enfatiza-
+ram o uso deste tipo de cˆamera. Um pequeno n´umero de
+trabalhos (3) utilizou c ˆameras binoculares ou sistemas
+de vis ˜ao est ´ereo com mais de uma c ˆamera. Al ´em
+disso, foram utilizadas c ˆameras de profundidade, RGB-
+D e Time-of-Flight (ToF). Um ´unico artigo usou uma
+combinac ¸˜ao de c ˆamera t ´ermica e Near-Infrared (NIR).
+Dentre outros sensores utilizados nos artigos, est ˜ao
+LIDARs, sistemas de posicionamento global (GPS), uni-
+dades de medic ¸˜ao inercial (IMU), infravermelho (IR),
+radar e ultrassom;
+• Quais recursos (linguagens, ferramentas, bibliotecas e
+arquiteturas de redes) foram utilizadas no desenvolvi-
+mento das soluc ¸˜oes?
+Resposta: Os recursos mais citados para processamento
+de imagens foram OpenCV [21], MATLAB [27] e
+National Instruments LabView [29]. Em relac ¸ ˜ao `as
+CNNs utilizadas como base para a criac ¸ ˜ao de novas
+arquiteturas, os nomes mais recorrentes foram: AlexNet,
+ResNet, VGG, MobileNet, Faster R-CNN e YOLO.
+Trabalhos Futuros
+Considerando as perspectivas promissoras nesta ´area de
+pesquisa, pretendemos produzir uma vers ˜ao expandida deste
+artigo, incorporando melhorias que ampliem o entendimento
+do estado atual neste campo. Pretendemos organizar as
+informac ¸˜oes de forma mais clara e acess ´ıvel, adotando um
+novo formato que facilite a compreens ˜ao dos leitores. Uma
+abordagem promissora ´e dividir os trabalhos por tipo de
+cultura, destacando os contextos espec ´ıficos de uso dos
+ve´ıculos agr´ıcolas aut ˆonomos. Isso permitir ´a uma an ´alise
+aprofundada das particularidades de cada cultura, explorando
+soluc ¸˜oes e avanc ¸os relevantes para cada contexto agr ´ıcola.
+Tamb´em incluiremos uma discuss ˜ao mais detalhada sobre
+a tend ˆencia de utilizac ¸˜ao de redes neurais artificiais, que
+s˜ao ferramentas poderosas no processamento de dados na
+agricultura. Com essas melhorias, nosso artigo preencher ´a
+lacunas no conhecimento atual e explorar ´a as possibilidades
+de pesquisa nesse campo em constante evoluc ¸˜ao.
+Agradecimentos
+Os autores gostariam de agradecer a toda equipe do projeto
+(Fundep Rota 2030/Linha V , N. 27192.02.01/2021.02.00).
+REFER ˆENCIAS
+[1] Diego In ´acio Patr´ıcio and Rafael Rieder. Computer vision and artificial
+intelligence in precision agriculture for grain crops: A systematic
+review. Computers and electronics in agriculture , 153:69–81, 2018.
+[2] Maria Cristiane Barbosa Galv ˜ao and Ivan Luiz Marques Ricarte.
+Revis˜ao sistem´atica da literatura: conceituac ¸˜ao, produc ¸˜ao e publicac ¸˜ao.
+Logeion: Filosofia da informac ¸˜ao, 6(1):57–73, 2019.
+[3] ScienceDirect. Science Direct. https://www.sciencedirect.com/, 2022.
+Online; Acessado em 12 de julho de 2022.
+[4] Scopus. Scopus Review. https://www.scopus.com/, 2022. Online;
+Acessado em 12 de julho de 2022.
+[5] SpringerLink. Springer Link. https://link.springer.com/, 2022. Online;
+Acessado em 12 de julho de 2022.
+[6] Web of Science. Web of Science. https://www.webofknowledge.com/,
+2022. Online; Acessado em 12 de julho de 2022.
+[7] ACM Digital Library. ACM Digital Library. https://dl.acm.org/, 2022.
+Online; Acessado em 12 de julho de 2022.
+[8] MDPI. Multidisciplinary Digital Publishing Institute. https://www.
+mdpi.com/, 2022. Online; Acessado em 12 de julho de 2022.
+[9] IEEE Xplore Digital Library. IEEE Xplore Digital Library. https:
+//ieeexplore.ieee.org/Xplore/home.jsp, 2022. Online; Acessado em 12
+de julho de 2022.
+[10] Rafael C Gonzalez and Richard C Woods. Processamento digital de
+imagens . Pearson Educaci ´on, 2009.
+[11] Richard Szeliski. Computer vision: algorithms and applications .
+Springer Nature, 2022.
+[12] Pedro Domingos. The master algorithm: How the quest for the
+ultimate learning machine will remake our world . Basic Books, 2015.
+[13] Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep Learning.
+MIT Press, 2016. http://www.deeplearningbook.org.
+[14] Yuhao Bai, Baohua Zhang, Naimin Xu, Jun Zhou, Jiayou Shi, and
+Zhihua Diao. Vision-based navigation and guidance for agricultural
+autonomous vehicles and robots: A review. Computers and Electronics
+in Agriculture, 205:107584, 2023.
+[15] Amin Ghobadpour, German Monsalve, Alben Cardenas, and Hossein
+Mousazadeh. Off-road electric vehicles and autonomous robots in
+agricultural sector: trends, challenges, and opportunities. Vehicles,
+4(3):843–864, 2022.
+[16] Valda Rondelli, Bruno Franceschetti, and Dario Mengoli. A re-
+view of current and historical research contributions to the develop-
+ment of ground autonomous vehicles for agriculture. Sustainability,
+14(15):9221, 2022.
+[17] Jinlin Xue, Lei Zhang, and Tony E Grift. Variable field-of-view ma-
+chine vision based row guidance of an agricultural robot. Computers
+and Electronics in Agriculture , 84:85–91, 2012.
+[18] Peidong Wang, Zhijun Meng, Changhai Luo, and Hebo Mei. Path
+recognition for agricultural robot vision navigation under weed en-
+vironment. In Computer and Computing Technologies in Agriculture
+VII: 7th IFIP WG 5.14 International Conference, CCTA 2013, Beijing,
+China, September 18-20, 2013, Revised Selected Papers, Part I 7 ,
+pages 242–248. Springer, 2014.
+[19] Paul VC Hough. Method and means for recognizing complex patterns,
+December 18 1962. US Patent 3,069,654.
+[20] Andrew English, Patrick Ross, David Ball, and Peter Corke. Vision
+based guidance for robot navigation in agriculture. In 2014 IEEE
+International Conference on Robotics and Automation (ICRA) , pages
+1693–1698. IEEE, 2014.
+[21] OpenCV. Opencv, 2021. Computer software.
+[22] Luis Emmi, Mariano Gonzalez-de Soto, Gonzalo Pajares, and Pablo
+Gonzalez-de Santos. Integrating sensory/actuation systems in agricul-
+tural vehicles. Sensors, 14(3):4014–4049, 2014.
+[23] Guoquan Jiang, Zhiheng Wang, and Hongmin Liu. Automatic
+detection of crop rows based on multi-rois. Expert systems with
+applications, 42(5):2429–2441, 2015.
+[24] Hamed Ramezani, Hassan ZakiDizaji, Hassan Masoudi, and Gholam-
+reza Akbarizadeh. A new dswts algorithm for real-time pedestrian
+detection in autonomous agricultural tractors as a computer vision
+system. Measurement, 93:126–134, 2016.
+491
+Authorized licensed use limited to: UNIVERSIDADE DE SAO PAULO. Downloaded on October 07,2025 at 16:55:23 UTC from IEEE Xplore.  Restrictions apply. 
+[25] Yerania Campos, Humberto Sossa, and Gonzalo Pajares. Spatio-
+temporal analysis for obstacle detection in agricultural videos. Applied
+Soft Computing, 45:86–97, 2016.
+[26] Palepu V Santhi, Nellore Kapileswar, Vijay KR Chenchela, and
+CH Venkata Siva Prasad. Sensor and vision based autonomous agribot
+for sowing seeds. In 2017 International Conference on Energy,
+Communication, Data Analytics and Soft Computing (ICECDS) , pages
+242–245. IEEE, 2017.
+[27] MathWorks. Matlab, 2021. Computer software.
+[28] Josiah Radcliffe, Julie Cox, and Duke M Bulanon. Machine vision for
+orchard navigation. Computers in Industry , 98:165–171, 2018.
+[29] National Instruments. Labview. Austin, TX: National Instruments,
+2019. Computer software.
+[30] Shuo Zhang, Yunyi Wang, Zhongxiang Zhu, Zhen Li, Yuefeng Du,
+and Enrong Mao. Tractor path tracking control based on binocular
+vision. Information Processing in Agriculture , 5(4):422–432, 2018.
+[31] Federico Pallottino, Paolo Menesatti, Simone Figorilli, Francesca
+Antonucci, Roberto Tomasone, Andrea Colantoni, and Corrado Costa.
+Machine vision retrofit system for mechanical weed control in preci-
+sion agriculture applications. Sustainability, 10(7):2209, 2018.
+[32] Yu Fei, Xiang Liu, Qichun Zhao, Ying Zhuang, Gonglei Liao, and
+Qiang Fu. Obstacle detection for agricultural machinery vehicle.
+In Proceedings of the 2019 International Conference on Artificial
+Intelligence and Computer Science , pages 126–131, 2019.
+[33] Samuel J LeV oir, Peter A Farley, Tao Sun, and Chong Xu. High-
+accuracy adaptive low-cost location sensing subsystems for autono-
+mous rover in precision agriculture. IEEE Open Journal of Industry
+Applications, 1:74–94, 2020.
+[34] Wei Zhao, Xuan Wang, Bozhao Qi, and Troy Runge. Ground-level
+mapping and navigating for agriculture based on iot and computer
+vision. IEEE Access, 8:221975–221985, 2020.
+[35] SP Orlov, SV Susarev, and AS Morev. Machine vision system for
+autonomous agricultural vehicle. In 2020 International Conference on
+Industrial Engineering, Applications and Manufacturing (ICIEAM) ,
+pages 1–5. IEEE, 2020.
+[36] Samwel Opiyo, Cedric Okinda, Jun Zhou, Emmy Mwangi, and Nelson
+Makange. Medial axis-based machine-vision system for orchard robot
+navigation. Computers and Electronics in Agriculture , 185:106153,
+2021.
+[37] Jingyao Gai, Lirong Xiang, and Lie Tang. Using a depth camera
+for crop row detection and mapping for under-canopy navigation of
+agricultural robotic vehicle. Computers and Electronics in Agriculture,
+188:106301, 2021.
+[38] Giulio Reina and Annalisa Milella. Towards autonomous agriculture:
+Automatic ground detection using trinocular stereovision. Sensors,
+12(9):12405–12423, 2012.
+[39] Patrick Ross, Andrew English, David Ball, Ben Upcroft, Gordon
+Wyeth, and Peter Corke. Novelty-based visual obstacle detection in
+agriculture. In 2014 IEEE International Conference on Robotics and
+Automation (ICRA), pages 1699–1705. IEEE, 2014.
+[40] Sebastian Haug, Andreas Michaels, Peter Biber, and J ¨orn Ostermann.
+Plant classification system for crop/weed discrimination without seg-
+mentation. In IEEE winter conference on applications of computer
+vision, pages 1142–1149. IEEE, 2014.
+[41] Leo Breiman. Random forests. Machine learning, 45:5–32, 2001.
+[42] Anil K Jain and Stan Z Li. Handbook of face recognition , volume 1.
+Springer, 2011.
+[43] Andrew English, Patrick Ross, David Ball, Ben Upcroft, and Peter
+Corke. Learning crop models for vision-based guidance of agricultural
+robots. In 2015 IEEE/RSJ International Conference on Intelligent
+Robots and Systems (IROS) , pages 1158–1163. IEEE, 2015.
+[44] Corinna Cortes and Vladimir Vapnik. Support vector machine.
+Machine learning, 20(3):273–297, 1995.
+[45] Fangwen Shu, Paul Lesur, Yaxu Xie, Alain Pagani, and Didier Stricker.
+Slam in the field: An evaluation of monocular mapping and localiza-
+tion on challenging dynamic agricultural environment. In Proceedings
+of the IEEE/CVF winter conference on applications of computer vision,
+pages 1761–1771, 2021.
+[46] Edmund J Sadgrove, Greg Falzon, David Miron, and David W Lamb.
+Real-time object detection in agricultural/remote environments using
+the multiple-expert colour feature extreme learning machine (mec-
+elm). Computers in Industry , 98:183–191, 2018.
+[47] Kim Arild Steen, Peter Christiansen, Henrik Karstoft, and Ras-
+mus Nyholm Jørgensen. Using deep learning to challenge safety
+standard for highly autonomous machines in agriculture. Journal of
+Imaging, 2(1):6, 2016.
+[48] Peter Christiansen, Lars N Nielsen, Kim A Steen, Rasmus N
+Jørgensen, and Henrik Karstoft. Deepanomaly: Combining background
+subtraction and deep learning for detecting obstacles and anomalies in
+an agricultural field. Sensors, 16(11):1904, 2016.
+[49] Hanwen Kang and Chao Chen. Fruit detection and segmentation for
+apple harvesting using visual sensor in orchards. Sensors, 19(20):4599,
+2019.
+[50] Luis Barba-Guaman, Jose Eugenio Naranjo, and Anthony Ortiz. Deep
+learning framework for vehicle and pedestrian detection in rural roads
+on an embedded gpu. Electronics, 9(4):589, 2020.
+[51] Esma Mujkic, Dan Hermann, Ole Ravn, Morten L Bilde, and Nils A
+Andersen. Towards semantic scene segmentation for autonomous
+agricultural vehicles. In 2020 16th International Conference on
+Control, Automation, Robotics and Vision (ICARCV) , pages 990–995.
+IEEE, 2020.
+[52] Hanwen Kang, Hongyu Zhou, Xing Wang, and Chao Chen. Real-time
+fruit recognition and grasping estimation for robotic apple harvesting.
+Sensors, 20(19):5670, 2020.
+[53] Charles R Qi, Hao Su, Kaichun Mo, and Leonidas J Guibas. Pointnet:
+Deep learning on point sets for 3d classification and segmentation. In
+Proceedings of the IEEE conference on computer vision and pattern
+recognition, pages 652–660, 2017.
+[54] Jing Li, Jialin Yin, and Lin Deng. A robot vision navigation method
+using deep learning in edge computing environment. EURASIP
+Journal on Advances in Signal Processing , 2021:1–20, 2021.
+[55] Magda Skocze ´n, Marcin Ochman, Krystian Spyra, Maciej Nikodem,
+Damian Krata, Marcin Panek, and Andrzej Pawłowski. Obstacle
+detection system for agricultural mobile robot application using rgb-d
+cameras. Sensors, 21(16):5292, 2021.
+[56] Eleni Vrochidou, Konstantinos Tziridis, Alexandros Nikolaou, The-
+ofanis Kalampokas, George A Papakostas, Theodore P Pachidis,
+Spyridon Mamalis, Stefanos Koundouras, and Vassilis G Kaburlasos.
+An autonomous grape-harvester robot: integrated system architecture.
+Electronics, 10(9):1056, 2021.
+[57] Morgan Quigley, Ken Conley, Brian Gerkey, Josh Faust, Tully Foote,
+Jeremy Leibs, Rob Wheeler, and Andrew Ng. ROS: an open-source
+robot operating system. IEEE Robotics & Automation Magazine ,
+15(3):72–82, 2009.
+[58] Enrico Bellocchio, Francesco Crocetti, Gabriele Costante, Mario Luca
+Fravolini, and Paolo Valigi. A novel vision-based weakly supervised
+framework for autonomous yield estimation in agricultural applicati-
+ons. Engineering Applications of Artificial Intelligence , 109:104615,
+2022.
+[59] Rapha ¨el d’Andrimont, Momchil Yordanov, Laura Martinez-Sanchez,
+and Marijn Van der Velde. Monitoring crop phenology with street-
+level imagery using computer vision. Computers and Electronics in
+Agriculture, 196:106866, 2022.
+[60] Esma Mujkic, Mark P Philipsen, Thomas B Moeslund, Martin P
+Christiansen, and Ole Ravn. Anomaly detection for agricultural
+vehicles using autoencoders. Sensors, 22(10):3608, 2022.
+[61] Jia Deng, Wei Dong, Richard Socher, Li-Jia Li, Kai Li, and Li Fei-Fei.
+Imagenet: A large-scale hierarchical image database. IEEE Conference
+on Computer Vision and Pattern Recognition , pages 248–255, 2009.
+[62] Mark Everingham, Luc Van Gool, Christopher KI Williams, John
+Winn, and Andrew Zisserman. The pascal visual object classes (voc)
+challenge. International Journal of Computer Vision , 88(2):303–338,
+2010.
+[63] Tsung-Yi Lin, Michael Maire, Serge Belongie, James Hays, Pietro
+Perona, Deva Ramanan, Piotr Doll ´ar, and C Lawrence Zitnick. Mi-
+crosoft coco: Common objects in context. In European conference on
+computer vision, pages 740–755. Springer, 2014.
+492
+Authorized licensed use limited to: UNIVERSIDADE DE SAO PAULO. Downloaded on October 07,2025 at 16:55:23 UTC from IEEE Xplore.  Restrictions apply. 

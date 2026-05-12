@@ -42,8 +42,6 @@ def chunkify(text, size=250, overlap=50):
 def clean_filename(name):
     name = name.lower()
     name = name.replace(".pdf", "")
-    
-    name = re.sub(r"\(\d+\)", "", name)
 
     name = re.sub(r"[^a-z0-9 ]", "", name)
 

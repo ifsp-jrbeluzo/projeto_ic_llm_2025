@@ -33,7 +33,7 @@ def load_prompt(path="prompt.txt"):
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
 
-def load_question(path="question.txt"):
+def load_question(path="question.json"):
 
     if not Path(path).exists():
         raise FileNotFoundError(
@@ -41,7 +41,7 @@ def load_question(path="question.txt"):
         )
 
     with open(path, "r", encoding="utf-8") as f:
-        return f.read().strip()
+        return json.load(f)
 
 # ---------------- LOAD CONTENT ---------------- #
 
@@ -54,7 +54,7 @@ ollama_cfg = config.get("ollama", {})
 
 prompt_template = load_prompt(paths_cfg.get("prompt_template", "prompt.txt"))
 
-QUESTION = load_question(paths_cfg.get("question_file", "question.txt"))
+QUESTION_DATA = load_question(paths_cfg.get("question_file", "question.json"))
 
 MAX_CONTEXT_CHARS = rag_cfg.get("max_context_chars", 6000)
 
@@ -217,82 +217,108 @@ for col in selected_collections:
         f"{safe_name}_{timestamp}.json"
     )
 
-    log_data = {
-        "timestamp": timestamp,
-        "collection": col.name,
-        "query": QUESTION,
-        "chunks": [],
-        "prompt": "",
-        "response": "",
-        "error": None
-    }
-
     # ---------------- COLLECTION ---------------- #
 
     collection = chroma_client.get_collection(
         col.name
     )
 
+    metadata = collection.metadata or {}
+
+    log_data = {
+        "timestamp": timestamp,
+        "collection": col.name,
+        "original_filename": None,
+        "chunk_size": metadata.get("chunk_size", "Desconhecido"),
+        "chunk_overlap": metadata.get("chunk_overlap", "Desconhecido"),
+        "interactions": [],
+        "error": None
+    }
+
     print(f"\n{'=' * 80}")
     print(f"PROCESSANDO: {col.name}")
     print(f"{'=' * 80}")
 
     try:
+        intro_text = QUESTION_DATA.get("intro", "")
+        questions_list = QUESTION_DATA.get("questions", [])
+        
+        if not questions_list:
+            raise ValueError("Nenhuma pergunta encontrada no arquivo JSON.")
 
-        # ---------------- RETRIEVE CONTEXT ---------------- #
+        for idx, q_item in enumerate(questions_list):
+            print(f"\n--- Processando Pergunta {idx+1}/{len(questions_list)} ---")
+            
+            if isinstance(q_item, dict):
+                q_text = f"{q_item.get('id', idx+1)}. {q_item.get('title', '')}:\n   - {q_item.get('instruction', '')}"
+                if "options" in q_item:
+                    q_text += "\n   dominios = [\n"
+                    for opt in q_item["options"]:
+                        q_text += f"      \"{opt}\",\n"
+                    q_text += "   ]"
+            else:
+                q_text = str(q_item)
 
-        context, chunks = get_context(
-            collection,
-            QUESTION
-        )
+            full_question = f"{intro_text}\n\n{q_text}".strip()
 
-        # ---------------- LOG CHUNKS ---------------- #
+            # ---------------- RETRIEVE CONTEXT ---------------- #
 
-        log_data["chunks"] = chunks
+            # Busca no banco vetorial usando apenas a pergunta específica 
+            # para evitar que a introdução confunda o embedding
+            context, chunks = get_context(
+                collection,
+                q_text
+            )
 
-        # ---------------- FINAL PROMPT ---------------- #
+            if not log_data["original_filename"] and chunks:
+                log_data["original_filename"] = chunks[0]["source"]
 
-        final_prompt = prompt_template.format(
-            question=QUESTION,
-            context=context
-        )
+            # ---------------- FINAL PROMPT ---------------- #
 
-        log_data["prompt"] = final_prompt
+            final_prompt = prompt_template.format(
+                question=full_question,
+                context=context
+            )
 
-        # ---------------- DEBUG ---------------- #
+            # ---------------- DEBUG ---------------- #
 
-        prompt_size = len(final_prompt)
+            prompt_size = len(final_prompt)
 
-        print(f"\nTAMANHO PROMPT: {prompt_size}")
+            print(f"\nTAMANHO PROMPT: {prompt_size}")
 
-        # ---------------- CHAT ---------------- #
+            # ---------------- CHAT ---------------- #
 
-        messages = [{
-            "role": "user",
-            "content": final_prompt
-        }]
+            messages = [{
+                "role": "user",
+                "content": final_prompt
+            }]
 
-        response_text = ""
+            response_text = ""
 
-        print("\nGerando resposta...\n")
+            print("\nGerando resposta...\n")
 
-        for part in ollama_client.chat(
-            model=CHAT_MODEL,
-            messages=messages,
-            stream=True
-        ):
+            for part in ollama_client.chat(
+                model=CHAT_MODEL,
+                messages=messages,
+                stream=True
+            ):
 
-            chunk = part["message"]["content"]
+                chunk = part["message"]["content"]
 
-            response_text += chunk
+                response_text += chunk
 
-            print(chunk, end="", flush=True)
+                print(chunk, end="", flush=True)
 
-        # ---------------- SAVE OUTPUT ---------------- #
+            print("\n\nConcluído.\n")
 
-        log_data["response"] = response_text
-
-        print("\n\nConcluído.\n")
+            # ---------------- LOG RESULTS ---------------- #
+            log_data["interactions"].append({
+                "question_index": idx + 1,
+                "query": full_question,
+                "chunks": chunks,
+                "prompt": final_prompt,
+                "response": response_text
+            })
 
     except Exception as e:
 

@@ -4,11 +4,10 @@
     "database": "./database",
     "logs": "./logs",
     "prompt_template": "prompt.txt",
-    "question_file": "question.txt"
-  },
+    "question_file": "question.json"
   "ingest": {
-    "chunk_size": 300,
-    "chunk_overlap": 75
+    "chunk_size": 600,
+    "chunk_overlap": 150
   },
   "rag": {
     "n_results": 7,

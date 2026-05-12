@@ -7,16 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-grad-1: #0f172a;
-            --bg-grad-2: #1e293b;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent: #38bdf8;
-            --accent-hover: #0284c7;
+            --bg-grad-1: #09090b;
+            --bg-grad-2: #09090b;
+            --glass-bg: #18181b;
+            --glass-border: #27272a;
+            --text-primary: #e4e4e7;
+            --text-secondary: #a1a1aa;
+            --accent: #d4d4d8;
+            --accent-hover: #fafafa;
             --danger: #ef4444;
-            --success: #22c55e;
+            --success: #10b981;
         }
 
         * {
@@ -29,7 +29,9 @@
         body {
             background: linear-gradient(135deg, var(--bg-grad-1), var(--bg-grad-2));
             color: var(--text-primary);
-            min-height: 100vh;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -48,11 +50,9 @@
 
         h1 {
             font-size: 1.5rem;
-            font-weight: 800;
+            font-weight: 600;
             letter-spacing: -0.5px;
-            background: linear-gradient(to right, #38bdf8, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-primary);
         }
 
         .upload-btn-wrapper {
@@ -345,8 +345,12 @@
                 }
             }
 
-            // Sort by timestamp descending
-            logsData.sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || ''));
+            // Sort by article name (natural sort, understands numbers)
+            logsData.sort((a, b) => {
+                const nameA = a.original_filename || a.collection || a._filename || '';
+                const nameB = b.original_filename || b.collection || b._filename || '';
+                return nameA.localeCompare(nameB, undefined, { numeric: true, sensitivity: 'base' });
+            });
 
             renderSidebar();
         });
@@ -396,13 +400,58 @@
             return formatted;
         }
 
+        function renderBeautifulJSON(obj) {
+            if (obj === null || obj === undefined) return `<span style="color: var(--text-secondary)">null</span>`;
+            
+            if (typeof obj !== 'object') {
+                return `<span>${formatMarkdown(String(obj)).replace(/\n/g, '<br>')}</span>`;
+            }
+
+            if (Array.isArray(obj)) {
+                if (obj.length === 0) return `<span style="color: var(--text-secondary)">[]</span>`;
+                let html = `<div style="display: flex; flex-direction: column; gap: 10px; margin-top: 5px;">`;
+                obj.forEach(item => {
+                    html += `<div style="padding: 12px; background: rgba(0,0,0,0.2); border-radius: 8px; border-left: 3px solid var(--accent)">${renderBeautifulJSON(item)}</div>`;
+                });
+                html += `</div>`;
+                return html;
+            }
+
+            // It's an object
+            const keys = Object.keys(obj);
+            if (keys.length === 0) return `<span style="color: var(--text-secondary)">{}</span>`;
+            
+            let html = `<div style="display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 5px;">`;
+            keys.forEach(key => {
+                html += `
+                    <div style="display: flex; flex-direction: column; background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px; border: 1px solid var(--glass-border);">
+                        <strong style="color: var(--accent); margin-bottom: 6px; font-size: 0.95rem; text-transform: capitalize; letter-spacing: 0.5px;">${key.replace(/_/g, ' ')}</strong>
+                        <div style="font-size: 0.95rem; line-height: 1.6; color: var(--text-primary);">${renderBeautifulJSON(obj[key])}</div>
+                    </div>
+                `;
+            });
+            html += `</div>`;
+            return html;
+        }
+
         function renderContent(log) {
             const hasError = !!log.error;
 
+            const docTitle = log.original_filename || log.collection || 'Desconhecido';
+            const chunkSize = log.chunk_size || '?';
+            const chunkOverlap = log.chunk_overlap || '?';
+
             let html = `
-                <div class="log-detail-header">
-                    <h2>${log.collection || 'Desconhecido'}</h2>
-                    <div class="timestamp">Processado em: ${formatTimestamp(log.timestamp)}</div>
+                <div class="log-detail-header" style="border-bottom: 1px solid var(--glass-border); padding-bottom: 25px; margin-bottom: 30px;">
+                    <h2 style="font-size: 1.6rem; font-weight: 600; margin-bottom: 12px; color: var(--text-primary);">${docTitle}</h2>
+                    <div style="display: flex; gap: 15px; align-items: center; font-size: 0.85rem;">
+                        <span style="color: var(--text-secondary);">${formatTimestamp(log.timestamp)}</span>
+                        <div style="display: flex; gap: 10px; background: var(--glass-bg); padding: 4px 10px; border-radius: 6px; border: 1px solid var(--glass-border);">
+                            <span><strong style="color: var(--accent);">Chunk Size:</strong> ${chunkSize}</span>
+                            <span style="color: var(--glass-border);">|</span>
+                            <span><strong style="color: var(--accent);">Overlap:</strong> ${chunkOverlap}</span>
+                        </div>
+                    </div>
                 </div>
             `;
 
@@ -415,50 +464,114 @@
                 `;
             }
 
-            if (log.response) {
-                html += `
-                    <div class="card" style="border-left: 4px solid var(--success);">
-                        <h3>🤖 Resposta Extraída (LLM)</h3>
-                        <div class="markdown-body">${formatMarkdown(log.response)}</div>
-                    </div>
-                `;
-            }
+            if (log.interactions && log.interactions.length > 0) {
+                log.interactions.forEach((interaction, idx) => {
+                    html += `<div style="margin-top: 30px; padding-top: 20px; border-top: 2px dashed rgba(255,255,255,0.1);">
+                                <h3 style="color: var(--accent); margin-bottom: 20px; font-size: 1.3rem;">Pergunta ${interaction.question_index || (idx + 1)}</h3>`;
+                    
+                    if (interaction.response) {
+                        let responseContent = "";
+                        try {
+                            let cleanResponse = interaction.response.replace(/```json\n?|\n?```/g, '').trim();
+                            const jsonObj = JSON.parse(cleanResponse);
+                            responseContent = renderBeautifulJSON(jsonObj);
+                        } catch (e) {
+                            responseContent = `<div class="markdown-body">${formatMarkdown(interaction.response).replace(/\n/g, '<br>')}</div>`;
+                        }
 
-            if (log.chunks && log.chunks.length > 0) {
-                html += `
-                    <div class="card">
-                        <h3>📄 Contexto Recuperado (RAG)</h3>
-                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 15px;">
-                            ${log.chunks.length} trechos recuperados do banco de dados vetorial.
-                        </p>
-                        <div class="chunks-container">
-                `;
-
-                log.chunks.forEach((c, idx) => {
-                    html += `
-                        <div class="chunk">
-                            <div class="chunk-header" onclick="toggleChunk(this)">
-                                <span>Trecho ${idx + 1} • Chunk ${c.chunk}</span>
-                                <span style="font-size: 0.75rem; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 10px;">${c.source}</span>
+                        html += `
+                            <div class="card" style="border-left: 4px solid var(--success);">
+                                <h3>🤖 Resposta Extraída (LLM)</h3>
+                                <div style="margin-top: 15px;">${responseContent}</div>
                             </div>
-                            <div class="chunk-body">${c.text}</div>
+                        `;
+                    }
+
+                    if (interaction.chunks && interaction.chunks.length > 0) {
+                        html += `
+                            <div class="card">
+                                <h3>📄 Contexto Recuperado (RAG)</h3>
+                                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 15px;">
+                                    ${interaction.chunks.length} trechos recuperados do banco de dados vetorial.
+                                </p>
+                                <div class="chunks-container">
+                        `;
+                        interaction.chunks.forEach((c, cIdx) => {
+                            html += `
+                                <div class="chunk">
+                                    <div class="chunk-header" onclick="toggleChunk(this)">
+                                        <span>Trecho ${cIdx + 1} • Chunk ${c.chunk}</span>
+                                        <span style="font-size: 0.75rem; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 10px;">${c.source}</span>
+                                    </div>
+                                    <div class="chunk-body">${c.text}</div>
+                                </div>
+                            `;
+                        });
+                        html += `</div></div>`;
+                    }
+
+                    if (interaction.query) {
+                        html += `
+                            <div class="card">
+                                <h3>🔍 Prompt / Query Utilizada</h3>
+                                <div class="markdown-body" style="font-size: 0.85rem; color: var(--text-secondary);">${interaction.query}</div>
+                            </div>
+                        `;
+                    }
+
+                    html += `</div>`;
+                });
+            } else {
+                // Lógica antiga de fallback
+                if (log.response) {
+                    let responseContent = "";
+                    try {
+                        let cleanResponse = log.response.replace(/```json\n?|\n?```/g, '').trim();
+                        const jsonObj = JSON.parse(cleanResponse);
+                        responseContent = renderBeautifulJSON(jsonObj);
+                    } catch (e) {
+                        responseContent = `<div class="markdown-body">${formatMarkdown(log.response).replace(/\n/g, '<br>')}</div>`;
+                    }
+
+                    html += `
+                        <div class="card" style="border-left: 4px solid var(--success);">
+                            <h3>🤖 Resposta Extraída (LLM)</h3>
+                            <div style="margin-top: 15px;">${responseContent}</div>
                         </div>
                     `;
-                });
+                }
 
-                html += `
+                if (log.chunks && log.chunks.length > 0) {
+                    html += `
+                        <div class="card">
+                            <h3>📄 Contexto Recuperado (RAG)</h3>
+                            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 15px;">
+                                ${log.chunks.length} trechos recuperados do banco de dados vetorial.
+                            </p>
+                            <div class="chunks-container">
+                    `;
+                    log.chunks.forEach((c, idx) => {
+                        html += `
+                            <div class="chunk">
+                                <div class="chunk-header" onclick="toggleChunk(this)">
+                                    <span>Trecho ${idx + 1} • Chunk ${c.chunk}</span>
+                                    <span style="font-size: 0.75rem; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 10px;">${c.source}</span>
+                                </div>
+                                <div class="chunk-body">${c.text}</div>
+                            </div>
+                        `;
+                    });
+                    html += `</div></div>`;
+                }
+
+                if (log.query) {
+                    html += `
+                        <div class="card">
+                            <h3>🔍 Prompt / Query Utilizada</h3>
+                            <div class="markdown-body" style="font-size: 0.85rem; color: var(--text-secondary);">${log.query}</div>
                         </div>
-                    </div>
-                `;
-            }
-
-            if (log.query) {
-                html += `
-                    <div class="card">
-                        <h3>🔍 Prompt / Query Utilizada</h3>
-                        <div class="markdown-body" style="font-size: 0.85rem; color: var(--text-secondary);">${log.query}</div>
-                    </div>
-                `;
+                    `;
+                }
             }
 
             content.innerHTML = html;
