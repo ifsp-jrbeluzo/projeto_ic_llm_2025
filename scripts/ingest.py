@@ -70,7 +70,7 @@ def add_chunks(collection, text_chunks, file_name, model_name):
             prompt=chunk
         )["embedding"]
 
-        collection.add(
+        collection.upsert(
             ids=[f"{file_name}_{i}"],
             embeddings=[embedding],
             documents=[chunk],
@@ -92,6 +92,10 @@ def select_files(papers_path):
     print("\nAvailable PDF files:")
     for i, file in enumerate(pdf_files):
         print(f"[{i}] {file.name}")
+
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1].lower() == "all":
+        return pdf_files
 
     selection = input("\nSelect files (e.g. 0,2 or 'all'): ").strip()
 

@@ -147,29 +147,33 @@ def main():
             
         gt_data = ground_truth[article_id]
         
-        extracted_data = {}
-        for interaction in log_data.get("interactions", []):
-            resp_str = interaction.get("response", "")
-            resp_clean = re.sub(r'```json\n?|\n?```', '', resp_str).strip()
-            try:
-                parsed = json.loads(resp_clean)
-                extracted_data.update(parsed)
-            except:
-                pass
-                
         evaluation = {}
         total_score = 0
         field_count = 0
         
-        for key, expected_val in gt_data.items():
+        gt_keys = list(gt_data.keys())
+        
+        for idx, interaction in enumerate(log_data.get("interactions", [])):
+            if idx >= len(gt_keys):
+                break
+                
+            gt_key = gt_keys[idx]
+            expected_val = gt_data[gt_key]
             actual_val = None
-            for e_key, e_val in extracted_data.items():
-                if match_key(key, e_key):
-                    actual_val = e_val
-                    break
-                    
+            
+            resp_str = interaction.get("response", "")
+            resp_clean = re.sub(r'```json\n?|\n?```', '', resp_str).strip()
+            try:
+                parsed = json.loads(resp_clean)
+                for k, v in parsed.items():
+                    if k.lower() != "raciocinio":
+                        actual_val = v
+                        break
+            except Exception:
+                pass
+                
             eval_result = evaluate_field(expected_val, actual_val)
-            evaluation[key] = {
+            evaluation[gt_key] = {
                 "expected": expected_val,
                 "actual": actual_val if actual_val is not None else "Não encontrado",
                 "score": eval_result["score"],

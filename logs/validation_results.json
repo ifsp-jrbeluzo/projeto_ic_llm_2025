@@ -2,9 +2,250 @@
     {
         "article_id": "17",
         "original_filename": "(17) Variable field-of-view machine vision based row guidance of an agricultural robot.pdf",
-        "log_file": "17_variable_fieldofview_machine_vision_b_300c_75o_20260512_172813.json",
-        "timestamp": "20260512_172813",
-        "overall_score": 70,
+        "log_file": "17_variable_fieldofview_machine_vision_b_600c_150o_20260512_184756.json",
+        "timestamp": "20260512_184756",
+        "overall_score": 75,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "score": 67,
+                "status": "Parcial"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera"
+                ],
+                "score": 100,
+                "status": "Correto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "MATLAB"
+                ],
+                "actual": [
+                    "MATLAB"
+                ],
+                "score": 100,
+                "status": "Correto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "detecção",
+                    "segmentação"
+                ],
+                "score": 33,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "18",
+        "original_filename": "(18) Path Recognition for Agricultural Robot Vision Navigation under Weed Enviromenment.pdf",
+        "log_file": "18_path_recognition_for_agricultural_rob_600c_150o_20260512_184520.json",
+        "timestamp": "20260512_184520",
+        "overall_score": 80,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "Transformada de Hough, filtros de cor e limiarização são os métodos principais utilizados.",
+                "score": 21,
+                "status": "Parcial"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera"
+                ],
+                "score": 100,
+                "status": "Correto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "transformada Hough"
+                ],
+                "actual": [
+                    "transformada Hough"
+                ],
+                "score": 100,
+                "status": "Correto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)"
+                ],
+                "score": 100,
+                "status": "Correto"
+            }
+        }
+    },
+    {
+        "article_id": "20",
+        "original_filename": "(20) Vision Based Guidance for Robot Navigation in Agriculture.pdf",
+        "log_file": "20_vision_based_guidance_for_robot_navig_600c_150o_20260512_184650.json",
+        "timestamp": "20260512_184650",
+        "overall_score": 50,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera",
+                    "imu"
+                ],
+                "actual": [
+                    "câmera",
+                    "imu",
+                    "LIDAR",
+                    "câmera estéreo"
+                ],
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "OpenCV"
+                ],
+                "actual": [
+                    "transformada Hough"
+                ],
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "detecção"
+                ],
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "22",
+        "original_filename": "(22) Integration sensory_actuation systems in agricultural vehicles.pdf",
+        "log_file": "22_integration_sensoryactuation_systems__600c_150o_20260512_184704.json",
+        "timestamp": "20260512_184704",
+        "overall_score": 32,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "Sim",
+                "score": 12,
+                "status": "Parcial"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera",
+                    "gps",
+                    "imu"
+                ],
+                "actual": [
+                    "câmera",
+                    "imu",
+                    "gps",
+                    "ccd filtro Bayer GR",
+                    "câmera multiespectral",
+                    "térmica"
+                ],
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "NI LabView"
+                ],
+                "actual": "SVS4050CFLGEA",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)",
+                    "detecção"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "detecção",
+                    "segmentação"
+                ],
+                "score": 66,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "23",
+        "original_filename": "(23) Automatic detection of crop rows based on multi-rois.pdf",
+        "log_file": "23_automatic_detection_of_crop_rows_base_600c_150o_20260512_184434.json",
+        "timestamp": "20260512_184434",
+        "overall_score": 62,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera"
+                ],
+                "score": 100,
+                "status": "Correto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "MATLAB"
+                ],
+                "actual": [
+                    "transformada Hough"
+                ],
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "estimativas de produção"
+                ],
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "24",
+        "original_filename": "(24) A new dswts algorithm for real-time pedestrian detection in autonomous agricultural tractors as a computer vision system.pdf",
+        "log_file": "24_a_new_dswts_algorithm_for_realtime_pe_600c_150o_20260512_184853.json",
+        "timestamp": "20260512_184853",
+        "overall_score": 75,
         "evaluation": {
             "Área Computacional": {
                 "expected": "(VC) Visão Computacional Clássica",
@@ -35,265 +276,13 @@
             },
             "Solução / Tarefa Principal": {
                 "expected": [
-                    "navegação (trajeto)"
-                ],
-                "actual": [
-                    "navegação (trajeto)",
-                    "detecção",
-                    "segmentação"
-                ],
-                "score": 33,
-                "status": "Parcial"
-            }
-        }
-    },
-    {
-        "article_id": "18",
-        "original_filename": "(18) Path Recognition for Agricultural Robot Vision Navigation under Weed Enviromenment.pdf",
-        "log_file": "18_path_recognition_for_agricultural_rob_300c_75o_20260512_172637.json",
-        "timestamp": "20260512_172637",
-        "overall_score": 83,
-        "evaluation": {
-            "Área Computacional": {
-                "expected": "(VC) Visão Computacional Clássica",
-                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
-                "score": 100,
-                "status": "Correto"
-            },
-            "Sensores Utilizados": {
-                "expected": [
-                    "câmera"
-                ],
-                "actual": [
-                    "câmera"
-                ],
-                "score": 100,
-                "status": "Correto"
-            },
-            "Bibliotecas, Frameworks ou Arquiteturas": {
-                "expected": [
-                    "transformada Hough"
-                ],
-                "actual": [
-                    "transformada Hough"
-                ],
-                "score": 100,
-                "status": "Correto"
-            },
-            "Solução / Tarefa Principal": {
-                "expected": [
-                    "navegação (trajeto)"
-                ],
-                "actual": [
-                    "navegação (trajeto)",
                     "segmentação",
                     "detecção"
                 ],
-                "score": 33,
-                "status": "Parcial"
-            }
-        }
-    },
-    {
-        "article_id": "20",
-        "original_filename": "(20) Vision Based Guidance for Robot Navigation in Agriculture.pdf",
-        "log_file": "20_vision_based_guidance_for_robot_navig_300c_75o_20260512_172949.json",
-        "timestamp": "20260512_172949",
-        "overall_score": 70,
-        "evaluation": {
-            "Área Computacional": {
-                "expected": "(VC) Visão Computacional Clássica",
-                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
-                "score": 100,
-                "status": "Correto"
-            },
-            "Sensores Utilizados": {
-                "expected": [
-                    "câmera",
-                    "imu"
-                ],
                 "actual": [
-                    "câmera",
-                    "imu"
-                ],
-                "score": 100,
-                "status": "Correto"
-            },
-            "Bibliotecas, Frameworks ou Arquiteturas": {
-                "expected": [
-                    "OpenCV"
-                ],
-                "actual": [
-                    "transformada Hough",
-                    "OpenCV"
+                    "detecção"
                 ],
                 "score": 50,
-                "status": "Parcial"
-            },
-            "Solução / Tarefa Principal": {
-                "expected": [
-                    "navegação (trajeto)"
-                ],
-                "actual": [
-                    "navegação (trajeto)",
-                    "detecção",
-                    "segmentação"
-                ],
-                "score": 33,
-                "status": "Parcial"
-            }
-        }
-    },
-    {
-        "article_id": "22",
-        "original_filename": "(22) Integration sensory_actuation systems in agricultural vehicles.pdf",
-        "log_file": "22_integration_sensoryactuation_systems__300c_75o_20260512_172838.json",
-        "timestamp": "20260512_172838",
-        "overall_score": 37,
-        "evaluation": {
-            "Área Computacional": {
-                "expected": "(VC) Visão Computacional Clássica",
-                "actual": "(AM) Aprendizado de Máquina",
-                "score": 23,
-                "status": "Parcial"
-            },
-            "Sensores Utilizados": {
-                "expected": [
-                    "câmera",
-                    "gps",
-                    "imu"
-                ],
-                "actual": [
-                    "câmera",
-                    "imu",
-                    "gps",
-                    "ccd filtro Bayer GR"
-                ],
-                "score": 75,
-                "status": "Parcial"
-            },
-            "Bibliotecas, Frameworks ou Arquiteturas": {
-                "expected": [
-                    "NI LabView"
-                ],
-                "actual": [
-                    "código próprio"
-                ],
-                "score": 0,
-                "status": "Incorreto"
-            },
-            "Solução / Tarefa Principal": {
-                "expected": [
-                    "navegação (trajeto)",
-                    "detecção"
-                ],
-                "actual": [
-                    "navegação (trajeto)",
-                    "detecção",
-                    "segmentação",
-                    "classificação"
-                ],
-                "score": 50,
-                "status": "Parcial"
-            }
-        }
-    },
-    {
-        "article_id": "23",
-        "original_filename": "(23) Automatic detection of crop rows based on multi-rois.pdf",
-        "log_file": "23_automatic_detection_of_crop_rows_base_300c_75o_20260512_172830.json",
-        "timestamp": "20260512_172830",
-        "overall_score": 58,
-        "evaluation": {
-            "Área Computacional": {
-                "expected": "(VC) Visão Computacional Clássica",
-                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
-                "score": 100,
-                "status": "Correto"
-            },
-            "Sensores Utilizados": {
-                "expected": [
-                    "câmera"
-                ],
-                "actual": [
-                    "câmera"
-                ],
-                "score": 100,
-                "status": "Correto"
-            },
-            "Bibliotecas, Frameworks ou Arquiteturas": {
-                "expected": [
-                    "MATLAB"
-                ],
-                "actual": [
-                    "transformada Hough",
-                    "OpenCV"
-                ],
-                "score": 0,
-                "status": "Incorreto"
-            },
-            "Solução / Tarefa Principal": {
-                "expected": [
-                    "navegação (trajeto)"
-                ],
-                "actual": [
-                    "detecção",
-                    "navegação (obstáculos)",
-                    "navegação (trajeto)"
-                ],
-                "score": 33,
-                "status": "Parcial"
-            }
-        }
-    },
-    {
-        "article_id": "24",
-        "original_filename": "(24) A new dswts algorithm for real-time pedestrian detection in autonomous agricultural tractors as a computer vision system.pdf",
-        "log_file": "24_a_new_dswts_algorithm_for_realtime_pe_300c_75o_20260512_172906.json",
-        "timestamp": "20260512_172906",
-        "overall_score": 19,
-        "evaluation": {
-            "Área Computacional": {
-                "expected": "(VC) Visão Computacional Clássica",
-                "actual": "(AM) Aprendizado de Máquina",
-                "score": 23,
-                "status": "Parcial"
-            },
-            "Sensores Utilizados": {
-                "expected": [
-                    "câmera"
-                ],
-                "actual": [
-                    "câmera",
-                    "câmera RGB-D",
-                    "câmera estéreo",
-                    "câmera multiespectral",
-                    "térmica"
-                ],
-                "score": 20,
-                "status": "Parcial"
-            },
-            "Bibliotecas, Frameworks ou Arquiteturas": {
-                "expected": [
-                    "MATLAB"
-                ],
-                "actual": [
-                    "SVM",
-                    "código próprio"
-                ],
-                "score": 0,
-                "status": "Incorreto"
-            },
-            "Solução / Tarefa Principal": {
-                "expected": [
-                    "segmentação",
-                    "detecção"
-                ],
-                "actual": [
-                    "detecção",
-                    "classificação"
-                ],
-                "score": 33,
                 "status": "Parcial"
             }
         }
@@ -301,13 +290,13 @@
     {
         "article_id": "25",
         "original_filename": "(25) Spatio- temporal analysis for obstacle detection in agricultural videos.pdf",
-        "log_file": "25_spatio_temporal_analysis_for_obstacle_300c_75o_20260512_172846.json",
-        "timestamp": "20260512_172846",
-        "overall_score": 41,
+        "log_file": "25_spatio_temporal_analysis_for_obstacle_600c_150o_20260512_185041.json",
+        "timestamp": "20260512_185041",
+        "overall_score": 45,
         "evaluation": {
             "Área Computacional": {
                 "expected": "(VC) Visão Computacional Clássica",
-                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "actual": "O método principal é (VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia).",
                 "score": 100,
                 "status": "Correto"
             },
@@ -316,11 +305,11 @@
                     "ccd filtro Bayer GR"
                 ],
                 "actual": [
-                    "câmera",
                     "LIDAR",
                     "câmera estéreo",
+                    "scanner laser",
                     "câmera RGB-D",
-                    "scanner laser"
+                    "câmera"
                 ],
                 "score": 0,
                 "status": "Incorreto"
@@ -330,10 +319,11 @@
                     "MATLAB"
                 ],
                 "actual": [
-                    "OpenCV"
+                    "código próprio",
+                    "MATLAB"
                 ],
-                "score": 0,
-                "status": "Incorreto"
+                "score": 50,
+                "status": "Parcial"
             },
             "Solução / Tarefa Principal": {
                 "expected": [
@@ -342,10 +332,9 @@
                 ],
                 "actual": [
                     "navegação (obstáculos)",
-                    "detecção",
-                    "segmentação"
+                    "detecção"
                 ],
-                "score": 66,
+                "score": 33,
                 "status": "Parcial"
             }
         }
@@ -353,13 +342,13 @@
     {
         "article_id": "26",
         "original_filename": "(26) Sensor and vision based autonomous agribot for sowing seeds.pdf",
-        "log_file": "26_sensor_and_vision_based_autonomous_ag_300c_75o_20260512_172914.json",
-        "timestamp": "20260512_172914",
-        "overall_score": 31,
+        "log_file": "26_sensor_and_vision_based_autonomous_ag_600c_150o_20260512_184730.json",
+        "timestamp": "20260512_184730",
+        "overall_score": 39,
         "evaluation": {
             "Área Computacional": {
                 "expected": "(VC) Visão Computacional Clássica",
-                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "actual": "Visão Computacional Clássica",
                 "score": 100,
                 "status": "Correto"
             },
@@ -370,10 +359,9 @@
                 "actual": [
                     "gps",
                     "câmera",
-                    "IR",
-                    "ultrassônico"
+                    "imu"
                 ],
-                "score": 25,
+                "score": 33,
                 "status": "Parcial"
             },
             "Bibliotecas, Frameworks ou Arquiteturas": {
@@ -382,6 +370,7 @@
                 ],
                 "actual": [
                     "OpenCV",
+                    "GPS",
                     "código próprio"
                 ],
                 "score": 0,
@@ -392,22 +381,22 @@
                     "navegação (mapa)"
                 ],
                 "actual": [
-                    "navegação (obstáculos)",
                     "navegação (trajeto)",
-                    "detecção",
-                    "segmentação"
+                    "navegação (mapa)",
+                    "navegação (obstáculos)",
+                    "detecção"
                 ],
-                "score": 0,
-                "status": "Incorreto"
+                "score": 25,
+                "status": "Parcial"
             }
         }
     },
     {
         "article_id": "28",
         "original_filename": "(28) Machine vision for orchard navigation..pdf",
-        "log_file": "28_machine_vision_for_orchard_navigation_300c_75o_20260512_172741.json",
-        "timestamp": "20260512_172741",
-        "overall_score": 43,
+        "log_file": "28_machine_vision_for_orchard_navigation_600c_150o_20260512_184420.json",
+        "timestamp": "20260512_184420",
+        "overall_score": 62,
         "evaluation": {
             "Área Computacional": {
                 "expected": "(VC) Visão Computacional Clássica",
@@ -420,21 +409,23 @@
                     "câmera"
                 ],
                 "actual": [
-                    "câmera",
-                    "câmera RGB-D",
-                    "NIR",
                     "câmera multiespectral"
                 ],
-                "score": 25,
-                "status": "Parcial"
+                "score": 100,
+                "status": "Correto"
             },
             "Bibliotecas, Frameworks ou Arquiteturas": {
                 "expected": [
                     "NI LabView"
                 ],
                 "actual": [
-                    "transformada Hough",
-                    "OpenCV"
+                    "OpenCV",
+                    "ROS",
+                    "CNNs",
+                    "CNN modificada",
+                    "DaSNet (Deep CNN)",
+                    "mobile-DaSNet",
+                    "ResNet101"
                 ],
                 "score": 0,
                 "status": "Incorreto"
@@ -455,8 +446,8 @@
     {
         "article_id": "30",
         "original_filename": "(30) Tractor path tracking control based on binocular vision.pdf",
-        "log_file": "30_tractor_path_tracking_control_based_o_300c_75o_20260512_172958.json",
-        "timestamp": "20260512_172958",
+        "log_file": "30_tractor_path_tracking_control_based_o_600c_150o_20260512_184718.json",
+        "timestamp": "20260512_184718",
         "overall_score": 70,
         "evaluation": {
             "Área Computacional": {
@@ -481,7 +472,7 @@
                 ],
                 "actual": [
                     "transformada Census",
-                    "OpenCV"
+                    "transformada Hough"
                 ],
                 "score": 50,
                 "status": "Parcial"
@@ -492,8 +483,8 @@
                 ],
                 "actual": [
                     "navegação (trajeto)",
-                    "detecção",
-                    "segmentação"
+                    "navegação (mapa)",
+                    "navegação (obstáculos)"
                 ],
                 "score": 33,
                 "status": "Parcial"
@@ -503,9 +494,9 @@
     {
         "article_id": "31",
         "original_filename": "(31) Machine Vision Retrofit System for Mechanical Weed Control in Precision Agriculture Applications.pdf",
-        "log_file": "31_machine_vision_retrofit_system_for_me_300c_75o_20260512_172933.json",
-        "timestamp": "20260512_172933",
-        "overall_score": 30,
+        "log_file": "31_machine_vision_retrofit_system_for_me_600c_150o_20260512_185009.json",
+        "timestamp": "20260512_185009",
+        "overall_score": 40,
         "evaluation": {
             "Área Computacional": {
                 "expected": "(VC) Visão Computacional Clássica",
@@ -519,10 +510,9 @@
                 ],
                 "actual": [
                     "câmera",
-                    "ccd",
-                    "ccd filtro Bayer GR"
+                    "ccd"
                 ],
-                "score": 33,
+                "score": 50,
                 "status": "Parcial"
             },
             "Bibliotecas, Frameworks ou Arquiteturas": {
@@ -531,12 +521,9 @@
                 ],
                 "actual": [
                     "MATLAB",
-                    "OpenCV",
-                    "k-means",
-                    "código próprio",
-                    "k-NN"
+                    "K-means"
                 ],
-                "score": 20,
+                "score": 50,
                 "status": "Parcial"
             },
             "Solução / Tarefa Principal": {
@@ -545,10 +532,11 @@
                 ],
                 "actual": [
                     "detecção",
+                    "segmentação",
                     "classificação",
-                    "segmentação"
+                    "navegação (obstáculos)"
                 ],
-                "score": 33,
+                "score": 25,
                 "status": "Parcial"
             }
         }
@@ -556,13 +544,13 @@
     {
         "article_id": "33",
         "original_filename": "(33) High Accuracy Adaptive Low Cost Location Sensing_(33) Subsystems for Autonomous Rover in Precision Agriculture.pdf",
-        "log_file": "33_high_accuracy_adaptive_low_cost_locat_300c_75o_20260512_172941.json",
-        "timestamp": "20260512_172941",
-        "overall_score": 58,
+        "log_file": "33_high_accuracy_adaptive_low_cost_locat_600c_150o_20260512_185022.json",
+        "timestamp": "20260512_185022",
+        "overall_score": 70,
         "evaluation": {
             "Área Computacional": {
                 "expected": "(VC) Visão Computacional Clássica",
-                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "actual": "Visão Computacional Clássica",
                 "score": 100,
                 "status": "Correto"
             },
@@ -583,22 +571,22 @@
                     "código próprio"
                 ],
                 "actual": [
-                    "OpenCV",
-                    "CNNs"
+                    "transformada Hough",
+                    "ALVINN",
+                    "código próprio"
                 ],
-                "score": 0,
-                "status": "Incorreto"
+                "score": 33,
+                "status": "Parcial"
             },
             "Solução / Tarefa Principal": {
                 "expected": [
                     "navegação (trajeto)"
                 ],
                 "actual": [
-                    "navegação (obstáculos)",
-                    "detecção",
-                    "navegação (trajeto)"
+                    "navegação (trajeto)",
+                    "detecção"
                 ],
-                "score": 33,
+                "score": 50,
                 "status": "Parcial"
             }
         }
@@ -606,8 +594,57 @@
     {
         "article_id": "34",
         "original_filename": "(34) Ground Level Mapping and Navigating for Agriculture Based on IoT and Computer Vision.pdf",
-        "log_file": "34_ground_level_mapping_and_navigating_f_300c_75o_20260512_172628.json",
-        "timestamp": "20260512_172628",
+        "log_file": "34_ground_level_mapping_and_navigating_f_600c_150o_20260512_184609.json",
+        "timestamp": "20260512_184609",
+        "overall_score": 48,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(RN) Redes Neurais (ex: ELM, RNAs tradicionais)",
+                "score": 43,
+                "status": "Parcial"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera",
+                    "LIDAR"
+                ],
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "ORB-SLAM2"
+                ],
+                "actual": [
+                    "ORB-SLAM2"
+                ],
+                "score": 100,
+                "status": "Correto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (mapa)"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "detecção",
+                    "segmentação",
+                    "estimativas de produção"
+                ],
+                "score": 0,
+                "status": "Incorreto"
+            }
+        }
+    },
+    {
+        "article_id": "35",
+        "original_filename": "(35) Machine Vision System for Autonomous Agricultural Vehicle.pdf",
+        "log_file": "35_machine_vision_system_for_autonomous__600c_150o_20260512_184812.json",
+        "timestamp": "20260512_184812",
         "overall_score": 50,
         "evaluation": {
             "Área Computacional": {
@@ -621,58 +658,6 @@
                     "câmera"
                 ],
                 "actual": [
-                    "câmera",
-                    "câmera RGB-D",
-                    "câmera estéreo"
-                ],
-                "score": 33,
-                "status": "Parcial"
-            },
-            "Bibliotecas, Frameworks ou Arquiteturas": {
-                "expected": [
-                    "ORB-SLAM2"
-                ],
-                "actual": [
-                    "ORB-SLAM2",
-                    "OpenCV"
-                ],
-                "score": 50,
-                "status": "Parcial"
-            },
-            "Solução / Tarefa Principal": {
-                "expected": [
-                    "navegação (mapa)"
-                ],
-                "actual": [
-                    "navegação (obstáculos)",
-                    "detecção",
-                    "segmentação",
-                    "classificação",
-                    "navegação (mapa)"
-                ],
-                "score": 20,
-                "status": "Parcial"
-            }
-        }
-    },
-    {
-        "article_id": "35",
-        "original_filename": "(35) Machine Vision System for Autonomous Agricultural Vehicle.pdf",
-        "log_file": "35_machine_vision_system_for_autonomous__300c_75o_20260512_172620.json",
-        "timestamp": "20260512_172620",
-        "overall_score": 45,
-        "evaluation": {
-            "Área Computacional": {
-                "expected": "(VC) Visão Computacional Clássica",
-                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
-                "score": 100,
-                "status": "Correto"
-            },
-            "Sensores Utilizados": {
-                "expected": [
-                    "câmera"
-                ],
-                "actual": [
                     "LIDAR",
                     "câmera"
                 ],
@@ -684,8 +669,184 @@
                     "OpenCV"
                 ],
                 "actual": [
-                    "código próprio",
-                    "CNNs"
+                    "OpenCV",
+                    "ROS",
+                    "SLAM",
+                    "código próprio"
+                ],
+                "score": 25,
+                "status": "Parcial"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "detecção"
+                ],
+                "actual": [
+                    "navegação (obstáculos)",
+                    "detecção",
+                    "segmentação",
+                    "classificação"
+                ],
+                "score": 25,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "36",
+        "original_filename": "(36) Medial axis-based machine-vision system for orchard robot navigation.pdf",
+        "log_file": "36_medial_axisbased_machinevision_system_600c_150o_20260512_184551.json",
+        "timestamp": "20260512_184551",
+        "overall_score": 68,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)",
+                "score": 37,
+                "status": "Parcial"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera"
+                ],
+                "score": 100,
+                "status": "Correto"
+            }
+        }
+    },
+    {
+        "article_id": "37",
+        "original_filename": "(37) Using a depth camera for crop row detection and mapping for under-canopy navigation of agricultural robotic vehicle.pdf",
+        "log_file": "37_using_a_depth_camera_for_crop_row_det_600c_150o_20260512_184338.json",
+        "timestamp": "20260512_184338",
+        "overall_score": 33,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera ToF"
+                ],
+                "actual": [
+                    "câmera ToF",
+                    "LIDAR",
+                    "câmera estéreo"
+                ],
+                "score": 33,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "código próprio"
+                ],
+                "actual": [
+                    "OpenCV",
+                    "ToF camera"
+                ],
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "detecção",
+                    "segmentação",
+                    "navegação (obstáculos)"
+                ],
+                "score": 0,
+                "status": "Incorreto"
+            }
+        }
+    },
+    {
+        "article_id": "38",
+        "original_filename": "(38) Towards Autonomous Agriculture_ Automatic Ground Detection Using Trinocular Stereovision.pdf",
+        "log_file": "38_towards_autonomous_agriculture_automa_600c_150o_20260512_185109.json",
+        "timestamp": "20260512_185109",
+        "overall_score": 41,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(AM) Aprendizado de Máquina",
+                "actual": "(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera estéreo"
+                ],
+                "actual": [
+                    "câmera",
+                    "câmera estéreo",
+                    "câmera binocular"
+                ],
+                "score": 33,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "código próprio"
+                ],
+                "actual": "Não informado no contexto",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "classificação"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "segmentação",
+                    "classificação"
+                ],
+                "score": 33,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "39",
+        "original_filename": "(39) Novelty-based visual obstacle detection in agriculture.pdf",
+        "log_file": "39_noveltybased_visual_obstacle_detectio_600c_150o_20260512_184626.json",
+        "timestamp": "20260512_184626",
+        "overall_score": 22,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(AM) Aprendizado de Máquina",
+                "actual": "(RN) Redes Neurais (ex: ELM, RNAs tradicionais)",
+                "score": 40,
+                "status": "Parcial"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera estéreo",
+                    "scanner laser"
+                ],
+                "actual": [
+                    "câmera",
+                    "LIDAR",
+                    "câmera IR"
+                ],
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "ROS"
+                ],
+                "actual": [
+                    "FLANN",
+                    "LIBVISO21"
                 ],
                 "score": 0,
                 "status": "Incorreto"
@@ -696,58 +857,7 @@
                 ],
                 "actual": [
                     "navegação (obstáculos)",
-                    "detecção",
-                    "segmentação"
-                ],
-                "score": 33,
-                "status": "Parcial"
-            }
-        }
-    },
-    {
-        "article_id": "36",
-        "original_filename": "(36) Medial axis-based machine-vision system for orchard robot navigation.pdf",
-        "log_file": "36_medial_axisbased_machinevision_system_300c_75o_20260512_172725.json",
-        "timestamp": "20260512_172725",
-        "overall_score": 48,
-        "evaluation": {
-            "Área Computacional": {
-                "expected": "(VC) Visão Computacional Clássica",
-                "actual": "(AM) Aprendizado de Máquina",
-                "score": 23,
-                "status": "Parcial"
-            },
-            "Sensores Utilizados": {
-                "expected": [
-                    "câmera"
-                ],
-                "actual": [
-                    "câmera RGB-D"
-                ],
-                "score": 100,
-                "status": "Correto"
-            },
-            "Bibliotecas, Frameworks ou Arquiteturas": {
-                "expected": [
-                    "filtro Gabor",
-                    "K-means"
-                ],
-                "actual": [
-                    "OpenCV",
-                    "transformada Hough",
-                    "K-means",
-                    "ROS"
-                ],
-                "score": 20,
-                "status": "Parcial"
-            },
-            "Solução / Tarefa Principal": {
-                "expected": [
-                    "navegação (trajeto)"
-                ],
-                "actual": [
-                    "navegação (obstáculos)",
-                    "navegação (trajeto)"
+                    "detecção"
                 ],
                 "score": 50,
                 "status": "Parcial"
@@ -755,28 +865,27 @@
         }
     },
     {
-        "article_id": "37",
-        "original_filename": "(37) Using a depth camera for crop row detection and mapping for under-canopy navigation of agricultural robotic vehicle.pdf",
-        "log_file": "37_using_a_depth_camera_for_crop_row_det_300c_75o_20260512_172733.json",
-        "timestamp": "20260512_172733",
-        "overall_score": 17,
+        "article_id": "40",
+        "original_filename": "(40) Plant classification system for crop _weed discrimination without segmentation.pdf",
+        "log_file": "40_plant_classification_system_for_crop__600c_150o_20260512_184955.json",
+        "timestamp": "20260512_184955",
+        "overall_score": 69,
         "evaluation": {
             "Área Computacional": {
-                "expected": "(VC) Visão Computacional Clássica",
-                "actual": "(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)",
-                "score": 37,
+                "expected": "(AM) Aprendizado de Máquina",
+                "actual": "Não informado no contexto",
+                "score": 27,
                 "status": "Parcial"
             },
             "Sensores Utilizados": {
                 "expected": [
-                    "câmera ToF"
+                    "câmera multiespectral"
                 ],
                 "actual": [
-                    "câmera ToF",
-                    "gps",
-                    "imu"
+                    "câmera multiespectral",
+                    "NIR"
                 ],
-                "score": 33,
+                "score": 50,
                 "status": "Parcial"
             },
             "Bibliotecas, Frameworks ou Arquiteturas": {
@@ -784,38 +893,241 @@
                     "código próprio"
                 ],
                 "actual": [
+                    "código próprio"
+                ],
+                "score": 100,
+                "status": "Correto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "classificação"
+                ],
+                "actual": [
+                    "classificação"
+                ],
+                "score": 100,
+                "status": "Correto"
+            }
+        }
+    },
+    {
+        "article_id": "43",
+        "original_filename": "(43) Learning crop models for vision-based guidance of agricultural robots.pdf",
+        "log_file": "43_learning_crop_models_for_visionbased__600c_150o_20260512_184841.json",
+        "timestamp": "20260512_184841",
+        "overall_score": 62,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(AM) Aprendizado de Máquina",
+                "actual": "(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera estéreo"
+                ],
+                "actual": [
+                    "câmera",
+                    "câmera estéreo"
+                ],
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "OpenCV",
+                    "SVM"
+                ],
+                "actual": [
                     "OpenCV"
                 ],
-                "score": 0,
-                "status": "Incorreto"
+                "score": 50,
+                "status": "Parcial"
             },
             "Solução / Tarefa Principal": {
                 "expected": [
                     "navegação (trajeto)"
                 ],
                 "actual": [
-                    "detecção",
-                    "segmentação",
-                    "navegação (obstáculos)",
-                    "navegação (mapa)"
+                    "navegação (trajeto)",
+                    "navegação (obstáculos)"
                 ],
-                "score": 0,
-                "status": "Incorreto"
+                "score": 50,
+                "status": "Parcial"
             }
         }
     },
     {
-        "article_id": "38",
-        "original_filename": "(38) Towards Autonomous Agriculture_ Automatic Ground Detection Using Trinocular Stereovision.pdf",
-        "log_file": "38_towards_autonomous_agriculture_automa_300c_75o_20260512_172612.json",
-        "timestamp": "20260512_172612",
-        "overall_score": 24,
+        "article_id": "45",
+        "original_filename": "(45) SLAM in the Field- An Evaluation of Monocular Mapping and Localization on Challenging Dynamic Agricultural Environment.pdf",
+        "log_file": "45_slam_in_the_field_an_evaluation_of_mo_600c_150o_20260512_185055.json",
+        "timestamp": "20260512_185055",
+        "overall_score": 29,
         "evaluation": {
             "Área Computacional": {
                 "expected": "(AM) Aprendizado de Máquina",
-                "actual": "(RN) Redes Neurais (ex: ELM, RNAs tradicionais)",
-                "score": 40,
+                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "score": 34,
                 "status": "Parcial"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera",
+                    "câmera RGB-D"
+                ],
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "OpenVSLAM"
+                ],
+                "actual": [
+                    "OpenCV",
+                    "ORB-SLAM2",
+                    "OpenVSLAM",
+                    "ResNet101",
+                    "CNNs",
+                    "ResNet18",
+                    "U-Net",
+                    "Monodepth2",
+                    "ImageNet",
+                    "KITTI",
+                    "TensorRT",
+                    "AlexNet"
+                ],
+                "score": 8,
+                "status": "Parcial"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (mapa)"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "navegação (mapa)",
+                    "detecção",
+                    "segmentação"
+                ],
+                "score": 25,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "46",
+        "original_filename": "(46) Real-time object detection in agricultural_remote environments using the multiple-expert colour feature extreme learning machine (MEC-ELM).pdf",
+        "log_file": "46_realtime_object_detection_in_agricult_600c_150o_20260512_184922.json",
+        "timestamp": "20260512_184922",
+        "overall_score": 66,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(RN) Redes Neurais",
+                "actual": "(RN) Redes Neurais (ex: ELM, RNAs tradicionais)",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera"
+                ],
+                "score": 100,
+                "status": "Correto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "algoritmo MEC-ELM"
+                ],
+                "actual": [
+                    "algoritmo MEC-ELM",
+                    "código próprio",
+                    "transformada Hough"
+                ],
+                "score": 33,
+                "status": "Parcial"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "detecção",
+                    "classificação"
+                ],
+                "actual": [
+                    "detecção",
+                    "navegação (obstáculos)"
+                ],
+                "score": 33,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "47",
+        "original_filename": "(47) Using Deep Learning to Challenge Safety Standard for Highly Autonomous Machines in Agriculture.pdf",
+        "log_file": "47_using_deep_learning_to_challenge_safe_600c_150o_20260512_184937.json",
+        "timestamp": "20260512_184937",
+        "overall_score": 58,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(CNN) Redes Neurais Convolucionais",
+                "actual": "Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera térmica",
+                    "LIDAR",
+                    "câmera estéreo"
+                ],
+                "score": 33,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "AlexNet",
+                    "TL"
+                ],
+                "actual": [
+                    "AlexNet"
+                ],
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "detecção",
+                    "classificação"
+                ],
+                "actual": [
+                    "detecção"
+                ],
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "48",
+        "original_filename": "(48) DeepAnomaly_ Combining Background Subtraction_and Deep Learning for Detecting Obstacles and_Anomalies in an Agricultural Field.pdf",
+        "log_file": "48_deepanomaly_combining_background_subt_600c_150o_20260512_185122.json",
+        "timestamp": "20260512_185122",
+        "overall_score": 41,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(CNN) Redes Neurais Convolucionais",
+                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "score": 100,
+                "status": "Correto"
             },
             "Sensores Utilizados": {
                 "expected": [
@@ -824,73 +1136,25 @@
                 "actual": [
                     "câmera",
                     "câmera estéreo",
-                    "câmera trinocular"
-                ],
-                "score": 33,
-                "status": "Parcial"
-            },
-            "Bibliotecas, Frameworks ou Arquiteturas": {
-                "expected": [
-                    "código próprio"
-                ],
-                "actual": [
-                    "OpenCV",
-                    "CNNs",
-                    "ROS"
-                ],
-                "score": 0,
-                "status": "Incorreto"
-            },
-            "Solução / Tarefa Principal": {
-                "expected": [
-                    "classificação"
-                ],
-                "actual": [
-                    "navegação (trajeto)",
-                    "navegação (obstáculos)",
-                    "segmentação",
-                    "classificação"
-                ],
-                "score": 25,
-                "status": "Parcial"
-            }
-        }
-    },
-    {
-        "article_id": "39",
-        "original_filename": "(39) Novelty-based visual obstacle detection in agriculture.pdf",
-        "log_file": "39_noveltybased_visual_obstacle_detectio_300c_75o_20260512_172604.json",
-        "timestamp": "20260512_172604",
-        "overall_score": 26,
-        "evaluation": {
-            "Área Computacional": {
-                "expected": "(AM) Aprendizado de Máquina",
-                "actual": "(RN) Redes Neurais",
-                "score": 41,
-                "status": "Parcial"
-            },
-            "Sensores Utilizados": {
-                "expected": [
-                    "câmera estéreo",
-                    "scanner laser"
-                ],
-                "actual": [
-                    "câmera",
-                    "câmera estéreo",
+                    "gps",
+                    "imu",
                     "LIDAR",
-                    "câmera RGB-D",
-                    "NIR"
+                    "câmera RGB",
+                    "térmica"
                 ],
-                "score": 16,
+                "score": 14,
                 "status": "Parcial"
             },
             "Bibliotecas, Frameworks ou Arquiteturas": {
                 "expected": [
-                    "ROS"
+                    "MATLAB",
+                    "CNN modificada"
                 ],
                 "actual": [
-                    "OpenCV",
-                    "LIBVISO2"
+                    "AlexNet",
+                    "CNNs",
+                    "VGG16",
+                    "Caffe"
                 ],
                 "score": 0,
                 "status": "Incorreto"
@@ -909,328 +1173,11 @@
         }
     },
     {
-        "article_id": "40",
-        "original_filename": "(40) Plant classification system for crop _weed discrimination without segmentation.pdf",
-        "log_file": "40_plant_classification_system_for_crop__300c_75o_20260512_172718.json",
-        "timestamp": "20260512_172718",
-        "overall_score": 62,
-        "evaluation": {
-            "Área Computacional": {
-                "expected": "(AM) Aprendizado de Máquina",
-                "actual": "(AM) Aprendizado de Máquina",
-                "score": 100,
-                "status": "Correto"
-            },
-            "Sensores Utilizados": {
-                "expected": [
-                    "câmera multiespectral"
-                ],
-                "actual": [
-                    "câmera multiespectral",
-                    "NIR"
-                ],
-                "score": 50,
-                "status": "Parcial"
-            },
-            "Bibliotecas, Frameworks ou Arquiteturas": {
-                "expected": [
-                    "código próprio"
-                ],
-                "actual": [
-                    "OpenCV",
-                    "transformada Hough",
-                    "SVM",
-                    "CNNs"
-                ],
-                "score": 0,
-                "status": "Incorreto"
-            },
-            "Solução / Tarefa Principal": {
-                "expected": [
-                    "classificação"
-                ],
-                "actual": [
-                    "classificação"
-                ],
-                "score": 100,
-                "status": "Correto"
-            }
-        }
-    },
-    {
-        "article_id": "43",
-        "original_filename": "(43) Learning crop models for vision-based guidance of agricultural robots.pdf",
-        "log_file": "43_learning_crop_models_for_visionbased__300c_75o_20260512_172645.json",
-        "timestamp": "20260512_172645",
-        "overall_score": 41,
-        "evaluation": {
-            "Área Computacional": {
-                "expected": "(AM) Aprendizado de Máquina",
-                "actual": "(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)",
-                "score": 100,
-                "status": "Correto"
-            },
-            "Sensores Utilizados": {
-                "expected": [
-                    "câmera estéreo"
-                ],
-                "actual": [
-                    "câmera",
-                    "gps",
-                    "imu"
-                ],
-                "score": 0,
-                "status": "Incorreto"
-            },
-            "Bibliotecas, Frameworks ou Arquiteturas": {
-                "expected": [
-                    "OpenCV",
-                    "SVM"
-                ],
-                "actual": [
-                    "transformada Hough",
-                    "SVM",
-                    "OpenCV"
-                ],
-                "score": 66,
-                "status": "Parcial"
-            },
-            "Solução / Tarefa Principal": {
-                "expected": [
-                    "navegação (trajeto)"
-                ],
-                "actual": [
-                    "navegação (obstáculos)",
-                    "detecção"
-                ],
-                "score": 0,
-                "status": "Incorreto"
-            }
-        }
-    },
-    {
-        "article_id": "45",
-        "original_filename": "(45) SLAM in the Field- An Evaluation of Monocular Mapping and Localization on Challenging Dynamic Agricultural Environment.pdf",
-        "log_file": "45_slam_in_the_field_an_evaluation_of_mo_300c_75o_20260512_172701.json",
-        "timestamp": "20260512_172701",
-        "overall_score": 21,
-        "evaluation": {
-            "Área Computacional": {
-                "expected": "(AM) Aprendizado de Máquina",
-                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
-                "score": 34,
-                "status": "Parcial"
-            },
-            "Sensores Utilizados": {
-                "expected": [
-                    "câmera"
-                ],
-                "actual": [
-                    "câmera",
-                    "câmera binocular"
-                ],
-                "score": 50,
-                "status": "Parcial"
-            },
-            "Bibliotecas, Frameworks ou Arquiteturas": {
-                "expected": [
-                    "OpenVSLAM"
-                ],
-                "actual": [
-                    "OpenCV",
-                    "ORB-SLAM2",
-                    "ROS",
-                    "CNNs",
-                    "ResNet101",
-                    "ResNet50",
-                    "SegNet",
-                    "DeepLabV3+",
-                    "transformada Hough"
-                ],
-                "score": 0,
-                "status": "Incorreto"
-            },
-            "Solução / Tarefa Principal": {
-                "expected": [
-                    "navegação (mapa)"
-                ],
-                "actual": [
-                    "navegação (trajeto)",
-                    "detecção",
-                    "segmentação",
-                    "classificação"
-                ],
-                "score": 0,
-                "status": "Incorreto"
-            }
-        }
-    },
-    {
-        "article_id": "46",
-        "original_filename": "(46) Real-time object detection in agricultural_remote environments using the multiple-expert colour feature extreme learning machine (MEC-ELM).pdf",
-        "log_file": "46_realtime_object_detection_in_agricult_300c_75o_20260512_172758.json",
-        "timestamp": "20260512_172758",
-        "overall_score": 66,
-        "evaluation": {
-            "Área Computacional": {
-                "expected": "(RN) Redes Neurais",
-                "actual": "(RN) Redes Neurais (ex: ELM, RNAs tradicionais)",
-                "score": 100,
-                "status": "Correto"
-            },
-            "Sensores Utilizados": {
-                "expected": [
-                    "câmera"
-                ],
-                "actual": [
-                    "câmera",
-                    "câmera RGB-D",
-                    "ccd"
-                ],
-                "score": 33,
-                "status": "Parcial"
-            },
-            "Bibliotecas, Frameworks ou Arquiteturas": {
-                "expected": [
-                    "algoritmo MEC-ELM"
-                ],
-                "actual": [
-                    "algoritmo MEC-ELM",
-                    "SVM",
-                    "CNNs"
-                ],
-                "score": 33,
-                "status": "Parcial"
-            },
-            "Solução / Tarefa Principal": {
-                "expected": [
-                    "detecção",
-                    "classificação"
-                ],
-                "actual": [
-                    "detecção",
-                    "classificação"
-                ],
-                "score": 100,
-                "status": "Correto"
-            }
-        }
-    },
-    {
-        "article_id": "47",
-        "original_filename": "(47) Using Deep Learning to Challenge Safety Standard for Highly Autonomous Machines in Agriculture.pdf",
-        "log_file": "47_using_deep_learning_to_challenge_safe_300c_75o_20260512_173023.json",
-        "timestamp": "20260512_173023",
-        "overall_score": 62,
-        "evaluation": {
-            "Área Computacional": {
-                "expected": "(CNN) Redes Neurais Convolucionais",
-                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
-                "score": 100,
-                "status": "Correto"
-            },
-            "Sensores Utilizados": {
-                "expected": [
-                    "câmera"
-                ],
-                "actual": [
-                    "câmera",
-                    "LIDAR",
-                    "câmera ToF",
-                    "câmera estéreo",
-                    "câmera RGB-D",
-                    "térmica"
-                ],
-                "score": 16,
-                "status": "Parcial"
-            },
-            "Bibliotecas, Frameworks ou Arquiteturas": {
-                "expected": [
-                    "AlexNet",
-                    "TL"
-                ],
-                "actual": [
-                    "AlexNet",
-                    "CNNs"
-                ],
-                "score": 33,
-                "status": "Parcial"
-            },
-            "Solução / Tarefa Principal": {
-                "expected": [
-                    "detecção",
-                    "classificação"
-                ],
-                "actual": [
-                    "detecção",
-                    "classificação"
-                ],
-                "score": 100,
-                "status": "Correto"
-            }
-        }
-    },
-    {
-        "article_id": "48",
-        "original_filename": "(48) DeepAnomaly_ Combining Background Subtraction_and Deep Learning for Detecting Obstacles and_Anomalies in an Agricultural Field.pdf",
-        "log_file": "48_deepanomaly_combining_background_subt_300c_75o_20260512_172822.json",
-        "timestamp": "20260512_172822",
-        "overall_score": 41,
-        "evaluation": {
-            "Área Computacional": {
-                "expected": "(CNN) Redes Neurais Convolucionais",
-                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
-                "score": 100,
-                "status": "Correto"
-            },
-            "Sensores Utilizados": {
-                "expected": [
-                    "câmera estéreo"
-                ],
-                "actual": [
-                    "câmera",
-                    "LIDAR",
-                    "gps",
-                    "imu",
-                    "câmera estéreo",
-                    "RGB camera",
-                    "thermal camera"
-                ],
-                "score": 14,
-                "status": "Parcial"
-            },
-            "Bibliotecas, Frameworks ou Arquiteturas": {
-                "expected": [
-                    "MATLAB",
-                    "CNN modificada"
-                ],
-                "actual": [
-                    "AlexNet",
-                    "CNNs",
-                    "Caffe"
-                ],
-                "score": 0,
-                "status": "Incorreto"
-            },
-            "Solução / Tarefa Principal": {
-                "expected": [
-                    "detecção"
-                ],
-                "actual": [
-                    "detecção",
-                    "segmentação"
-                ],
-                "score": 50,
-                "status": "Parcial"
-            }
-        }
-    },
-    {
         "article_id": "49",
         "original_filename": "(49) Fruit Detection and Segmentation for Apple Harvesting Using Visual Sensor in Orchards.pdf",
-        "log_file": "49_fruit_detection_and_segmentation_for__300c_75o_20260512_172855.json",
-        "timestamp": "20260512_172855",
-        "overall_score": 58,
+        "log_file": "49_fruit_detection_and_segmentation_for__600c_150o_20260512_184534.json",
+        "timestamp": "20260512_184534",
+        "overall_score": 50,
         "evaluation": {
             "Área Computacional": {
                 "expected": "(CNN) Redes Neurais Convolucionais",
@@ -1244,35 +1191,26 @@
                 ],
                 "actual": [
                     "câmera RGB-D",
-                    "kinect-v2",
                     "câmera",
                     "NIR"
                 ],
-                "score": 25,
-                "status": "Parcial"
+                "score": 0,
+                "status": "Incorreto"
             },
             "Bibliotecas, Frameworks ou Arquiteturas": {
                 "expected": [
                     "DaSNet (Deep CNN)"
                 ],
                 "actual": [
-                    "OpenCV",
-                    "CNNs",
-                    "AlexNet",
-                    "ResNet101",
                     "ResNet50",
-                    "DeepLabV3+",
-                    "SegNet",
-                    "DaSNet (Deep CNN)",
-                    "mobile-DaSNet",
+                    "ResNet101",
                     "TensorRT",
-                    "ORB-SLAM2",
-                    "OpenVSLAM",
-                    "TL",
-                    "CNN modificada"
+                    "tensorflow MobileNet",
+                    "caffe",
+                    "TensorFlow"
                 ],
-                "score": 7,
-                "status": "Parcial"
+                "score": 0,
+                "status": "Incorreto"
             },
             "Solução / Tarefa Principal": {
                 "expected": [
@@ -1291,9 +1229,9 @@
     {
         "article_id": "50",
         "original_filename": "(50) Deep Learning Framework for Vehicle and Pedestrian Detection in Rural Roads on an Embedded GPU.pdf",
-        "log_file": "50_deep_learning_framework_for_vehicle_a_300c_75o_20260512_172709.json",
-        "timestamp": "20260512_172709",
-        "overall_score": 61,
+        "log_file": "50_deep_learning_framework_for_vehicle_a_600c_150o_20260512_184407.json",
+        "timestamp": "20260512_184407",
+        "overall_score": 62,
         "evaluation": {
             "Área Computacional": {
                 "expected": "(CNN) Redes Neurais Convolucionais",
@@ -1316,17 +1254,15 @@
                     "TensorRT"
                 ],
                 "actual": [
-                    "TensorFlow",
-                    "PyTorch",
-                    "Caffe/Caffe2",
-                    "Keras",
-                    "MXNet",
-                    "TensorRT",
-                    "CNNs",
-                    "SSD-MobileNet"
+                    "ssd-mobilenet v1",
+                    "ssd-mobilenet v2",
+                    "pednet",
+                    "multiped",
+                    "ssd-inception v2",
+                    "CNNs"
                 ],
-                "score": 12,
-                "status": "Parcial"
+                "score": 0,
+                "status": "Incorreto"
             },
             "Solução / Tarefa Principal": {
                 "expected": [
@@ -1334,10 +1270,9 @@
                     "classificação"
                 ],
                 "actual": [
-                    "detecção",
-                    "segmentação"
+                    "detecção"
                 ],
-                "score": 33,
+                "score": 50,
                 "status": "Parcial"
             }
         }
@@ -1345,9 +1280,9 @@
     {
         "article_id": "51",
         "original_filename": "(51) Towards Semantic Scene Segmentation for Autonomous Agricultural Vehicles.pdf",
-        "log_file": "51_towards_semantic_scene_segmentation_f_300c_75o_20260512_172653.json",
-        "timestamp": "20260512_172653",
-        "overall_score": 68,
+        "log_file": "51_towards_semantic_scene_segmentation_f_600c_150o_20260512_184909.json",
+        "timestamp": "20260512_184909",
+        "overall_score": 61,
         "evaluation": {
             "Área Computacional": {
                 "expected": "(CNN) Redes Neurais Convolucionais",
@@ -1370,12 +1305,17 @@
                     "SegNet"
                 ],
                 "actual": [
+                    "AlexNet",
                     "SegNet",
-                    "VGG16",
-                    "tensorflow MobileNet",
-                    "CNNs"
+                    "OpenCV",
+                    "VGG",
+                    "ResNet",
+                    "U-Net",
+                    "DeconvNet",
+                    "FCN",
+                    "DeepLabV3+"
                 ],
-                "score": 25,
+                "score": 11,
                 "status": "Parcial"
             },
             "Solução / Tarefa Principal": {
@@ -1384,9 +1324,10 @@
                 ],
                 "actual": [
                     "segmentação",
-                    "detecção"
+                    "detecção",
+                    "navegação (obstáculos)"
                 ],
-                "score": 50,
+                "score": 33,
                 "status": "Parcial"
             }
         }
@@ -1394,13 +1335,13 @@
     {
         "article_id": "52",
         "original_filename": "(52) Real-Time Fruit Recognition and Grasping Estimationfor Robotic Apple Harvesting.pdf",
-        "log_file": "52_realtime_fruit_recognition_and_graspi_300c_75o_20260512_173006.json",
-        "timestamp": "20260512_173006",
-        "overall_score": 66,
+        "log_file": "52_realtime_fruit_recognition_and_graspi_600c_150o_20260512_184324.json",
+        "timestamp": "20260512_184324",
+        "overall_score": 64,
         "evaluation": {
             "Área Computacional": {
                 "expected": "(CNN) Redes Neurais Convolucionais",
-                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "actual": "Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
                 "score": 100,
                 "status": "Correto"
             },
@@ -1409,10 +1350,11 @@
                     "câmera RGB-D"
                 ],
                 "actual": [
-                    "câmera RGB-D"
+                    "câmera RGB-D",
+                    "NIR"
                 ],
-                "score": 100,
-                "status": "Correto"
+                "score": 50,
+                "status": "Parcial"
             },
             "Bibliotecas, Frameworks ou Arquiteturas": {
                 "expected": [
@@ -1420,15 +1362,20 @@
                     "TL"
                 ],
                 "actual": [
-                    "OpenCV",
-                    "CNNs",
-                    "YOLO-V3",
+                    "PointNet",
+                    "Mobile-DasNet",
+                    "ResNet101",
+                    "YOLO-V2",
+                    "Faster-RCNN",
                     "Mask-RCNN",
-                    "VGG16",
-                    "TensorFlow"
+                    "Dense-YOLO",
+                    "DasNet-v1",
+                    "DasNet-v2",
+                    "SPRNet",
+                    "tensorflow MobileNet"
                 ],
-                "score": 0,
-                "status": "Incorreto"
+                "score": 8,
+                "status": "Parcial"
             },
             "Solução / Tarefa Principal": {
                 "expected": [
@@ -1437,20 +1384,19 @@
                 ],
                 "actual": [
                     "detecção",
-                    "segmentação",
-                    "estimativas de produção"
+                    "segmentação"
                 ],
-                "score": 66,
-                "status": "Parcial"
+                "score": 100,
+                "status": "Correto"
             }
         }
     },
     {
         "article_id": "54",
         "original_filename": "(54) A robot vision navigation method using deep learning in edge computing environment.pdf",
-        "log_file": "54_a_robot_vision_navigation_method_usin_300c_75o_20260512_172805.json",
-        "timestamp": "20260512_172805",
-        "overall_score": 45,
+        "log_file": "54_a_robot_vision_navigation_method_usin_600c_150o_20260512_184743.json",
+        "timestamp": "20260512_184743",
+        "overall_score": 25,
         "evaluation": {
             "Área Computacional": {
                 "expected": "(CNN) Redes Neurais Convolucionais",
@@ -1463,18 +1409,18 @@
                     "ccd"
                 ],
                 "actual": [
-                    "ccd",
-                    "câmera"
+                    "câmera",
+                    "gps",
+                    "imu"
                 ],
-                "score": 50,
-                "status": "Parcial"
+                "score": 0,
+                "status": "Incorreto"
             },
             "Bibliotecas, Frameworks ou Arquiteturas": {
                 "expected": [
                     "ResNet101"
                 ],
                 "actual": [
-                    "tensorflow",
                     "transformada Hough"
                 ],
                 "score": 0,
@@ -1485,21 +1431,21 @@
                     "navegação (trajeto)"
                 ],
                 "actual": [
-                    "navegação (trajeto)",
+                    "navegação (obstáculos)",
                     "segmentação",
                     "detecção"
                 ],
-                "score": 33,
-                "status": "Parcial"
+                "score": 0,
+                "status": "Incorreto"
             }
         }
     },
     {
         "article_id": "55",
         "original_filename": "(55) Obstacle Detection System for Agricultural Mobile RobotApplication Using RGB-D Cameras.pdf",
-        "log_file": "55_obstacle_detection_system_for_agricul_300c_75o_20260512_172749.json",
-        "timestamp": "20260512_172749",
-        "overall_score": 50,
+        "log_file": "55_obstacle_detection_system_for_agricul_600c_150o_20260512_184502.json",
+        "timestamp": "20260512_184502",
+        "overall_score": 42,
         "evaluation": {
             "Área Computacional": {
                 "expected": "(CNN) Redes Neurais Convolucionais",
@@ -1512,10 +1458,17 @@
                     "câmera RGB-D"
                 ],
                 "actual": [
+                    "câmera",
+                    "gps",
+                    "imu",
+                    "câmera binocular",
+                    "LIDAR",
                     "câmera RGB-D",
-                    "câmera"
+                    "câmera estéreo",
+                    "câmera multiespectral",
+                    "térmica"
                 ],
-                "score": 50,
+                "score": 11,
                 "status": "Parcial"
             },
             "Bibliotecas, Frameworks ou Arquiteturas": {
@@ -1523,23 +1476,24 @@
                     "DeepLabV3+"
                 ],
                 "actual": [
-                    "OpenCV",
-                    "CNNs",
-                    "Deep Learning",
-                    "TensorRT"
+                    "DeepLabV3+",
+                    "ResNet34",
+                    "Point Cloud Library"
                 ],
-                "score": 0,
-                "status": "Incorreto"
+                "score": 33,
+                "status": "Parcial"
             },
             "Solução / Tarefa Principal": {
                 "expected": [
                     "navegação (obstáculos)"
                 ],
                 "actual": [
+                    "navegação (trajeto)",
+                    "navegação (obstáculos)",
                     "detecção",
-                    "navegação (obstáculos)"
+                    "segmentação"
                 ],
-                "score": 50,
+                "score": 25,
                 "status": "Parcial"
             }
         }
@@ -1547,13 +1501,13 @@
     {
         "article_id": "56",
         "original_filename": "(56) An Autonomous Grape-Harvester Robot_ Integrated System Architecture.pdf",
-        "log_file": "56_an_autonomous_grapeharvester_robot_in_300c_75o_20260512_172922.json",
-        "timestamp": "20260512_172922",
-        "overall_score": 37,
+        "log_file": "56_an_autonomous_grapeharvester_robot_in_600c_150o_20260512_184352.json",
+        "timestamp": "20260512_184352",
+        "overall_score": 46,
         "evaluation": {
             "Área Computacional": {
                 "expected": "(CNN) Redes Neurais Convolucionais",
-                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "actual": "Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
                 "score": 100,
                 "status": "Correto"
             },
@@ -1565,15 +1519,13 @@
                 ],
                 "actual": [
                     "câmera",
-                    "imu",
-                    "gps",
+                    "câmera 3D",
                     "câmera RGB-D",
-                    "câmera ToF",
-                    "LIDAR",
-                    "térmica",
-                    "NIR"
+                    "câmera RGB",
+                    "NIR",
+                    "térmica"
                 ],
-                "score": 22,
+                "score": 50,
                 "status": "Parcial"
             },
             "Bibliotecas, Frameworks ou Arquiteturas": {
@@ -1581,19 +1533,16 @@
                     "CNNs"
                 ],
                 "actual": [
-                    "OpenCV",
                     "ResNet50",
                     "MobileNetV2",
-                    "UNET_MobileNetV2",
                     "YOLOv3",
                     "YOLOv5",
-                    "tensorflow MobileNet",
+                    "UNET",
+                    "Random Forest",
                     "CNNs",
-                    "CNN modificada",
-                    "ResNet101",
-                    "DeepLabV3+"
+                    "ROS"
                 ],
-                "score": 9,
+                "score": 12,
                 "status": "Parcial"
             },
             "Solução / Tarefa Principal": {
@@ -1603,11 +1552,10 @@
                 ],
                 "actual": [
                     "navegação (trajeto)",
-                    "navegação (mapa)",
-                    "navegação (obstáculos)",
-                    "detecção"
+                    "detecção",
+                    "classificação"
                 ],
-                "score": 20,
+                "score": 25,
                 "status": "Parcial"
             }
         }
@@ -1615,9 +1563,9 @@
     {
         "article_id": "58",
         "original_filename": "(58) A novel vision-based weakly supervised framework for autonomous yield estimation in agricultural applications.pdf",
-        "log_file": "58_a_novel_visionbased_weakly_supervised_300c_75o_20260512_173014.json",
-        "timestamp": "20260512_173014",
-        "overall_score": 40,
+        "log_file": "58_a_novel_visionbased_weakly_supervised_600c_150o_20260512_184449.json",
+        "timestamp": "20260512_184449",
+        "overall_score": 55,
         "evaluation": {
             "Área Computacional": {
                 "expected": "(CNN) Redes Neurais Convolucionais",
@@ -1632,12 +1580,11 @@
                 "actual": [
                     "LIDAR",
                     "gps",
-                    "gps-rtk",
                     "câmera",
                     "câmera multiespectral",
                     "câmera estéreo"
                 ],
-                "score": 16,
+                "score": 20,
                 "status": "Parcial"
             },
             "Bibliotecas, Frameworks ou Arquiteturas": {
@@ -1646,36 +1593,32 @@
                     "TL"
                 ],
                 "actual": [
-                    "OpenCV",
-                    "FasterRCNN",
                     "CNNs",
-                    "Mask R-CNN",
-                    "ResNet101",
-                    "DeepLabV3+"
+                    "FasterRCNN",
+                    "YOLO",
+                    "tensorflow MobileNet"
                 ],
-                "score": 14,
-                "status": "Parcial"
+                "score": 0,
+                "status": "Incorreto"
             },
             "Solução / Tarefa Principal": {
                 "expected": [
                     "estimativas de produção"
                 ],
                 "actual": [
-                    "detecção",
-                    "segmentação",
                     "estimativas de produção"
                 ],
-                "score": 33,
-                "status": "Parcial"
+                "score": 100,
+                "status": "Correto"
             }
         }
     },
     {
         "article_id": "59",
         "original_filename": "(59) Computers and Electronics in Agriculture.pdf",
-        "log_file": "59_computers_and_electronics_in_agricult_300c_75o_20260512_172541.json",
-        "timestamp": "20260512_172541",
-        "overall_score": 43,
+        "log_file": "59_computers_and_electronics_in_agricult_600c_150o_20260512_184827.json",
+        "timestamp": "20260512_184827",
+        "overall_score": 41,
         "evaluation": {
             "Área Computacional": {
                 "expected": "(CNN) Redes Neurais Convolucionais",
@@ -1689,8 +1632,8 @@
                 ],
                 "actual": [
                     "câmera",
-                    "câmera RGB-D",
-                    "gps"
+                    "gps",
+                    "câmera multiespectral"
                 ],
                 "score": 33,
                 "status": "Parcial"
@@ -1700,20 +1643,12 @@
                     "tensorflow MobileNet"
                 ],
                 "actual": [
-                    "CNN",
-                    "AlexNet",
-                    "tensorflow MobileNet",
-                    "DeepLabV3+",
-                    "CNNs",
-                    "ResNet101",
-                    "SegNet",
-                    "DaSNet (Deep CNN)",
-                    "mobile-DaSNet",
-                    "Autoencoders VGG19",
-                    "ResNet50"
+                    "Tensorflow 1.3.0",
+                    "CUDA",
+                    "TensorRT"
                 ],
-                "score": 9,
-                "status": "Parcial"
+                "score": 0,
+                "status": "Incorreto"
             },
             "Solução / Tarefa Principal": {
                 "expected": [
@@ -1721,8 +1656,8 @@
                 ],
                 "actual": [
                     "detecção",
-                    "segmentação",
-                    "classificação"
+                    "classificação",
+                    "segmentação"
                 ],
                 "score": 33,
                 "status": "Parcial"
@@ -1732,15 +1667,15 @@
     {
         "article_id": "60",
         "original_filename": "(60) Anomaly Detection for Agricultural Vehicles Using Autoencoders.pdf",
-        "log_file": "60_anomaly_detection_for_agricultural_ve_300c_75o_20260512_172552.json",
-        "timestamp": "20260512_172552",
-        "overall_score": 70,
+        "log_file": "60_anomaly_detection_for_agricultural_ve_600c_150o_20260512_184638.json",
+        "timestamp": "20260512_184638",
+        "overall_score": 53,
         "evaluation": {
             "Área Computacional": {
                 "expected": "(CNN) Redes Neurais Convolucionais",
-                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
-                "score": 100,
-                "status": "Correto"
+                "actual": "Redes Neurais (ex: ELM, RNAs tradicionais)",
+                "score": 57,
+                "status": "Parcial"
             },
             "Sensores Utilizados": {
                 "expected": [
@@ -1759,7 +1694,7 @@
                 "actual": [
                     "Autoencoders VGG19",
                     "CNNs",
-                    "código próprio"
+                    "YOLOv5"
                 ],
                 "score": 33,
                 "status": "Parcial"
@@ -1770,9 +1705,11 @@
                 ],
                 "actual": [
                     "detecção",
+                    "segmentação",
+                    "estimativas de produção",
                     "navegação (obstáculos)"
                 ],
-                "score": 50,
+                "score": 25,
                 "status": "Parcial"
             }
         }

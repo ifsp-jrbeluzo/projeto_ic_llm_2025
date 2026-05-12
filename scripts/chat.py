@@ -88,7 +88,11 @@ print("\nModo:")
 print("[1] Um banco")
 print("[2] Todos os bancos")
 
-mode = input("Escolha: ").strip()
+import sys
+if len(sys.argv) > 1 and sys.argv[1].lower() == "all":
+    mode = "2"
+else:
+    mode = input("Escolha: ").strip()
 
 if mode == "1":
 
@@ -297,17 +301,25 @@ for col in selected_collections:
 
             print("\nGerando resposta...\n")
 
-            for part in ollama_client.chat(
-                model=CHAT_MODEL,
-                messages=messages,
-                stream=True
-            ):
-
-                chunk = part["message"]["content"]
-
-                response_text += chunk
-
-                print(chunk, end="", flush=True)
+            max_retries = 3
+            for attempt in range(max_retries):
+                try:
+                    for part in ollama_client.chat(
+                        model=CHAT_MODEL,
+                        messages=messages,
+                        stream=True
+                    ):
+                        chunk = part["message"]["content"]
+                        response_text += chunk
+                        print(chunk, end="", flush=True)
+                    break
+                except Exception as e:
+                    print(f"\n[Aviso] Falha na API na tentativa {attempt+1}/{max_retries}: {str(e)}")
+                    if attempt == max_retries - 1:
+                        raise e
+                    print("Aguardando 5 segundos antes de tentar novamente...")
+                    time.sleep(5)
+                    response_text = ""
 
             print("\n\nConcluído.\n")
 
