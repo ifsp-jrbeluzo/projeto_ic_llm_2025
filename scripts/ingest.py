@@ -62,13 +62,13 @@ def generate_collection_name(file_path, chunk_size, overlap):
 
 # ---------------- DB ---------------- #
 
-def generate_database():
-    return chromadb.PersistentClient(path="./database")
+def generate_database(db_path="./database"):
+    return chromadb.PersistentClient(path=db_path)
 
-def add_chunks(collection, text_chunks, file_name):
+def add_chunks(collection, text_chunks, file_name, model_name):
     for i, chunk in enumerate(text_chunks):
         embedding = ollama.embeddings(
-            model="embeddinggemma",
+            model=model_name,
             prompt=chunk
         )["embedding"]
 
@@ -114,12 +114,19 @@ def select_files(papers_path):
 def main():
     config = load_config()
 
-    chunk_size = config.get("chunk_size", 250)
-    chunk_overlap = config.get("chunk_overlap", 50)
-    papers_path = Path(config.get("papers_path", "./papers"))
+    paths_cfg = config.get("paths", {})
+    ingest_cfg = config.get("ingest", {})
+    models_cfg = config.get("models", {})
+
+    chunk_size = ingest_cfg.get("chunk_size", 250)
+    chunk_overlap = ingest_cfg.get("chunk_overlap", 50)
+    papers_path = Path(paths_cfg.get("papers", "./papers"))
+    db_path = paths_cfg.get("database", "./database")
+
+    model_name = models_cfg.get("embedding", "embeddinggemma")
 
     selected_files = select_files(papers_path)
-    db = generate_database()
+    db = generate_database(db_path)
 
     for file_path in selected_files:
         collection_name = generate_collection_name(
@@ -142,7 +149,7 @@ def main():
 
         text = pdf_to_text(file_path)
         chunks = chunkify(text, chunk_size, chunk_overlap)
-        add_chunks(collection, chunks, file_path.name)
+        add_chunks(collection, chunks, file_path.name, model_name)
 
     print("\nAll databases created successfully!")
 

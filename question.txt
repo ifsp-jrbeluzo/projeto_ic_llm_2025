@@ -1,10 +1,18 @@
-Classifique o artigo em UMA das seguintes categorias principais:
+Com base no contexto fornecido, extraia as seguintes informações quantificadas sobre a pesquisa do artigo. Caso alguma informação não conste no contexto, responda com "Não informado no contexto".
 
-Visão Computacional Clássica
-→ Métodos tradicionais de processamento de imagem, segmentação, transformada de Hough, filtros, OpenCV, extração manual de características, geometria computacional etc.
-Aprendizado de Máquina
-→ Uso de algoritmos clássicos de machine learning como SVM, Random Forest, K-Means, Bayesian methods, Markov Random Fields, regressão etc.
-Redes Neurais
-→ Uso de redes neurais artificiais tradicionais que não sejam CNN profundas.
-Redes Neurais Convolucionais (CNN / Deep Learning)
-→ Uso de CNNs, YOLO, ResNet, VGG, MobileNet, SegNet, U-Net, Faster R-CNN, Transformers visuais, autoencoders convolucionais, transfer learning etc.
+1. Área Computacional (Classifique o método principal em UMA das opções):
+   - Visão Computacional Clássica (ex: processamento de imagem, transformada de Hough, filtros, extração manual).
+   - Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Markov Random Fields).
+   - Redes Neurais (ex: Redes artificiais tradicionais, shallow networks, ELM).
+   - Redes Neurais Convolucionais / Deep Learning (ex: CNNs, ResNet, VGG, YOLO, MobileNet, SegNet, Autoencoders).
+
+2. Sensores Utilizados:
+   - Liste os sensores utilizados no veículo/robô agrícola (ex: Câmera monocular, Câmera estéreo, RGB-D, Câmera infravermelha/térmica, LIDAR, Scanner Laser, GPS, IMU, etc.).
+
+3. Bibliotecas, Frameworks ou Arquiteturas:
+   - Liste as principais tecnologias computacionais utilizadas na implementação (ex: MATLAB, OpenCV, NI LabView, ROS, ORB-SLAM2, TensorFlow, PyTorch, YOLO, ResNet, etc.).
+
+4. Solução / Tarefa Principal:
+   - Identifique a principal aplicação do sistema desenvolvido (ex: Navegação por trajeto, Navegação por mapa, Detecção de obstáculos, Segmentação semântica, Classificação, Estimativa de produção, etc.).
+
+Apresente os resultados de forma estruturada.

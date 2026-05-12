@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM RAG Logs Viewer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-grad-1: #0f172a;
+            --bg-grad-2: #1e293b;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #0284c7;
+            --danger: #ef4444;
+            --success: #22c55e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-grad-1), var(--bg-grad-2));
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        header {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .btn {
+            border: 1px solid var(--accent);
+            color: white;
+            background-color: rgba(56, 189, 248, 0.1);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn:hover {
+            background-color: var(--accent);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 350px;
+            background: rgba(0, 0, 0, 0.2);
+            border-right: 1px solid var(--glass-border);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .log-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--glass-border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .log-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .log-item.active {
+            background: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid var(--accent);
+        }
+
+        .log-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        .log-meta {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .status-badge {
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 12px;
+            background: var(--success);
+            color: #000;
+            font-weight: bold;
+        }
+        
+        .status-badge.error {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        /* Content Area */
+        .content {
+            flex: 1;
+            padding: 30px 40px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        .empty-state h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .log-detail-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .log-detail-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .timestamp {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .markdown-body {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        /* Chunks Accordion */
+        .chunk {
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .chunk-header {
+            padding: 12px 15px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.02);
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chunk-header:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .chunk-body {
+            padding: 15px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--glass-border);
+            display: none;
+            line-height: 1.5;
+        }
+
+        .chunk.open .chunk-body {
+            display: block;
+        }
+
+        /* Error box */
+        .error-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--danger);
+            color: #fca5a5;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>✨ RAG Logs Dashboard</h1>
+        <div class="upload-btn-wrapper">
+            <button class="btn">Abrir Pasta de Logs</button>
+            <input type="file" id="folderInput" webkitdirectory directory multiple />
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="empty-state" style="height: auto; padding: 30px 20px;">
+                <p style="font-size: 0.9rem;">Selecione a pasta "logs" para carregar as análises.</p>
+            </div>
+        </aside>
+
+        <main class="content" id="content">
+            <div class="empty-state">
+                <h2>Nenhum log selecionado</h2>
+                <p>Clique em um item na barra lateral para visualizar os detalhes da extração.</p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const folderInput = document.getElementById('folderInput');
+        const sidebar = document.getElementById('sidebar');
+        const content = document.getElementById('content');
+        
+        let logsData = [];
+
+        // Parse YYYYMMDD_HHMMSS to a readable format
+        function formatTimestamp(ts) {
+            if (!ts || ts.length < 15) return ts;
+            const year = ts.substring(0, 4);
+            const month = ts.substring(4, 6);
+            const day = ts.substring(6, 8);
+            const hour = ts.substring(9, 11);
+            const min = ts.substring(11, 13);
+            const sec = ts.substring(13, 15);
+            return `${day}/${month}/${year} ${hour}:${min}:${sec}`;
+        }
+
+        folderInput.addEventListener('change', async (event) => {
+            const files = Array.from(event.target.files);
+            const jsonFiles = files.filter(f => f.name.endsWith('.json'));
+            
+            if (jsonFiles.length === 0) {
+                alert("Nenhum arquivo .json encontrado na pasta selecionada.");
+                return;
+            }
+
+            logsData = [];
+            sidebar.innerHTML = '<div style="padding: 20px; text-align: center; color: #94a3b8;">Carregando...</div>';
+
+            for (let file of jsonFiles) {
+                try {
+                    const text = await file.text();
+                    const json = JSON.parse(text);
+                    json._filename = file.name;
+                    logsData.push(json);
+                } catch (e) {
+                    console.error("Erro ao ler", file.name, e);
+                }
+            }
+
+            // Sort by timestamp descending
+            logsData.sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || ''));
+
+            renderSidebar();
+        });
+
+        function renderSidebar() {
+            sidebar.innerHTML = '';
+            
+            if (logsData.length === 0) {
+                sidebar.innerHTML = '<div style="padding: 20px; text-align: center; color: #94a3b8;">Nenhum log válido encontrado.</div>';
+                return;
+            }
+
+            logsData.forEach((log, index) => {
+                const el = document.createElement('div');
+                el.className = 'log-item';
+                
+                const hasError = !!log.error;
+                
+                el.innerHTML = `
+                    <div class="log-title">${log.collection || log._filename}</div>
+                    <div class="log-meta">
+                        <span>${formatTimestamp(log.timestamp)}</span>
+                        <span class="status-badge ${hasError ? 'error' : ''}">${hasError ? 'Erro' : 'Sucesso'}</span>
+                    </div>
+                `;
+                
+                el.onclick = () => {
+                    document.querySelectorAll('.log-item').forEach(i => i.classList.remove('active'));
+                    el.classList.add('active');
+                    renderContent(log);
+                };
+                
+                sidebar.appendChild(el);
+            });
+        }
+
+        function toggleChunk(element) {
+            element.parentElement.classList.toggle('open');
+        }
+
+        function formatMarkdown(text) {
+            if (!text) return "Vazio";
+            // Simple markdown parser for bold and newlines
+            let formatted = text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/## (.*?)\n/g, '<h2>$1</h2>\n');
+            return formatted;
+        }
+
+        function renderContent(log) {
+            const hasError = !!log.error;
+
+            let html = `
+                <div class="log-detail-header">
+                    <h2>${log.collection || 'Desconhecido'}</h2>
+                    <div class="timestamp">Processado em: ${formatTimestamp(log.timestamp)}</div>
+                </div>
+            `;
+
+            if (hasError) {
+                html += `
+                    <div class="card error-box">
+                        <h3>⚠️ Erro de Execução</h3>
+                        <div class="markdown-body">${log.error}</div>
+                    </div>
+                `;
+            }
+
+            if (log.response) {
+                html += `
+                    <div class="card" style="border-left: 4px solid var(--success);">
+                        <h3>🤖 Resposta Extraída (LLM)</h3>
+                        <div class="markdown-body">${formatMarkdown(log.response)}</div>
+                    </div>
+                `;
+            }
+
+            if (log.chunks && log.chunks.length > 0) {
+                html += `
+                    <div class="card">
+                        <h3>📄 Contexto Recuperado (RAG)</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 15px;">
+                            ${log.chunks.length} trechos recuperados do banco de dados vetorial.
+                        </p>
+                        <div class="chunks-container">
+                `;
+
+                log.chunks.forEach((c, idx) => {
+                    html += `
+                        <div class="chunk">
+                            <div class="chunk-header" onclick="toggleChunk(this)">
+                                <span>Trecho ${idx + 1} • Chunk ${c.chunk}</span>
+                                <span style="font-size: 0.75rem; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 10px;">${c.source}</span>
+                            </div>
+                            <div class="chunk-body">${c.text}</div>
+                        </div>
+                    `;
+                });
+
+                html += `
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (log.query) {
+                html += `
+                    <div class="card">
+                        <h3>🔍 Prompt / Query Utilizada</h3>
+                        <div class="markdown-body" style="font-size: 0.85rem; color: var(--text-secondary);">${log.query}</div>
+                    </div>
+                `;
+            }
+
+            content.innerHTML = html;
+        }
+    </script>
+</body>
+</html>

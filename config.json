@@ -1,17 +1,25 @@
 {
-  "chunk_size": 300,
-  "chunk_overlap": 75,
-  "papers_path": "./papers",
-
-  "question": "tipos de visão computacional utilizados no artigo",
-
-  "n_results": 7,
-
-  "max_context_chars": 6000,
-
-  "embedding_model": "embeddinggemma",
-  "chat_model": "gemma3:27b",
-
-  "ollama_host": "https://ollama.com",
-  "ollama_api_key": "3abac4c624ac4438ae50f4e78f5287cd.7CGPF_O-lLdkyXHW-RgFEAYt"
+  "paths": {
+    "papers": "./papers",
+    "database": "./database",
+    "logs": "./logs",
+    "prompt_template": "prompt.txt",
+    "question_file": "question.txt"
+  },
+  "ingest": {
+    "chunk_size": 300,
+    "chunk_overlap": 75
+  },
+  "rag": {
+    "n_results": 7,
+    "max_context_chars": 6000
+  },
+  "models": {
+    "embedding": "embeddinggemma",
+    "chat": "gemma3:27b"
+  },
+  "ollama": {
+    "host": "https://ollama.com",
+    "api_key": "3abac4c624ac4438ae50f4e78f5287cd.7CGPF_O-lLdkyXHW-RgFEAYt"
+  }
 }

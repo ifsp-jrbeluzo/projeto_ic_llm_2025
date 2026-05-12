@@ -1,3 +1,6 @@
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
+
 import ollama
 from ollama import Client
 import chromadb
@@ -44,25 +47,31 @@ def load_question(path="question.txt"):
 
 config = load_config()
 
-prompt_template = load_prompt("prompt.txt")
+paths_cfg = config.get("paths", {})
+rag_cfg = config.get("rag", {})
+models_cfg = config.get("models", {})
+ollama_cfg = config.get("ollama", {})
 
-QUESTION = load_question("question.txt")
+prompt_template = load_prompt(paths_cfg.get("prompt_template", "prompt.txt"))
 
-MAX_CONTEXT_CHARS = config.get(
-    "max_context_chars",
-    6000
-)
+QUESTION = load_question(paths_cfg.get("question_file", "question.txt"))
+
+MAX_CONTEXT_CHARS = rag_cfg.get("max_context_chars", 6000)
+
+N_RESULTS = rag_cfg.get("n_results", 3)
+EMBEDDING_MODEL = models_cfg.get("embedding", "embeddinggemma")
+CHAT_MODEL = models_cfg.get("chat", "gemma3:27b")
 
 # ---------------- LOG DIR ---------------- #
 
-LOG_DIR = Path("logs")
+LOG_DIR = Path(paths_cfg.get("logs", "./logs"))
 
 LOG_DIR.mkdir(exist_ok=True)
 
 # ---------------- CHROMA ---------------- #
 
 chroma_client = chromadb.PersistentClient(
-    path="./database"
+    path=paths_cfg.get("database", "./database")
 )
 
 collections = chroma_client.list_collections()
@@ -100,16 +109,9 @@ else:
 # ---------------- OLLAMA ---------------- #
 
 ollama_client = Client(
-    host=config.get(
-        "ollama_host",
-        "http://localhost:11434"
-    ),
+    host=ollama_cfg.get("host", "http://localhost:11434"),
     headers={
-        "Authorization":
-        "Bearer " + config.get(
-            "ollama_api_key",
-            ""
-        )
+        "Authorization": "Bearer " + ollama_cfg.get("api_key", "")
     }
 )
 
@@ -117,7 +119,7 @@ ollama_client = Client(
 
 def get_context(collection, query):
 
-    n_results = config.get("n_results", 3)
+    n_results = N_RESULTS
 
     print("\nQUERY RAG:\n")
     print(query)
@@ -125,10 +127,7 @@ def get_context(collection, query):
     # ---------------- EMBEDDING ---------------- #
 
     embedding = ollama.embeddings(
-        model=config.get(
-            "embedding_model",
-            "embeddinggemma"
-        ),
+        model=EMBEDDING_MODEL,
         prompt=query
     )["embedding"]
 
@@ -215,18 +214,18 @@ for col in selected_collections:
     )
 
     log_file = LOG_DIR / (
-        f"{safe_name}_{timestamp}.txt"
+        f"{safe_name}_{timestamp}.json"
     )
 
-    def write_log(text=""):
-
-        with open(
-            log_file,
-            "a",
-            encoding="utf-8"
-        ) as f:
-
-            f.write(text + "\n")
+    log_data = {
+        "timestamp": timestamp,
+        "collection": col.name,
+        "query": QUESTION,
+        "chunks": [],
+        "prompt": "",
+        "response": "",
+        "error": None
+    }
 
     # ---------------- COLLECTION ---------------- #
 
@@ -238,10 +237,6 @@ for col in selected_collections:
     print(f"PROCESSANDO: {col.name}")
     print(f"{'=' * 80}")
 
-    write_log("=" * 80)
-    write_log(f"DATABASE: {col.name}")
-    write_log("=" * 80)
-
     try:
 
         # ---------------- RETRIEVE CONTEXT ---------------- #
@@ -251,25 +246,9 @@ for col in selected_collections:
             QUESTION
         )
 
-        # ---------------- LOG QUESTION ---------------- #
-
-        write_log("\nQUESTION:\n")
-
-        write_log(QUESTION)
-
         # ---------------- LOG CHUNKS ---------------- #
 
-        write_log("\nCHUNKS CAPTURADOS:\n")
-
-        for c in chunks:
-
-            write_log(
-                f"{c['source']} | chunk {c['chunk']}"
-            )
-
-            write_log(c["text"])
-
-            write_log("-" * 40)
+        log_data["chunks"] = chunks
 
         # ---------------- FINAL PROMPT ---------------- #
 
@@ -278,21 +257,13 @@ for col in selected_collections:
             context=context
         )
 
+        log_data["prompt"] = final_prompt
+
         # ---------------- DEBUG ---------------- #
 
         prompt_size = len(final_prompt)
 
         print(f"\nTAMANHO PROMPT: {prompt_size}")
-
-        write_log("\nPROMPT SIZE:\n")
-
-        write_log(str(prompt_size))
-
-        # ---------------- LOG PROMPT ---------------- #
-
-        write_log("\nFINAL PROMPT:\n")
-
-        write_log(final_prompt)
 
         # ---------------- CHAT ---------------- #
 
@@ -306,10 +277,7 @@ for col in selected_collections:
         print("\nGerando resposta...\n")
 
         for part in ollama_client.chat(
-            model=config.get(
-                "chat_model",
-                "gemma3:27b"
-            ),
+            model=CHAT_MODEL,
             messages=messages,
             stream=True
         ):
@@ -322,21 +290,21 @@ for col in selected_collections:
 
         # ---------------- SAVE OUTPUT ---------------- #
 
-        write_log("\nMODEL OUTPUT:\n")
-
-        write_log(response_text)
-
-        write_log("\n\n")
+        log_data["response"] = response_text
 
         print("\n\nConcluído.\n")
 
     except Exception as e:
 
-        error_msg = f"\nERRO: {str(e)}"
+        error_msg = f"ERRO: {str(e)}"
 
-        print(error_msg)
+        print(f"\n{error_msg}")
 
-        write_log(error_msg)
+        log_data["error"] = error_msg
+        
+    finally:
+        with open(log_file, "w", encoding="utf-8") as f:
+            json.dump(log_data, f, indent=4, ensure_ascii=False)
 
     # ---------------- CLEAN MEMORY ---------------- #
 
