@@ -1195,7 +1195,12 @@
             const chunkOverlap = parseInt(document.getElementById('ingestChunkOverlap').value);
             const embedModel = document.getElementById('ingestEmbedModel').value;
 
-            // Salva as configurações de banco antes de iniciar
+            if (chunkOverlap >= chunkSize) {
+                showToast("Erro: O Overlap nao pode ser maior ou igual ao Chunk Size!", "error");
+                return;
+            }
+
+            // Salva as configuracoes de banco antes de iniciar
             saveConfig();
 
             fetch('/api/run/ingest', {
