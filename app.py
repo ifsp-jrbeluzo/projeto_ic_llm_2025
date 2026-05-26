@@ -154,6 +154,23 @@ class UnifiedPipelineServer(BaseHTTPRequestHandler):
                                     })
                                 except Exception:
                                     pass
+                    
+                    # Adiciona a rodada legada como opção virtual caso haja um consolidado na raiz dos logs
+                    root_results = logs_base_dir / "validation_results.json"
+                    if root_results.exists():
+                        runs_list.append({
+                            "folder_name": "legacy",
+                            "info": {
+                                "run_name": "Teste Legado (Histórico Anterior)",
+                                "timestamp": "Legado",
+                                "chat_model": "Desconhecido (RAG anterior)",
+                                "chunk_size": 600,
+                                "chunk_overlap": 150,
+                                "n_results": 7,
+                                "embedding_model": "embeddinggemma",
+                                "max_context_chars": 8000
+                            }
+                        })
                 # Ordena as runs de forma que as mais recentes apareçam primeiro
                 runs_list.sort(key=lambda x: x["info"].get("timestamp", x["folder_name"]), reverse=True)
                 self.send_json(200, {"runs": runs_list})
@@ -226,7 +243,9 @@ class UnifiedPipelineServer(BaseHTTPRequestHandler):
                 selected_run = query_params.get("run", [None])[0]
                 
                 res_file = None
-                if selected_run and selected_run != "default":
+                if selected_run == "legacy":
+                    res_file = logs_dir / "validation_results.json"
+                elif selected_run and selected_run != "default":
                     res_file = logs_dir / selected_run / "validation_results.json"
                 else:
                     # Se não passou run ou passou default, tenta encontrar a run mais recente
