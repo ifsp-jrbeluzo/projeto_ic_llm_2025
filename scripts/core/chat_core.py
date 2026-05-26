@@ -1,4 +1,5 @@
 import sys
+import re
 import ollama
 from ollama import Client
 import chromadb
@@ -14,7 +15,7 @@ try:
 except Exception:
     pass
 
-def get_context(collection, query, embedding_model, n_results=3, max_context_chars=6000, log_callback=None):
+def get_context(collection, query, embedding_model, ollama_client, n_results=3, max_context_chars=6000, log_callback=None):
     def log(msg):
         if log_callback:
             log_callback(msg)
@@ -23,8 +24,8 @@ def get_context(collection, query, embedding_model, n_results=3, max_context_cha
 
     log(f"\n[RAG] Buscando contexto para query: '{query[:60]}...'")
 
-    # 1. Embedding da query usando ollama global
-    embedding = ollama.embeddings(
+    # 1. Embedding da query usando o cliente configurado com host/headers corretos
+    embedding = ollama_client.embeddings(
         model=embedding_model,
         prompt=query
     )["embedding"]
@@ -76,6 +77,7 @@ def run_chat_pipeline(
     prompt_template,
     question_data,
     db_path=None,
+    run_name=None,
     log_callback=None,
     stream_callback=None
 ):
@@ -95,8 +97,32 @@ def run_chat_pipeline(
     embedding_model = models_cfg.get("embedding", "embeddinggemma")
     chat_model = models_cfg.get("chat", "gemma3:27b")
 
-    log_dir = Path(paths_cfg.get("logs", "./logs"))
-    log_dir.mkdir(exist_ok=True)
+    # Calcula a subpasta da Run de teste específica
+    log_base_dir = Path(paths_cfg.get("logs", "./logs"))
+    log_base_dir.mkdir(exist_ok=True)
+
+    if not run_name:
+        run_name = f"run_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    
+    # Higieniza o nome da run para ser seguro como nome de pasta
+    run_folder_name = re.sub(r'[^a-zA-Z0-9._-]', '_', run_name)
+    run_dir = log_base_dir / run_folder_name
+    run_dir.mkdir(exist_ok=True)
+
+    # Grava o arquivo de metadados da run
+    run_info = {
+        "run_name": run_name,
+        "folder_name": run_folder_name,
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "chunk_size": config.get("ingest", {}).get("chunk_size", "Desconhecido"),
+        "chunk_overlap": config.get("ingest", {}).get("chunk_overlap", "Desconhecido"),
+        "n_results": n_results,
+        "max_context_chars": max_context_chars,
+        "embedding_model": embedding_model,
+        "chat_model": chat_model
+    }
+    with open(run_dir / "run_info.json", "w", encoding="utf-8") as f:
+        json.dump(run_info, f, indent=4, ensure_ascii=False)
 
     if db_path is None:
         db_path = paths_cfg.get("database", "./database")
@@ -110,11 +136,12 @@ def run_chat_pipeline(
     )
 
     log(f"Iniciando extração RAG para {len(selected_collection_names)} banco(s)...")
+    log(f"Os logs de teste serão salvos na pasta: logs/{run_folder_name}/")
 
     for col_name in selected_collection_names:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         safe_name = col_name.replace(" ", "_").replace("/", "_").replace("\\", "_")
-        log_file = log_dir / f"{safe_name}_{timestamp}.json"
+        log_file = run_dir / f"{safe_name}_{timestamp}.json"
 
         log(f"\n{'='*80}\nPROCESSANDO: {col_name}\n{'='*80}")
 
@@ -157,11 +184,12 @@ def run_chat_pipeline(
 
                 full_question = f"{intro_text}\n\n{q_text}".strip()
 
-                # Busca no banco vetorial
+                # Busca no banco vetorial com o cliente customizado
                 context, chunks = get_context(
                     collection,
                     q_text,
                     embedding_model,
+                    ollama_client,
                     n_results,
                     max_context_chars,
                     log_callback
@@ -224,9 +252,10 @@ def run_chat_pipeline(
         finally:
             with open(log_file, "w", encoding="utf-8") as f:
                 json.dump(log_data, f, indent=4, ensure_ascii=False)
-            log(f"\nLog salvo em: {log_file.name}")
+            log(f"\nLog salvo em: logs/{run_folder_name}/{log_file.name}")
 
         gc.collect()
         time.sleep(1)
 
     log("\nProcessamento RAG finalizado!")
+    return run_folder_name

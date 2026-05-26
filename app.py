@@ -133,6 +133,34 @@ class UnifiedPipelineServer(BaseHTTPRequestHandler):
                 self.send_json(500, {"error": str(e)})
             return
 
+        elif path_only == '/api/runs':
+            try:
+                config = load_config()
+                paths = config.get("paths", {})
+                logs_base_dir = Path(paths.get("logs", "./logs"))
+                
+                runs_list = []
+                if logs_base_dir.exists():
+                    for item in logs_base_dir.iterdir():
+                        if item.is_dir():
+                            info_file = item / "run_info.json"
+                            if info_file.exists():
+                                try:
+                                    with open(info_file, "r", encoding="utf-8") as f:
+                                        info_data = json.load(f)
+                                    runs_list.append({
+                                        "folder_name": item.name,
+                                        "info": info_data
+                                    })
+                                except Exception:
+                                    pass
+                # Ordena as runs de forma que as mais recentes apareçam primeiro
+                runs_list.sort(key=lambda x: x["info"].get("timestamp", x["folder_name"]), reverse=True)
+                self.send_json(200, {"runs": runs_list})
+            except Exception as e:
+                self.send_json(500, {"error": str(e)})
+            return
+
         elif path_only == '/api/papers':
             try:
                 config = load_config()
@@ -193,9 +221,37 @@ class UnifiedPipelineServer(BaseHTTPRequestHandler):
                 config = load_config()
                 paths = config.get("paths", {})
                 logs_dir = Path(paths.get("logs", "./logs"))
-                res_file = logs_dir / "validation_results.json"
                 
-                if res_file.exists():
+                # Aceita query param ?run=run_folder_name
+                selected_run = query_params.get("run", [None])[0]
+                
+                res_file = None
+                if selected_run and selected_run != "default":
+                    res_file = logs_dir / selected_run / "validation_results.json"
+                else:
+                    # Se não passou run ou passou default, tenta encontrar a run mais recente
+                    latest_run_folder = None
+                    latest_time = ""
+                    if logs_dir.exists():
+                        for item in logs_dir.iterdir():
+                            if item.is_dir():
+                                info_file = item / "run_info.json"
+                                if info_file.exists():
+                                    try:
+                                        with open(info_file, "r", encoding="utf-8") as f:
+                                            info_data = json.load(f)
+                                        ts = info_data.get("timestamp", "")
+                                        if ts > latest_time:
+                                            latest_time = ts
+                                            latest_run_folder = item
+                                    except Exception:
+                                        pass
+                    if latest_run_folder:
+                        res_file = latest_run_folder / "validation_results.json"
+                    else:
+                        res_file = logs_dir / "validation_results.json"
+                
+                if res_file and res_file.exists():
                     with open(res_file, "r", encoding="utf-8") as f:
                         data = json.load(f)
                     self.send_json(200, data)
@@ -273,11 +329,12 @@ class UnifiedPipelineServer(BaseHTTPRequestHandler):
                 files = data.get("files", [])
                 chunk_size = data.get("chunk_size")
                 chunk_overlap = data.get("chunk_overlap")
+                embedding_model = data.get("embedding_model")
                 
                 # Executa em thread assíncrona
                 threading.Thread(
                     target=self.bg_ingest_thread, 
-                    args=(files, chunk_size, chunk_overlap)
+                    args=(files, chunk_size, chunk_overlap, embedding_model)
                 ).start()
                 self.send_json(200, {"status": "started"})
             except Exception as e:
@@ -295,11 +352,17 @@ class UnifiedPipelineServer(BaseHTTPRequestHandler):
                 data = json.loads(post_data)
                 collections = data.get("collections", [])
                 selected_db = data.get("database")
+                run_name = data.get("run_name")
+                
+                # Recebe parâmetros RAG do body
+                chat_model = data.get("chat_model")
+                n_results = data.get("n_results")
+                max_context_chars = data.get("max_context_chars")
                 
                 # Executa em thread assíncrona
                 threading.Thread(
                     target=self.bg_chat_thread, 
-                    args=(collections, selected_db)
+                    args=(collections, selected_db, run_name, chat_model, n_results, max_context_chars)
                 ).start()
                 self.send_json(200, {"status": "started"})
             except Exception as e:
@@ -311,8 +374,16 @@ class UnifiedPipelineServer(BaseHTTPRequestHandler):
                 self.send_json(400, {"error": "Outro pipeline já está em execução."})
                 return
             
-            threading.Thread(target=self.bg_validate_thread).start()
-            self.send_json(200, {"status": "started"})
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length).decode('utf-8')
+            try:
+                data = json.loads(post_data) if content_length > 0 else {}
+                run_folder = data.get("run_folder")
+                
+                threading.Thread(target=self.bg_validate_thread, args=(run_folder,)).start()
+                self.send_json(200, {"status": "started"})
+            except Exception as e:
+                self.send_json(500, {"error": str(e)})
             return
 
         # Rota não encontrada
@@ -335,7 +406,7 @@ class UnifiedPipelineServer(BaseHTTPRequestHandler):
 
     # --- Métodos de Execução em Background ---
 
-    def bg_ingest_thread(self, files, custom_chunk_size=None, custom_chunk_overlap=None):
+    def bg_ingest_thread(self, files, custom_chunk_size=None, custom_chunk_overlap=None, custom_embedding_model=None):
         global PIPELINE_STATUS, LOGS_BUFFER
         with LOGS_LOCK:
             PIPELINE_STATUS["running"] = True
@@ -350,13 +421,19 @@ class UnifiedPipelineServer(BaseHTTPRequestHandler):
 
             chunk_size = custom_chunk_size if custom_chunk_size is not None else ingest_cfg.get("chunk_size", 250)
             chunk_overlap = custom_chunk_overlap if custom_chunk_overlap is not None else ingest_cfg.get("chunk_overlap", 50)
-            
+            model_name = custom_embedding_model if custom_embedding_model is not None else models_cfg.get("embedding", "embeddinggemma")
+
+            # Salva temporariamente os novos parâmetros em config.json para fins informativos
+            config["ingest"]["chunk_size"] = chunk_size
+            config["ingest"]["chunk_overlap"] = chunk_overlap
+            config["models"]["embedding"] = model_name
+            save_config(data=config)
+
             papers_path = Path(paths.get("papers", "./papers"))
             db_base_path = Path(paths.get("database", "./database"))
             
             # Subpasta parametrizada para isolamento dos bancos
             db_path = db_base_path / f"db_{chunk_size}c_{chunk_overlap}o"
-            model_name = models_cfg.get("embedding", "embeddinggemma")
 
             selected_paths = []
             if files == "all":
@@ -380,7 +457,8 @@ class UnifiedPipelineServer(BaseHTTPRequestHandler):
                 PIPELINE_STATUS["running"] = False
                 PIPELINE_STATUS["task"] = None
 
-    def bg_chat_thread(self, selected_cols, selected_db=None):
+    def bg_chat_thread(self, selected_cols, selected_db=None, run_name=None, 
+                       custom_chat_model=None, custom_n_results=None, custom_max_context_chars=None):
         global PIPELINE_STATUS, LOGS_BUFFER
         with LOGS_LOCK:
             PIPELINE_STATUS["running"] = True
@@ -390,6 +468,17 @@ class UnifiedPipelineServer(BaseHTTPRequestHandler):
         try:
             config = load_config()
             paths = config.get("paths", {})
+            
+            # Se vieram overrides de RAG, atualiza e salva em config.json
+            if custom_chat_model:
+                config.setdefault("models", {})["chat"] = custom_chat_model
+            if custom_n_results:
+                config.setdefault("rag", {})["n_results"] = int(custom_n_results)
+            if custom_max_context_chars:
+                config.setdefault("rag", {})["max_context_chars"] = int(custom_max_context_chars)
+            
+            save_config(data=config)
+
             prompt_template = load_prompt(paths.get("prompt_template", "configs/prompt.txt"))
             question_data = load_questions(paths.get("question_file", "configs/question.json"))
 
@@ -412,15 +501,23 @@ class UnifiedPipelineServer(BaseHTTPRequestHandler):
             else:
                 cols = selected_cols
 
-            run_chat_pipeline(
+            # Roda o pipeline de chat
+            run_folder = run_chat_pipeline(
                 selected_collection_names=cols,
                 config=config,
                 prompt_template=prompt_template,
                 question_data=question_data,
                 db_path=str(db_path),
+                run_name=run_name,
                 log_callback=add_log,
                 stream_callback=lambda token: add_log(token) if token.strip() == "" else add_log(f"   -> LLM: {token}")
             )
+
+            # Roda automaticamente a validação da run correspondente
+            add_log("\nExecução RAG concluída. Iniciando auditoria automática da run...")
+            run_validation(base_dir_path=".", run_folder_name=run_folder, log_callback=add_log)
+            add_log(f"\nAuditoria automática concluída para a run: {run_folder}!")
+
         except Exception as e:
             add_log(f"ERRO CRÍTICO NO PIPELINE RAG: {str(e)}")
         finally:
@@ -428,7 +525,7 @@ class UnifiedPipelineServer(BaseHTTPRequestHandler):
                 PIPELINE_STATUS["running"] = False
                 PIPELINE_STATUS["task"] = None
 
-    def bg_validate_thread(self):
+    def bg_validate_thread(self, run_folder=None):
         global PIPELINE_STATUS, LOGS_BUFFER
         with LOGS_LOCK:
             PIPELINE_STATUS["running"] = True
@@ -436,7 +533,7 @@ class UnifiedPipelineServer(BaseHTTPRequestHandler):
             LOGS_BUFFER.clear()
 
         try:
-            run_validation(base_dir_path=".", log_callback=add_log)
+            run_validation(base_dir_path=".", run_folder_name=run_folder, log_callback=add_log)
         except Exception as e:
             add_log(f"ERRO CRÍTICO NA VALIDAÇÃO: {str(e)}")
         finally:

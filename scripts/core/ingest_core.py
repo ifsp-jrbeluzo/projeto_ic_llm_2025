@@ -1,14 +1,8 @@
 from pypdf import PdfReader
 import ollama
-import chromadb
-import sys
+from ollama import Client
 from pathlib import Path
 import re
-
-try:
-    sys.stdout.reconfigure(encoding='utf-8')
-except Exception:
-    pass
 
 def pdf_to_text(file_path):
     reader = PdfReader(file_path)
@@ -49,7 +43,7 @@ def generate_collection_name(file_path, chunk_size, overlap):
 def generate_database(db_path="./database"):
     return chromadb.PersistentClient(path=db_path)
 
-def add_chunks(collection, text_chunks, file_name, model_name, log_callback=None):
+def add_chunks(collection, text_chunks, file_name, model_name, ollama_client, log_callback=None):
     def log(msg):
         if log_callback:
             log_callback(msg)
@@ -61,7 +55,8 @@ def add_chunks(collection, text_chunks, file_name, model_name, log_callback=None
         if i % 10 == 0 or i == total - 1:
             log(f"   -> Processando chunk {i+1}/{total}...")
         
-        embedding = ollama.embeddings(
+        # Gera embeddings usando o cliente customizado com host/api_key corretos
+        embedding = ollama_client.embeddings(
             model=model_name,
             prompt=chunk
         )["embedding"]
@@ -84,7 +79,24 @@ def run_ingestion(selected_files, chunk_size, chunk_overlap, db_path, model_name
             print(msg)
 
     log(f"Iniciando ingestão de {len(selected_files)} arquivos...")
-    db = generate_database(db_path)
+    
+    import chromadb
+    db = chromadb.PersistentClient(path=db_path)
+
+    # Carrega configurações do Ollama para instanciar o cliente customizado
+    try:
+        from core.config_manager import load_config
+        config = load_config()
+    except Exception:
+        config = {}
+    
+    ollama_cfg = config.get("ollama", {})
+    ollama_client = Client(
+        host=ollama_cfg.get("host", "http://localhost:11434"),
+        headers={
+            "Authorization": "Bearer " + ollama_cfg.get("api_key", "")
+        }
+    )
 
     for file_path in selected_files:
         file_path = Path(file_path)
@@ -115,7 +127,7 @@ def run_ingestion(selected_files, chunk_size, chunk_overlap, db_path, model_name
             chunks = chunkify(text, chunk_size, chunk_overlap)
             log(f"Extraído com sucesso! Gerados {len(chunks)} chunks.")
             
-            add_chunks(collection, chunks, file_path.name, model_name, log_callback)
+            add_chunks(collection, chunks, file_path.name, model_name, ollama_client, log_callback)
             log(f"Coleção {collection_name} populada com sucesso!")
         except Exception as e:
             log(f"Erro ao processar arquivo {file_path.name}: {str(e)}")

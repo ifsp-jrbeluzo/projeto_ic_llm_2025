@@ -537,7 +537,11 @@
         <header>
             <h2 id="viewTitle">Auditoria de Precisão RAG</h2>
             <div id="headerControls">
-                <button class="btn btn-primary btn-sm" onclick="triggerValidation()" id="btnValidateQuick">🔄 Atualizar Validação</button>
+                <!-- Dropdown das rodadas de teste na aba Auditoria -->
+                <div style="display: flex; align-items: center; gap: 10px;" id="headerRunsContainer">
+                    <label style="margin:0; font-size: 0.85rem; color: var(--text-secondary);">Teste Rodado (Run):</label>
+                    <select id="auditRunSelect" onchange="loadResults()" style="width: 220px; padding: 6px 12px; font-size: 0.85rem;"></select>
+                </div>
             </div>
         </header>
 
@@ -545,6 +549,12 @@
 
             <!-- TAB: AUDITORIA / DASHBOARD -->
             <div class="tab-panel active" id="panel-dashboard">
+                <!-- Informações de Metadados da Rodada Selecionada -->
+                <div class="card" id="auditRunMetadataCard" style="margin-bottom: 20px; padding: 18px 24px; display: none;">
+                    <h4 style="font-size: 0.72rem; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; letter-spacing: 1px;">Configurações Utilizadas Neste Teste</h4>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;" id="auditRunMetadataContent"></div>
+                </div>
+
                 <div style="display: flex; height: 100%;" id="dashboardLayout">
                     <!-- Sidebar com Artigos -->
                     <div class="sidebar-dashboard" id="dashArticlesList">
@@ -559,7 +569,7 @@
                             <div style="font-size: 3rem; margin-bottom: 20px;">📊</div>
                             <h3 style="margin-bottom: 12px;">Visão Geral da Performance</h3>
                             <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 30px;">
-                                Carregue e audite as extrações feitas pela LLM. Abaixo é gerado o gráfico médio de acertos por categoria com base nos gabaritos do ground_truth.json.
+                                Selecione uma rodada de teste no seletor superior para analisar os resultados. Abaixo é gerada a média de acertos por categoria.
                             </p>
                             <div style="max-width: 600px; margin: 0 auto;" id="mainChartContainer">
                                 <canvas id="chartGeral" height="280"></canvas>
@@ -583,7 +593,7 @@
                                 <button class="btn btn-sm" onclick="loadPapers()">🔄</button>
                             </div>
                         </div>
-                        <div class="table-container" style="max-height: 380px; overflow-y: auto;">
+                        <div class="table-container" style="max-height: 300px; overflow-y: auto;">
                             <table>
                                 <thead>
                                     <tr>
@@ -602,16 +612,20 @@
 
                         <!-- Parametrização Dinâmica do Banco de Ingestão -->
                         <div style="margin-top: 20px; border-top: 1px solid var(--glass-border); padding-top: 16px;">
-                            <h4 style="font-size: 0.85rem; color: var(--accent); margin-bottom: 12px;">Configurar Parâmetros Deste Banco</h4>
+                            <h4 style="font-size: 0.85rem; color: var(--accent); margin-bottom: 12px;">Parâmetros de Criação do Banco</h4>
                             <div class="config-grid">
-                                <div class="form-group" style="margin-bottom: 0;">
-                                    <label>Tamanho do Chunk</label>
+                                <div class="form-group" style="margin-bottom: 10px;">
+                                    <label>Tamanho do Chunk (Palavras)</label>
                                     <input type="number" id="ingestChunkSize" value="600" required>
                                 </div>
-                                <div class="form-group" style="margin-bottom: 0;">
+                                <div class="form-group" style="margin-bottom: 10px;">
                                     <label>Sobreposição (Overlap)</label>
                                     <input type="number" id="ingestChunkOverlap" value="150" required>
                                 </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label>Modelo de Embeddings</label>
+                                <input type="text" id="ingestEmbedModel" value="embeddinggemma" required>
                             </div>
                         </div>
 
@@ -637,7 +651,8 @@
 
             <!-- TAB: PIPELINE RAG -->
             <div class="tab-panel" id="panel-chat">
-                <div class="grid-2">
+                <div style="display: grid; grid-template-columns: 1fr 1.1fr; gap: 28px; margin-bottom: 28px;">
+                    <!-- Seleção de Coleções -->
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Bancos e Coleções no ChromaDB</h3>
@@ -649,7 +664,7 @@
                                 <button class="btn btn-sm" onclick="loadPapers()">🔄</button>
                             </div>
                         </div>
-                        <div class="table-container" style="max-height: 480px; overflow-y: auto;">
+                        <div class="table-container" style="max-height: 380px; overflow-y: auto;">
                             <table>
                                 <thead>
                                     <tr>
@@ -665,91 +680,79 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <!-- Parametrização RAG e LLM -->
+                        <div style="margin-top: 20px; border-top: 1px solid var(--glass-border); padding-top: 16px;">
+                            <h4 style="font-size: 0.85rem; color: var(--accent); margin-bottom: 12px;">Parâmetros da Extração RAG</h4>
+                            <div class="config-grid">
+                                <div class="form-group" style="margin-bottom: 10px;">
+                                    <label>Modelo Chat LLM</label>
+                                    <input type="text" id="chatChatModel" value="gemma3:27b" required>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 10px;">
+                                    <label>Nome Customizado do Teste (Run)</label>
+                                    <input type="text" id="chatRunName" placeholder="Ex: teste_gemma3_inicial">
+                                </div>
+                            </div>
+                            <div class="config-grid">
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label>Quantidade de Contextos (n_results)</label>
+                                    <input type="number" id="chatNResults" value="7" required>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label>Limite Contexto (Caracteres)</label>
+                                    <input type="number" id="chatMaxContext" value="8000" required>
+                                </div>
+                            </div>
+                        </div>
+
                         <div style="margin-top: 24px; display: flex; gap: 12px;">
                             <button class="btn btn-primary" onclick="startChatSelected()">🤖 Extrair do Selecionados</button>
                             <button class="btn" onclick="startChatAll()">🤖 Extrair de Todos</button>
                         </div>
                     </div>
 
-                    <div>
-                        <div class="card" style="height: 100%; display: flex; flex-direction: column;">
-                            <div class="terminal-header">
-                                <span>Console da LLM</span>
-                                <span style="font-family: inherit; color: var(--accent);" id="chatTermStatus">ocioso</span>
-                            </div>
-                            <div class="terminal" id="chatTerminal">
-                                [INFO] Aguardando chamada RAG...
-                            </div>
+                    <!-- Prompt Template integrado no Pipeline RAG -->
+                    <div class="card" style="display: flex; flex-direction: column;">
+                        <div class="card-header">
+                            <h3 class="card-title">Template do Prompt (prompt.txt)</h3>
+                            <button class="btn btn-sm" onclick="savePrompt()">💾 Salvar Prompt</button>
                         </div>
+                        <div style="flex: 1; display: flex; flex-direction: column;">
+                            <textarea id="promptTextArea" style="flex: 1; min-height: 400px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="terminal-header">
+                        <span>Console da LLM e Auditoria Automática</span>
+                        <span style="font-family: inherit; color: var(--accent);" id="chatTermStatus">ocioso</span>
+                    </div>
+                    <div class="terminal" id="chatTerminal">
+                        [INFO] Aguardando chamada RAG...
                     </div>
                 </div>
             </div>
 
             <!-- TAB: CONFIGURAÇÕES -->
             <div class="tab-panel" id="panel-config">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-bottom: 28px;">
-                    <!-- Config.json -->
-                    <div class="card">
-                        <h3 class="card-title" style="margin-bottom: 20px;">Parâmetros de Execução (configs/config.json)</h3>
-                        <form id="configForm" onsubmit="saveConfig(event)">
-                            <h4 style="font-size: 0.85rem; color: var(--accent); margin-bottom: 12px;">Modelo de Linguagem</h4>
-                            <div class="config-grid">
-                                <div class="form-group">
-                                    <label>Modelo Chat LLM</label>
-                                    <input type="text" id="cfgChatModel" value="gemma3:27b" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Modelo Embedding</label>
-                                    <input type="text" id="cfgEmbedModel" value="embeddinggemma" required>
-                                </div>
+                <!-- Conexão do Ollama -->
+                <div class="card" style="margin-bottom: 28px;">
+                    <h3 class="card-title" style="margin-bottom: 20px;">Servidor e Chaves de API</h3>
+                    <form id="configForm" onsubmit="saveConfig(event)">
+                        <div class="config-grid">
+                            <div class="form-group">
+                                <label>Host do Ollama</label>
+                                <input type="text" id="cfgOllamaHost" value="http://localhost:11434" required>
                             </div>
-                            
-                            <h4 style="font-size: 0.85rem; color: var(--accent); margin-bottom: 12px;">Configurações RAG Padrão</h4>
-                            <div class="config-grid">
-                                <div class="form-group">
-                                    <label>Chunk Size (Tamanho)</label>
-                                    <input type="number" id="cfgChunkSize" value="600" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Chunk Overlap</label>
-                                    <input type="number" id="cfgChunkOverlap" value="150" required>
-                                </div>
+                            <div class="form-group">
+                                <label>API Key / Bearer Token</label>
+                                <input type="text" id="cfgOllamaKey" value="">
                             </div>
-                            <div class="config-grid">
-                                <div class="form-group">
-                                    <label>n_results (N chunks recuperados)</label>
-                                    <input type="number" id="cfgNResults" value="7" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Max Context Length (Caracteres)</label>
-                                    <input type="number" id="cfgMaxContext" value="8000" required>
-                                </div>
-                            </div>
-
-                            <h4 style="font-size: 0.85rem; color: var(--accent); margin-bottom: 12px;">Servidor Ollama</h4>
-                            <div class="config-grid">
-                                <div class="form-group">
-                                    <label>Host do Ollama</label>
-                                    <input type="text" id="cfgOllamaHost" value="http://localhost:11434" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>API Key / Headers</label>
-                                    <input type="text" id="cfgOllamaKey" value="">
-                                </div>
-                            </div>
-
-                            <button class="btn btn-primary" type="submit">💾 Salvar Configurações</button>
-                        </form>
-                    </div>
-
-                    <!-- Prompt.txt -->
-                    <div class="card" style="display: flex; flex-direction: column;">
-                        <h3 class="card-title" style="margin-bottom: 20px;">Template do Prompt (configs/prompt.txt)</h3>
-                        <div style="flex: 1; display: flex; flex-direction: column; gap: 14px;">
-                            <textarea id="promptTextArea" style="flex: 1; min-height: 380px; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;"></textarea>
-                            <button class="btn btn-primary" onclick="savePrompt()">💾 Salvar Prompt</button>
                         </div>
-                    </div>
+                        <button class="btn btn-primary" type="submit">💾 Salvar Conexões</button>
+                    </form>
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px;">
@@ -787,10 +790,38 @@
         let currentTab = 'dashboard';
         let isRunning = false;
         let runningTask = null;
+        let lastRunningTask = null;
         let pollInterval = null;
         let chartGeral = null;
         let resultsData = [];
         let configData = {};
+        let runsHistory = [];
+
+        // --- SISTEMA DE LOGS DO TERMINAL ---
+        function updateTerminalLogs(logs) {
+            if (!logs || !Array.isArray(logs)) return;
+            const logText = logs.map(line => {
+                const div = document.createElement('div');
+                div.className = 'log-line';
+                div.textContent = line;
+                return div.outerHTML;
+            }).join('');
+
+            const taskToUpdate = runningTask || lastRunningTask;
+            if (taskToUpdate === 'ingest') {
+                const term = document.getElementById('ingestTerminal');
+                if (term) {
+                    term.innerHTML = logText;
+                    term.scrollTop = term.scrollHeight;
+                }
+            } else if (taskToUpdate === 'chat' || taskToUpdate === 'validate') {
+                const term = document.getElementById('chatTerminal');
+                if (term) {
+                    term.innerHTML = logText;
+                    term.scrollTop = term.scrollHeight;
+                }
+            }
+        }
 
         // --- INICIALIZAÇÃO ---
         window.addEventListener('load', () => {
@@ -829,22 +860,23 @@
 
             const headerTitle = document.getElementById('viewTitle');
             const headerControls = document.getElementById('headerControls');
+            const runsContainer = document.getElementById('headerRunsContainer');
 
             if (tabId === 'dashboard') {
                 headerTitle.innerText = "Auditoria de Precisão RAG";
-                headerControls.innerHTML = `<button class="btn btn-primary btn-sm" onclick="triggerValidation()">🔄 Atualizar Validação</button>`;
-                loadResults();
-            } else if (tabId === 'ingest') {
-                headerTitle.innerText = "Ingestão de Documentos em Lote";
-                headerControls.innerHTML = `<button class="btn btn-sm" onclick="loadPapers()">🔄 Atualizar Arquivos</button>`;
-                loadPapers();
-            } else if (tabId === 'chat') {
-                headerTitle.innerText = "Pipeline RAG e Extração de Metadados";
-                headerControls.innerHTML = `<button class="btn btn-sm" onclick="loadPapers()">🔄 Atualizar Coleções</button>`;
-                loadPapers();
-            } else if (tabId === 'config') {
-                headerTitle.innerText = "Gerenciamento de Arquivos e Parâmetros";
-                headerControls.innerHTML = '';
+                runsContainer.style.display = "flex";
+                loadRunsList();
+            } else {
+                runsContainer.style.display = "none";
+                if (tabId === 'ingest') {
+                    headerTitle.innerText = "Ingestão de Documentos em Lote";
+                    loadPapers();
+                } else if (tabId === 'chat') {
+                    headerTitle.innerText = "Pipeline RAG e Extração de Metadados";
+                    loadPapers();
+                } else if (tabId === 'config') {
+                    headerTitle.innerText = "Gerenciamento de Arquivos e Parâmetros";
+                }
             }
         }
 
@@ -854,25 +886,26 @@
                 .then(r => r.json())
                 .then(data => {
                     configData = data;
-                    document.getElementById('cfgChatModel').value = data.models?.chat || '';
-                    document.getElementById('cfgEmbedModel').value = data.models?.embedding || '';
-                    document.getElementById('cfgChunkSize').value = data.ingest?.chunk_size || 600;
-                    document.getElementById('cfgChunkOverlap').value = data.ingest?.chunk_overlap || 150;
-                    
-                    // Preenche campos de Ingestão com valores globais padrão
-                    document.getElementById('ingestChunkSize').value = data.ingest?.chunk_size || 600;
-                    document.getElementById('ingestChunkOverlap').value = data.ingest?.chunk_overlap || 150;
-
-                    document.getElementById('cfgNResults').value = data.rag?.n_results || 7;
-                    document.getElementById('cfgMaxContext').value = data.rag?.max_context_chars || 8000;
                     document.getElementById('cfgOllamaHost').value = data.ollama?.host || 'http://localhost:11434';
                     document.getElementById('cfgOllamaKey').value = data.ollama?.api_key || '';
+
+                    // Ingestão
+                    document.getElementById('ingestChunkSize').value = data.ingest?.chunk_size || 600;
+                    document.getElementById('ingestChunkOverlap').value = data.ingest?.chunk_overlap || 150;
+                    document.getElementById('ingestEmbedModel').value = data.models?.embedding || 'embeddinggemma';
+
+                    // Chat/RAG
+                    document.getElementById('chatChatModel').value = data.models?.chat || 'gemma3:27b';
+                    document.getElementById('chatNResults').value = data.rag?.n_results || 7;
+                    document.getElementById('chatMaxContext').value = data.rag?.max_context_chars || 8000;
                 })
                 .catch(e => console.error("Erro ao carregar config.json", e));
         }
 
         function saveConfig(e) {
-            e.preventDefault();
+            if (e) e.preventDefault();
+            
+            // Injeta parâmetros das outras abas de volta na config antes de salvar
             const data = {
                 paths: configData.paths || {
                     papers: "./papers",
@@ -882,16 +915,16 @@
                     question_file: "configs/question.json"
                 },
                 ingest: {
-                    chunk_size: parseInt(document.getElementById('cfgChunkSize').value),
-                    chunk_overlap: parseInt(document.getElementById('cfgChunkOverlap').value)
+                    chunk_size: parseInt(document.getElementById('ingestChunkSize').value),
+                    chunk_overlap: parseInt(document.getElementById('ingestChunkOverlap').value)
                 },
                 rag: {
-                    n_results: parseInt(document.getElementById('cfgNResults').value),
-                    max_context_chars: parseInt(document.getElementById('cfgMaxContext').value)
+                    n_results: parseInt(document.getElementById('chatNResults').value),
+                    max_context_chars: parseInt(document.getElementById('chatMaxContext').value)
                 },
                 models: {
-                    embedding: document.getElementById('cfgEmbedModel').value,
-                    chat: document.getElementById('cfgChatModel').value
+                    embedding: document.getElementById('ingestEmbedModel').value,
+                    chat: document.getElementById('chatChatModel').value
                 },
                 ollama: {
                     host: document.getElementById('cfgOllamaHost').value,
@@ -907,7 +940,7 @@
             .then(r => r.json())
             .then(res => {
                 if (res.error) throw new Error(res.error);
-                showToast("config.json salvo com sucesso!");
+                showToast("Conexões salvas e sincronizadas!");
                 loadConfigData();
             })
             .catch(e => showToast(e.message, 'error'));
@@ -931,7 +964,7 @@
             .then(r => r.json())
             .then(res => {
                 if (res.error) throw new Error(res.error);
-                showToast("prompt.txt salvo com sucesso!");
+                showToast("Template de Prompt salvo!");
             })
             .catch(e => showToast(e.message, 'error'));
         }
@@ -956,7 +989,7 @@
                 .then(r => r.json())
                 .then(res => {
                     if (res.error) throw new Error(res.error);
-                    showToast("question.json salvo com sucesso!");
+                    showToast("question.json salvo!");
                 })
                 .catch(e => showToast(e.message, 'error'));
             } catch (e) {
@@ -984,7 +1017,7 @@
                 .then(r => r.json())
                 .then(res => {
                     if (res.error) throw new Error(res.error);
-                    showToast("ground_truth.json salvo com sucesso!");
+                    showToast("ground_truth.json salvo!");
                 })
                 .catch(e => showToast(e.message, 'error'));
             } catch (e) {
@@ -1002,8 +1035,13 @@
                         const text = document.getElementById('statusText');
                         const subtext = document.getElementById('statusSubtext');
                         
+                        const wasRunning = isRunning;
                         isRunning = data.running;
                         runningTask = data.task;
+
+                        if (runningTask) {
+                            lastRunningTask = runningTask;
+                        }
 
                         if (isRunning) {
                             widget.className = "status-widget status-active";
@@ -1019,57 +1057,39 @@
                                 text.innerText = "Validação ativa...";
                                 subtext.innerText = "Calculando acertos e gerando relatório.";
                             }
-                            
-                            updateTerminalLogs(data.logs);
                         } else {
                             widget.className = "status-widget";
                             text.innerText = "Sistema Ocioso";
                             subtext.innerText = "Tudo pronto para rodar.";
                             document.getElementById('ingestTermStatus').innerText = "ocioso";
                             document.getElementById('chatTermStatus').innerText = "ocioso";
+
+                            // Se acabou de finalizar a tarefa em background, atualiza os dados correspondentes
+                            if (wasRunning) {
+                                loadPapers();
+                                if (lastRunningTask === 'chat' || lastRunningTask === 'validate') {
+                                    loadRunsList();
+                                }
+                            }
                         }
+
+                        updateTerminalLogs(data.logs);
                     })
                     .catch(e => console.error("Erro no polling de status", e));
             }, 1500);
         }
 
-        function updateTerminalLogs(logs) {
-            const ingestTerm = document.getElementById('ingestTerminal');
-            const chatTerm = document.getElementById('chatTerminal');
-
-            const content = logs.map(line => {
-                let colorClass = 'color: #d4d4d8;';
-                if (line.includes('ERRO') || line.includes('Falha')) colorClass = 'color: #fb7185; font-weight: 600;';
-                else if (line.includes('sucesso') || line.includes('concluída')) colorClass = 'color: #34d399;';
-                else if (line.includes('[RAG]') || line.includes('PROCESSANDO')) colorClass = 'color: #38bdf8;';
-                else if (line.includes('-> LLM')) colorClass = 'color: #fbbf24; font-weight: 500;';
-                
-                return `<div class="log-line" style="${colorClass}">${line}</div>`;
-            }).join('');
-
-            if (runningTask === 'ingest') {
-                ingestTerm.innerHTML = content;
-                ingestTerm.scrollTop = ingestTerm.scrollHeight;
-            } else if (runningTask === 'chat') {
-                chatTerm.innerHTML = content;
-                chatTerm.scrollTop = chatTerm.scrollHeight;
-            }
-        }
-
         // --- SISTEMA DE BANCOS DE DADOS E PAPERS ---
         function loadPapers() {
-            // Carrega primeiro a lista de bancos de dados existentes
             fetch('/api/databases')
                 .then(r => r.json())
                 .then(data => {
                     const ingestSelect = document.getElementById('ingestDbSelect');
                     const chatSelect = document.getElementById('chatDbSelect');
                     
-                    // Salva valores selecionados anteriormente
                     const prevIngestVal = ingestSelect.value;
                     const prevChatVal = chatSelect.value;
 
-                    // Limpa e repopula dropdowns
                     ingestSelect.innerHTML = '<option value="default">Configuração Ativa</option>';
                     chatSelect.innerHTML = '<option value="default">Padrão da Configuração</option>';
 
@@ -1078,7 +1098,6 @@
                         chatSelect.innerHTML += `<option value="${db}">${db}</option>`;
                     });
 
-                    // Tenta restaurar seleções anteriores
                     if (Array.from(ingestSelect.options).some(o => o.value === prevIngestVal)) {
                         ingestSelect.value = prevIngestVal;
                     }
@@ -1086,7 +1105,6 @@
                         chatSelect.value = prevChatVal;
                     }
 
-                    // Carrega as tabelas com base nos bancos ativos nos dropdowns
                     loadPapersForIngest();
                     loadPapersForChat();
                 });
@@ -1175,6 +1193,10 @@
         function triggerIngestion(files) {
             const chunkSize = parseInt(document.getElementById('ingestChunkSize').value);
             const chunkOverlap = parseInt(document.getElementById('ingestChunkOverlap').value);
+            const embedModel = document.getElementById('ingestEmbedModel').value;
+
+            // Salva as configurações de banco antes de iniciar
+            saveConfig();
 
             fetch('/api/run/ingest', {
                 method: 'POST',
@@ -1182,7 +1204,8 @@
                 body: JSON.stringify({ 
                     files: files,
                     chunk_size: chunkSize,
-                    chunk_overlap: chunkOverlap
+                    chunk_overlap: chunkOverlap,
+                    embedding_model: embedModel
                 })
             })
             .then(r => r.json())
@@ -1210,41 +1233,128 @@
 
         function triggerChat(cols) {
             const db = document.getElementById('chatDbSelect').value;
+            const runName = document.getElementById('chatRunName').value;
+            const chatModel = document.getElementById('chatChatModel').value;
+            const nResults = parseInt(document.getElementById('chatNResults').value);
+            const maxContext = parseInt(document.getElementById('chatMaxContext').value);
+
+            // Garante o prompt salvo
+            savePrompt();
+            saveConfig();
 
             fetch('/api/run/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
                     collections: cols,
-                    database: db
+                    database: db,
+                    run_name: runName,
+                    chat_model: chatModel,
+                    n_results: nResults,
+                    max_context_chars: maxContext
                 })
             })
             .then(r => r.json())
             .then(res => {
                 if (res.error) throw new Error(res.error);
                 showToast("Extração RAG iniciada!");
+                document.getElementById('chatTerminal').innerHTML = "[INFO] Chamada iniciada. Aguardando streaming da LLM...";
                 switchTab('chat');
             })
             .catch(e => showToast(e.message, 'error'));
         }
 
-        // --- SISTEMA DE VALIDAÇÃO / DASHBOARD ---
-        function triggerValidation() {
-            showToast("Iniciando auditoria semântica...");
-            fetch('/api/run/validate', { method: 'POST' })
+        // --- HISTÓRICO DE RUNS E AUDITORIA (DASHBOARD) ---
+        function loadRunsList() {
+            fetch('/api/runs')
                 .then(r => r.json())
-                .then(res => {
-                    if (res.error) throw new Error(res.error);
-                    setTimeout(() => {
+                .then(data => {
+                    runsHistory = data.runs;
+                    const select = document.getElementById('auditRunSelect');
+                    const prevVal = select.value;
+
+                    select.innerHTML = '';
+                    if (runsHistory.length === 0) {
+                        select.innerHTML = '<option value="default">Nenhum teste auditado</option>';
+                        document.getElementById('auditRunMetadataCard').style.display = "none";
                         loadResults();
-                        showToast("Auditoria de precisão finalizada!");
-                    }, 4000);
-                })
-                .catch(e => showToast(e.message, 'error'));
+                        return;
+                    }
+
+                    runsHistory.forEach(r => {
+                        const name = r.info.run_name || r.folder_name;
+                        const date = r.info.timestamp || '';
+                        select.innerHTML += `<option value="${r.folder_name}">${name} (${date})</option>`;
+                    });
+
+                    // Tenta manter a seleção ou pega a mais recente (primeira da lista)
+                    if (prevVal && Array.from(select.options).some(o => o.value === prevVal)) {
+                        select.value = prevVal;
+                    } else {
+                        select.value = runsHistory[0].folder_name;
+                    }
+
+                    loadResults();
+                });
+        }
+
+        function triggerValidation() {
+            const runFolder = document.getElementById('auditRunSelect').value;
+            if (!runFolder || runFolder === 'default') {
+                showToast("Nenhuma rodada de teste ativa para auditar.", 'error');
+                return;
+            }
+            showToast("Iniciando auditoria da run...");
+            
+            fetch('/api/run/validate', { 
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ run_folder: runFolder })
+            })
+            .then(r => r.json())
+            .then(res => {
+                if (res.error) throw new Error(res.error);
+                setTimeout(() => {
+                    loadResults();
+                    showToast("Auditoria finalizada com sucesso!");
+                }, 3000);
+            })
+            .catch(e => showToast(e.message, 'error'));
         }
 
         function loadResults() {
-            fetch('/api/results')
+            const runFolder = document.getElementById('auditRunSelect').value;
+            
+            // Exibe metadados da rodada de teste selecionada
+            const runInfo = runsHistory.find(r => r.folder_name === runFolder);
+            const metadataCard = document.getElementById('auditRunMetadataCard');
+            const metadataContent = document.getElementById('auditRunMetadataContent');
+
+            if (runInfo && runInfo.info) {
+                metadataCard.style.display = "block";
+                metadataContent.innerHTML = `
+                    <div>
+                        <span style="font-size:0.75rem; color:var(--text-secondary);">Modelo de Chat</span>
+                        <div style="font-weight:700; font-size:0.85rem; margin-top:2px;">${runInfo.info.chat_model || 'Não informado'}</div>
+                    </div>
+                    <div>
+                        <span style="font-size:0.75rem; color:var(--text-secondary);">Chunking do Banco</span>
+                        <div style="font-weight:700; font-size:0.85rem; margin-top:2px;">${runInfo.info.chunk_size}c | ${runInfo.info.chunk_overlap}o</div>
+                    </div>
+                    <div>
+                        <span style="font-size:0.75rem; color:var(--text-secondary);">Qtd. Contexto (n_results)</span>
+                        <div style="font-weight:700; font-size:0.85rem; margin-top:2px;">${runInfo.info.n_results} chunks</div>
+                    </div>
+                    <div>
+                        <span style="font-size:0.75rem; color:var(--text-secondary);">Embeddings / Tamanho</span>
+                        <div style="font-weight:700; font-size:0.85rem; margin-top:2px;">${runInfo.info.embedding_model} (${runInfo.info.max_context_chars} char)</div>
+                    </div>
+                `;
+            } else {
+                metadataCard.style.display = "none";
+            }
+
+            fetch(`/api/results?run=${runFolder}`)
                 .then(r => r.json())
                 .then(data => {
                     resultsData = data;
@@ -1257,7 +1367,7 @@
             const list = document.getElementById('dashArticlesList');
             list.innerHTML = '';
             if (resultsData.length === 0) {
-                list.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-secondary);">Nenhum dado auditado. Execute o pipeline de extração e validação.</div>';
+                list.innerHTML = '<div style="padding: 20px; text-align: center; color: var(--text-secondary);">Nenhum dado auditado nesta rodada de teste. Execute a validação.</div>';
                 return;
             }
 

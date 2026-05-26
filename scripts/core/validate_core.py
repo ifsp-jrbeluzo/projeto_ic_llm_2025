@@ -99,7 +99,7 @@ def evaluate_field(expected, actual):
             
         return {"score": score_pct, "status": status}
 
-def run_validation(base_dir_path=".", log_callback=None):
+def run_validation(base_dir_path=".", run_folder_name=None, log_callback=None):
     def log(msg):
         if log_callback:
             log_callback(msg)
@@ -108,7 +108,14 @@ def run_validation(base_dir_path=".", log_callback=None):
 
     base_dir = Path(base_dir_path)
     logs_dir = base_dir / "logs"
-    gt_path = base_dir / "ground_truth.json"
+    
+    if run_folder_name:
+        logs_dir = logs_dir / run_folder_name
+        log(f"Iniciando validação da run específica: {run_folder_name}")
+    else:
+        log(f"Iniciando validação geral na raiz de logs")
+
+    gt_path = base_dir / "configs/ground_truth.json"
     out_path = logs_dir / "validation_results.json"
     
     if not gt_path.exists():
@@ -118,10 +125,10 @@ def run_validation(base_dir_path=".", log_callback=None):
     ground_truth = load_json(gt_path)
     results = []
     
-    log(f"Iniciando validação de logs em: {logs_dir.absolute()}")
+    log(f"Auditando logs em: {logs_dir.absolute()}")
     
     for log_file in logs_dir.glob("*.json"):
-        if log_file.name == "validation_results.json":
+        if log_file.name == "validation_results.json" or log_file.name == "run_info.json":
             continue
             
         try:
@@ -193,9 +200,12 @@ def run_validation(base_dir_path=".", log_callback=None):
         })
         
     results.sort(key=lambda x: int(x["article_id"]))
+    
+    # Cria o diretório se não existir (garantia)
+    logs_dir.mkdir(parents=True, exist_ok=True)
         
     with open(out_path, 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=4, ensure_ascii=False)
         
-    log(f"\nValidação concluída para {len(results)} artigos. Salvo em: {out_path.name}")
+    log(f"\nValidação concluída para {len(results)} artigos. Salvo em: {out_path.absolute()}")
     return results
