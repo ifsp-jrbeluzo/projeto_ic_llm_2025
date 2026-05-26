@@ -257,5 +257,13 @@ def run_chat_pipeline(
         gc.collect()
         time.sleep(1)
 
+    # Garante a liberação de locks de arquivos do SQLite do ChromaDB
+    try:
+        chroma_client._system.stop()
+        chroma_client = None
+        gc.collect()
+    except Exception:
+        pass
+
     log("\nProcessamento RAG finalizado!")
     return run_folder_name

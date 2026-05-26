@@ -211,6 +211,10 @@ class UnifiedPipelineServer(BaseHTTPRequestHandler):
                     try:
                         chroma_client = chromadb.PersistentClient(path=str(db_path))
                         collections = [c.name for c in chroma_client.list_collections()]
+                        chroma_client._system.stop()
+                        chroma_client = None
+                        import gc
+                        gc.collect()
                     except Exception:
                         pass
 
@@ -605,6 +609,12 @@ class UnifiedPipelineServer(BaseHTTPRequestHandler):
                 cols = [c.name for c in chroma_client.list_collections()]
             else:
                 cols = selected_cols
+            
+            # Libera o client e roda GC para não prender o lock do SQLite durante o pipeline
+            chroma_client._system.stop()
+            chroma_client = None
+            import gc
+            gc.collect()
 
             # Roda o pipeline de chat
             run_folder = run_chat_pipeline(

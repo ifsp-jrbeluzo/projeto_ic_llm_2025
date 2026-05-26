@@ -134,4 +134,13 @@ def run_ingestion(selected_files, chunk_size, chunk_overlap, db_path, model_name
         except Exception as e:
             log(f"Erro ao processar arquivo {file_path.name}: {str(e)}")
 
+    # Garante a liberação de locks de arquivos do SQLite do ChromaDB
+    try:
+        db._system.stop()
+        db = None
+        import gc
+        gc.collect()
+    except Exception:
+        pass
+
     log("\nProcessamento de banco vetorial finalizado com sucesso!")
