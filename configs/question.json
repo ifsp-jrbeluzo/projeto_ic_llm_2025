@@ -1,0 +1,87 @@
+{
+  "intro": "Com base no contexto fornecido, responda estritamente a pergunta abaixo sobre a pesquisa do artigo. Não extraia outras informações quantificadas ou extras que não foram explicitamente solicitadas. Caso a informação pedida não conste no contexto, responda com \"Não informado no contexto\".\n\nIMPORTANTE (Chain of Thought): Antes de dar a sua resposta final, pense e explique sua lógica. Apresente sua resposta unicamente de forma estruturada em um arquivo json contendo exatamente duas chaves:\n1. \"raciocinio\": Uma breve string onde você deduz e explica como encontrou a informação no texto e se ela corresponde às opções do domínio.\n2. \"<NOME_DA_ENTIDADE>\": A chave da resposta propriamente dita baseada no domínio exigido.",
+  "questions": [
+    {
+      "id": 1,
+      "title": "Área Computacional",
+      "instruction": "Classifique o método principal em UMA das opções exatas abaixo:",
+      "options": [
+        "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+        "(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)",
+        "(RN) Redes Neurais (ex: ELM, RNAs tradicionais)",
+        "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Sensores Utilizados",
+      "instruction": "Liste os sensores utilizados mapeando-os estritamente para UM OU MAIS dos valores exatos do seguinte domínio:",
+      "options": [
+        "câmera",
+        "imu",
+        "gps",
+        "ccd filtro Bayer GR",
+        "câmera binocular",
+        "câmera binocular IR",
+        "LIDAR",
+        "câmera ToF",
+        "câmera estéreo",
+        "scanner laser",
+        "câmera multiespectral",
+        "kinect-v2",
+        "câmera RGB-D",
+        "ccd",
+        "câm. 3D",
+        "NIR",
+        "térmica"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Bibliotecas, Frameworks ou Arquiteturas",
+      "instruction": "Liste as tecnologias computacionais mapeando-as estritamente para UM OU MAIS dos valores exatos do seguinte domínio:",
+      "options": [
+        "MATLAB",
+        "transformada Hough",
+        "OpenCV",
+        "NI LabView",
+        "transformada Census",
+        "código próprio",
+        "ORB-SLAM2",
+        "filtro Gabor",
+        "K-means",
+        "ROS",
+        "SVM",
+        "OpenVSLAM",
+        "algoritmo MEC-ELM",
+        "AlexNet",
+        "TL",
+        "CNN modificada",
+        "DaSNet (Deep CNN)",
+        "TensorRT",
+        "SegNet",
+        "mobile-DaSNet",
+        "ResNet101",
+        "DeepLabV3+",
+        "CNNs",
+        "ResNet50",
+        "tensorflow MobileNet",
+        "Autoencoders VGG19"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Solução / Tarefa Principal",
+      "instruction": "Identifique as aplicações principais do sistema mapeando-as estritamente para UM OU MAIS dos valores do seguinte domínio:",
+      "options": [
+        "navegação (trajeto)",
+        "navegação (mapa)",
+        "navegação (obstáculos)",
+        "detecção",
+        "segmentação",
+        "classificação",
+        "estimativas de produção"
+      ]
+    }
+  ]
+}

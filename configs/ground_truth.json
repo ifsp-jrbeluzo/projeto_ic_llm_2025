@@ -1,0 +1,212 @@
+{
+  "17": {
+    "Área Computacional": "(VC) Visão Computacional Clássica",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["MATLAB"],
+    "Solução / Tarefa Principal": ["navegação (trajeto)"]
+  },
+  "18": {
+    "Área Computacional": "(VC) Visão Computacional Clássica",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["transformada Hough"],
+    "Solução / Tarefa Principal": ["navegação (trajeto)"]
+  },
+  "20": {
+    "Área Computacional": "(VC) Visão Computacional Clássica",
+    "Sensores Utilizados": ["câmera", "imu"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["OpenCV"],
+    "Solução / Tarefa Principal": ["navegação (trajeto)"]
+  },
+  "22": {
+    "Área Computacional": "(VC) Visão Computacional Clássica",
+    "Sensores Utilizados": ["câmera", "gps", "imu"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["NI LabView"],
+    "Solução / Tarefa Principal": ["navegação (trajeto)", "detecção"]
+  },
+  "23": {
+    "Área Computacional": "(VC) Visão Computacional Clássica",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["MATLAB"],
+    "Solução / Tarefa Principal": ["navegação (trajeto)"]
+  },
+  "24": {
+    "Área Computacional": "(VC) Visão Computacional Clássica",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["MATLAB"],
+    "Solução / Tarefa Principal": ["segmentação", "detecção"]
+  },
+  "25": {
+    "Área Computacional": "(VC) Visão Computacional Clássica",
+    "Sensores Utilizados": ["ccd filtro Bayer GR"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["MATLAB"],
+    "Solução / Tarefa Principal": ["segmentação", "detecção"]
+  },
+  "26": {
+    "Área Computacional": "(VC) Visão Computacional Clássica",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["MATLAB"],
+    "Solução / Tarefa Principal": ["navegação (mapa)"]
+  },
+  "28": {
+    "Área Computacional": "(VC) Visão Computacional Clássica",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["NI LabView"],
+    "Solução / Tarefa Principal": ["navegação (trajeto)"]
+  },
+  "30": {
+    "Área Computacional": "(VC) Visão Computacional Clássica",
+    "Sensores Utilizados": ["câmera binocular"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["transformada Census"],
+    "Solução / Tarefa Principal": ["navegação (trajeto)"]
+  },
+  "31": {
+    "Área Computacional": "(VC) Visão Computacional Clássica",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["MATLAB"],
+    "Solução / Tarefa Principal": ["detecção"]
+  },
+  "32": {
+    "Área Computacional": "(VC) Visão Computacional Clássica",
+    "Sensores Utilizados": ["câmera binocular IR"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["OpenCV"],
+    "Solução / Tarefa Principal": ["detecção"]
+  },
+  "33": {
+    "Área Computacional": "(VC) Visão Computacional Clássica",
+    "Sensores Utilizados": ["câmera", "LIDAR"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["código próprio"],
+    "Solução / Tarefa Principal": ["navegação (trajeto)"]
+  },
+  "34": {
+    "Área Computacional": "(VC) Visão Computacional Clássica",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["ORB-SLAM2"],
+    "Solução / Tarefa Principal": ["navegação (mapa)"]
+  },
+  "35": {
+    "Área Computacional": "(VC) Visão Computacional Clássica",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["OpenCV"],
+    "Solução / Tarefa Principal": ["detecção"]
+  },
+  "36": {
+    "Área Computacional": "(VC) Visão Computacional Clássica",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["filtro Gabor", "K-means"],
+    "Solução / Tarefa Principal": ["navegação (trajeto)"]
+  },
+  "37": {
+    "Área Computacional": "(VC) Visão Computacional Clássica",
+    "Sensores Utilizados": ["câmera ToF"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["código próprio"],
+    "Solução / Tarefa Principal": ["navegação (trajeto)"]
+  },
+  "38": {
+    "Área Computacional": "(AM) Aprendizado de Máquina",
+    "Sensores Utilizados": ["câmera estéreo"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["código próprio"],
+    "Solução / Tarefa Principal": ["classificação"]
+  },
+  "39": {
+    "Área Computacional": "(AM) Aprendizado de Máquina",
+    "Sensores Utilizados": ["câmera estéreo", "scanner laser"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["ROS"],
+    "Solução / Tarefa Principal": ["detecção"]
+  },
+  "40": {
+    "Área Computacional": "(AM) Aprendizado de Máquina",
+    "Sensores Utilizados": ["câmera multiespectral"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["código próprio"],
+    "Solução / Tarefa Principal": ["classificação"]
+  },
+  "43": {
+    "Área Computacional": "(AM) Aprendizado de Máquina",
+    "Sensores Utilizados": ["câmera estéreo"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["OpenCV", "SVM"],
+    "Solução / Tarefa Principal": ["navegação (trajeto)"]
+  },
+  "45": {
+    "Área Computacional": "(AM) Aprendizado de Máquina",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["OpenVSLAM"],
+    "Solução / Tarefa Principal": ["navegação (mapa)"]
+  },
+  "46": {
+    "Área Computacional": "(RN) Redes Neurais",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["algoritmo MEC-ELM"],
+    "Solução / Tarefa Principal": ["detecção", "classificação"]
+  },
+  "47": {
+    "Área Computacional": "(CNN) Redes Neurais Convolucionais",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["AlexNet", "TL"],
+    "Solução / Tarefa Principal": ["detecção", "classificação"]
+  },
+  "48": {
+    "Área Computacional": "(CNN) Redes Neurais Convolucionais",
+    "Sensores Utilizados": ["câmera estéreo"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["MATLAB", "CNN modificada"],
+    "Solução / Tarefa Principal": ["detecção"]
+  },
+  "49": {
+    "Área Computacional": "(CNN) Redes Neurais Convolucionais",
+    "Sensores Utilizados": ["kinect-v2"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["DaSNet (Deep CNN)"],
+    "Solução / Tarefa Principal": ["segmentação", "detecção"]
+  },
+  "50": {
+    "Área Computacional": "(CNN) Redes Neurais Convolucionais",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["TensorRT"],
+    "Solução / Tarefa Principal": ["detecção", "classificação"]
+  },
+  "51": {
+    "Área Computacional": "(CNN) Redes Neurais Convolucionais",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["SegNet"],
+    "Solução / Tarefa Principal": ["segmentação"]
+  },
+  "52": {
+    "Área Computacional": "(CNN) Redes Neurais Convolucionais",
+    "Sensores Utilizados": ["câmera RGB-D"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["mobile-DaSNet", "TL"],
+    "Solução / Tarefa Principal": ["segmentação", "detecção"]
+  },
+  "54": {
+    "Área Computacional": "(CNN) Redes Neurais Convolucionais",
+    "Sensores Utilizados": ["ccd"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["ResNet101"],
+    "Solução / Tarefa Principal": ["navegação (trajeto)"]
+  },
+  "55": {
+    "Área Computacional": "(CNN) Redes Neurais Convolucionais",
+    "Sensores Utilizados": ["câmera RGB-D"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["DeepLabV3+"],
+    "Solução / Tarefa Principal": ["navegação (obstáculos)"]
+  },
+  "56": {
+    "Área Computacional": "(CNN) Redes Neurais Convolucionais",
+    "Sensores Utilizados": ["câm. 3D", "NIR", "térmica"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["CNNs"],
+    "Solução / Tarefa Principal": ["segmentação", "detecção"]
+  },
+  "58": {
+    "Área Computacional": "(CNN) Redes Neurais Convolucionais",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["ResNet50", "TL"],
+    "Solução / Tarefa Principal": ["estimativas de produção"]
+  },
+  "59": {
+    "Área Computacional": "(CNN) Redes Neurais Convolucionais",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["tensorflow MobileNet"],
+    "Solução / Tarefa Principal": ["classificação"]
+  },
+  "60": {
+    "Área Computacional": "(CNN) Redes Neurais Convolucionais",
+    "Sensores Utilizados": ["câmera"],
+    "Bibliotecas, Frameworks ou Arquiteturas": ["Autoencoders VGG19"],
+    "Solução / Tarefa Principal": ["detecção"]
+  }
+}
