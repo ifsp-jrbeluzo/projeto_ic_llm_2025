@@ -405,6 +405,92 @@ class UnifiedPipelineServer(BaseHTTPRequestHandler):
                 self.send_json(500, {"error": str(e)})
             return
 
+        elif self.path == '/api/database/delete':
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length).decode('utf-8')
+            try:
+                data = json.loads(post_data)
+                db_name = data.get("database")
+                
+                config = load_config()
+                paths = config.get("paths", {})
+                db_base_path = Path(paths.get("database", "./database"))
+                
+                import shutil
+                if db_name == "all":
+                    deleted_count = 0
+                    if db_base_path.exists():
+                        for item in db_base_path.iterdir():
+                            if item.is_dir() and item.name.startswith("db_"):
+                                try:
+                                    shutil.rmtree(item)
+                                    deleted_count += 1
+                                except Exception:
+                                    pass
+                    add_log(f"Todos os {deleted_count} bancos vetoriais foram excluídos.")
+                    self.send_json(200, {"status": "success", "message": f"{deleted_count} bancos excluídos."})
+                elif db_name:
+                    db_path = db_base_path / db_name
+                    if db_path.exists() and db_path.is_dir() and db_name.startswith("db_"):
+                        shutil.rmtree(db_path)
+                        add_log(f"Banco vetorial {db_name} excluído com sucesso.")
+                        self.send_json(200, {"status": "success"})
+                    else:
+                        self.send_json(404, {"error": "Banco não encontrado ou inválido."})
+                else:
+                    self.send_json(400, {"error": "Nome do banco não especificado."})
+            except Exception as e:
+                self.send_json(500, {"error": f"Erro ao deletar: {str(e)}. O banco pode estar em uso pelo sistema."})
+            return
+
+        elif self.path == '/api/run/delete':
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length).decode('utf-8')
+            try:
+                data = json.loads(post_data)
+                run_folder = data.get("run")
+                
+                config = load_config()
+                paths = config.get("paths", {})
+                logs_base_dir = Path(paths.get("logs", "./logs"))
+                
+                import shutil
+                if run_folder == "all":
+                    deleted_dirs = 0
+                    deleted_files = 0
+                    if logs_base_dir.exists():
+                        for item in logs_base_dir.iterdir():
+                            try:
+                                if item.is_dir():
+                                    shutil.rmtree(item)
+                                    deleted_dirs += 1
+                                else:
+                                    item.unlink()
+                                    deleted_files += 1
+                            except Exception:
+                                pass
+                    add_log("Todos os logs e runs de teste foram excluídos.")
+                    self.send_json(200, {"status": "success", "message": "Histórico limpo."})
+                elif run_folder:
+                    run_path = logs_base_dir / run_folder
+                    if run_path.exists() and run_path.is_dir() and run_path.parent == logs_base_dir:
+                        shutil.rmtree(run_path)
+                        add_log(f"Run de teste {run_folder} excluída com sucesso.")
+                        self.send_json(200, {"status": "success"})
+                    elif run_folder == "legacy":
+                        legacy_results = logs_base_dir / "validation_results.json"
+                        if legacy_results.exists():
+                            legacy_results.unlink()
+                        add_log("Registro de teste legado excluído.")
+                        self.send_json(200, {"status": "success"})
+                    else:
+                        self.send_json(404, {"error": "Run não encontrada ou inválida."})
+                else:
+                    self.send_json(400, {"error": "Nome da run não especificado."})
+            except Exception as e:
+                self.send_json(500, {"error": f"Erro ao deletar: {str(e)}"})
+            return
+
         # Rota não encontrada
         self.send_response(404)
         self.end_headers()

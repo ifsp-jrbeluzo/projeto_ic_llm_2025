@@ -538,9 +538,10 @@
             <h2 id="viewTitle">Auditoria de Precisão RAG</h2>
             <div id="headerControls">
                 <!-- Dropdown das rodadas de teste na aba Auditoria -->
-                <div style="display: flex; align-items: center; gap: 10px;" id="headerRunsContainer">
+                <div style="display: flex; align-items: center; gap: 8px;" id="headerRunsContainer">
                     <label style="margin:0; font-size: 0.85rem; color: var(--text-secondary);">Teste Rodado (Run):</label>
                     <select id="auditRunSelect" onchange="loadResults()" style="width: 220px; padding: 6px 12px; font-size: 0.85rem;"></select>
+                    <button class="btn btn-sm" onclick="deleteCurrentRun()" title="Excluir esta Run de Teste" style="border-color: rgba(251, 113, 133, 0.4); color: var(--danger); padding: 6px 12px; font-size: 0.85rem;">🗑️ Excluir</button>
                 </div>
             </div>
         </header>
@@ -585,12 +586,13 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Ingestão de Artigos PDF (papers/)</h3>
-                            <div style="display: flex; gap: 8px; align-items: center;">
+                            <div style="display: flex; gap: 6px; align-items: center;">
                                 <label style="margin: 0; white-space: nowrap; font-size: 0.8rem;">Banco Visualizado:</label>
                                 <select id="ingestDbSelect" onchange="loadPapersForIngest()" style="padding: 6px 12px; font-size: 0.8rem; width: 180px;">
                                     <option value="default">Configuração Ativa</option>
                                 </select>
                                 <button class="btn btn-sm" onclick="loadPapers()">🔄</button>
+                                <button class="btn btn-sm" onclick="deleteCurrentDatabase('ingest')" title="Excluir este Banco Vetorial" style="border-color: rgba(251, 113, 133, 0.4); color: var(--danger);">🗑️</button>
                             </div>
                         </div>
                         <div class="table-container" style="max-height: 300px; overflow-y: auto;">
@@ -656,12 +658,13 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Bancos e Coleções no ChromaDB</h3>
-                            <div style="display: flex; gap: 8px; align-items: center;">
+                            <div style="display: flex; gap: 6px; align-items: center;">
                                 <label style="margin: 0; white-space: nowrap; font-size: 0.8rem;">Banco Selecionado:</label>
                                 <select id="chatDbSelect" onchange="loadPapersForChat()" style="padding: 6px 12px; font-size: 0.8rem; width: 180px;">
                                     <option value="default">Padrão da Configuração</option>
                                 </select>
                                 <button class="btn btn-sm" onclick="loadPapers()">🔄</button>
+                                <button class="btn btn-sm" onclick="deleteCurrentDatabase('chat')" title="Excluir este Banco Vetorial" style="border-color: rgba(251, 113, 133, 0.4); color: var(--danger);">🗑️</button>
                             </div>
                         </div>
                         <div class="table-container" style="max-height: 380px; overflow-y: auto;">
@@ -753,6 +756,22 @@
                         </div>
                         <button class="btn btn-primary" type="submit">💾 Salvar Conexões</button>
                     </form>
+                </div>
+
+                <!-- Administração e Limpeza de Dados -->
+                <div class="card" style="margin-bottom: 28px; border-color: rgba(251, 113, 133, 0.2);">
+                    <h3 class="card-title" style="margin-bottom: 12px; color: var(--danger);">Administração e Limpeza de Dados</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 20px;">
+                        Ações administrativas para redefinir e liberar espaço no projeto. Use com atenção!
+                    </p>
+                    <div style="display: flex; gap: 16px;">
+                        <button class="btn" onclick="wipeAllDatabases()" style="border-color: rgba(251, 113, 133, 0.4); color: var(--danger); background: rgba(251, 113, 133, 0.05);">
+                            🗑️ Excluir Todos os Bancos Vetoriais
+                        </button>
+                        <button class="btn" onclick="wipeAllRuns()" style="border-color: rgba(251, 113, 133, 0.4); color: var(--danger); background: rgba(251, 113, 133, 0.05);">
+                            🗑️ Limpar Todos os Logs e Runs de Teste
+                        </button>
+                    </div>
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px;">
@@ -1532,6 +1551,99 @@
             }
 
             details.innerHTML = html;
+        }
+
+        // --- SISTEMA DE EXCLUSÃO DE DADOS (FRONTEND) ---
+        function deleteCurrentDatabase(type) {
+            const selectId = type === 'ingest' ? 'ingestDbSelect' : 'chatDbSelect';
+            const dbName = document.getElementById(selectId).value;
+
+            if (!dbName || dbName === 'default') {
+                showToast("Por favor, selecione um banco vetorial específico para excluir.", "error");
+                return;
+            }
+
+            if (!confirm(`⚠️ Tem certeza de que deseja excluir o banco vetorial '${dbName}'?\nEsta ação apagará todos os dados indexados desta combinação e não pode ser desfeita.`)) {
+                return;
+            }
+
+            fetch('/api/database/delete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ database: dbName })
+            })
+            .then(r => r.json())
+            .then(res => {
+                if (res.error) throw new Error(res.error);
+                showToast("Banco vetorial excluído!");
+                loadPapers();
+            })
+            .catch(e => showToast(e.message, "error"));
+        }
+
+        function deleteCurrentRun() {
+            const runFolder = document.getElementById('auditRunSelect').value;
+
+            if (!runFolder || runFolder === 'default') {
+                showToast("Por favor, selecione uma run de teste específica para excluir.", "error");
+                return;
+            }
+
+            const nameToDisplay = runFolder === 'legacy' ? 'Histórico Legado' : runFolder;
+            if (!confirm(`⚠️ Tem certeza de que deseja excluir a rodada de teste '${nameToDisplay}'?\nIsso removerá permanentemente os relatórios e logs deste teste.`)) {
+                return;
+            }
+
+            fetch('/api/run/delete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ run: runFolder })
+            })
+            .then(r => r.json())
+            .then(res => {
+                if (res.error) throw new Error(res.error);
+                showToast("Run de teste excluída com sucesso!");
+                loadRunsList();
+            })
+            .catch(e => showToast(e.message, "error"));
+        }
+
+        function wipeAllDatabases() {
+            if (!confirm("⚠️ ATENÇÃO EXTREMA ⚠️\nTem certeza de que deseja apagar TODOS os bancos vetoriais criados?\nIsso removerá completamente todas as coleções do ChromaDB!")) {
+                return;
+            }
+
+            fetch('/api/database/delete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ database: 'all' })
+            })
+            .then(r => r.json())
+            .then(res => {
+                if (res.error) throw new Error(res.error);
+                showToast("Todos os bancos vetoriais foram limpos!");
+                loadPapers();
+            })
+            .catch(e => showToast(e.message, "error"));
+        }
+
+        function wipeAllRuns() {
+            if (!confirm("⚠️ ATENÇÃO EXTREMA ⚠️\nTem certeza de que deseja apagar TODO o histórico de runs de teste e logs?\nTodos os relatórios e estatísticas da Auditoria serão perdidos permanentemente!")) {
+                return;
+            }
+
+            fetch('/api/run/delete', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ run: 'all' })
+            })
+            .then(r => r.json())
+            .then(res => {
+                if (res.error) throw new Error(res.error);
+                showToast("Todo o histórico de testes foi limpo!");
+                loadRunsList();
+            })
+            .catch(e => showToast(e.message, "error"));
         }
     </script>
 </body>
