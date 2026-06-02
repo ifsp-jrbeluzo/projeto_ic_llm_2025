@@ -113,12 +113,18 @@ def evaluate_field(expected, actual):
 
 def main():
     base_dir = Path(__file__).parent.parent
-    logs_dir = base_dir / "logs"
-    gt_path = base_dir / "ground_truth.json"
-    out_path = logs_dir / "validation_results.json"
+    
+    env_logs_dir = os.environ.get("VALIDATE_LOGS_DIR")
+    logs_dir = Path(env_logs_dir) if env_logs_dir else base_dir / "logs"
+    
+    env_gt_path = os.environ.get("VALIDATE_GT_PATH")
+    gt_path = Path(env_gt_path) if env_gt_path else base_dir / "ground_truth.json"
+    
+    env_out_path = os.environ.get("VALIDATE_OUT_PATH")
+    out_path = Path(env_out_path) if env_out_path else logs_dir / "validation_results.json"
     
     if not gt_path.exists():
-        print(f"Erro: ground_truth.json nao encontrado.")
+        print(f"Erro: ground_truth.json nao encontrado em {gt_path}.")
         return
         
     ground_truth = load_json(gt_path)

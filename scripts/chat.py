@@ -1,4 +1,5 @@
 import sys
+import os
 sys.stdout.reconfigure(encoding='utf-8')
 
 import ollama
@@ -53,29 +54,45 @@ models_cfg = config.get("models", {})
 ollama_cfg = config.get("ollama", {})
 ingest_cfg = config.get("ingest", {})
 
-prompt_template = load_prompt(paths_cfg.get("prompt_template", "prompt.txt"))
+# Override inputs using environment variables if set
+env_prompt_path = os.environ.get("RAG_PROMPT_PATH")
+prompt_template = load_prompt(env_prompt_path if env_prompt_path else paths_cfg.get("prompt_template", "prompt.txt"))
 
-QUESTION_DATA = load_question(paths_cfg.get("question_file", "question.json"))
+env_question_path = os.environ.get("RAG_QUESTION_PATH")
+QUESTION_DATA = load_question(env_question_path if env_question_path else paths_cfg.get("question_file", "question.json"))
 
 MAX_CONTEXT_CHARS = rag_cfg.get("max_context_chars", 6000)
 
-N_RESULTS = rag_cfg.get("n_results", 3)
-EMBEDDING_MODEL = models_cfg.get("embedding", "embeddinggemma")
-CHAT_MODEL = models_cfg.get("chat", "gemma3:27b")
+env_n_results = os.environ.get("RAG_N_RESULTS")
+N_RESULTS = int(env_n_results) if env_n_results and env_n_results.isdigit() else rag_cfg.get("n_results", 3)
+
+env_embedding_model = os.environ.get("RAG_EMBEDDING_MODEL")
+EMBEDDING_MODEL = env_embedding_model if env_embedding_model else models_cfg.get("embedding", "embeddinggemma")
+
+env_chat_model = os.environ.get("RAG_CHAT_MODEL")
+CHAT_MODEL = env_chat_model if env_chat_model else models_cfg.get("chat", "gemma3:27b")
 
 # ---------------- LOG DIR ---------------- #
 
-LOG_DIR = Path(paths_cfg.get("logs", "./logs"))
+env_log_dir = os.environ.get("RAG_LOG_DIR")
+if env_log_dir:
+    LOG_DIR = Path(env_log_dir)
+else:
+    LOG_DIR = Path(paths_cfg.get("logs", "./logs"))
 
-LOG_DIR.mkdir(exist_ok=True)
+LOG_DIR.mkdir(parents=True, exist_ok=True)
 
 # ---------------- CHROMA ---------------- #
 
-# Constrói o caminho dinâmico com base nos parâmetros de chunking
-chunk_size = ingest_cfg.get("chunk_size", 250)
-chunk_overlap = ingest_cfg.get("chunk_overlap", 50)
-db_base_path = Path(paths_cfg.get("database", "./database"))
-db_path = db_base_path / f"db_{chunk_size}c_{chunk_overlap}o"
+env_db_path = os.environ.get("RAG_DB_PATH")
+if env_db_path:
+    db_path = Path(env_db_path)
+else:
+    # Constrói o caminho dinâmico com base nos parâmetros de chunking
+    chunk_size = ingest_cfg.get("chunk_size", 250)
+    chunk_overlap = ingest_cfg.get("chunk_overlap", 50)
+    db_base_path = Path(paths_cfg.get("database", "./database"))
+    db_path = db_base_path / f"db_{chunk_size}c_{chunk_overlap}o"
 
 print(f"\nCarregando banco de dados: {db_path}")
 
@@ -93,31 +110,31 @@ if not collections:
 
 # ---------------- MODE ---------------- #
 
-print("\nModo:")
-print("[1] Um banco")
-print("[2] Todos os bancos")
-
-import sys
-if len(sys.argv) > 1 and sys.argv[1].lower() == "all":
-    mode = "2"
+env_collections = os.environ.get("RAG_COLLECTIONS")
+if env_collections:
+    if env_collections.lower() == "all":
+        selected_collections = collections
+    else:
+        names = [n.strip() for n in env_collections.split(",")]
+        selected_collections = [c for c in collections if c.name in names]
 else:
-    mode = input("Escolha: ").strip()
+    print("\nModo:")
+    print("[1] Um banco")
+    print("[2] Todos os bancos")
 
-if mode == "1":
+    if len(sys.argv) > 1 and sys.argv[1].lower() == "all":
+        mode = "2"
+    else:
+        mode = input("Escolha: ").strip()
 
-    print("\nBancos disponíveis:\n")
-
-    for i, col in enumerate(collections):
-
-        print(f"[{i}] {col.name}")
-
-    idx = int(input("\nSelecione: "))
-
-    selected_collections = [collections[idx]]
-
-else:
-
-    selected_collections = collections
+    if mode == "1":
+        print("\nBancos disponíveis:\n")
+        for i, col in enumerate(collections):
+            print(f"[{i}] {col.name}")
+        idx = int(input("\nSelecione: "))
+        selected_collections = [collections[idx]]
+    else:
+        selected_collections = collections
 
 # ---------------- OLLAMA ---------------- #
 

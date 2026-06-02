@@ -1,9 +1,15 @@
-from pypdf import PdfReader
 import ollama
 import chromadb
 from pathlib import Path
 import json
 import re
+import os
+import sys
+
+# Import core modules
+sys.path.append(str(Path(__file__).parent.parent))
+from scripts.core.pdf_extractor import pdf_to_text
+from scripts.core.chunker import chunkify
 
 # ---------------- CONFIG ---------------- #
 
@@ -12,30 +18,6 @@ def load_config(config_path="config.json"):
         raise FileNotFoundError(f"Config file not found: {config_path}")
     with open(config_path, "r", encoding="utf-8") as f:
         return json.load(f)
-
-# ---------------- PDF ---------------- #
-
-def pdf_to_text(file_path):
-    reader = PdfReader(file_path)
-    text = ""
-    for page in reader.pages:
-        page_text = page.extract_text()
-        if page_text:
-            text += page_text + "\n"
-    return text
-
-# ---------------- CHUNK ---------------- #
-
-def chunkify(text, size=250, overlap=50):
-    words = text.split()
-    chunks = []
-    start = 0
-    while start < len(words):
-        end = start + size
-        chunk = " ".join(words[start:end])
-        chunks.append(chunk)
-        start += size - overlap
-    return chunks
 
 # ---------------- NAMING ---------------- #
 
@@ -83,19 +65,48 @@ def add_chunks(collection, text_chunks, file_name, model_name):
 # ---------------- FILE SELECT ---------------- #
 
 def select_files(papers_path):
-    pdf_files = list(papers_path.glob("*.pdf"))
+    pdf_files = sorted(list(papers_path.glob("*.pdf")))
 
     if not pdf_files:
         print("No PDF files found.")
         exit()
 
+    # Check environment variable first (for web app runner)
+    env_selection = os.environ.get("INGEST_FILES")
+    if env_selection:
+        if env_selection.lower() == "all":
+            return pdf_files
+        parts = [p.strip() for p in env_selection.split(",")]
+        selected = []
+        for p in parts:
+            if p.isdigit():
+                idx = int(p)
+                if idx < len(pdf_files):
+                    selected.append(pdf_files[idx])
+            else:
+                for f in pdf_files:
+                    if f.name == p or f.stem == p:
+                        selected.append(f)
+        return selected
+
+    # Check CLI sys.argv
+    if len(sys.argv) > 1:
+        arg = sys.argv[1].lower()
+        if arg == "all":
+            return pdf_files
+        parts = [p.strip() for p in arg.split(",")]
+        selected = []
+        for p in parts:
+            if p.isdigit():
+                idx = int(p)
+                if idx < len(pdf_files):
+                    selected.append(pdf_files[idx])
+        if selected:
+            return selected
+
     print("\nAvailable PDF files:")
     for i, file in enumerate(pdf_files):
         print(f"[{i}] {file.name}")
-
-    import sys
-    if len(sys.argv) > 1 and sys.argv[1].lower() == "all":
-        return pdf_files
 
     selection = input("\nSelect files (e.g. 0,2 or 'all'): ").strip()
 
@@ -120,8 +131,13 @@ def main():
     ingest_cfg = config.get("ingest", {})
     models_cfg = config.get("models", {})
 
-    chunk_size = ingest_cfg.get("chunk_size", 250)
-    chunk_overlap = ingest_cfg.get("chunk_overlap", 50)
+    # Check environment variables for chunking params
+    env_chunk_size = os.environ.get("INGEST_CHUNK_SIZE")
+    env_chunk_overlap = os.environ.get("INGEST_CHUNK_OVERLAP")
+
+    chunk_size = int(env_chunk_size) if env_chunk_size and env_chunk_size.isdigit() else ingest_cfg.get("chunk_size", 250)
+    chunk_overlap = int(env_chunk_overlap) if env_chunk_overlap and env_chunk_overlap.isdigit() else ingest_cfg.get("chunk_overlap", 50)
+    
     papers_path = Path(paths_cfg.get("papers", "./papers"))
     db_base_path = Path(paths_cfg.get("database", "./database"))
 
