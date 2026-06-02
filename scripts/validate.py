@@ -169,12 +169,17 @@ def main():
             
             resp_str = interaction.get("response", "")
             resp_clean = re.sub(r'```json\n?|\n?```', '', resp_str).strip()
+            reasoning_val = None
             try:
                 parsed = json.loads(resp_clean)
                 for k, v in parsed.items():
-                    if k.lower() != "raciocinio":
-                        actual_val = v
-                        break
+                    if k.lower() == "raciocinio":
+                        reasoning_val = v
+                    else:
+                        if isinstance(v, bool) and v is True:
+                            actual_val = k
+                        else:
+                            actual_val = v
             except Exception:
                 pass
                 
@@ -182,6 +187,8 @@ def main():
             evaluation[gt_key] = {
                 "expected": expected_val,
                 "actual": actual_val if actual_val is not None else "Não encontrado",
+                "reasoning": reasoning_val,
+                "raw_response": resp_str,
                 "score": eval_result["score"],
                 "status": eval_result["status"]
             }

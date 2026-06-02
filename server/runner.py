@@ -1,6 +1,7 @@
 import asyncio
 import os
 import sys
+import subprocess
 from pathlib import Path
 from datetime import datetime
 
@@ -44,6 +45,7 @@ class TaskRunner:
             process_env.update({k: str(v) for k, v in env_override.items()})
             # Force unbuffered output so we get logs in real time
             process_env["PYTHONUNBUFFERED"] = "1"
+            process_env["PYTHONPATH"] = str(Path(__file__).parent.parent)
 
             script_path = str(Path(__file__).parent.parent / "scripts" / script_name)
             python_exe = sys.executable
@@ -57,15 +59,16 @@ class TaskRunner:
             self.append_log(f"Env overrides: {env_override}\n")
 
             try:
-                self.process = await asyncio.create_subprocess_exec(
-                    python_exe,
-                    *cmd_args,
-                    stdout=asyncio.subprocess.PIPE,
-                    stderr=asyncio.subprocess.STDOUT,
+                self.process = subprocess.Popen(
+                    [python_exe] + cmd_args,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
                     env=process_env
                 )
             except Exception as e:
-                self.append_log(f"Erro ao iniciar subprocesso: {str(e)}")
+                import traceback
+                tb = traceback.format_exc()
+                self.append_log(f"Erro ao iniciar subprocesso:\n{tb}")
                 self.is_running = False
             # Start reading logs in background task
             asyncio.create_task(self._read_output(self.process))
@@ -97,25 +100,24 @@ class TaskRunner:
                 process_env = os.environ.copy()
                 process_env.update({k: str(v) for k, v in env_override.items()})
                 process_env["PYTHONUNBUFFERED"] = "1"
+                process_env["PYTHONPATH"] = str(Path(__file__).parent.parent)
                 
                 # Execute chat.py with "all" argument to skip interactive mode
-                self.process = await asyncio.create_subprocess_exec(
-                    python_exe,
-                    script_path,
-                    "all",
-                    stdout=asyncio.subprocess.PIPE,
-                    stderr=asyncio.subprocess.STDOUT,
+                self.process = subprocess.Popen(
+                    [python_exe, script_path, "all"],
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.STDOUT,
                     env=process_env
                 )
                 
                 # Read output for this run
                 while True:
-                    line = await self.process.stdout.readline()
+                    line = await asyncio.to_thread(self.process.stdout.readline)
                     if not line:
                         break
                     self.append_log(line.decode('utf-8', errors='replace').rstrip())
                 
-                exit_code = await self.process.wait()
+                exit_code = await asyncio.to_thread(self.process.wait)
                 self.append_log(f"\nFinalizado pipeline {idx} (Código de saída: {exit_code})")
                 if exit_code != 0:
                     self.append_log(f"Pipeline falhou. Abortando sequência.")
@@ -126,7 +128,9 @@ class TaskRunner:
                 await self._run_validation_step(str(target_run_dir))
                 
         except Exception as e:
-            self.append_log(f"\nErro durante execução da sequência: {str(e)}")
+            import traceback
+            tb = traceback.format_exc()
+            self.append_log(f"\nErro durante execução da sequência:\n{tb}")
         finally:
             self.is_running = False
             self.task_type = None
@@ -136,7 +140,7 @@ class TaskRunner:
     async def _read_output(self, process):
         try:
             while True:
-                line = await process.stdout.readline()
+                line = await asyncio.to_thread(process.stdout.readline)
                 if not line:
                     break
                 decoded_line = line.decode('utf-8', errors='replace').rstrip()
@@ -144,7 +148,7 @@ class TaskRunner:
         except Exception as e:
             self.append_log(f"\nErro de leitura de logs: {str(e)}")
         finally:
-            exit_code = await process.wait()
+            exit_code = await asyncio.to_thread(process.wait)
             self.append_log(f"\n--- PROCESSO FINALIZADO (Código de saída: {exit_code}) ---")
             
             # Post RAG Validation step
@@ -167,23 +171,23 @@ class TaskRunner:
         process_env.update({
             "VALIDATE_LOGS_DIR": str(log_dir),
             "VALIDATE_OUT_PATH": str(Path(log_dir) / "validation_results.json"),
-            "PYTHONUNBUFFERED": "1"
+            "PYTHONUNBUFFERED": "1",
+            "PYTHONPATH": str(Path(__file__).parent.parent)
         })
 
         try:
-            val_process = await asyncio.create_subprocess_exec(
-                python_exe,
-                script_path,
-                stdout=asyncio.subprocess.PIPE,
-                stderr=asyncio.subprocess.STDOUT,
+            val_process = subprocess.Popen(
+                [python_exe, script_path],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.STDOUT,
                 env=process_env
             )
             while True:
-                line = await val_process.stdout.readline()
+                line = await asyncio.to_thread(val_process.stdout.readline)
                 if not line:
                     break
                 self.append_log(line.decode('utf-8', errors='replace').rstrip())
-            await val_process.wait()
+            await asyncio.to_thread(val_process.wait)
             self.append_log("--- VALIDAÇÃO / AUDITORIA FINALIZADA ---")
         except Exception as e:
             self.append_log(f"Erro ao executar passo de validação: {str(e)}")

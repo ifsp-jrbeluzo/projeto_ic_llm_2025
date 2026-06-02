@@ -656,26 +656,15 @@
         </div>
     </header>
 
-    <div class="tabs-nav">
-        <button class="tab-btn active" id="tab-btn-dashboard" onclick="switchTab('dashboard')">📊 Status & Auditoria</button>
-        <button class="tab-btn" id="tab-btn-ingestion" onclick="switchTab('ingestion')">🗄️ Gerar Banco de Dados</button>
-        <button class="tab-btn" id="tab-btn-pipeline" onclick="switchTab('pipeline')">⚙️ Executar Pipeline RAG</button>
-    </div>
-
-    <!-- Active Task Monitor (shows at the top if running) -->
-    <div class="status-container" id="statusContainer" style="display: none;">
-        <div class="status-card">
-            <div class="status-info">
-                <div class="status-dot active"></div>
-                <div>
-                    <span style="font-weight: 600;" id="statusTaskText">Executando Tarefa...</span>
-                    <span style="color: var(--text-secondary); margin-left: 10px;" id="statusTimerText"></span>
-                </div>
+    <div style="display: flex; height: calc(100vh - 85px); width: 100vw; overflow: hidden;">
+        
+        <!-- MAIN CONTENT AREA -->
+        <div style="flex: 1; display: flex; flex-direction: column; overflow: hidden; min-width: 0;">
+            <div class="tabs-nav">
+                <button class="tab-btn active" id="tab-btn-dashboard" onclick="switchTab('dashboard')">📊 Status & Auditoria</button>
+                <button class="tab-btn" id="tab-btn-ingestion" onclick="switchTab('ingestion')">🗄️ Gerar Banco de Dados</button>
+                <button class="tab-btn" id="tab-btn-pipeline" onclick="switchTab('pipeline')">⚙️ Executar Pipeline RAG</button>
             </div>
-            <button class="btn btn-danger" onclick="killActiveTask()">Cancelar Execução</button>
-        </div>
-        <div class="console-container" id="consoleLogs"></div>
-    </div>
 
     <!-- TAB 1: DASHBOARD & VALIDATOR -->
     <div class="tab-content active" id="tab-dashboard">
@@ -683,7 +672,10 @@
         <div class="run-control-panel" id="runControlPanel" style="display: none;">
             <div class="form-group" style="flex: 1;">
                 <label for="runSelector">Teste Ativo (Run Selecionado)</label>
-                <select id="runSelector" class="form-control" onchange="loadSelectedRun()"></select>
+                <div style="display: flex; gap: 10px;">
+                    <select id="runSelector" class="form-control" style="flex: 1;" onchange="loadSelectedRun()"></select>
+                    <button class="btn btn-danger" onclick="deleteSelectedRun()" title="Deletar Run Selecionado">🗑️</button>
+                </div>
             </div>
             <div class="form-group" style="flex: 1;" id="compareSelectorGroup">
                 <label for="compareSelector">Comparar Configurações Com</label>
@@ -786,9 +778,20 @@
                 </div>
 
                 <div class="form-group" style="margin-bottom: 20px;">
-                    <label for="ragQuestions">Arquivo de Perguntas JSON (question.json)</label>
-                    <textarea id="ragQuestions" rows="8" class="form-control" placeholder="JSON de Perguntas..."></textarea>
-                    <span id="jsonFeedback" style="font-size: 11px; margin-top: 4px; display: none;"></span>
+                    <label>Perguntas do Pipeline (question.json)</label>
+                    
+                    <div style="background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+                        <label for="ragIntro" style="font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase;">Texto de Introdução / Prompt Central</label>
+                        <textarea id="ragIntro" rows="4" class="form-control" style="width: 100%; margin-top: 6px;"></textarea>
+                    </div>
+                    
+                    <div id="questionsBuilderContainer" style="display: flex; flex-direction: column; gap: 15px;">
+                        <!-- Questions will be injected here by JS -->
+                    </div>
+                    
+                    <button class="btn" style="margin-top: 15px; width: 100%; justify-content: center; border-style: dashed; border-color: rgba(255,255,255,0.2);" onclick="addQuestionField()">
+                        ➕ Adicionar Nova Pergunta
+                    </button>
                 </div>
 
                 <button class="btn btn-primary btn-large" id="btnRunRAG" onclick="submitRAG()">
@@ -796,6 +799,24 @@
                 </button>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- SIDE TERMINAL (Active Task Monitor) -->
+        <div class="status-container" id="statusContainer" style="display: none; width: 450px; flex-shrink: 0; flex-direction: column; background: rgba(10, 10, 12, 0.5); border-left: 1px solid var(--glass-border); margin: 0; padding: 20px; box-sizing: border-box; height: 100%;">
+            <div class="status-card" style="margin-bottom: 15px; flex-direction: column; align-items: stretch; gap: 15px;">
+                <div class="status-info">
+                    <div class="status-dot active"></div>
+                    <div>
+                        <div style="font-weight: 600;" id="statusTaskText">Executando Tarefa...</div>
+                        <div style="color: var(--text-secondary); margin-top: 4px; font-size: 0.8rem;" id="statusTimerText"></div>
+                    </div>
+                </div>
+                <button class="btn btn-danger" style="width: 100%; justify-content: center;" onclick="killActiveTask()">Parar Processo</button>
+            </div>
+            <div class="console-container" id="consoleLogs" style="flex: 1; margin: 0; height: auto;"></div>
+        </div>
+        
     </div>
 
     <script>
@@ -816,7 +837,7 @@
         // Default template contents
         const DEFAULT_PROMPT = "Você é um classificador especializado em análise de artigos científicos de robótica e inteligência artificial aplicados à agricultura.\n\nUse estritamente as passagens de texto fornecidas abaixo como contexto para responder à pergunta. Não invente nenhuma informação.\n\n[CONTEXTO]\n{context}\n\n[PERGUNTA]\n{question}\n\nResponda estritamente no formato JSON, contendo apenas as chaves 'raciocinio' e a chave correspondente à pergunta.";
         const DEFAULT_QUESTIONS = {
-            "intro": "Responda à seguinte pergunta com base no contexto do artigo científico fornecido:",
+            "intro": "Com base no contexto fornecido, responda estritamente a pergunta abaixo sobre a pesquisa do artigo. Não extraia outras informações extras. Caso a informação não conste no contexto, responda com \"Não informado no contexto\".\n\nIMPORTANTE: Apresente sua resposta unicamente de forma estruturada em um arquivo JSON válido contendo exatamente duas chaves:\n1. \"raciocinio\": Uma string onde você deduz e explica sua lógica.\n2. \"<TITULO_DA_PERGUNTA>\": Substitua por (ex: 'Área Computacional', 'Sensores Utilizados', etc). O valor desta chave deve ser a sua resposta final extraída estritamente das opções listadas.",
             "questions": [
                 {
                     "id": 1,
@@ -827,6 +848,38 @@
                         "(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)",
                         "(RN) Redes Neurais (ex: ELM, RNAs tradicionais)",
                         "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)"
+                    ]
+                },
+                {
+                    "id": 2,
+                    "title": "Sensores Utilizados",
+                    "instruction": "Liste os sensores utilizados mapeando-os estritamente para UM OU MAIS dos valores exatos do seguinte domínio:",
+                    "options": [
+                        "câmera", "imu", "gps", "ccd filtro Bayer GR", "câmera binocular", 
+                        "câmera binocular IR", "LIDAR", "câmera ToF", "câmera estéreo", 
+                        "scanner laser", "câmera multiespectral", "kinect-v2", "câmera RGB-D", 
+                        "ccd", "câm. 3D", "NIR", "térmica"
+                    ]
+                },
+                {
+                    "id": 3,
+                    "title": "Bibliotecas, Frameworks ou Arquiteturas",
+                    "instruction": "Liste as tecnologias computacionais mapeando-as estritamente para UM OU MAIS dos valores exatos do seguinte domínio:",
+                    "options": [
+                        "MATLAB", "transformada Hough", "OpenCV", "NI LabView", "transformada Census", 
+                        "código próprio", "ORB-SLAM2", "filtro Gabor", "K-means", "ROS", "SVM", 
+                        "OpenVSLAM", "algoritmo MEC-ELM", "AlexNet", "TL", "CNN modificada", 
+                        "DaSNet (Deep CNN)", "TensorRT", "SegNet", "mobile-DaSNet", "ResNet101", 
+                        "DeepLabV3+", "CNNs", "ResNet50", "tensorflow MobileNet", "Autoencoders VGG19"
+                    ]
+                },
+                {
+                    "id": 4,
+                    "title": "Solução / Tarefa Principal",
+                    "instruction": "Identifique as aplicações principais do sistema mapeando-as estritamente para UM OU MAIS dos valores do seguinte domínio:",
+                    "options": [
+                        "navegação (trajeto)", "navegação (mapa)", "navegação (obstáculos)", 
+                        "detecção", "segmentação", "classificação", "estimativas de produção"
                     ]
                 }
             ]
@@ -859,7 +912,10 @@
                     
                     // Populate defaults
                     document.getElementById('ragPrompt').value = DEFAULT_PROMPT;
-                    document.getElementById('ragQuestions').value = JSON.stringify(DEFAULT_QUESTIONS, null, 4);
+                    document.getElementById('ragIntro').value = DEFAULT_QUESTIONS.intro;
+                    
+                    // Render UI builder
+                    renderQuestionsBuilder(DEFAULT_QUESTIONS.questions);
 
                     // Load initial configurations from local config if possible
                     await syncPromptsAndQuestions();
@@ -899,8 +955,23 @@
                 data.runs.forEach(run => {
                     runsCache[run.id] = run;
                     
-                    const scoreText = run.overall_score !== null ? ` [Precisão: ${run.overall_score}%]` : ' [Sem validação]';
-                    const optionText = `${run.id}${scoreText}`;
+                    let dateStr = "";
+                    if (run.config && run.config.timestamp) {
+                        const d = new Date(run.config.timestamp);
+                        dateStr = d.toLocaleDateString() + " " + d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                    } else if (run.timestamp) {
+                        dateStr = run.timestamp;
+                    }
+
+                    let configStr = "";
+                    if (run.config) {
+                        const model = run.config.chat_model ? run.config.chat_model.split(':')[0] : "N/A";
+                        const dbs = run.config.databases ? run.config.databases.length + " DBs" : "";
+                        configStr = `(${model}, ${dbs})`;
+                    }
+                    
+                    const scoreText = run.overall_score !== null ? ` - Precisão: ${run.overall_score}%` : ' - Sem validação';
+                    const optionText = `[${dateStr}] ${configStr}${scoreText}`;
                     
                     const opt1 = document.createElement('option');
                     opt1.value = run.id;
@@ -947,6 +1018,56 @@
             }
         }
 
+        async function deleteSelectedRun() {
+            const runId = runSelector.value;
+            if (!runId) return;
+            if (!confirm(`Tem certeza que deseja deletar os logs e a auditoria do Teste: ${runId}? Esta ação é irreversível.`)) return;
+
+            try {
+                const res = await fetch(`/api/runs/${runId}`, { method: 'DELETE' });
+                const data = await res.json();
+                if (res.ok) {
+                    alert("Teste deletado com sucesso.");
+                    loadRunsList();
+                    // Clear UI
+                    runSelector.value = "";
+                    loadSelectedRun();
+                } else {
+                    alert("Erro ao deletar: " + data.detail);
+                }
+            } catch (err) {
+                alert("Erro na requisição.");
+            }
+        }
+
+        // --- INSTANT RUNNING STATE UX ---
+        function showInitialRunningState(taskType) {
+            const monitor = document.getElementById('statusContainer');
+            const statusTaskText = document.getElementById('statusTaskText');
+            const consoleLogs = document.getElementById('consoleLogs');
+            const statusDot = monitor.querySelector('.status-dot');
+            const btnKill = monitor.querySelector('.btn-danger');
+            
+            monitor.style.display = 'flex';
+            if (statusDot) {
+                statusDot.classList.add('active');
+            }
+            statusTaskText.textContent = `Iniciando Tarefa: ${taskType.toUpperCase()}...`;
+            if (btnKill) btnKill.style.display = 'inline-flex';
+            
+            consoleLogs.innerHTML = '';
+            const l = document.createElement('div');
+            l.className = 'console-line';
+            l.textContent = "Conectando ao servidor e iniciando processo em segundo plano...";
+            consoleLogs.appendChild(l);
+            
+            // Disable launch buttons
+            document.getElementById('btnRunIngest').disabled = true;
+            document.getElementById('btnRunRAG').disabled = true;
+            
+            runningTask = true;
+        }
+
         // --- POLLING STATUS ---
         let pollInterval = null;
         function startPollingStatus() {
@@ -958,16 +1079,16 @@
                     
                     const monitor = document.getElementById('statusContainer');
                     const consoleLogs = document.getElementById('consoleLogs');
+                    const statusDot = monitor.querySelector('.status-dot');
+                    const statusTaskText = document.getElementById('statusTaskText');
+                    const btnKill = monitor.querySelector('.btn-danger');
                     
-                    if (status.is_running) {
-                        monitor.style.display = 'block';
-                        document.getElementById('statusTaskText').textContent = `Tarefa em Execução: ${status.task_type.toUpperCase()}`;
+                    const hasLogs = status.logs && status.logs.trim() !== '';
+                    
+                    if (status.is_running || hasLogs) {
+                        monitor.style.display = 'flex';
                         
-                        // Disable launch buttons
-                        document.getElementById('btnRunIngest').disabled = true;
-                        document.getElementById('btnRunRAG').disabled = true;
-                        
-                        // Append console outputs and scroll
+                        // Update logs content
                         const wasAtBottom = consoleLogs.scrollHeight - consoleLogs.clientHeight <= consoleLogs.scrollTop + 50;
                         consoleLogs.innerHTML = '';
                         status.logs.split('\n').forEach(line => {
@@ -979,10 +1100,26 @@
                         if (wasAtBottom) {
                             consoleLogs.scrollTop = consoleLogs.scrollHeight;
                         }
+                    } else {
+                        monitor.style.display = 'none';
+                    }
+                    
+                    if (status.is_running) {
+                        if (statusDot) statusDot.classList.add('active');
+                        statusTaskText.textContent = `Tarefa em Execução: ${status.task_type.toUpperCase()}`;
+                        if (btnKill) btnKill.style.display = 'inline-flex';
+                        
+                        // Disable launch buttons
+                        document.getElementById('btnRunIngest').disabled = true;
+                        document.getElementById('btnRunRAG').disabled = true;
                         
                         runningTask = true;
                     } else {
-                        monitor.style.display = 'none';
+                        if (statusDot) statusDot.classList.remove('active');
+                        statusTaskText.textContent = `Última Operação Concluída / Ocioso`;
+                        if (btnKill) btnKill.style.display = 'none';
+                        
+                        // Enable launch buttons
                         document.getElementById('btnRunIngest').disabled = false;
                         document.getElementById('btnRunRAG').disabled = false;
                         
@@ -1008,6 +1145,22 @@
                 }
             } catch (err) {
                 alert("Erro ao enviar sinal de cancelamento.");
+            }
+        }
+
+        async function deleteDatabase(dbName) {
+            if (!confirm(`Tem certeza que deseja deletar o banco de dados "${dbName}"? Todos os vetores serão perdidos e esta ação é irreversível.`)) return;
+            try {
+                const res = await fetch(`/api/databases/${dbName}`, { method: 'DELETE' });
+                const data = await res.json();
+                if (res.ok) {
+                    alert("Banco de dados deletado com sucesso.");
+                    loadIngestionData(); // Reload DB list
+                } else {
+                    alert("Erro ao deletar: " + data.detail);
+                }
+            } catch (err) {
+                alert("Erro na requisição.");
             }
         }
 
@@ -1054,7 +1207,10 @@
                             <strong style="color: #fff;">${db.name}</strong>
                             <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;">Coleções: ${colls}</div>
                         </div>
-                        <span class="status-badge status-100" style="margin:0;">Ativo</span>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <span class="status-badge status-100" style="margin:0;">Ativo</span>
+                            <button class="btn btn-danger" style="padding: 4px 8px; font-size: 11px;" onclick="deleteDatabase('${db.name}')">Deletar</button>
+                        </div>
                     `;
                     dbList.appendChild(el);
                 });
@@ -1093,8 +1249,7 @@
                 });
                 
                 if (res.ok) {
-                    switchTab('dashboard');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    showInitialRunningState('ingest');
                 } else {
                     const data = await res.json();
                     alert("Erro ao disparar: " + data.detail);
@@ -1104,10 +1259,95 @@
             }
         }
 
-        // --- PIPELINE FORM ACTIONS ---
+        // --- PIPELINE DYNAMIC FORM ACTIONS ---
+        
+        let questionsList = [];
+        
+        function renderQuestionsBuilder(questions) {
+            questionsList = questions || [];
+            const container = document.getElementById('questionsBuilderContainer');
+            container.innerHTML = '';
+            
+            questionsList.forEach((q, index) => {
+                const qBlock = document.createElement('div');
+                qBlock.className = 'question-block';
+                qBlock.style.background = 'rgba(24, 24, 27, 0.4)';
+                qBlock.style.border = '1px solid var(--glass-border)';
+                qBlock.style.borderRadius = '8px';
+                qBlock.style.padding = '15px';
+                qBlock.style.position = 'relative';
+                
+                const optionsText = q.options ? q.options.join('\n') : '';
+                
+                qBlock.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h4 style="color: #fff; font-size: 0.9rem;">Pergunta ${index + 1}</h4>
+                        <button class="btn btn-danger" style="padding: 4px 8px; font-size: 11px;" onclick="removeQuestionField(${index})" title="Remover Pergunta">🗑️</button>
+                    </div>
+                    <div class="grid-2" style="margin-bottom: 12px; gap: 12px;">
+                        <div class="form-group">
+                            <label style="font-size: 0.7rem;">Título da Pergunta / Chave</label>
+                            <input type="text" class="form-control q-title" value="${q.title || ''}" placeholder="Ex: Área Computacional" style="font-size: 0.85rem;">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: 0.7rem;">Instrução para a IA</label>
+                            <input type="text" class="form-control q-inst" value="${q.instruction || ''}" placeholder="Ex: Classifique o método..." style="font-size: 0.85rem;">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label style="font-size: 0.7rem;">Opções (Uma por linha)</label>
+                        <textarea class="form-control q-opts" rows="3" style="font-size: 0.8rem; white-space: pre;" placeholder="Opção A\nOpção B\nOpção C">${optionsText}</textarea>
+                    </div>
+                `;
+                container.appendChild(qBlock);
+            });
+        }
+        
+        function addQuestionField() {
+            questionsList.push({
+                id: questionsList.length + 1,
+                title: "",
+                instruction: "",
+                options: []
+            });
+            renderQuestionsBuilder(questionsList);
+        }
+        
+        function removeQuestionField(index) {
+            questionsList.splice(index, 1);
+            renderQuestionsBuilder(questionsList);
+        }
+        
+        // Sync DOM fields back into the JSON structure before submitting
+        function buildQuestionsJSON() {
+            const intro = document.getElementById('ragIntro').value;
+            const qBlocks = document.querySelectorAll('.question-block');
+            const finalQuestions = [];
+            
+            qBlocks.forEach((block, idx) => {
+                const title = block.querySelector('.q-title').value;
+                const inst = block.querySelector('.q-inst').value;
+                const optsRaw = block.querySelector('.q-opts').value;
+                const opts = optsRaw.split('\n').map(o => o.trim()).filter(o => o !== '');
+                
+                finalQuestions.push({
+                    id: idx + 1,
+                    title: title,
+                    instruction: inst,
+                    options: opts
+                });
+            });
+            
+            return {
+                intro: intro,
+                questions: finalQuestions
+            };
+        }
+
         async function loadPipelineData() {
             if (!isServerMode) return;
             try {
+                // Fetch databases
                 const res = await fetch('/api/databases');
                 const dbData = await res.json();
                 const dbList = document.getElementById('dbCheckboxList');
@@ -1115,44 +1355,66 @@
 
                 if (dbData.databases.length === 0) {
                     dbList.innerHTML = '<div style="color: var(--text-secondary); font-style: italic;">Nenhum banco disponível. Crie um banco na aba anterior primeiro.</div>';
-                    return;
+                } else {
+                    dbData.databases.forEach(db => {
+                        const item = document.createElement('label');
+                        item.className = 'checkbox-item';
+                        item.innerHTML = `<input type="checkbox" name="pipelineDb" value="${db.name}"> ${db.name} (${db.collections.length} coleções)`;
+                        dbList.appendChild(item);
+                    });
                 }
 
-                dbData.databases.forEach(db => {
-                    const item = document.createElement('label');
-                    item.className = 'checkbox-item';
-                    item.innerHTML = `<input type="checkbox" name="pipelineDb" value="${db.name}"> ${db.name} (${db.collections.length} coleções)`;
-                    dbList.appendChild(item);
-                });
+                // Fetch Ollama models dynamically
+                const modelSelect = document.getElementById('ragModel');
+                const currentVal = modelSelect.value;
+                try {
+                    const modelRes = await fetch('/api/models');
+                    const modelData = await modelRes.json();
+                    if (modelData.models && modelData.models.length > 0) {
+                        modelSelect.innerHTML = '';
+                        
+                        // FILTER: ONLY CLOUD MODELS
+                        const cloudModels = modelData.models.filter(m => m.toLowerCase().includes('cloud'));
+                        
+                        // Fallback se o currentVal possuir cloud mas a api não retornou, mantém ele
+                        if (cloudModels.length === 0 && currentVal.toLowerCase().includes('cloud')) {
+                            cloudModels.push(currentVal);
+                        }
+                        
+                        if (cloudModels.length === 0) {
+                            const opt = document.createElement('option');
+                            opt.value = "";
+                            opt.textContent = "Nenhum modelo Cloud encontrado";
+                            modelSelect.appendChild(opt);
+                        } else {
+                            cloudModels.forEach(modelName => {
+                                const opt = document.createElement('option');
+                                opt.value = modelName;
+                                opt.textContent = modelName;
+                                if (modelName === currentVal) {
+                                    opt.selected = true;
+                                }
+                                modelSelect.appendChild(opt);
+                            });
+                        }
+                        
+                        // If currentVal was empty/not found, make sure a default is selected
+                        if (!currentVal && modelSelect.options.length > 0) {
+                            modelSelect.selectedIndex = 0;
+                        }
+                    }
+                } catch (modelErr) {
+                    console.error("Erro ao buscar modelos do Ollama:", modelErr);
+                }
             } catch (e) {
                 console.error("Erro ao carregar dados do pipeline:", e);
             }
         }
 
-        // Validate JSON questions textarea
-        document.getElementById('ragQuestions').addEventListener('input', (e) => {
-            const feedback = document.getElementById('jsonFeedback');
-            try {
-                if (e.target.value.trim() === '') {
-                    feedback.style.display = 'none';
-                    return;
-                }
-                JSON.parse(e.target.value);
-                feedback.style.display = 'block';
-                feedback.style.color = 'var(--success)';
-                feedback.textContent = 'JSON Válido ✔';
-            } catch (err) {
-                feedback.style.display = 'block';
-                feedback.style.color = 'var(--danger)';
-                feedback.textContent = 'JSON Inválido: ' + err.message;
-            }
-        });
-
         async function submitRAG() {
             const model = document.getElementById('ragModel').value;
             const nResults = parseInt(document.getElementById('ragNResults').value);
             const prompt = document.getElementById('ragPrompt').value;
-            const questionsRaw = document.getElementById('ragQuestions').value;
 
             const selectedDbs = [];
             document.querySelectorAll('input[name="pipelineDb"]:checked').forEach(cb => {
@@ -1163,12 +1425,15 @@
                 alert("Por favor, selecione pelo menos um banco de dados para rodar.");
                 return;
             }
+            
+            if (!model) {
+                alert("Nenhum modelo Cloud selecionado.");
+                return;
+            }
 
-            let questionsObj = null;
-            try {
-                questionsObj = JSON.parse(questionsRaw);
-            } catch (e) {
-                alert("O arquivo de perguntas contém um JSON inválido. Corrija-o antes de executar.");
+            const questionsObj = buildQuestionsJSON();
+            if (questionsObj.questions.length === 0) {
+                alert("Por favor, adicione pelo menos uma pergunta para o pipeline.");
                 return;
             }
 
@@ -1186,8 +1451,7 @@
                 });
 
                 if (res.ok) {
-                    switchTab('dashboard');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    showInitialRunningState('chat');
                 } else {
                     const data = await res.json();
                     alert("Erro ao iniciar pipeline: " + data.detail);
@@ -1495,6 +1759,15 @@
                             <div class="comp-box comp-actual">
                                 <h4>Extraído pela IA</h4>
                                 <div>${formatValue(data.actual)}</div>
+                                ${data.reasoning ? `
+                                <div style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,0.1); font-size: 0.85rem; color: var(--text-secondary); font-style: italic; line-height: 1.5;">
+                                    <strong>Raciocínio:</strong><br>
+                                    ${String(data.reasoning).replace(/</g, '&lt;').replace(/>/g, '&gt;')}
+                                </div>` : (data.raw_response ? `
+                                <div style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,0.1); font-size: 0.75rem; color: var(--text-secondary);">
+                                    <strong>Resposta Bruta:</strong><br>
+                                    <pre style="white-space: pre-wrap; font-family: 'Courier New', Courier, monospace; margin-top: 4px; max-height: 150px; overflow-y: auto;">${String(data.raw_response).replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>
+                                </div>` : '')}
                             </div>
                         </div>
                     </div>

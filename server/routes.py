@@ -63,13 +63,21 @@ async def list_databases():
         # Find all folders starting with db_
         for folder in sorted(DATABASE_DIR.iterdir()):
             if folder.is_dir() and folder.name.startswith("db_"):
-                # Load chroma client to list collections in this database
+                # Load collections directly from sqlite to avoid locking the database file
                 collections = []
                 try:
-                    client = chromadb.PersistentClient(path=str(folder))
-                    collections = [c.name for c in client.list_collections()]
+                    db_file = folder / "chroma.sqlite3"
+                    if db_file.exists():
+                        import sqlite3
+                        # Open in read-only mode to prevent write-locks
+                        conn = sqlite3.connect(f"file:{db_file}?mode=ro", uri=True)
+                        cursor = conn.cursor()
+                        cursor.execute("SELECT name FROM collections;")
+                        rows = cursor.fetchall()
+                        collections = [r[0] for r in rows]
+                        conn.close()
                 except Exception:
-                    pass  # if folder is empty/invalid
+                    pass  # if folder is empty/invalid/locked
                 
                 databases.append({
                     "name": folder.name,
@@ -79,6 +87,40 @@ async def list_databases():
         return {"databases": databases}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+# API: List Ollama models
+@router.get("/api/models")
+async def list_models():
+    try:
+        config_path = BASE_DIR / "config.json"
+        ollama_host = "http://localhost:11434"
+        ollama_key = ""
+        if config_path.exists():
+            with open(config_path, "r", encoding="utf-8") as f:
+                config_data = json.load(f)
+                ollama_cfg = config_data.get("ollama", {})
+                ollama_host = ollama_cfg.get("host", "http://localhost:11434")
+                ollama_key = ollama_cfg.get("api_key", "")
+
+        from ollama import Client
+        headers = {"Authorization": f"Bearer {ollama_key}"} if ollama_key else None
+        client = Client(host=ollama_host, headers=headers)
+        res = client.list()
+        
+        models = []
+        for m in res.get("models", []):
+            name = m.get("model", m.get("name"))
+            # Append -cloud suffix if fetched from the custom cloud endpoint
+            if "ollama.com" in ollama_host and not name.endswith("-cloud"):
+                name += "-cloud"
+            models.append(name)
+            
+        return {"models": models}
+    except Exception as e:
+        return {
+            "models": ["gemma3:4b", "gemma3:8b", "gemma3:27b", "llama3:8b", "llama3:70b", "phi4"],
+            "error": str(e)
+        }
 
 # API: List historical runs
 @router.get("/api/runs")
@@ -146,6 +188,30 @@ async def get_run(run_id: str):
         "config": cfg_data,
         "validation_results": val_data
     }
+
+# API: Delete a run
+@router.delete("/api/runs/{run_id}")
+async def delete_run(run_id: str):
+    run_path = RUNS_DIR / run_id
+    if not run_path.exists() or not run_path.is_dir():
+        raise HTTPException(status_code=404, detail="Run não encontrado")
+    try:
+        shutil.rmtree(run_path)
+        return {"success": True, "message": "Run deletado com sucesso."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# API: Delete a database
+@router.delete("/api/databases/{db_name}")
+async def delete_database(db_name: str):
+    db_path = DATABASE_DIR / db_name
+    if not db_path.exists() or not db_path.is_dir():
+        raise HTTPException(status_code=404, detail="Banco de dados não encontrado")
+    try:
+        shutil.rmtree(db_path)
+        return {"success": True, "message": "Banco de dados deletado com sucesso."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 # API: Get runner status and logs
 @router.get("/api/status")

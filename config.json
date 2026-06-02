@@ -16,7 +16,7 @@
   },
   "models": {
     "embedding": "embeddinggemma",
-    "chat": "gemma3:27b"
+    "chat": "gemma4:31b-cloud"
   },
   "ollama": {
     "host": "https://ollama.com",

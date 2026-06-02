@@ -1,0 +1,385 @@
+[
+    {
+        "article_id": "17",
+        "original_filename": "(17) Variable field-of-view machine vision based row guidance of an agricultural robot.pdf",
+        "log_file": "17_variable_fieldofview_machine_vision_b_100c_50o_20260602_170609.json",
+        "timestamp": "20260602_170609",
+        "overall_score": 75,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O texto descreve o processo de determinação da linha de guia utilizando a segmentação de cores para distinguir plantas de milho verdes do fundo do solo, resultando em uma imagem binária, seguida por processamento morfológico. Essas técnicas (segmentação por cor e morfologia) são características da Visão Computacional Clássica.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O texto descreve o processo de determinação da linha de guia utilizando a segmentação de cores para distinguir plantas de milho verdes do fundo do solo, resultando em uma imagem binária, seguida por processamento morfológico. Essas técnicas (segmentação por cor e morfologia) são características da Visão Computacional Clássica.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}\n```",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera"
+                ],
+                "reasoning": "O texto menciona explicitamente o uso de uma 'low cost digital camera (Logitech /C210QuickCam)' para a aquisição de imagens, o que corresponde ao valor 'câmera' dentro do domínio fornecido.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O texto menciona explicitamente o uso de uma 'low cost digital camera (Logitech /C210QuickCam)' para a aquisição de imagens, o que corresponde ao valor 'câmera' dentro do domínio fornecido.\",\n  \"Sensores Utilizados\": [\n    \"câmera\"\n  ]\n}\n```",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "MATLAB"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "Analisei os chunks de texto fornecidos (67, 68 e 74) do documento '(17) Variable field-of-view machine vision based row guidance of an agricultural robot.pdf'. O conteúdo desses trechos consiste predominantemente em referências bibliográficas e uma tabela com dados de erro (FOV arrangement), não mencionando nenhuma das bibliotecas, frameworks ou arquiteturas listadas no domínio especificado.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"Analisei os chunks de texto fornecidos (67, 68 e 74) do documento '(17) Variable field-of-view machine vision based row guidance of an agricultural robot.pdf'. O conteúdo desses trechos consiste predominantemente em referências bibliográficas e uma tabela com dados de erro (FOV arrangement), não mencionando nenhuma das bibliotecas, frameworks ou arquiteturas listadas no domínio especificado.\",\n  \"Bibliotecas, Frameworks ou Arquiteturas\": \"Não informado no contexto\"\n}\n```",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)"
+                ],
+                "reasoning": "O texto menciona explicitamente que as aplicações de visão computacional na agricultura podem ser categorizadas em três áreas, sendo uma delas a 'visual navigation' (Chunk 7 e 8). Além disso, o Chunk 8 afirma que a 'Machine vision based navigation of agricultural vehicles' possui ampla cobertura na literatura. O Chunk 44 descreve a utilização de simulação indoor para estabelecer a relação entre a posição do robô e informações de orientação (guidance) baseadas em imagens para navegação entre fileiras de milho (cornrows). Portanto, a tarefa principal mapeia-se para 'navegação (trajeto)'.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O texto menciona explicitamente que as aplicações de visão computacional na agricultura podem ser categorizadas em três áreas, sendo uma delas a 'visual navigation' (Chunk 7 e 8). Além disso, o Chunk 8 afirma que a 'Machine vision based navigation of agricultural vehicles' possui ampla cobertura na literatura. O Chunk 44 descreve a utilização de simulação indoor para estabelecer a relação entre a posição do robô e informações de orientação (guidance) baseadas em imagens para navegação entre fileiras de milho (cornrows). Portanto, a tarefa principal mapeia-se para 'navegação (trajeto)'.\",\n  \"Solução / Tarefa Principal\": [\n    \"navegação (trajeto)\"\n  ]\n}\n```",
+                "score": 100,
+                "status": "Correto"
+            }
+        }
+    },
+    {
+        "article_id": "18",
+        "original_filename": "(18) Path Recognition for Agricultural Robot Vision Navigation under Weed Enviromenment.pdf",
+        "log_file": "18_path_recognition_for_agricultural_rob_100c_50o_20260602_170543.json",
+        "timestamp": "20260602_170543",
+        "overall_score": 37,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O texto no Chunk 11 descreve explicitamente a utilização de um 'Image Segmentation Based on Color Feature Model', mencionando a necessidade de selecionar uma característica de cor apropriada para aumentar o peso do canal verde da imagem a fim de extrair informações da cultura e eliminar o fundo. Esse método de segmentação baseado em cor é uma técnica característica da Visão Computacional Clássica.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O texto no Chunk 11 descreve explicitamente a utilização de um 'Image Segmentation Based on Color Feature Model', mencionando a necessidade de selecionar uma característica de cor apropriada para aumentar o peso do canal verde da imagem a fim de extrair informações da cultura e eliminar o fundo. Esse método de segmentação baseado em cor é uma técnica característica da Visão Computacional Clássica.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}\n```",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "Analisei os chunks 35, 36 e 37 do documento fornecido. O texto consiste em uma lista de referências bibliográficas. Embora mencione termos como 'machine vision', 'vision-based perception', 'image processing' e 'crop row images', não há a especificação técnica do modelo ou tipo de sensor utilizado no experimento principal do artigo, apenas referências a trabalhos de terceiros que utilizam visão computacional. Portanto, nenhum sensor do domínio listado foi explicitamente identificado no contexto fornecido.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"Analisei os chunks 35, 36 e 37 do documento fornecido. O texto consiste em uma lista de referências bibliográficas. Embora mencione termos como 'machine vision', 'vision-based perception', 'image processing' e 'crop row images', não há a especificação técnica do modelo ou tipo de sensor utilizado no experimento principal do artigo, apenas referências a trabalhos de terceiros que utilizam visão computacional. Portanto, nenhum sensor do domínio listado foi explicitamente identificado no contexto fornecido.\",\n  \"Sensores Utilizados\": \"Não informado no contexto\"\n}\n```",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "transformada Hough"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "Analisei os chunks 35, 36 e 37 do documento fornecido. O texto contém apenas referências bibliográficas de outros autores (como Torii, Burgos-Artizzu, Astrand, Zhao, Xue, Dong e Pinto). Não há menção a bibliotecas, frameworks, arquiteturas ou tecnologias computacionais específicas utilizadas no desenvolvimento do artigo em questão, nem qualquer termo que coincida com a lista de domínios fornecida.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"Analisei os chunks 35, 36 e 37 do documento fornecido. O texto contém apenas referências bibliográficas de outros autores (como Torii, Burgos-Artizzu, Astrand, Zhao, Xue, Dong e Pinto). Não há menção a bibliotecas, frameworks, arquiteturas ou tecnologias computacionais específicas utilizadas no desenvolvimento do artigo em questão, nem qualquer termo que coincida com a lista de domínios fornecida.\",\n  \"Bibliotecas, Frameworks ou Arquiteturas\": \"Não informado no contexto\"\n}\n```",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "detecção"
+                ],
+                "reasoning": "O texto menciona explicitamente a extração da 'navigation path' (linha central da cultura) através da Transformada de Hough (Chunk 18), o plotagem de tal caminho (Chunk 22) e a eliminação de interferências de ervas daninhas para a navegação, o que caracteriza a aplicação de navegação por trajeto. Além disso, o texto cita a eliminação de objetos de pequena área para remover interferências (Chunk 18) e a detecção de valores de pico (Chunk 22), o que envolve processos de detecção.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O texto menciona explicitamente a extração da 'navigation path' (linha central da cultura) através da Transformada de Hough (Chunk 18), o plotagem de tal caminho (Chunk 22) e a eliminação de interferências de ervas daninhas para a navegação, o que caracteriza a aplicação de navegação por trajeto. Além disso, o texto cita a eliminação de objetos de pequena área para remover interferências (Chunk 18) e a detecção de valores de pico (Chunk 22), o que envolve processos de detecção.\",\n  \"Solução / Tarefa Principal\": [\n    \"navegação (trajeto)\",\n    \"detecção\"\n  ]\n}\n```",
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "20",
+        "original_filename": "(20) Vision Based Guidance for Robot Navigation in Agriculture.pdf",
+        "log_file": "20_vision_based_guidance_for_robot_navig_100c_50o_20260602_170648.json",
+        "timestamp": "20260602_170648",
+        "overall_score": 66,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O texto descreve um 'novel vision based texture tracking method' e menciona que métodos existentes utilizam 'segmentation' baseada em 'colour' e 'visual difference between the crop and soil'. O Chunk 32 detalha a manipulação de 'RGB value' e o cálculo de um plano no 'RGB space' por imagem, características típicas de processamento de imagem e visão computacional clássica, sem qualquer menção a treinamento de modelos de machine learning, redes neurais ou arquiteturas convolucionais.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O texto descreve um 'novel vision based texture tracking method' e menciona que métodos existentes utilizam 'segmentation' baseada em 'colour' e 'visual difference between the crop and soil'. O Chunk 32 detalha a manipulação de 'RGB value' e o cálculo de um plano no 'RGB space' por imagem, características típicas de processamento de imagem e visão computacional clássica, sem qualquer menção a treinamento de modelos de machine learning, redes neurais ou arquiteturas convolucionais.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}\n```",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera",
+                    "imu"
+                ],
+                "actual": [
+                    "câmera",
+                    "imu",
+                    "gps"
+                ],
+                "reasoning": "O texto menciona explicitamente o uso de 'IDS camera' e 'webcam' (Chunk 72 e 73), que se classificam como 'câmera'. Também menciona que um 'IMU' pode ser usado para aumentar ou substituir estados (Chunk 26) e cita a medição de offset via 'GPS system' (Chunk 72).",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O texto menciona explicitamente o uso de 'IDS camera' e 'webcam' (Chunk 72 e 73), que se classificam como 'câmera'. Também menciona que um 'IMU' pode ser usado para aumentar ou substituir estados (Chunk 26) e cita a medição de offset via 'GPS system' (Chunk 72).\",\n  \"Sensores Utilizados\": [\n    \"câmera\",\n    \"imu\",\n    \"gps\"\n  ]\n}\n```",
+                "score": 66,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "OpenCV"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "Analisei os chunks de texto fornecidos (18, 73 e 105) em busca de menções a bibliotecas, frameworks ou arquiteturas computacionais listadas no domínio solicitado. O texto menciona sensores (IDS camera, webcam), culturas agrícolas (wheat, sorghum, chickpeas) e contextos de experimentos (open loop, closed loop), porém não cita nenhuma das tecnologias específicas como MATLAB, OpenCV, ROS, CNNs, entre outras listadas no domínio.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"Analisei os chunks de texto fornecidos (18, 73 e 105) em busca de menções a bibliotecas, frameworks ou arquiteturas computacionais listadas no domínio solicitado. O texto menciona sensores (IDS camera, webcam), culturas agrícolas (wheat, sorghum, chickpeas) e contextos de experimentos (open loop, closed loop), porém não cita nenhuma das tecnologias específicas como MATLAB, OpenCV, ROS, CNNs, entre outras listadas no domínio.\",\n  \"Bibliotecas, Frameworks ou Arquiteturas\": \"Não informado no contexto\"\n}\n```",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)"
+                ],
+                "reasoning": "O texto menciona que o artigo apresenta um método baseado em visão monocular para rastrear a direção e o deslocamento lateral das fileiras de culturas ('track the direction and lateral offset of the crop rows') e discute a guia de robôs ('guidance' e 'guiding the robot') ao longo de fileiras de trigo e sorgo. Isso caracteriza a tarefa de navegação em termos de trajeto/direcionamento.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O texto menciona que o artigo apresenta um método baseado em visão monocular para rastrear a direção e o deslocamento lateral das fileiras de culturas ('track the direction and lateral offset of the crop rows') e discute a guia de robôs ('guidance' e 'guiding the robot') ao longo de fileiras de trigo e sorgo. Isso caracteriza a tarefa de navegação em termos de trajeto/direcionamento.\",\n  \"Solução / Tarefa Principal\": [\n    \"navegação (trajeto)\"\n  ]\n}\n```",
+                "score": 100,
+                "status": "Correto"
+            }
+        }
+    },
+    {
+        "article_id": "22",
+        "original_filename": "(22) Integration sensory_actuation systems in agricultural vehicles.pdf",
+        "log_file": "22_integration_sensoryactuation_systems__100c_50o_20260602_170638.json",
+        "timestamp": "20260602_170638",
+        "overall_score": 56,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O texto menciona no Chunk 39 que o sistema de percepção baseia-se em 'machine vision' (visão computacional) para as tarefas de identificação de linhas e detecção de ervas daninhas. Não há menção a algoritmos específicos de Aprendizado de Máquina (ML), Redes Neurais (RN) ou Redes Neurais Convolucionais (CNN) no contexto fornecido, caracterizando a abordagem como visão computacional.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O texto menciona no Chunk 39 que o sistema de percepção baseia-se em 'machine vision' (visão computacional) para as tarefas de identificação de linhas e detecção de ervas daninhas. Não há menção a algoritmos específicos de Aprendizado de Máquina (ML), Redes Neurais (RN) ou Redes Neurais Convolucionais (CNN) no contexto fornecido, caracterizando a abordagem como visão computacional.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}\n```",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera",
+                    "gps",
+                    "imu"
+                ],
+                "actual": [
+                    "câmera",
+                    "imu",
+                    "gps",
+                    "ccd filtro Bayer GR",
+                    "ccd"
+                ],
+                "reasoning": "O Chunk 46 menciona explicitamente o uso de um sensor baseado em câmera (modelo SVS4050CFLGEA) construído com o sensor CCD Kodak KAI 04050M/C com um filtro de cor Bayer GR. Também menciona o uso de um IMU (modelo 3DM-GX3-35), que é descrito como um Attitude Heading Reference System (AHRS) com GPS.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O Chunk 46 menciona explicitamente o uso de um sensor baseado em câmera (modelo SVS4050CFLGEA) construído com o sensor CCD Kodak KAI 04050M/C com um filtro de cor Bayer GR. Também menciona o uso de um IMU (modelo 3DM-GX3-35), que é descrito como um Attitude Heading Reference System (AHRS) com GPS.\",\n  \"Sensores Utilizados\": [\n    \"câmera\",\n    \"imu\",\n    \"gps\",\n    \"ccd filtro Bayer GR\",\n    \"ccd\"\n  ]\n}\n```",
+                "score": 60,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "NI LabView"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "Analisei os chunks fornecidos do documento '(22) Integration sensory_actuation systems in agricultural vehicles.pdf'. Os trechos consistem em listas de referências bibliográficas (citações de outros autores). Não há menção a bibliotecas, frameworks, algoritmos específicos ou arquiteturas computacionais como as listadas no domínio (ex: MATLAB, OpenCV, ROS, CNNs, etc) dentro do texto disponível.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"Analisei os chunks fornecidos do documento '(22) Integration sensory_actuation systems in agricultural vehicles.pdf'. Os trechos consistem em listas de referências bibliográficas (citações de outros autores). Não há menção a bibliotecas, frameworks, algoritmos específicos ou arquiteturas computacionais como as listadas no domínio (ex: MATLAB, OpenCV, ROS, CNNs, etc) dentro do texto disponível.\",\n  \"Bibliotecas, Frameworks ou Arquiteturas\": \"Não informado no contexto\"\n}\n```",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)",
+                    "detecção"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "navegação (mapa)",
+                    "detecção"
+                ],
+                "reasoning": "O texto menciona a integração de subsistemas de 'guidance' (orientação/navegação), 'weed detection and identification' (detecção e identificação de ervas daninhas) e 'mapping' (mapeamento), além de detalhar no sistema de tomada de decisão a 'trajectory planning' (planejamento de trajetória) e a 'weed coverage map interpretation' (interpretação do mapa de cobertura de ervas daninhas). Portanto, as aplicações mapeiam-se para navegação (trajeto), navegação (mapa) e detecção.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O texto menciona a integração de subsistemas de 'guidance' (orientação/navegação), 'weed detection and identification' (detecção e identificação de ervas daninhas) e 'mapping' (mapeamento), além de detalhar no sistema de tomada de decisão a 'trajectory planning' (planejamento de trajetória) e a 'weed coverage map interpretation' (interpretação do mapa de cobertura de ervas daninhas). Portanto, as aplicações mapeiam-se para navegação (trajeto), navegação (mapa) e detecção.\",\n  \"Solução / Tarefa Principal\": [\n    \"navegação (trajeto)\",\n    \"navegação (mapa)\",\n    \"detecção\"\n  ]\n}\n```",
+                "score": 66,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "23",
+        "original_filename": "(23) Automatic detection of crop rows based on multi-rois.pdf",
+        "log_file": "23_automatic_detection_of_crop_rows_base_100c_50o_20260602_170701.json",
+        "timestamp": "20260602_170701",
+        "overall_score": 45,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O contexto fornecido consiste em referências bibliográficas. Nele, são citados diversos trabalhos focados em detecção de linhas e linhas de cultura utilizando a 'Transformada de Hough' (Hough transformation / improved Hough transform voting scheme) e 'visão de máquina' (machine vision), que são técnicas características de Visão Computacional Clássica.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O contexto fornecido consiste em referências bibliográficas. Nele, são citados diversos trabalhos focados em detecção de linhas e linhas de cultura utilizando a 'Transformada de Hough' (Hough transformation / improved Hough transform voting scheme) e 'visão de máquina' (machine vision), que são técnicas características de Visão Computacional Clássica.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}\n```",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera",
+                    "gps",
+                    "imu"
+                ],
+                "reasoning": "O texto no Chunk 152 menciona a necessidade de fusão do 'vision sensor' (sensor de visão, que mapeia para 'câmera') com outros sensores de navegação, especificamente citando 'Global Positioning System (GPS)' e 'inertial sensor' (sensor inercial, que mapeia para 'imu').",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O texto no Chunk 152 menciona a necessidade de fusão do 'vision sensor' (sensor de visão, que mapeia para 'câmera') com outros sensores de navegação, especificamente citando 'Global Positioning System (GPS)' e 'inertial sensor' (sensor inercial, que mapeia para 'imu').\",\n  \"Sensores Utilizados\": [\n    \"câmera\",\n    \"gps\",\n    \"imu\"\n  ]\n}\n```",
+                "score": 33,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "MATLAB"
+                ],
+                "actual": [
+                    "transformada Hough"
+                ],
+                "reasoning": "Analisei os chunks de texto fornecidos, que consistem em listas de referências bibliográficas. Identifiquei a menção a 'improved Hough transform voting scheme' no Chunk 157 e 'Hough space' também no Chunk 157, além de 'transform (RHT)' no Chunk 177. Entre as opções do domínio fornecido, a única correspondente a essas menções é 'transformada Hough'.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"Analisei os chunks de texto fornecidos, que consistem em listas de referências bibliográficas. Identifiquei a menção a 'improved Hough transform voting scheme' no Chunk 157 e 'Hough space' também no Chunk 157, além de 'transform (RHT)' no Chunk 177. Entre as opções do domínio fornecido, a única correspondente a essas menções é 'transformada Hough'.\",\n  \"Bibliotecas, Frameworks ou Arquiteturas\": [\n    \"transformada Hough\"\n  ]\n}\n```",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "detecção"
+                ],
+                "reasoning": "O texto afirma explicitamente no Chunk 1 que o artigo apresenta um 'automatic and robust crop rows detection algorithm' (algoritmo de detecção de linhas de cultura) para um 'vision-based agricultural machinery guidance system' (sistema de guia de máquinas agrícolas baseado em visão). Além disso, o Chunk 5 menciona a 'autonomous navigation of agricultural machinery' (navegação autônoma de máquinas agrícolas) e cita aplicações como pulverização automática, capina, colheita e preparo do solo. Portanto, as tarefas principais são a detecção (de linhas de cultura) e a navegação (do trajeto da máquina).",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O texto afirma explicitamente no Chunk 1 que o artigo apresenta um 'automatic and robust crop rows detection algorithm' (algoritmo de detecção de linhas de cultura) para um 'vision-based agricultural machinery guidance system' (sistema de guia de máquinas agrícolas baseado em visão). Além disso, o Chunk 5 menciona a 'autonomous navigation of agricultural machinery' (navegação autônoma de máquinas agrícolas) e cita aplicações como pulverização automática, capina, colheita e preparo do solo. Portanto, as tarefas principais são a detecção (de linhas de cultura) e a navegação (do trajeto da máquina).\",\n  \"Solução / Tarefa Principal\": [\n    \"navegação (trajeto)\",\n    \"detecção\"\n  ]\n}\n```",
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "24",
+        "original_filename": "(24) A new dswts algorithm for real-time pedestrian detection in autonomous agricultural tractors as a computer vision system.pdf",
+        "log_file": "24_a_new_dswts_algorithm_for_realtime_pe_100c_50o_20260602_170555.json",
+        "timestamp": "20260602_170555",
+        "overall_score": 42,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)",
+                "reasoning": "O texto menciona a extração de 'Haar-like features' (características Haar), o uso do algoritmo de detecção 'adaboost' e 'cascade classification' para segmentação, além de citar a 'SVM classification' para a avaliação e confirmação da detecção de pedestres. Esses métodos (Haar-like features, Adaboost e SVM) são característicos de técnicas de Aprendizado de Máquina.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O texto menciona a extração de 'Haar-like features' (características Haar), o uso do algoritmo de detecção 'adaboost' e 'cascade classification' para segmentação, além de citar a 'SVM classification' para a avaliação e confirmação da detecção de pedestres. Esses métodos (Haar-like features, Adaboost e SVM) são característicos de técnicas de Aprendizado de Máquina.\",\n  \"Área Computacional\": \"(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)\"\n}\n```",
+                "score": 37,
+                "status": "Parcial"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera"
+                ],
+                "reasoning": "O texto menciona no Chunk 84 um 'monocular vision-based specific person detection system' e no Chunk 13 refere-se ao sistema como um 'computer vision system'. A visão monocular e a visão computacional são implementadas através do uso de câmeras. Não há menção a nenhum outro sensor da lista de domínios fornecida.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O texto menciona no Chunk 84 um 'monocular vision-based specific person detection system' e no Chunk 13 refere-se ao sistema como um 'computer vision system'. A visão monocular e a visão computacional são implementadas através do uso de câmeras. Não há menção a nenhum outro sensor da lista de domínios fornecida.\",\n  \"Sensores Utilizados\": [\n    \"câmera\"\n  ]\n}\n```",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "MATLAB"
+                ],
+                "actual": [
+                    "SVM"
+                ],
+                "reasoning": "Analisei os chunks de texto fornecidos, que consistem em referências bibliográficas. No Chunk 86 e 87, é mencionada a combinação do 'AdaBoost algorithm and support vector machine'. No Chunk 87, é mencionado 'SVM pedestrian detection'. O termo 'SVM' (Support Vector Machine) consta na lista de domínios fornecida.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"Analisei os chunks de texto fornecidos, que consistem em referências bibliográficas. No Chunk 86 e 87, é mencionada a combinação do 'AdaBoost algorithm and support vector machine'. No Chunk 87, é mencionado 'SVM pedestrian detection'. O termo 'SVM' (Support Vector Machine) consta na lista de domínios fornecida.\",\n  \"Bibliotecas, Frameworks ou Arquiteturas\": [\n    \"SVM\"\n  ]\n}\n```",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "segmentação",
+                    "detecção"
+                ],
+                "actual": [
+                    "detecção",
+                    "classificação"
+                ],
+                "reasoning": "O documento descreve a implementação de um sistema de 'pedestrian detection' (detecção de pedestres) em tratores agrícolas autônomos. O texto menciona explicitamente a avaliação de funções de classificação para identificar membros do corpo humano e categorizar o objeto alvo, o que caracteriza as tarefas de detecção e classificação.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O documento descreve a implementação de um sistema de 'pedestrian detection' (detecção de pedestres) em tratores agrícolas autônomos. O texto menciona explicitamente a avaliação de funções de classificação para identificar membros do corpo humano e categorizar o objeto alvo, o que caracteriza as tarefas de detecção e classificação.\",\n  \"Solução / Tarefa Principal\": [\n    \"detecção\",\n    \"classificação\"\n  ]\n}\n```",
+                "score": 33,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "25",
+        "original_filename": "(25) Spatio- temporal analysis for obstacle detection in agricultural videos.pdf",
+        "log_file": "25_spatio_temporal_analysis_for_obstacle_100c_50o_20260602_170620.json",
+        "timestamp": "20260602_170620",
+        "overall_score": 33,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O Algoritmo 1 descrito no Chunk 74 detalha o processo de segmentação de imagem para extração de foreground, utilizando o canal b* do espaço de cores L*a*b*, computando histograma de frequência, assimetria (skewness), valores de limiar (threshold) e pontos críticos através do método de diferenças finitas. Essas técnicas de processamento de imagem baseadas em cor, histogramas e limiarização caracterizam-se como Visão Computacional Clássica.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O Algoritmo 1 descrito no Chunk 74 detalha o processo de segmentação de imagem para extração de foreground, utilizando o canal b* do espaço de cores L*a*b*, computando histograma de frequência, assimetria (skewness), valores de limiar (threshold) e pontos críticos através do método de diferenças finitas. Essas técnicas de processamento de imagem baseadas em cor, histogramas e limiarização caracterizam-se como Visão Computacional Clássica.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}\n```",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "ccd filtro Bayer GR"
+                ],
+                "actual": [
+                    "câmera"
+                ],
+                "reasoning": "O texto no Chunk 14 menciona explicitamente o uso de uma 'high-resolution camera operating in the visible RGB spectral range', o que corresponde ao domínio 'câmera'. O Chunk 36 menciona que 'Biber et al. [30] incorporated a LIDAR', porém, isso se refere ao trabalho de outros autores em comparação à metodologia do artigo atual, não sendo um sensor utilizado no sistema proposto pelos autores do documento analisado.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O texto no Chunk 14 menciona explicitamente o uso de uma 'high-resolution camera operating in the visible RGB spectral range', o que corresponde ao domínio 'câmera'. O Chunk 36 menciona que 'Biber et al. [30] incorporated a LIDAR', porém, isso se refere ao trabalho de outros autores em comparação à metodologia do artigo atual, não sendo um sensor utilizado no sistema proposto pelos autores do documento analisado.\",\n  \"Sensores Utilizados\": [\n    \"câmera\"\n  ]\n}\n```",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "MATLAB"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "Analisei os chunks de texto fornecidos (29, 35 e 74). O texto menciona técnicas gerais de detecção (optical flow, temporal differencing, mixture of Gaussians), cita um framework de self-learning por Reina e Milella, e descreve um algoritmo de segmentação de imagem baseado no canal b* do espaço de cores L*a*b*. No entanto, não há menção a nenhuma das bibliotecas, frameworks ou arquiteturas listadas no domínio fornecido (como MATLAB, OpenCV, ROS, CNNs, etc.).",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"Analisei os chunks de texto fornecidos (29, 35 e 74). O texto menciona técnicas gerais de detecção (optical flow, temporal differencing, mixture of Gaussians), cita um framework de self-learning por Reina e Milella, e descreve um algoritmo de segmentação de imagem baseado no canal b* do espaço de cores L*a*b*. No entanto, não há menção a nenhuma das bibliotecas, frameworks ou arquiteturas listadas no domínio fornecido (como MATLAB, OpenCV, ROS, CNNs, etc.).\",\n  \"Bibliotecas, Frameworks ou Arquiteturas\": \"Não informado no contexto\"\n}\n```",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "segmentação",
+                    "detecção"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "navegação (mapa)",
+                    "navegação (obstáculos)",
+                    "detecção",
+                    "segmentação",
+                    "classificação"
+                ],
+                "reasoning": "O Chunk 9 menciona que o sistema de navegação é capaz de resolver problemas de 'mapping' (navegação (mapa)), 'path following' (navegação (trajeto)) e 'obstacle avoidance' (navegação (obstáculos)), além de destacar a necessidade de 'detecting obstructions' (detecção). O Chunk 36 menciona 'classification rate' (classificação). O Chunk 74 apresenta o 'Algorithm 1. Image segmentation' (segmentação). Portanto, as aplicações abrangem navegação (trajeto, mapa e obstáculos), detecção, segmentação e classificação.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O Chunk 9 menciona que o sistema de navegação é capaz de resolver problemas de 'mapping' (navegação (mapa)), 'path following' (navegação (trajeto)) e 'obstacle avoidance' (navegação (obstáculos)), além de destacar a necessidade de 'detecting obstructions' (detecção). O Chunk 36 menciona 'classification rate' (classificação). O Chunk 74 apresenta o 'Algorithm 1. Image segmentation' (segmentação). Portanto, as aplicações abrangem navegação (trajeto, mapa e obstáculos), detecção, segmentação e classificação.\",\n  \"Solução / Tarefa Principal\": [\n    \"navegação (trajeto)\",\n    \"navegação (mapa)\",\n    \"navegação (obstáculos)\",\n    \"detecção\",\n    \"segmentação\",\n    \"classificação\"\n  ]\n}\n```",
+                "score": 33,
+                "status": "Parcial"
+            }
+        }
+    }
+]
