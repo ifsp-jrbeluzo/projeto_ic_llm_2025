@@ -123,12 +123,18 @@ def main():
     chunk_size = ingest_cfg.get("chunk_size", 250)
     chunk_overlap = ingest_cfg.get("chunk_overlap", 50)
     papers_path = Path(paths_cfg.get("papers", "./papers"))
-    db_path = paths_cfg.get("database", "./database")
+    db_base_path = Path(paths_cfg.get("database", "./database"))
+
+    # Subpasta isolada por configuração de chunking: db_{chunk_size}c_{chunk_overlap}o
+    db_path = db_base_path / f"db_{chunk_size}c_{chunk_overlap}o"
+    db_path.mkdir(parents=True, exist_ok=True)
 
     model_name = models_cfg.get("embedding", "embeddinggemma")
 
+    print(f"\nUsando banco de dados: {db_path}")
+
     selected_files = select_files(papers_path)
-    db = generate_database(db_path)
+    db = generate_database(str(db_path))
 
     for file_path in selected_files:
         collection_name = generate_collection_name(

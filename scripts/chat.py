@@ -51,6 +51,7 @@ paths_cfg = config.get("paths", {})
 rag_cfg = config.get("rag", {})
 models_cfg = config.get("models", {})
 ollama_cfg = config.get("ollama", {})
+ingest_cfg = config.get("ingest", {})
 
 prompt_template = load_prompt(paths_cfg.get("prompt_template", "prompt.txt"))
 
@@ -70,15 +71,23 @@ LOG_DIR.mkdir(exist_ok=True)
 
 # ---------------- CHROMA ---------------- #
 
+# Constrói o caminho dinâmico com base nos parâmetros de chunking
+chunk_size = ingest_cfg.get("chunk_size", 250)
+chunk_overlap = ingest_cfg.get("chunk_overlap", 50)
+db_base_path = Path(paths_cfg.get("database", "./database"))
+db_path = db_base_path / f"db_{chunk_size}c_{chunk_overlap}o"
+
+print(f"\nCarregando banco de dados: {db_path}")
+
 chroma_client = chromadb.PersistentClient(
-    path=paths_cfg.get("database", "./database")
+    path=str(db_path)
 )
 
 collections = chroma_client.list_collections()
 
 if not collections:
 
-    print("Nenhum banco encontrado em ./database")
+    print(f"Nenhum banco encontrado em {db_path}")
 
     exit()
 

@@ -7,8 +7,8 @@
     "question_file": "question.json"
   },
   "ingest": {
-    "chunk_size": 600,
-    "chunk_overlap": 150
+    "chunk_size": 100,
+    "chunk_overlap": 50
   },
   "rag": {
     "n_results": 7,
