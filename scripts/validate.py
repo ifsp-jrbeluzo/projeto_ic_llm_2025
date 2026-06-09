@@ -114,8 +114,26 @@ def evaluate_field(expected, actual):
 def main():
     base_dir = Path(__file__).parent.parent
     
+    # Load config to get dynamic logs path
+    config_path = base_dir / "configs" / "config.json"
+    paths_cfg = {}
+    if config_path.exists():
+        try:
+            with open(config_path, "r", encoding="utf-8") as f:
+                paths_cfg = json.load(f).get("paths", {})
+        except Exception:
+            pass
+
+    def resolve_path(cfg_val, default_rel):
+        if not cfg_val:
+            return base_dir / default_rel
+        path = Path(cfg_val)
+        if path.is_absolute():
+            return path
+        return base_dir / path
+
     env_logs_dir = os.environ.get("VALIDATE_LOGS_DIR")
-    logs_dir = Path(env_logs_dir) if env_logs_dir else base_dir / "logs"
+    logs_dir = Path(env_logs_dir) if env_logs_dir else resolve_path(paths_cfg.get("logs"), "logs")
     
     env_gt_path = os.environ.get("VALIDATE_GT_PATH")
     gt_path = Path(env_gt_path) if env_gt_path else base_dir / "ground_truth.json"

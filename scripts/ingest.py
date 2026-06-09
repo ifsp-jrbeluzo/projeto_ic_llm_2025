@@ -13,7 +13,7 @@ from scripts.core.chunker import chunkify
 
 # ---------------- CONFIG ---------------- #
 
-def load_config(config_path="config.json"):
+def load_config(config_path="configs/config.json"):
     if not Path(config_path).exists():
         raise FileNotFoundError(f"Config file not found: {config_path}")
     with open(config_path, "r", encoding="utf-8") as f:
@@ -46,20 +46,31 @@ def generate_database(db_path="./database"):
     return chromadb.PersistentClient(path=db_path)
 
 def add_chunks(collection, text_chunks, file_name, model_name):
+    ids = []
+    embeddings = []
+    documents = []
+    metadatas = []
+    
     for i, chunk in enumerate(text_chunks):
         embedding = ollama.embeddings(
             model=model_name,
             prompt=chunk
         )["embedding"]
-
+        
+        ids.append(f"{file_name}_{i}")
+        embeddings.append(embedding)
+        documents.append(chunk)
+        metadatas.append({
+            "source": file_name,
+            "chunk": i
+        })
+        
+    if ids:
         collection.upsert(
-            ids=[f"{file_name}_{i}"],
-            embeddings=[embedding],
-            documents=[chunk],
-            metadatas=[{
-                "source": file_name,
-                "chunk": i
-            }]
+            ids=ids,
+            embeddings=embeddings,
+            documents=documents,
+            metadatas=metadatas
         )
 
 # ---------------- FILE SELECT ---------------- #

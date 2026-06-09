@@ -13,16 +13,38 @@ router = APIRouter()
 runner = TaskRunner()
 
 BASE_DIR = Path(__file__).parent.parent
-PAPERS_DIR = BASE_DIR / "papers"
-DATABASE_DIR = BASE_DIR / "database"
-LOGS_DIR = BASE_DIR / "logs"
+
+# Load config to get dynamic paths
+config_path = BASE_DIR / "configs" / "config.json"
+paths_cfg = {}
+if config_path.exists():
+    try:
+        with open(config_path, "r", encoding="utf-8") as f:
+            paths_cfg = json.load(f).get("paths", {})
+    except Exception:
+        pass
+
+def resolve_path(cfg_val, default_rel):
+    if not cfg_val:
+        return BASE_DIR / default_rel
+    path = Path(cfg_val)
+    if path.is_absolute():
+        return path
+    return BASE_DIR / path
+
+PAPERS_DIR = resolve_path(paths_cfg.get("papers"), "papers")
+DATABASE_DIR = resolve_path(paths_cfg.get("database"), "database")
+LOGS_DIR = resolve_path(paths_cfg.get("logs"), "logs")
 RUNS_DIR = LOGS_DIR / "runs"
 
 # Ensure directories exist
-PAPERS_DIR.mkdir(exist_ok=True)
-DATABASE_DIR.mkdir(exist_ok=True)
-LOGS_DIR.mkdir(exist_ok=True)
-RUNS_DIR.mkdir(exist_ok=True)
+try:
+    PAPERS_DIR.mkdir(parents=True, exist_ok=True)
+    DATABASE_DIR.mkdir(parents=True, exist_ok=True)
+    LOGS_DIR.mkdir(parents=True, exist_ok=True)
+    RUNS_DIR.mkdir(parents=True, exist_ok=True)
+except Exception:
+    pass
 
 class IngestRequest(BaseModel):
     chunk_size: int
@@ -92,7 +114,7 @@ async def list_databases():
 @router.get("/api/models")
 async def list_models():
     try:
-        config_path = BASE_DIR / "config.json"
+        config_path = BASE_DIR / "configs" / "config.json"
         ollama_host = "http://localhost:11434"
         ollama_key = ""
         if config_path.exists():

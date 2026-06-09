@@ -14,7 +14,7 @@ import time
 
 # ---------------- LOAD FILES ---------------- #
 
-def load_config(config_path="config.json"):
+def load_config(config_path="configs/config.json"):
 
     if not Path(config_path).exists():
         raise FileNotFoundError(
