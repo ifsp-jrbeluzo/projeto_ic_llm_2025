@@ -2,7 +2,14 @@ import json
 import os
 import re
 import difflib
+import sys
 from pathlib import Path
+
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+except Exception:
+    pass
+
 
 def load_json(path):
     with open(path, 'r', encoding='utf-8') as f:
@@ -229,7 +236,7 @@ def main():
     with open(out_path, 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=4, ensure_ascii=False)
         
-    print(f"Validação aproximada concluída para {len(results)} logs. Salvo em {out_path}")
+    print(f"Validacao aproximada concluida para {len(results)} logs. Salvo em {out_path}")
 
 if __name__ == "__main__":
     main()

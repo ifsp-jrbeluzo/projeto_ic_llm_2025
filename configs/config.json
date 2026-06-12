@@ -12,7 +12,7 @@
   },
   "rag": {
     "n_results": 7,
-    "max_context_chars": 8000
+    "max_context_chars": 30000
   },
   "models": {
     "embedding": "embeddinggemma",
