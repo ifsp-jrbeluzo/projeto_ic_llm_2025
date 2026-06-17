@@ -1,0 +1,1894 @@
+[
+    {
+        "article_id": "17",
+        "original_filename": "(17) Variable field-of-view machine vision based row guidance of an agricultural robot.pdf",
+        "log_file": "17_variable_fieldofview_machine_vision_b_250c_50o_20260611_193428.json",
+        "timestamp": "20260611_193428",
+        "overall_score": 45,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O artigo descreve a utilização de segmentação de cor, binarização e operações morfológicas (abertura, etc.) para determinar linhas de orientação das fileiras, além de controle fuzzy. Não há menção a técnicas de aprendizado de máquina, redes neurais ou CNNs. Portanto, o método principal corresponde à Visão Computacional Clássica, que inclui processamento de cor, limiarização e morfologia.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve a utilização de segmentação de cor, binarização e operações morfológicas (abertura, etc.) para determinar linhas de orientação das fileiras, além de controle fuzzy. Não há menção a técnicas de aprendizado de máquina, redes neurais ou CNNs. Portanto, o método principal corresponde à Visão Computacional Clássica, que inclui processamento de cor, limiarização e morfologia.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera",
+                    "gps"
+                ],
+                "reasoning": "O texto descreve o uso de uma câmera digital Logitech C210 como sensor de captura de imagens para o sistema de visão. Além disso, menciona que dados de RTK‑GPS foram coletados para avaliar o desempenho de orientação, indicando a presença de um sensor GPS. Não há referência a outros sensores listados no domínio (imu, lidar, etc.). Portanto, os sensores utilizados são a câmera e o GPS.",
+                "raw_response": "{\n  \"raciocinio\": \"O texto descreve o uso de uma câmera digital Logitech C210 como sensor de captura de imagens para o sistema de visão. Além disso, menciona que dados de RTK‑GPS foram coletados para avaliar o desempenho de orientação, indicando a presença de um sensor GPS. Não há referência a outros sensores listados no domínio (imu, lidar, etc.). Portanto, os sensores utilizados são a câmera e o GPS.\",\n  \"Sensores Utilizados\": [\n    \"câmera\",\n    \"gps\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "MATLAB"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "O enunciado forneceu apenas o contexto do artigo, mas não contém uma pergunta específica a ser respondida. Sem saber qual informação está sendo solicitada, não há como extrair uma resposta do texto fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"O enunciado forneceu apenas o contexto do artigo, mas não contém uma pergunta específica a ser respondida. Sem saber qual informação está sendo solicitada, não há como extrair uma resposta do texto fornecido.\",\n  \"Resposta\": \"Não informado no contexto\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "detecção",
+                    "segmentação"
+                ],
+                "reasoning": "O artigo descreve um sistema de visão artificial que permite ao robô agrícola seguir linhas de cultivo em milho. O método consiste em detectar linhas de plantações (detecção) e segmentar as plantas e linhas de cultivo (segmentação) para gerar uma linha de guia que o robô segue, permitindo navegação ao longo da fila (navegação (trajeto)). Não há menção a navegação baseada em mapa, obstáculos, classificação de objetos ou estimativas de produção.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema de visão artificial que permite ao robô agrícola seguir linhas de cultivo em milho. O método consiste em detectar linhas de plantações (detecção) e segmentar as plantas e linhas de cultivo (segmentação) para gerar uma linha de guia que o robô segue, permitindo navegação ao longo da fila (navegação (trajeto)). Não há menção a navegação baseada em mapa, obstáculos, classificação de objetos ou estimativas de produção.\",\n  \"Aplicações Principais\": [\n    \"navegação (trajeto)\",\n    \"detecção\",\n    \"segmentação\"\n  ]\n}",
+                "score": 33,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "18",
+        "original_filename": "(18) Path Recognition for Agricultural Robot Vision Navigation under Weed Enviromenment.pdf",
+        "log_file": "18_path_recognition_for_agricultural_rob_250c_50o_20260611_193531.json",
+        "timestamp": "20260611_193531",
+        "overall_score": 75,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O método proposto baseia‑se em extração de características de cor (I = 2G‑R‑B), limiarização da imagem, filtragem morfológica por exclusão de objetos de pequena área e extração da linha central da cultura usando a Transformada de Hough. Todas essas técnicas são típicas de visão computacional clássica, sem uso de aprendizado de máquina ou redes neurais.",
+                "raw_response": "{\n  \"raciocinio\": \"O método proposto baseia‑se em extração de características de cor (I = 2G‑R‑B), limiarização da imagem, filtragem morfológica por exclusão de objetos de pequena área e extração da linha central da cultura usando a Transformada de Hough. Todas essas técnicas são típicas de visão computacional clássica, sem uso de aprendizado de máquina ou redes neurais.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera"
+                ],
+                "reasoning": "Nos trechos do documento (Chunk 5) descreve‑se que o experimento utilizou \"a câmera Monta G-125C da Allied Vision Technology Inc.\". Não há menção a outros sensores (imu, gps, LIDAR, etc.). Assim, o único sensor citado que corresponde exatamente a um dos valores do domínio fornecido é \"câmera\".",
+                "raw_response": "{\n  \"raciocinio\": \"Nos trechos do documento (Chunk 5) descreve‑se que o experimento utilizou \\\"a câmera Monta G-125C da Allied Vision Technology Inc.\\\". Não há menção a outros sensores (imu, gps, LIDAR, etc.). Assim, o único sensor citado que corresponde exatamente a um dos valores do domínio fornecido é \\\"câmera\\\".\",\n  \"Sensores Utilizados\": [\n    \"câmera\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "transformada Hough"
+                ],
+                "actual": "Câmera Monta G-125C (Allied Vision Technology Inc.) de alta velocidade, instalada no robô móvel Seekur",
+                "reasoning": "O texto descreve que os experimentos foram realizados com uma câmera Monta G-125C da Allied Vision Technology Inc., conectada ao robô móvel Seekur. Essa câmera possui alta velocidade e resolução de 1296×964, sendo utilizada para capturar as imagens de cor que alimentam o algoritmo de reconhecimento de caminho. Não há menção a outros sensores. Quanto às tecnologias computacionais, o método proposto utiliza a transformada de Hough para extração da linha central da cultura, que corresponde exatamente a um dos itens listados no domínio fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"O texto descreve que os experimentos foram realizados com uma câmera Monta G-125C da Allied Vision Technology Inc., conectada ao robô móvel Seekur. Essa câmera possui alta velocidade e resolução de 1296×964, sendo utilizada para capturar as imagens de cor que alimentam o algoritmo de reconhecimento de caminho. Não há menção a outros sensores. Quanto às tecnologias computacionais, o método proposto utiliza a transformada de Hough para extração da linha central da cultura, que corresponde exatamente a um dos itens listados no domínio fornecido.\",\n  \"Sensores Utilizados\": \"Câmera Monta G-125C (Allied Vision Technology Inc.) de alta velocidade, instalada no robô móvel Seekur\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)"
+                ],
+                "reasoning": "O artigo descreve um método de reconhecimento de caminho para navegação visual de robôs agrícolas em ambientes com plantas daninhas. O objetivo principal do sistema é guiar o robô ao longo da linha central da cultura, ou seja, determinar e seguir a trajetória de navegação. Embora o método envolva segmentação de imagens para separar cultivo de fundo e de ervas daninhas, a aplicação final do sistema é a navegação do robô ao longo do trajeto agronômico.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um método de reconhecimento de caminho para navegação visual de robôs agrícolas em ambientes com plantas daninhas. O objetivo principal do sistema é guiar o robô ao longo da linha central da cultura, ou seja, determinar e seguir a trajetória de navegação. Embora o método envolva segmentação de imagens para separar cultivo de fundo e de ervas daninhas, a aplicação final do sistema é a navegação do robô ao longo do trajeto agronômico.\",\n  \"Aplicações Principais\": [\n    \"navegação (trajeto)\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            }
+        }
+    },
+    {
+        "article_id": "20",
+        "original_filename": "(20) Vision Based Guidance for Robot Navigation in Agriculture.pdf",
+        "log_file": "20_vision_based_guidance_for_robot_navig_250c_50o_20260611_193100.json",
+        "timestamp": "20260611_193100",
+        "overall_score": 66,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O artigo descreve um método que extrai e rastreia a textura paralela dominante usando visão monocular, transformações de perspectiva, cálculo de variância, RANSAC para ajuste de linha e correlação normalizada (ZNCC). Não há menção a aprendizado de máquina, redes neurais ou CNNs. Portanto, a abordagem se enquadra em técnicas clássicas de visão computacional.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um método que extrai e rastreia a textura paralela dominante usando visão monocular, transformações de perspectiva, cálculo de variância, RANSAC para ajuste de linha e correlação normalizada (ZNCC). Não há menção a aprendizado de máquina, redes neurais ou CNNs. Portanto, a abordagem se enquadra em técnicas clássicas de visão computacional.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera",
+                    "imu"
+                ],
+                "actual": [
+                    "câmera",
+                    "imu",
+                    "gps"
+                ],
+                "reasoning": "O artigo descreve que a atitude da câmera é estimada usando um IMU (Chunk 2 e Chunk 6). A presença de uma câmera é mencionada em vários trechos (Chunk 2, Chunk 6, Chunk 18) para capturar imagens do campo. Além disso, na avaliação experimental, as estimativas de deslocamento são comparadas com um sistema GPS/INS (Chunk 18), indicando o uso de GPS como sensor. Não há menção a outros sensores da lista fornecida.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que a atitude da câmera é estimada usando um IMU (Chunk 2 e Chunk 6). A presença de uma câmera é mencionada em vários trechos (Chunk 2, Chunk 6, Chunk 18) para capturar imagens do campo. Além disso, na avaliação experimental, as estimativas de deslocamento são comparadas com um sistema GPS/INS (Chunk 18), indicando o uso de GPS como sensor. Não há menção a outros sensores da lista fornecida.\",\n  \"Sensores Utilizados\": [\n    \"câmera\",\n    \"imu\",\n    \"gps\"\n  ]\n}",
+                "score": 66,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "OpenCV"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "O prompt não apresenta uma pergunta específica a ser respondida; apenas indica que a resposta deve ser extraída do contexto fornecido. Como não há um enunciado de pergunta, não é possível determinar qual informação buscar. Portanto, a resposta adequada é indicar que a informação não foi informada no contexto.",
+                "raw_response": "{\n  \"raciocinio\": \"O prompt não apresenta uma pergunta específica a ser respondida; apenas indica que a resposta deve ser extraída do contexto fornecido. Como não há um enunciado de pergunta, não é possível determinar qual informação buscar. Portanto, a resposta adequada é indicar que a informação não foi informada no contexto.\",\n  \"Resposta\": \"Não informado no contexto\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)"
+                ],
+                "reasoning": "O artigo descreve um método de visão monocular que rastreia a direção e o deslocamento lateral das fileiras de cultura para guiar autonomamente um robô ao longo dessas fileiras. O objetivo principal mencionado é a condução do veículo ao longo das linhas de plantio, ou seja, a navegação de trajeto dentro do campo. Não há menção a geração de mapas, deteção ou segmentação de objetos, classificação ou estimativas de produção. Portanto, a aplicação principal corresponde ao domínio de navegação de trajeto.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um método de visão monocular que rastreia a direção e o deslocamento lateral das fileiras de cultura para guiar autonomamente um robô ao longo dessas fileiras. O objetivo principal mencionado é a condução do veículo ao longo das linhas de plantio, ou seja, a navegação de trajeto dentro do campo. Não há menção a geração de mapas, deteção ou segmentação de objetos, classificação ou estimativas de produção. Portanto, a aplicação principal corresponde ao domínio de navegação de trajeto.\",\n  \"Aplicações Principais\": [\n    \"navegação (trajeto)\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            }
+        }
+    },
+    {
+        "article_id": "22",
+        "original_filename": "(22) Integration sensory_actuation systems in agricultural vehicles.pdf",
+        "log_file": "22_integration_sensoryactuation_systems__250c_50o_20260611_192737.json",
+        "timestamp": "20260611_192737",
+        "overall_score": 56,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O artigo descreve um sistema de percepção que utiliza câmeras, IMU e RTK‑GPS para identificar linhas de cultivo e detectar ervas daninhas. A descrição dos processos enfatiza a calibração da câmera, o uso de parâmetros intrínsecos e extrínsecos, a extração de linhas de cultivo a partir de imagens e a geração de matrizes de densidade de ervas. Não há menção a técnicas de aprendizado de máquina, redes neurais ou CNNs; o foco está em métodos de visão computacional clássica, como detecção de linhas e análise de cores/pixels. Portanto, o método principal se enquadra na categoria de Visão Computacional Clássica.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema de percepção que utiliza câmeras, IMU e RTK‑GPS para identificar linhas de cultivo e detectar ervas daninhas. A descrição dos processos enfatiza a calibração da câmera, o uso de parâmetros intrínsecos e extrínsecos, a extração de linhas de cultivo a partir de imagens e a geração de matrizes de densidade de ervas. Não há menção a técnicas de aprendizado de máquina, redes neurais ou CNNs; o foco está em métodos de visão computacional clássica, como detecção de linhas e análise de cores/pixels. Portanto, o método principal se enquadra na categoria de Visão Computacional Clássica.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera",
+                    "gps",
+                    "imu"
+                ],
+                "actual": [
+                    "câmera",
+                    "imu",
+                    "gps",
+                    "ccd filtro Bayer GR"
+                ],
+                "reasoning": "O texto descreve os sensores instalados no trato‑tractor: (i) uma câmera modelo SVS4050CFLGEA que utiliza um sensor CCD Kodak KAI 04050M/C com filtro Bayer GR; (ii) um IMU 3DM‑GX3‑35 da Lord MicroStrain; (iii) um receptor GPS Trimble BX982 GNSS. Esses três componentes correspondem aos valores do domínio fornecido: câmera, imu, gps e ccd filtro Bayer GR.",
+                "raw_response": "{\n  \"raciocinio\": \"O texto descreve os sensores instalados no trato‑tractor: (i) uma câmera modelo SVS4050CFLGEA que utiliza um sensor CCD Kodak KAI 04050M/C com filtro Bayer GR; (ii) um IMU 3DM‑GX3‑35 da Lord MicroStrain; (iii) um receptor GPS Trimble BX982 GNSS. Esses três componentes correspondem aos valores do domínio fornecido: câmera, imu, gps e ccd filtro Bayer GR.\",\n  \"Sensores Utilizados\": [\n    \"câmera\",\n    \"imu\",\n    \"gps\",\n    \"ccd filtro Bayer GR\"\n  ]\n}",
+                "score": 75,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "NI LabView"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "A mensagem recebida contém apenas as instruções e o contexto do artigo, mas não apresenta a pergunta específica a ser respondida. Sem a pergunta, não há como extrair ou inferir a informação solicitada.",
+                "raw_response": "{\n  \"raciocinio\": \"A mensagem recebida contém apenas as instruções e o contexto do artigo, mas não apresenta a pergunta específica a ser respondida. Sem a pergunta, não há como extrair ou inferir a informação solicitada.\",\n  \"Resposta\": \"Não informado no contexto\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)",
+                    "detecção"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "navegação (mapa)",
+                    "detecção",
+                    "classificação"
+                ],
+                "reasoning": "O texto descreve que a arquitetura proposta integra os subsistemas de orientação (guidance), detecção e identificação de plantas daninhas (weed detection and identification), atuação de precisão (precision actuation) e mapeamento (mapping). Assim, as aplicações principais são: (1) navegação de trajeto, pois o subsistema de orientação gere o planejamento de rotas; (2) navegação baseada em mapa, pois o subsistema de mapeamento gera mapas de cobertura de plantas daninhas; (3) detecção, relacionada ao reconhecimento de plantas daninhas; e (4) classificação, referente à identificação das espécies de plantas daninhas.",
+                "raw_response": "{\n  \"raciocinio\": \"O texto descreve que a arquitetura proposta integra os subsistemas de orientação (guidance), detecção e identificação de plantas daninhas (weed detection and identification), atuação de precisão (precision actuation) e mapeamento (mapping). Assim, as aplicações principais são: (1) navegação de trajeto, pois o subsistema de orientação gere o planejamento de rotas; (2) navegação baseada em mapa, pois o subsistema de mapeamento gera mapas de cobertura de plantas daninhas; (3) detecção, relacionada ao reconhecimento de plantas daninhas; e (4) classificação, referente à identificação das espécies de plantas daninhas.\",\n  \"Aplicações Principais\": [\n    \"navegação (trajeto)\",\n    \"navegação (mapa)\",\n    \"detecção\",\n    \"classificação\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "23",
+        "original_filename": "(23) Automatic detection of crop rows based on multi-rois.pdf",
+        "log_file": "23_automatic_detection_of_crop_rows_base_250c_50o_20260611_193834.json",
+        "timestamp": "20260611_193834",
+        "overall_score": 62,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O artigo descreve um método que utiliza transformações de nível de cinza, índices de cor, binarização por Otsu, criação de múltiplas regiões de interesse (multi-ROIs), clustering para validar pontos centrais e ajuste por regressão linear (least squares). Não há menção de técnicas de aprendizado de máquina, redes neurais ou CNNs; todas as etapas são técnicas clássicas de visão computacional.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um método que utiliza transformações de nível de cinza, índices de cor, binarização por Otsu, criação de múltiplas regiões de interesse (multi-ROIs), clustering para validar pontos centrais e ajuste por regressão linear (least squares). Não há menção de técnicas de aprendizado de máquina, redes neurais ou CNNs; todas as etapas são técnicas clássicas de visão computacional.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera"
+                ],
+                "reasoning": "O documento descreve que, para a aquisição de imagens, foi utilizada uma câmera Samsung S750 colorida montada em um veículo agrícola (Chunk 10). Não há menção a outros sensores como IMU, GPS, LIDAR etc. Portanto, o único sensor explicitamente citado é a câmera.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O documento descreve que, para a aquisição de imagens, foi utilizada uma câmera Samsung S750 colorida montada em um veículo agrícola (Chunk 10). Não há menção a outros sensores como IMU, GPS, LIDAR etc. Portanto, o único sensor explicitamente citado é a câmera.\",\n  \"Sensores Utilizados\": [\n    \"câmera\"\n  ]\n}\n```",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "MATLAB"
+                ],
+                "actual": [
+                    "transformada Hough",
+                    "código próprio"
+                ],
+                "reasoning": "O artigo informa que o algoritmo proposto necessita de aproximadamente 61 ms para reconhecer as linhas de cultivo em imagens de 640 × 480 pixels. Essa informação está descrita nos trechos que apresentam o tempo de processamento (Chunk 0 e Chunk 36). Como a pergunta solicita o tempo de processamento, o valor extraído é 61 ms.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O artigo informa que o algoritmo proposto necessita de aproximadamente 61 ms para reconhecer as linhas de cultivo em imagens de 640 × 480 pixels. Essa informação está descrita nos trechos que apresentam o tempo de processamento (Chunk 0 e Chunk 36). Como a pergunta solicita o tempo de processamento, o valor extraído é 61 ms.\",\n  \"Tempo de Processamento\": \"61 ms\",\n  \"Bibliotecas, Frameworks ou Arquiteturas\": [\n    \"transformada Hough\",\n    \"código próprio\"\n  ]\n}\n```",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "detecção"
+                ],
+                "reasoning": "O artigo descreve um método automático de detecção de linhas de cultivo que visa apoiar sistemas de orientação visual de máquinas agrícolas. Essa detecção fornece a informação necessária para que o veículo siga corretamente as fileiras durante operações como pulverização automática, capina, colheita e preparo de solo. Dessa forma, a aplicação principal do sistema é a navegação ao longo da trajetória das fileiras de cultivo, baseada na detecção das linhas de plantio. Além disso, o próprio objetivo do algoritmo é detectar as linhas de cultivo, o que corresponde à categoria de detecção no domínio fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um método automático de detecção de linhas de cultivo que visa apoiar sistemas de orientação visual de máquinas agrícolas. Essa detecção fornece a informação necessária para que o veículo siga corretamente as fileiras durante operações como pulverização automática, capina, colheita e preparo de solo. Dessa forma, a aplicação principal do sistema é a navegação ao longo da trajetória das fileiras de cultivo, baseada na detecção das linhas de plantio. Além disso, o próprio objetivo do algoritmo é detectar as linhas de cultivo, o que corresponde à categoria de detecção no domínio fornecido.\",\n  \"Aplicações Principais\": [\n    \"navegação (trajeto)\",\n    \"detecção\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "24",
+        "original_filename": "(24) A new dswts algorithm for real-time pedestrian detection in autonomous agricultural tractors as a computer vision system.pdf",
+        "log_file": "24_a_new_dswts_algorithm_for_realtime_pe_250c_50o_20260611_193552.json",
+        "timestamp": "20260611_193552",
+        "overall_score": 74,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O artigo descreve o algoritmo DSWTS, que consiste em etapas de divisão da imagem, segmentação usando gradiente de magnitude (Sobel), técnicas de watershed, limiarização e subtração de fundo, além de operações morfológicas. Essas etapas são típicas de processamento de imagem clássico, sem uso de modelos de aprendizado de máquina ou redes neurais. Portanto, o método principal se enquadra na categoria de Visão Computacional Clássica.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve o algoritmo DSWTS, que consiste em etapas de divisão da imagem, segmentação usando gradiente de magnitude (Sobel), técnicas de watershed, limiarização e subtração de fundo, além de operações morfológicas. Essas etapas são típicas de processamento de imagem clássico, sem uso de modelos de aprendizado de máquina ou redes neurais. Portanto, o método principal se enquadra na categoria de Visão Computacional Clássica.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera"
+                ],
+                "reasoning": "O artigo descreve que foi utilizado um único sensor de visão: uma câmera CMOS (Logitech c920 HD pro webcam) com resolução 640x480 a 30 fps, instalada na frente do trator. Não há menção a outros sensores (IMU, GPS, LIDAR, etc.). Portanto, o sensor utilizado corresponde ao domínio \"câmera\".",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que foi utilizado um único sensor de visão: uma câmera CMOS (Logitech c920 HD pro webcam) com resolução 640x480 a 30 fps, instalada na frente do trator. Não há menção a outros sensores (IMU, GPS, LIDAR, etc.). Portanto, o sensor utilizado corresponde ao domínio \\\"câmera\\\".\",\n  \"Sensores Utilizados\": [\n    \"câmera\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "MATLAB"
+                ],
+                "actual": [
+                    "MATLAB",
+                    "código próprio",
+                    "SVM"
+                ],
+                "reasoning": "O texto descreve que o sistema foi implementado com uma única câmera CMOS (Logitech c920 HD pro) posicionada no trator e controlada por software MATLAB. Não há menção a outros tipos de sensores (como LIDAR, infravermelho, radar etc.). Portanto, o sensor utilizado é a câmera CMOS mencionada. Quanto às tecnologias computacionais, o artigo indica o uso do MATLAB para aquisição e processamento de imagens, além de empregar algoritmos próprios (DSWTS) e classificação baseada em SVM. Esses itens correspondem aos termos do domínio fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"O texto descreve que o sistema foi implementado com uma única câmera CMOS (Logitech c920 HD pro) posicionada no trator e controlada por software MATLAB. Não há menção a outros tipos de sensores (como LIDAR, infravermelho, radar etc.). Portanto, o sensor utilizado é a câmera CMOS mencionada. Quanto às tecnologias computacionais, o artigo indica o uso do MATLAB para aquisição e processamento de imagens, além de empregar algoritmos próprios (DSWTS) e classificação baseada em SVM. Esses itens correspondem aos termos do domínio fornecido.\",\n  \"Sensores Utilizados\": \"Câmera CMOS Logitech c920 HD pro\",\n  \"Bibliotecas, Frameworks ou Arquiteturas\": [\n    \"MATLAB\",\n    \"código próprio\",\n    \"SVM\"\n  ]\n}",
+                "score": 33,
+                "status": "Parcial"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "segmentação",
+                    "detecção"
+                ],
+                "actual": [
+                    "detecção",
+                    "segmentação",
+                    "navegação (obstáculos)"
+                ],
+                "reasoning": "O artigo descreve o algoritmo DSWTS implementado em um trator agrícola autônomo para detectar pedestres em tempo real. O método envolve segmentar a imagem (uso de magnitude gradient, watershed e thresholding) e depois reconhecer o pedestre, ou seja, realiza detecção de obstáculos humanos. Assim, as aplicações principais estão relacionadas à detecção de pedestres, à segmentação da imagem para separar o pedestre do fundo e ao uso dessa detecção para navegação segura, evitando obstáculos.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve o algoritmo DSWTS implementado em um trator agrícola autônomo para detectar pedestres em tempo real. O método envolve segmentar a imagem (uso de magnitude gradient, watershed e thresholding) e depois reconhecer o pedestre, ou seja, realiza detecção de obstáculos humanos. Assim, as aplicações principais estão relacionadas à detecção de pedestres, à segmentação da imagem para separar o pedestre do fundo e ao uso dessa detecção para navegação segura, evitando obstáculos.\",\n  \"Aplicações Principais\": [\n    \"detecção\",\n    \"segmentação\",\n    \"navegação (obstáculos)\"\n  ]\n}",
+                "score": 66,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "25",
+        "original_filename": "(25) Spatio- temporal analysis for obstacle detection in agricultural videos.pdf",
+        "log_file": "25_spatio_temporal_analysis_for_obstacle_250c_50o_20260611_193810.json",
+        "timestamp": "20260611_193810",
+        "overall_score": 79,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O método proposto no artigo baseia‑se em segmentação por cores no espaço CIELAB, uso de histogramas, cálculo de assimetria, limiares calculados a partir de estatísticas (skewness, desvios‑padrão) e operações morfológicas (erosão, dilatação). Não há menção a treinamento, modelos estatísticos de aprendizado ou redes neurais. Portanto, trata‑se de uma abordagem de Visão Computacional Clássica, que utiliza processamento de imagem tradicional.",
+                "raw_response": "{\n  \"raciocinio\": \"O método proposto no artigo baseia‑se em segmentação por cores no espaço CIELAB, uso de histogramas, cálculo de assimetria, limiares calculados a partir de estatísticas (skewness, desvios‑padrão) e operações morfológicas (erosão, dilatação). Não há menção a treinamento, modelos estatísticos de aprendizado ou redes neurais. Portanto, trata‑se de uma abordagem de Visão Computacional Clássica, que utiliza processamento de imagem tradicional.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "ccd filtro Bayer GR"
+                ],
+                "actual": [
+                    "câmera",
+                    "ccd filtro Bayer GR"
+                ],
+                "reasoning": "O artigo descreve que o sistema de captura utilizado foi uma câmera de alta resolução baseada em CCD, que opera no espectro visível RGB. A especificação detalha que o sensor é um CCD Kodak KAI 04050M/C com filtro de cor Bayer no padrão GR. Não há menção a outros sensores como LIDAR, IMU, GPS ou câmeras estéreo. Portanto, os sensores identificados dentro do domínio fornecido são a câmera (câmera) e o tipo específico de sensor CCD com filtro Bayer GR (ccd filtro Bayer GR).",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que o sistema de captura utilizado foi uma câmera de alta resolução baseada em CCD, que opera no espectro visível RGB. A especificação detalha que o sensor é um CCD Kodak KAI 04050M/C com filtro de cor Bayer no padrão GR. Não há menção a outros sensores como LIDAR, IMU, GPS ou câmeras estéreo. Portanto, os sensores identificados dentro do domínio fornecido são a câmera (câmera) e o tipo específico de sensor CCD com filtro Bayer GR (ccd filtro Bayer GR).\",\n  \"Sensores Utilizados\": [\n    \"câmera\",\n    \"ccd filtro Bayer GR\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "MATLAB"
+                ],
+                "actual": [
+                    "MATLAB"
+                ],
+                "reasoning": "A partir dos trechos do documento, a única tecnologia computacional explicitamente citada é o uso do MATLAB (versão 2013a) e do Image Processing Toolbox, que são mencionados na seção de resultados. Não há referência a outras ferramentas listadas no domínio fornecido (como OpenCV, ROS, CNNs, etc.). Portanto, a única tecnologia que pode ser incluída é o MATLAB.",
+                "raw_response": "{\n  \"raciocinio\": \"A partir dos trechos do documento, a única tecnologia computacional explicitamente citada é o uso do MATLAB (versão 2013a) e do Image Processing Toolbox, que são mencionados na seção de resultados. Não há referência a outras ferramentas listadas no domínio fornecido (como OpenCV, ROS, CNNs, etc.). Portanto, a única tecnologia que pode ser incluída é o MATLAB.\",\n  \"Tecnologias Computacionais\": [\n    \"MATLAB\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "segmentação",
+                    "detecção"
+                ],
+                "actual": [
+                    "navegação (obstáculos)",
+                    "detecção",
+                    "segmentação"
+                ],
+                "reasoning": "O artigo descreve um sistema que visa detectar obstáculos estáticos e dinâmicos em vídeos agrícolas, utilizando segmentação de imagens e análise temporal. Essa detecção é essencial para a navegação segura de veículos autônomos, permitindo a evasão de obstáculos durante o trajeto. Assim, as aplicações principais do sistema correspondem às áreas de navegação relacionadas a obstáculos, bem como às funções de detecção e segmentação de imagens.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema que visa detectar obstáculos estáticos e dinâmicos em vídeos agrícolas, utilizando segmentação de imagens e análise temporal. Essa detecção é essencial para a navegação segura de veículos autônomos, permitindo a evasão de obstáculos durante o trajeto. Assim, as aplicações principais do sistema correspondem às áreas de navegação relacionadas a obstáculos, bem como às funções de detecção e segmentação de imagens.\",\n  \"Aplicações Principais\": [\n    \"navegação (obstáculos)\",\n    \"detecção\",\n    \"segmentação\"\n  ]\n}",
+                "score": 66,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "26",
+        "original_filename": "(26) Sensor and vision based autonomous agribot for sowing seeds.pdf",
+        "log_file": "26_sensor_and_vision_based_autonomous_ag_250c_50o_20260611_193333.json",
+        "timestamp": "20260611_193333",
+        "overall_score": 64,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O artigo descreve um sistema de orientação baseado em visão que utiliza etapas de processamento de imagem típicas de visão computacional clássica: aquisição de imagem, eliminação de ruído, operação Sobel, conversão de RGB para BW, extração de bordas, cálculo de centróide e uso de recursos morfológicos. Não há menção a algoritmos de aprendizado de máquina, redes neurais ou CNNs. Portanto, o método principal enquadra‑se na categoria de Visão Computacional Clássica.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema de orientação baseado em visão que utiliza etapas de processamento de imagem típicas de visão computacional clássica: aquisição de imagem, eliminação de ruído, operação Sobel, conversão de RGB para BW, extração de bordas, cálculo de centróide e uso de recursos morfológicos. Não há menção a algoritmos de aprendizado de máquina, redes neurais ou CNNs. Portanto, o método principal enquadra‑se na categoria de Visão Computacional Clássica.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera",
+                    "imu",
+                    "gps"
+                ],
+                "reasoning": "No texto são mencionados os sensores de câmera para o sistema de visão, um acelerômetro de 3 eixos (parte de um IMU) e o uso de GPS. Os outros sensores citados (ultrassônico e IR) não pertencem ao domínio listado, portanto são omitidos.",
+                "raw_response": "{\n  \"raciocinio\": \"No texto são mencionados os sensores de câmera para o sistema de visão, um acelerômetro de 3 eixos (parte de um IMU) e o uso de GPS. Os outros sensores citados (ultrassônico e IR) não pertencem ao domínio listado, portanto são omitidos.\",\n  \"Sensores Utilizados\": [\n    \"câmera\",\n    \"imu\",\n    \"gps\"\n  ]\n}",
+                "score": 33,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "MATLAB"
+                ],
+                "actual": [
+                    "MATLAB"
+                ],
+                "reasoning": "A pergunta específica não foi incluída no prompt, portanto não há como extrair uma resposta direta do contexto. Assim, a resposta para a questão solicitada é 'Não informado no contexto'.",
+                "raw_response": "{\n  \"raciocinio\": \"A pergunta específica não foi incluída no prompt, portanto não há como extrair uma resposta direta do contexto. Assim, a resposta para a questão solicitada é 'Não informado no contexto'.\",\n  \"Informação Solicitada\": \"Não informado no contexto\",\n  \"Bibliotecas, Frameworks ou Arquiteturas\": [\n    \"MATLAB\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (mapa)"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "navegação (mapa)",
+                    "navegação (obstáculos)",
+                    "detecção"
+                ],
+                "reasoning": "O artigo descreve um agribot autônomo que realiza semeadura de sementes. Para isso, ele precisa navegar pelo campo (trajeto) usando sensores e visão, construir mapas globais e locais (mapa) a partir de GPS e visão, evitar obstáculos detectados por sensores ultrassônicos e IR (obstáculos) e processar imagens para extrair arestas e linhas da cena (detecção). Não há menção a segmentação, classificação ou estimativas de produção.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um agribot autônomo que realiza semeadura de sementes. Para isso, ele precisa navegar pelo campo (trajeto) usando sensores e visão, construir mapas globais e locais (mapa) a partir de GPS e visão, evitar obstáculos detectados por sensores ultrassônicos e IR (obstáculos) e processar imagens para extrair arestas e linhas da cena (detecção). Não há menção a segmentação, classificação ou estimativas de produção.\",\n  \"Aplicações Principais\": [\n    \"navegação (trajeto)\",\n    \"navegação (mapa)\",\n    \"navegação (obstáculos)\",\n    \"detecção\"\n  ]\n}",
+                "score": 25,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "28",
+        "original_filename": "(28) Machine vision for orchard navigation..pdf",
+        "log_file": "28_machine_vision_for_orchard_navigation_250c_50o_20260611_192926.json",
+        "timestamp": "20260611_192926",
+        "overall_score": 50,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O artigo descreve um algoritmo de visão computacional que utiliza extração do plano de cor verde, segmentação binária entre céu e copas, cálculo do centróide e controle PI. Não há menção a técnicas de aprendizado de máquina, redes neurais ou CNNs. Portanto, o método principal corresponde a técnicas de Visão Computacional Clássica.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um algoritmo de visão computacional que utiliza extração do plano de cor verde, segmentação binária entre céu e copas, cálculo do centróide e controle PI. Não há menção a técnicas de aprendizado de máquina, redes neurais ou CNNs. Portanto, o método principal corresponde a técnicas de Visão Computacional Clássica.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera",
+                    "NIR"
+                ],
+                "reasoning": "O artigo descreve que o sistema de navegação visual utiliza uma câmera modificada GoPro Hero 3+ cujo filtro foi trocado para captar luz no próximo infravermelho (NIR). Assim, o sensor principal emprega uma câmera que opera no espectro visível e no infravermelho próximo. Além disso, durante os testes foi utilizado um sensor ultrassônico para medir a distância ao limite da pista, mas esse tipo de sensor não está presente no domínio fornecido. Portanto, os sensores que se enquadram nos valores exatos do domínio são a câmera e o sensor NIR.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que o sistema de navegação visual utiliza uma câmera modificada GoPro Hero 3+ cujo filtro foi trocado para captar luz no próximo infravermelho (NIR). Assim, o sensor principal emprega uma câmera que opera no espectro visível e no infravermelho próximo. Além disso, durante os testes foi utilizado um sensor ultrassônico para medir a distância ao limite da pista, mas esse tipo de sensor não está presente no domínio fornecido. Portanto, os sensores que se enquadram nos valores exatos do domínio são a câmera e o sensor NIR.\",\n  \"Sensores Utilizados\": [\n    \"câmera\",\n    \"NIR\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "NI LabView"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "O prompt solicita que eu responda a uma pergunta específica sobre a pesquisa do artigo, mas a própria pergunta não foi fornecida no texto. Sem conhecer o conteúdo da pergunta, não há como extrair ou inferir a resposta a partir do contexto disponível.",
+                "raw_response": "{\n  \"raciocinio\": \"O prompt solicita que eu responda a uma pergunta específica sobre a pesquisa do artigo, mas a própria pergunta não foi fornecida no texto. Sem conhecer o conteúdo da pergunta, não há como extrair ou inferir a resposta a partir do contexto disponível.\",\n  \"Pergunta\": \"Não informado no contexto\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "segmentação"
+                ],
+                "reasoning": "O artigo descreve um sistema de visão computacional que permite que um veículo terrestre não‑tripulado siga autonomamente a linha central de fileiras de árvores em um pomar. O objetivo principal declarado é a navegação ao longo do trajeto da fileira, usando a diferença de contraste entre a copa das árvores e o céu para gerar o caminho a ser percorrido. Para isso, o algoritmo segmenta a imagem em duas regiões (céu e copa) e extrai o centróide da área segmentada como variável de controle, o que indica que a segmentação de imagens é uma aplicação central do sistema. Não há menção a navegação baseada em mapa, detecção de obstáculos, classificação de objetos ou estimativas de produção. Assim, as aplicações principais são a navegação ao longo do trajeto da fileira e a segmentação da cena.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema de visão computacional que permite que um veículo terrestre não‑tripulado siga autonomamente a linha central de fileiras de árvores em um pomar. O objetivo principal declarado é a navegação ao longo do trajeto da fileira, usando a diferença de contraste entre a copa das árvores e o céu para gerar o caminho a ser percorrido. Para isso, o algoritmo segmenta a imagem em duas regiões (céu e copa) e extrai o centróide da área segmentada como variável de controle, o que indica que a segmentação de imagens é uma aplicação central do sistema. Não há menção a navegação baseada em mapa, detecção de obstáculos, classificação de objetos ou estimativas de produção. Assim, as aplicações principais são a navegação ao longo do trajeto da fileira e a segmentação da cena.\",\n  \"Aplicações Principais\": [\n    \"navegação (trajeto)\",\n    \"segmentação\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "30",
+        "original_filename": "(30) Tractor path tracking control based on binocular vision.pdf",
+        "log_file": "30_tractor_path_tracking_control_based_o_250c_50o_20260611_193450.json",
+        "timestamp": "20260611_193450",
+        "overall_score": 62,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O artigo descreve o uso do Census transform para detecção de linhas de cultivo, bem como pré‑processamento de imagens, detector SUSAN e Hough/segmentação, que são técnicas típicas de Visão Computacional Clássica. Não há menção a algoritmos de Aprendizado de Máquina, Redes Neurais ou CNNs. Portanto, o método principal se enquadra na categoria de Visão Computacional Clássica.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve o uso do Census transform para detecção de linhas de cultivo, bem como pré‑processamento de imagens, detector SUSAN e Hough/segmentação, que são técnicas típicas de Visão Computacional Clássica. Não há menção a algoritmos de Aprendizado de Máquina, Redes Neurais ou CNNs. Portanto, o método principal se enquadra na categoria de Visão Computacional Clássica.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera binocular"
+                ],
+                "actual": [
+                    "câmera binocular"
+                ],
+                "reasoning": "O artigo descreve o uso de uma câmera binocular (modelo Bumblebee 2) para captura de imagens estéreo que alimentam o algoritmo de detecção de linhas de cultivo. Nenhum outro sensor mencionado no texto corresponde aos termos do domínio fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve o uso de uma câmera binocular (modelo Bumblebee 2) para captura de imagens estéreo que alimentam o algoritmo de detecção de linhas de cultivo. Nenhum outro sensor mencionado no texto corresponde aos termos do domínio fornecido.\",\n  \"Sensores Utilizados\": [\n    \"câmera binocular\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "transformada Census"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "O enunciado solicita responder a pergunta específica sobre a pesquisa do artigo, porém a pergunta em si não foi fornecida no texto. Como não há informação disponível no contexto para responder, a única resposta possível é indicar que a informação não está presente.",
+                "raw_response": "{\n  \"raciocinio\": \"O enunciado solicita responder a pergunta específica sobre a pesquisa do artigo, porém a pergunta em si não foi fornecida no texto. Como não há informação disponível no contexto para responder, a única resposta possível é indicar que a informação não está presente.\",\n  \"Resposta\": \"Não informado no contexto\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "detecção"
+                ],
+                "reasoning": "O artigo descreve um sistema de controle de rastreamento de trajetória para tratores que utiliza visão binocular para identificar linhas de cultura (detecção de linhas de cultivo) e gerar o caminho a ser seguido (planejamento e controle da trajetória). Assim, as aplicações centrais são: (i) detectar as linhas de cultivo, caracterizando‑se como tarefa de detecção, e (ii) usar essa informação para conduzir o trator ao longo do percurso desejado, configurando uma aplicação de navegação de trajeto. Não há menção a navegação de mapa, detecção de obstáculos, segmentação avançada ou estimativas de produção como aplicações principais.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema de controle de rastreamento de trajetória para tratores que utiliza visão binocular para identificar linhas de cultura (detecção de linhas de cultivo) e gerar o caminho a ser seguido (planejamento e controle da trajetória). Assim, as aplicações centrais são: (i) detectar as linhas de cultivo, caracterizando‑se como tarefa de detecção, e (ii) usar essa informação para conduzir o trator ao longo do percurso desejado, configurando uma aplicação de navegação de trajeto. Não há menção a navegação de mapa, detecção de obstáculos, segmentação avançada ou estimativas de produção como aplicações principais.\",\n  \"Aplicações Principais\": [\n    \"navegação (trajeto)\",\n    \"detecção\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "31",
+        "original_filename": "(31) Machine Vision Retrofit System for Mechanical Weed Control in Precision Agriculture Applications.pdf",
+        "log_file": "31_machine_vision_retrofit_system_for_me_250c_50o_20260611_193855.json",
+        "timestamp": "20260611_193855",
+        "overall_score": 55,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)",
+                "reasoning": "O artigo descreve que a classificação dos objetos nas imagens é realizada por meio de um algoritmo de k-NN (k-Nearest Neighbors). Esse algoritmo pertence à categoria de Aprendizado de Máquina supervisionado, que inclui métodos como SVM, Random Forest, K-Means e Expectation-Maximization. Não são utilizadas redes neurais ou CNNs. Portanto, o método principal enquadra‑se em Aprendizado de Máquina.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que a classificação dos objetos nas imagens é realizada por meio de um algoritmo de k-NN (k-Nearest Neighbors). Esse algoritmo pertence à categoria de Aprendizado de Máquina supervisionado, que inclui métodos como SVM, Random Forest, K-Means e Expectation-Maximization. Não são utilizadas redes neurais ou CNNs. Portanto, o método principal enquadra‑se em Aprendizado de Máquina.\",\n  \"Área Computacional\": \"(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)\"\n}",
+                "score": 37,
+                "status": "Parcial"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera",
+                    "ccd"
+                ],
+                "reasoning": "O texto descreve que o retro‑fit utiliza uma câmera RGB modelo Allied Vision Mako G-125C, a qual possui um sensor CCD (Charge‑Coupled Device). Assim, dentro do domínio fornecido, o tipo de sensor corresponde a \"câmera\" (por ser uma câmera RGB) e também a \"ccd\" (por ser um sensor CCD). Não há menção a outros sensores listados no domínio.",
+                "raw_response": "{\n  \"raciocinio\": \"O texto descreve que o retro‑fit utiliza uma câmera RGB modelo Allied Vision Mako G-125C, a qual possui um sensor CCD (Charge‑Coupled Device). Assim, dentro do domínio fornecido, o tipo de sensor corresponde a \\\"câmera\\\" (por ser uma câmera RGB) e também a \\\"ccd\\\" (por ser um sensor CCD). Não há menção a outros sensores listados no domínio.\",\n  \"Sensores Utilizados\": [\n    \"câmera\",\n    \"ccd\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "MATLAB"
+                ],
+                "actual": [
+                    "MATLAB"
+                ],
+                "reasoning": "O texto fornecido não contém a pergunta específica que deve ser respondida. Como a informação solicitada não está presente nos trechos disponíveis, não é possível extrair uma resposta concreta.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O texto fornecido não contém a pergunta específica que deve ser respondida. Como a informação solicitada não está presente nos trechos disponíveis, não é possível extrair uma resposta concreta.\",\n  \"Resposta\": \"Não informado no contexto\",\n  \"Tecnologias\": [\n    \"MATLAB\"\n  ]\n}\n```",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "detecção"
+                ],
+                "actual": [
+                    "detecção",
+                    "segmentação",
+                    "classificação"
+                ],
+                "reasoning": "O texto descreve que o sistema retrofit de visão computacional foi desenvolvido para controlar implementos mecânicos de capina intra‑fileira, discriminando plantas daninhas das culturas. Para isso são realizados passos de correção de iluminação, extração de canais de cor, filtragem de ruído, operações morfométricas e classificação por k‑NN, o que indica claramente que o sistema realiza detecção de objetos (plantas), segmentação da imagem para separar plantas de fundo e classificação dos objetos em categorias (erva, cultura, solo). Não há menção a navegação ou estimativas de produção. Assim, as aplicações principais correspondem aos domínios de detecção, segmentação e classificação.",
+                "raw_response": "{\n  \"raciocinio\": \"O texto descreve que o sistema retrofit de visão computacional foi desenvolvido para controlar implementos mecânicos de capina intra‑fileira, discriminando plantas daninhas das culturas. Para isso são realizados passos de correção de iluminação, extração de canais de cor, filtragem de ruído, operações morfométricas e classificação por k‑NN, o que indica claramente que o sistema realiza detecção de objetos (plantas), segmentação da imagem para separar plantas de fundo e classificação dos objetos em categorias (erva, cultura, solo). Não há menção a navegação ou estimativas de produção. Assim, as aplicações principais correspondem aos domínios de detecção, segmentação e classificação.\",\n  \"Aplicações Principais\": [\n    \"detecção\",\n    \"segmentação\",\n    \"classificação\"\n  ]\n}",
+                "score": 33,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "33",
+        "original_filename": "(33) High Accuracy Adaptive Low Cost Location Sensing_(33) Subsystems for Autonomous Rover in Precision Agriculture.pdf",
+        "log_file": "33_high_accuracy_adaptive_low_cost_locat_250c_50o_20260611_194005.json",
+        "timestamp": "20260611_194005",
+        "overall_score": 49,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O artigo descreve um subsistema de detecção de linhas de cultivo que utiliza filtragem RGB, filtragem por triângulo, limiarização de intensidade (BW mean threshold), detecção de bordas de Canny, regressões lineares (invertida e Deming) e detecção de linhas de Hough. Todas essas técnicas são exemplares de Visão Computacional Clássica, sem envolver aprendizado de máquina ou redes neurais.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um subsistema de detecção de linhas de cultivo que utiliza filtragem RGB, filtragem por triângulo, limiarização de intensidade (BW mean threshold), detecção de bordas de Canny, regressões lineares (invertida e Deming) e detecção de linhas de Hough. Todas essas técnicas são exemplares de Visão Computacional Clássica, sem envolver aprendizado de máquina ou redes neurais.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera",
+                    "LIDAR"
+                ],
+                "actual": [
+                    "câmera",
+                    "LIDAR",
+                    "gps"
+                ],
+                "reasoning": "O artigo descreve a solução proposta que utiliza um sensor de câmera de baixo custo (≈ $50) para a fase de crescimento inicial e um sensor LIDAR (≈ $1500) para a fase de crescimento avançado. Além disso, o estudo compara os resultados obtidos com sensores de referência RTK‑GPS, indicando que o GPS também foi empregado nos experimentos. Assim, os sensores efetivamente mencionados e utilizados no trabalho são a câmera, o LIDAR e o GPS.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve a solução proposta que utiliza um sensor de câmera de baixo custo (≈ $50) para a fase de crescimento inicial e um sensor LIDAR (≈ $1500) para a fase de crescimento avançado. Além disso, o estudo compara os resultados obtidos com sensores de referência RTK‑GPS, indicando que o GPS também foi empregado nos experimentos. Assim, os sensores efetivamente mencionados e utilizados no trabalho são a câmera, o LIDAR e o GPS.\",\n  \"Sensores Utilizados\": [\n    \"câmera\",\n    \"LIDAR\",\n    \"gps\"\n  ]\n}",
+                "score": 66,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "código próprio"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "O enunciado solicita uma resposta baseada no trecho fornecido, porém não foi especificada qual a pergunta a ser respondida. Como não há informação sobre a questão alvo no contexto apresentado, a única conclusão válida é que a informação requerida não está disponível nos trechos citados.",
+                "raw_response": "{\n  \"raciocinio\": \"O enunciado solicita uma resposta baseada no trecho fornecido, porém não foi especificada qual a pergunta a ser respondida. Como não há informação sobre a questão alvo no contexto apresentado, a única conclusão válida é que a informação requerida não está disponível nos trechos citados.\",\n  \"Resposta\": \"Não informado no contexto\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "detecção",
+                    "segmentação"
+                ],
+                "reasoning": "O artigo descreve um subsistema de localização de baixo custo que permite ao rover autônomo determinar sua posição relativa ao centro da faixa (furrow) usando câmera e LiDAR. Essa capacidade é usada para corrigir o percurso do robô dentro da fila, fornecendo erros de cross‑track e heading, o que caracteriza a aplicação principal de navegação ao longo da trajetória. Além disso, o método envolve reconhecimento e segmentação de plantas para identificar as bordas da fila, o que corresponde às funções de detecção e segmentação de imagens agrícolas.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um subsistema de localização de baixo custo que permite ao rover autônomo determinar sua posição relativa ao centro da faixa (furrow) usando câmera e LiDAR. Essa capacidade é usada para corrigir o percurso do robô dentro da fila, fornecendo erros de cross‑track e heading, o que caracteriza a aplicação principal de navegação ao longo da trajetória. Além disso, o método envolve reconhecimento e segmentação de plantas para identificar as bordas da fila, o que corresponde às funções de detecção e segmentação de imagens agrícolas.\",\n  \"Aplicações Principais\": [\n    \"navegação (trajeto)\",\n    \"detecção\",\n    \"segmentação\"\n  ]\n}",
+                "score": 33,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "34",
+        "original_filename": "(34) Ground Level Mapping and Navigating for Agriculture Based on IoT and Computer Vision.pdf",
+        "log_file": "34_ground_level_mapping_and_navigating_f_250c_50o_20260611_192901.json",
+        "timestamp": "20260611_192901",
+        "overall_score": 83,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O artigo descreve que o método central adotado para mapeamento e navegação é um algoritmo de SLAM visual baseado em ORB‑SLAM2, que utiliza detecção e descrição de recursos (ORB) para estimar pose e reconstruir o ambiente. ORB‑SLAM é uma abordagem de visão computacional baseada em características clássicas, sem uso de aprendizado de máquina ou redes neurais profundas. Portanto, a técnica principal se enquadra na categoria de Visão Computacional Clássica.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que o método central adotado para mapeamento e navegação é um algoritmo de SLAM visual baseado em ORB‑SLAM2, que utiliza detecção e descrição de recursos (ORB) para estimar pose e reconstruir o ambiente. ORB‑SLAM é uma abordagem de visão computacional baseada em características clássicas, sem uso de aprendizado de máquina ou redes neurais profundas. Portanto, a técnica principal se enquadra na categoria de Visão Computacional Clássica.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera"
+                ],
+                "reasoning": "O artigo descreve que o sistema de mapeamento utiliza exclusivamente uma câmera monocular (USB Logitech C922x-Pro) para coleta de imagens. Não há menção a outros sensores como IMU, GPS, LIDAR ou câmeras estereoscópicas. Portanto, o sensor utilizado corresponde ao domínio \"câmera\".",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que o sistema de mapeamento utiliza exclusivamente uma câmera monocular (USB Logitech C922x-Pro) para coleta de imagens. Não há menção a outros sensores como IMU, GPS, LIDAR ou câmeras estereoscópicas. Portanto, o sensor utilizado corresponde ao domínio \\\"câmera\\\".\",\n  \"Sensores Utilizados\": [\n    \"câmera\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "ORB-SLAM2"
+                ],
+                "actual": [
+                    "ORB-SLAM2"
+                ],
+                "reasoning": "No contexto do artigo, a única tecnologia que corresponde exatamente a um dos itens listados no domínio fornecido é o ORB-SLAM2, citado como algoritmo de SLAM utilizado no sistema proposto. Nenhuma das outras bibliotecas, frameworks ou arquiteturas mencionadas (por exemplo, Docker, Edge Computing, Wi‑Fi) está presente na lista de valores permitidos.",
+                "raw_response": "{\n  \"raciocinio\": \"No contexto do artigo, a única tecnologia que corresponde exatamente a um dos itens listados no domínio fornecido é o ORB-SLAM2, citado como algoritmo de SLAM utilizado no sistema proposto. Nenhuma das outras bibliotecas, frameworks ou arquiteturas mencionadas (por exemplo, Docker, Edge Computing, Wi‑Fi) está presente na lista de valores permitidos.\",\n  \"Tecnologias Utilizadas\": [\n    \"ORB-SLAM2\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (mapa)"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "navegação (mapa)",
+                    "navegação (obstáculos)"
+                ],
+                "reasoning": "A partir da descrição do artigo, o sistema proposto tem como objetivo gerar mapas 3D da fazenda, permitir o planejamento de rotas e a navegação autônoma dos robôs, bem como garantir que áreas inacessíveis sejam evitadas. Essas funções correspondem diretamente a navegação de trajeto (planejamento de rotas), navegação baseada em mapa (geração e uso de mapas 3D) e navegação com obstáculos (identificação e evitação de áreas não navegáveis). Não há menção a tarefas de detecção, segmentação, classificação ou estimativas de produção como aplicações principais do sistema de mapeamento e navegação.",
+                "raw_response": "{\n  \"raciocinio\": \"A partir da descrição do artigo, o sistema proposto tem como objetivo gerar mapas 3D da fazenda, permitir o planejamento de rotas e a navegação autônoma dos robôs, bem como garantir que áreas inacessíveis sejam evitadas. Essas funções correspondem diretamente a navegação de trajeto (planejamento de rotas), navegação baseada em mapa (geração e uso de mapas 3D) e navegação com obstáculos (identificação e evitação de áreas não navegáveis). Não há menção a tarefas de detecção, segmentação, classificação ou estimativas de produção como aplicações principais do sistema de mapeamento e navegação.\",\n  \"Aplicações Principais\": [\n    \"navegação (trajeto)\",\n    \"navegação (mapa)\",\n    \"navegação (obstáculos)\"\n  ]\n}",
+                "score": 33,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "35",
+        "original_filename": "(35) Machine Vision System for Autonomous Agricultural Vehicle.pdf",
+        "log_file": "35_machine_vision_system_for_autonomous__250c_50o_20260611_193006.json",
+        "timestamp": "20260611_193006",
+        "overall_score": 66,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O artigo descreve um método de detecção de obstáculos que se baseia em processamento clássico de nuvens de pontos: divisão em camadas horizontais, clustering por distância euclidiana, verificação de conexões entre clusters e cálculo de altura e diâmetro dos objetos. Não há menção ao uso de algoritmos de aprendizado de máquina ou redes neurais no método principal; apenas se fala em possíveis trabalhos futuros com CNNs. Portanto, o método principal se enquadra na categoria de Visão Computacional Clássica.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um método de detecção de obstáculos que se baseia em processamento clássico de nuvens de pontos: divisão em camadas horizontais, clustering por distância euclidiana, verificação de conexões entre clusters e cálculo de altura e diâmetro dos objetos. Não há menção ao uso de algoritmos de aprendizado de máquina ou redes neurais no método principal; apenas se fala em possíveis trabalhos futuros com CNNs. Portanto, o método principal se enquadra na categoria de Visão Computacional Clássica.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "LIDAR",
+                    "câmera"
+                ],
+                "reasoning": "Nos trechos do documento (Chunk 4) descreve-se que o subsistema de sensores inclui \"lidars e câmeras\". Especificamente são mencionados dois tipos de LIDAR (2D e 3D) e câmeras para visão geral do ambiente. Não há referência a nenhum dos demais sensores do domínio (imu, gps, etc.). Portanto, os sensores utilizados segundo o contexto são LIDAR e câmera.",
+                "raw_response": "{\n  \"raciocinio\": \"Nos trechos do documento (Chunk 4) descreve-se que o subsistema de sensores inclui \\\"lidars e câmeras\\\". Especificamente são mencionados dois tipos de LIDAR (2D e 3D) e câmeras para visão geral do ambiente. Não há referência a nenhum dos demais sensores do domínio (imu, gps, etc.). Portanto, os sensores utilizados segundo o contexto são LIDAR e câmera.\",\n  \"Sensores Utilizados\": [\n    \"LIDAR\",\n    \"câmera\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "OpenCV"
+                ],
+                "actual": [
+                    "OpenCV"
+                ],
+                "reasoning": "O enunciado solicita que a resposta contenha duas chaves: uma de raciocínio explicativo e outra cujo nome seja o título da pergunta, retornando a informação extraída do contexto. Contudo, o título da pergunta não foi fornecido no texto da solicitação, impossibilitando identificar qual informação específica deve ser respondida. Assim, indiquei que a informação não está informada no contexto. Quanto às bibliotecas, frameworks ou arquiteturas mencionadas no texto, apenas \"OpenCV\" está presente na lista de domínios permitidos.",
+                "raw_response": "{\n  \"raciocinio\": \"O enunciado solicita que a resposta contenha duas chaves: uma de raciocínio explicativo e outra cujo nome seja o título da pergunta, retornando a informação extraída do contexto. Contudo, o título da pergunta não foi fornecido no texto da solicitação, impossibilitando identificar qual informação específica deve ser respondida. Assim, indiquei que a informação não está informada no contexto. Quanto às bibliotecas, frameworks ou arquiteturas mencionadas no texto, apenas \\\"OpenCV\\\" está presente na lista de domínios permitidos.\",\n  \"Não informado no contexto\": \"Não informado no contexto\",\n  \"Bibliotecas, Frameworks ou Arquiteturas\": [\n    \"OpenCV\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "detecção"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "navegação (mapa)",
+                    "navegação (obstáculos)",
+                    "detecção",
+                    "classificação",
+                    "segmentação"
+                ],
+                "reasoning": "O artigo descreve um sistema de visão de máquina para veículo agrícola autônomo que integra lidars (2D e 3D) e câmeras. As funções descritas incluem construção de mapas de profundidade, SLAM, geração de trajetórias ótimas, detecção e classificação de obstáculos, separação estrutural de obstáculos (segmentação) e cálculo de distância e ângulo dos objetos reconhecidos. Assim, as aplicações principais do sistema correspondem a navegação por trajeto, criação de mapa de ambiente, navegação com atenção a obstáculos, detecção de objetos, classificação dos mesmos e segmentação para separar obstáculos.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema de visão de máquina para veículo agrícola autônomo que integra lidars (2D e 3D) e câmeras. As funções descritas incluem construção de mapas de profundidade, SLAM, geração de trajetórias ótimas, detecção e classificação de obstáculos, separação estrutural de obstáculos (segmentação) e cálculo de distância e ângulo dos objetos reconhecidos. Assim, as aplicações principais do sistema correspondem a navegação por trajeto, criação de mapa de ambiente, navegação com atenção a obstáculos, detecção de objetos, classificação dos mesmos e segmentação para separar obstáculos.\",\n  \"Aplicações Principais\": [\n    \"navegação (trajeto)\",\n    \"navegação (mapa)\",\n    \"navegação (obstáculos)\",\n    \"detecção\",\n    \"classificação\",\n    \"segmentação\"\n  ]\n}",
+                "score": 16,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "36",
+        "original_filename": "(36) Medial axis-based machine-vision system for orchard robot navigation.pdf",
+        "log_file": "36_medial_axisbased_machinevision_system_250c_50o_20260611_193123.json",
+        "timestamp": "20260611_193123",
+        "overall_score": 75,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)",
+                "reasoning": "O algoritmo proposto utiliza filtros Gabor para extração de textura, seguida por redução de dimensionalidade via PCA e, principalmente, a segmentação da imagem por meio de clustering K‑means para identificar a região de interesse (caminho). O uso de K‑means, que é uma técnica de aprendizado não supervisionado, caracteriza o método como pertencente ao âmbito de Aprendizado de Máquina.",
+                "raw_response": "{\n  \"raciocinio\": \"O algoritmo proposto utiliza filtros Gabor para extração de textura, seguida por redução de dimensionalidade via PCA e, principalmente, a segmentação da imagem por meio de clustering K‑means para identificar a região de interesse (caminho). O uso de K‑means, que é uma técnica de aprendizado não supervisionado, caracteriza o método como pertencente ao âmbito de Aprendizado de Máquina.\",\n  \"Área Computacional\": \"(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)\"\n}",
+                "score": 37,
+                "status": "Parcial"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera RGB-D"
+                ],
+                "reasoning": "No texto do artigo, a única tecnologia de sensor descrita como parte do sistema de navegação desenvolvida é a câmera IntelRealSense D435, que captura imagens RGB a 1 fps e pode operar até 30 fps em resolução 1920×1080. Esta câmera é classificada como um sensor RGB‑D, pois fornece tanto informação de cor quanto de profundidade. Não há menção a uso de IMU, GPS, LIDAR ou outros sensores listados no domínio. Portanto, o único sensor utilizado que corresponde aos valores permitidos é \"câmera RGB-D\".",
+                "raw_response": "{\n  \"raciocinio\": \"No texto do artigo, a única tecnologia de sensor descrita como parte do sistema de navegação desenvolvida é a câmera IntelRealSense D435, que captura imagens RGB a 1 fps e pode operar até 30 fps em resolução 1920×1080. Esta câmera é classificada como um sensor RGB‑D, pois fornece tanto informação de cor quanto de profundidade. Não há menção a uso de IMU, GPS, LIDAR ou outros sensores listados no domínio. Portanto, o único sensor utilizado que corresponde aos valores permitidos é \\\"câmera RGB-D\\\".\",\n  \"Sensores Utilizados\": [\n    \"câmera RGB-D\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "filtro Gabor",
+                    "K-means"
+                ],
+                "actual": [
+                    "filtro Gabor",
+                    "K-means",
+                    "ROS"
+                ],
+                "reasoning": "No texto do artigo, a seção de aquisição de imagens (Chunk 11) descreve que a câmera utilizada foi a Intel RealSense D435, especificamente seu canal RGB, posicionada no topo central do robô. Dessa forma, a informação sobre o(s) sensor(es) empregado(s) está claramente presente no contexto.\n\nQuanto às tecnologias computacionais empregadas, o artigo menciona o uso de filtros Gabor para extração de características de textura (Chunk 12, 15), o algoritmo de clustering K‑means para segmentação da imagem (Chunk 0, 12) e o framework ROS (Robot Operating System) para controle do robô (Chunk 9). Todos estes itens correspondem exatamente aos valores listados no domínio fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"No texto do artigo, a seção de aquisição de imagens (Chunk 11) descreve que a câmera utilizada foi a Intel RealSense D435, especificamente seu canal RGB, posicionada no topo central do robô. Dessa forma, a informação sobre o(s) sensor(es) empregado(s) está claramente presente no contexto.\\n\\nQuanto às tecnologias computacionais empregadas, o artigo menciona o uso de filtros Gabor para extração de características de textura (Chunk 12, 15), o algoritmo de clustering K‑means para segmentação da imagem (Chunk 0, 12) e o framework ROS (Robot Operating System) para controle do robô (Chunk 9). Todos estes itens correspondem exatamente aos valores listados no domínio fornecido.\",\n  \"Sensores Utilizados\": \"Intel RealSense D435 RGB camera\",\n  \"Tecnologias\": [\n    \"filtro Gabor\",\n    \"K-means\",\n    \"ROS\"\n  ]\n}",
+                "score": 66,
+                "status": "Parcial"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)"
+                ],
+                "reasoning": "O artigo descreve um sistema de visão computacional que extrai o eixo medial de imagens binarizadas para gerar o caminho que o robô deve seguir no pomar. O objetivo declarado é \"gerar um caminho de navegação preciso\" e o experimento avalia o erro de rastreamento de trajetória, indicando que a aplicação principal é a navegação ao longo do trajeto. Embora o método inclua etapas de segmentação (filtragem Gabor e k‑means), essa etapa serve apenas ao propósito de obter o caminho, não constituindo um objetivo de aplicação independente. Portanto, a aplicação principal do sistema mapeia-se ao domínio \"navegação (trajeto)\".",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema de visão computacional que extrai o eixo medial de imagens binarizadas para gerar o caminho que o robô deve seguir no pomar. O objetivo declarado é \\\"gerar um caminho de navegação preciso\\\" e o experimento avalia o erro de rastreamento de trajetória, indicando que a aplicação principal é a navegação ao longo do trajeto. Embora o método inclua etapas de segmentação (filtragem Gabor e k‑means), essa etapa serve apenas ao propósito de obter o caminho, não constituindo um objetivo de aplicação independente. Portanto, a aplicação principal do sistema mapeia-se ao domínio \\\"navegação (trajeto)\\\".\",\n  \"Aplicações Principais\": [\n    \"navegação (trajeto)\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            }
+        }
+    },
+    {
+        "article_id": "37",
+        "original_filename": "(37) Using a depth camera for crop row detection and mapping for under-canopy navigation of agricultural robotic vehicle.pdf",
+        "log_file": "37_using_a_depth_camera_for_crop_row_det_250c_50o_20260611_192839.json",
+        "timestamp": "20260611_192839",
+        "overall_score": 37,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(VC) Visão Computacional Clássica",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O artigo descreve um pipeline que utiliza filtros bilaterais, detecção de plano do solo, clustering baseado em Euclidean Clustering e programação linear/dinâmica para ajustar planos paralelos que modelam as linhas das fileiras de cultivo. Não há menção a algoritmos de aprendizado de máquina, redes neurais ou CNNs. Portanto, o método principal se enquadra nas técnicas clássicas de visão computacional e processamento de nuvens de pontos.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um pipeline que utiliza filtros bilaterais, detecção de plano do solo, clustering baseado em Euclidean Clustering e programação linear/dinâmica para ajustar planos paralelos que modelam as linhas das fileiras de cultivo. Não há menção a algoritmos de aprendizado de máquina, redes neurais ou CNNs. Portanto, o método principal se enquadra nas técnicas clássicas de visão computacional e processamento de nuvens de pontos.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera ToF"
+                ],
+                "actual": [
+                    "câmera ToF",
+                    "imu",
+                    "gps",
+                    "câmera estéreo"
+                ],
+                "reasoning": "O artigo descreve que o robô PhenoBot 3.0 possui uma câmera Time‑of‑Flight (ToF) para detecção de linhas de cultura, um módulo RTK‑GPS para posicionamento global, duas unidades de medição inercial (IMU) para orientação e cabeçalhos de câmeras estéreo para aquisição de imagens de close‑range dos vegetais. Esses sensores correspondem exatamente aos termos listados no domínio fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que o robô PhenoBot 3.0 possui uma câmera Time‑of‑Flight (ToF) para detecção de linhas de cultura, um módulo RTK‑GPS para posicionamento global, duas unidades de medição inercial (IMU) para orientação e cabeçalhos de câmeras estéreo para aquisição de imagens de close‑range dos vegetais. Esses sensores correspondem exatamente aos termos listados no domínio fornecido.\",\n  \"Sensores Utilizados\": [\n    \"câmera ToF\",\n    \"imu\",\n    \"gps\",\n    \"câmera estéreo\"\n  ]\n}",
+                "score": 25,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "código próprio"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "O texto fornecido contém várias informações sobre o método, resultados e detalhes do artigo, porém a pergunta específica que deve ser respondida não foi incluída na solicitação. Sem o enunciado da pergunta, não há como extrair a resposta desejada a partir do contexto.",
+                "raw_response": "{\n  \"raciocinio\": \"O texto fornecido contém várias informações sobre o método, resultados e detalhes do artigo, porém a pergunta específica que deve ser respondida não foi incluída na solicitação. Sem o enunciado da pergunta, não há como extrair a resposta desejada a partir do contexto.\",\n  \"Resposta\": \"Não informado no contexto\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "navegação (mapa)",
+                    "navegação (obstáculos)",
+                    "detecção"
+                ],
+                "reasoning": "O artigo descreve um sistema que usa uma câmera Time-of-Flight para detectar linhas de cultivo a partir de imagens de profundidade. A partir dos resultados de detecção, o sistema: (1) gera mapas de ocupação do campo (campo de mapeamento) e (2) fornece dados de posicionamento inter‑fileira para o robô. O mapa de ocupação serve para planejar trajetórias e evitar colisões, portanto apoia a navegação baseada em mapa e obstáculos. A detecção das linhas de cultivo por si só também é uma aplicação de detecção. Assim, as aplicações principais listadas no domínio são: navegação (trajeto), navegação (mapa), navegação (obstáculos) e detecção.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema que usa uma câmera Time-of-Flight para detectar linhas de cultivo a partir de imagens de profundidade. A partir dos resultados de detecção, o sistema: (1) gera mapas de ocupação do campo (campo de mapeamento) e (2) fornece dados de posicionamento inter‑fileira para o robô. O mapa de ocupação serve para planejar trajetórias e evitar colisões, portanto apoia a navegação baseada em mapa e obstáculos. A detecção das linhas de cultivo por si só também é uma aplicação de detecção. Assim, as aplicações principais listadas no domínio são: navegação (trajeto), navegação (mapa), navegação (obstáculos) e detecção.\",\n  \"Aplicações Principais\": [\n    \"navegação (trajeto)\",\n    \"navegação (mapa)\",\n    \"navegação (obstáculos)\",\n    \"detecção\"\n  ]\n}",
+                "score": 25,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "38",
+        "original_filename": "(38) Towards Autonomous Agriculture_ Automatic Ground Detection Using Trinocular Stereovision.pdf",
+        "log_file": "38_towards_autonomous_agriculture_automa_250c_50o_20260611_193644.json",
+        "timestamp": "20260611_193644",
+        "overall_score": 38,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(AM) Aprendizado de Máquina",
+                "actual": "(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)",
+                "reasoning": "O artigo descreve um framework auto‑aprendente que utiliza classificadores baseados em características geométricas e de cor extraídas de nuvens de pontos 3D obtidas por estereovisão trinocular. Para modelar a classe do solo são empregados Modelos de Mistura Gaussiana (GMM) ajustados com o algoritmo Expectation‑Maximization (EM) e seleção automática do número de componentes via BIC. Essa abordagem se enquadra nas técnicas de Aprendizado de Máquina, especificamente utilizando EM/GMM, que está listado entre as opções de Aprendizado de Máquina.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um framework auto‑aprendente que utiliza classificadores baseados em características geométricas e de cor extraídas de nuvens de pontos 3D obtidas por estereovisão trinocular. Para modelar a classe do solo são empregados Modelos de Mistura Gaussiana (GMM) ajustados com o algoritmo Expectation‑Maximization (EM) e seleção automática do número de componentes via BIC. Essa abordagem se enquadra nas técnicas de Aprendizado de Máquina, especificamente utilizando EM/GMM, que está listado entre as opções de Aprendizado de Máquina.\",\n  \"Área Computacional\": \"(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera estéreo"
+                ],
+                "actual": [
+                    "câmera estéreo",
+                    "LIDAR",
+                    "térmica"
+                ],
+                "reasoning": "O artigo descreve o uso de um sistema de câmera trinocular Bumblebee XB3, que fornece imagens estéreo, configurado como um par estéreo (câmera estéreo). Também menciona um sensor laser 3D da Sick, classificado como um LIDAR ou scanner laser, e uma câmera térmica infravermelha. Estes são os sensores explicitamente listados no texto fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve o uso de um sistema de câmera trinocular Bumblebee XB3, que fornece imagens estéreo, configurado como um par estéreo (câmera estéreo). Também menciona um sensor laser 3D da Sick, classificado como um LIDAR ou scanner laser, e uma câmera térmica infravermelha. Estes são os sensores explicitamente listados no texto fornecido.\",\n  \"Sensores Utilizados\": [\n    \"câmera estéreo\",\n    \"LIDAR\",\n    \"térmica\"\n  ]\n}",
+                "score": 33,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "código próprio"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "O texto fornecido contém detalhes sobre o sistema de visão estéreo trinocular, classificadores geométricos e de cor, e o contexto de uso em um trator agrícola, mas não inclui a pergunta específica a ser respondida. Como a pergunta não foi informada, não há como extrair a resposta solicitada a partir do contexto.",
+                "raw_response": "{\n  \"raciocinio\": \"O texto fornecido contém detalhes sobre o sistema de visão estéreo trinocular, classificadores geométricos e de cor, e o contexto de uso em um trator agrícola, mas não inclui a pergunta específica a ser respondida. Como a pergunta não foi informada, não há como extrair a resposta solicitada a partir do contexto.\",\n  \"Não informado no contexto\": \"Não informado no contexto\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "classificação"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "navegação (obstáculos)",
+                    "navegação (mapa)",
+                    "segmentação",
+                    "classificação"
+                ],
+                "reasoning": "O artigo descreve um sistema de percepção baseado em visão estereoscópica trinocular que aprende a classificar o terreno em solo e não-solo, segmenta subclasses de solo e atualiza continuamente o modelo. Essa capacidade é usada para permitir navegação autônoma segura em ambientes agrícolas não estruturados, reconhecendo obstáculos, criando mapas de terreno e apoiando o planejamento de trajetória. Portanto, as aplicações principais correspondem aos domínios de navegação (trajeto), navegação (obstáculos), navegação (mapa), segmentação e classificação.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema de percepção baseado em visão estereoscópica trinocular que aprende a classificar o terreno em solo e não-solo, segmenta subclasses de solo e atualiza continuamente o modelo. Essa capacidade é usada para permitir navegação autônoma segura em ambientes agrícolas não estruturados, reconhecendo obstáculos, criando mapas de terreno e apoiando o planejamento de trajetória. Portanto, as aplicações principais correspondem aos domínios de navegação (trajeto), navegação (obstáculos), navegação (mapa), segmentação e classificação.\",\n  \"Aplicações Principais\": [\n    \"navegação (trajeto)\",\n    \"navegação (obstáculos)\",\n    \"navegação (mapa)\",\n    \"segmentação\",\n    \"classificação\"\n  ]\n}",
+                "score": 20,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "39",
+        "original_filename": "(39) Novelty-based visual obstacle detection in agriculture.pdf",
+        "log_file": "39_noveltybased_visual_obstacle_detectio_250c_50o_20260611_193921.json",
+        "timestamp": "20260611_193921",
+        "overall_score": 36,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(AM) Aprendizado de Máquina",
+                "actual": "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                "reasoning": "O artigo descreve um método que utiliza um detector de novidade baseado em estimativa de densidade de probabilidade no espaço de descritores de imagem (cor Lab, variância) e emparelhamento estéreo denso. Não há menção ao uso de algoritmos de aprendizado de máquina supervisionado, redes neurais ou arquiteturas convolucionais; a abordagem se baseia em análise clássica de imagens, descritores e estatísticas, caracterizando‑se como Visão Computacional Clássica.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um método que utiliza um detector de novidade baseado em estimativa de densidade de probabilidade no espaço de descritores de imagem (cor Lab, variância) e emparelhamento estéreo denso. Não há menção ao uso de algoritmos de aprendizado de máquina supervisionado, redes neurais ou arquiteturas convolucionais; a abordagem se baseia em análise clássica de imagens, descritores e estatísticas, caracterizando‑se como Visão Computacional Clássica.\",\n  \"Área Computacional\": \"(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)\"\n}",
+                "score": 31,
+                "status": "Parcial"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera estéreo",
+                    "scanner laser"
+                ],
+                "actual": [
+                    "scanner laser",
+                    "câmera estéreo",
+                    "gps"
+                ],
+                "reasoning": "O artigo descreve que a plataforma robótica utiliza dois sensores principais para detecção de obstáculos: um scanner laser planar (SICK LMS151) e um par de câmeras estéreo (iDS UI-5240CP). Além disso, menciona que a localização e orientação do veículo são registradas por um sistema GPS de alta precisão. Esses três sensores correspondem exatamente aos valores presentes no domínio fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que a plataforma robótica utiliza dois sensores principais para detecção de obstáculos: um scanner laser planar (SICK LMS151) e um par de câmeras estéreo (iDS UI-5240CP). Além disso, menciona que a localização e orientação do veículo são registradas por um sistema GPS de alta precisão. Esses três sensores correspondem exatamente aos valores presentes no domínio fornecido.\",\n  \"Sensores Utilizados\": [\n    \"scanner laser\",\n    \"câmera estéreo\",\n    \"gps\"\n  ]\n}",
+                "score": 66,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "ROS"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "A pergunta não foi apresentada no prompt, portanto não há como identificar qual informação buscar no contexto fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"A pergunta não foi apresentada no prompt, portanto não há como identificar qual informação buscar no contexto fornecido.\",\n  \"Resposta\": \"Não informado no contexto\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "detecção"
+                ],
+                "actual": [
+                    "navegação (obstáculos)",
+                    "detecção"
+                ],
+                "reasoning": "O artigo descreve um sistema de deteção de obstáculos baseado em novidade visual que, ao identificar regiões potencialmente obstáculo, aciona o pareamento estéreo para gerar nuvem de pontos e criar um mapa de obstáculos. Esse mapa é usado para que o robô autônomo evite colisões ao percorrer campos agrícolas, permitindo a navegação segura. Assim, as funções principais do sistema são a deteção de obstáculos e o suporte à navegação baseada em obstáculos (e, indiretamente, ao trajeto). Não há menção a segmentação, classificação de culturas ou estimativas de produção.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema de deteção de obstáculos baseado em novidade visual que, ao identificar regiões potencialmente obstáculo, aciona o pareamento estéreo para gerar nuvem de pontos e criar um mapa de obstáculos. Esse mapa é usado para que o robô autônomo evite colisões ao percorrer campos agrícolas, permitindo a navegação segura. Assim, as funções principais do sistema são a deteção de obstáculos e o suporte à navegação baseada em obstáculos (e, indiretamente, ao trajeto). Não há menção a segmentação, classificação de culturas ou estimativas de produção.\",\n  \"Aplicações Principais\": [\n    \"navegação (obstáculos)\",\n    \"detecção\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "40",
+        "original_filename": "(40) Plant classification system for crop _weed discrimination without segmentation.pdf",
+        "log_file": "40_plant_classification_system_for_crop__250c_50o_20260611_193706.json",
+        "timestamp": "20260611_193706",
+        "overall_score": 50,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(AM) Aprendizado de Máquina",
+                "actual": "(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)",
+                "reasoning": "O artigo descreve que a classificação das plantas é realizada por um classificador Random Forest, escolhido por ser multi‑classe, rápido de treinar e capaz de estimar scores de certeza. Random Forest é um algoritmo clássico de aprendizado de máquina, não é baseado em redes neurais nem em técnicas puras de visão computacional tradicional. Portanto, o método principal se enquadra na categoria de Aprendizado de Máquina.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que a classificação das plantas é realizada por um classificador Random Forest, escolhido por ser multi‑classe, rápido de treinar e capaz de estimar scores de certeza. Random Forest é um algoritmo clássico de aprendizado de máquina, não é baseado em redes neurais nem em técnicas puras de visão computacional tradicional. Portanto, o método principal se enquadra na categoria de Aprendizado de Máquina.\",\n  \"Área Computacional\": \"(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera multiespectral"
+                ],
+                "actual": [
+                    "câmera multiespectral",
+                    "NIR"
+                ],
+                "reasoning": "O documento descreve que o sistema utiliza uma câmera monocular down‑looking multiespectral (modelo JAI AD‑130 GE) que captura imagens nos espectros visível (canal vermelho) e infravermelho próximo (NIR). Portanto, os sensores empregados são uma câmera multiespectral e o próprio sensor NIR, que constam exatamente nos termos do domínio fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"O documento descreve que o sistema utiliza uma câmera monocular down‑looking multiespectral (modelo JAI AD‑130 GE) que captura imagens nos espectros visível (canal vermelho) e infravermelho próximo (NIR). Portanto, os sensores empregados são uma câmera multiespectral e o próprio sensor NIR, que constam exatamente nos termos do domínio fornecido.\",\n  \"Sensores Utilizados\": [\n    \"câmera multiespectral\",\n    \"NIR\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "código próprio"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "O texto fornecido não inclui a pergunta a ser respondida nem o título da pergunta. Sem essa informação não há como extrair uma resposta específica do contexto.",
+                "raw_response": "{\n  \"raciocinio\": \"O texto fornecido não inclui a pergunta a ser respondida nem o título da pergunta. Sem essa informação não há como extrair uma resposta específica do contexto.\",\n  \"Resposta\": \"Não informado no contexto\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "classificação"
+                ],
+                "actual": [
+                    "detecção",
+                    "classificação"
+                ],
+                "reasoning": "O artigo descreve um sistema que classifica pixels da imagem como cultivos ou ervas daninhas, permitindo que um robô de campo trate seletivamente as ervas daninhas. Essa funcionalidade corresponde às tarefas de detecção (identificar a presença de plantas/ervas daninhas) e de classificação (atribuir a classe crop ou weed a cada pixel). Não há menção de navegação, segmentação ou estimativas de produção.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema que classifica pixels da imagem como cultivos ou ervas daninhas, permitindo que um robô de campo trate seletivamente as ervas daninhas. Essa funcionalidade corresponde às tarefas de detecção (identificar a presença de plantas/ervas daninhas) e de classificação (atribuir a classe crop ou weed a cada pixel). Não há menção de navegação, segmentação ou estimativas de produção.\",\n  \"Aplicações Principais\": [\n    \"detecção\",\n    \"classificação\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "43",
+        "original_filename": "(43) Learning crop models for vision-based guidance of agricultural robots.pdf",
+        "log_file": "43_learning_crop_models_for_visionbased__250c_50o_20260611_193946.json",
+        "timestamp": "20260611_193946",
+        "overall_score": 50,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(AM) Aprendizado de Máquina",
+                "actual": "(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)",
+                "reasoning": "O artigo descreve que o método principal utilizado para estimar o deslocamento das linhas de cultivo é um algoritmo de regressão baseado em Support Vector Machine (SVM). SVM pertence à categoria de aprendizado de máquina, não sendo um algoritmo clássico de visão computacional puro nem uma rede neural. Portanto, a classificação correta é a de Aprendizado de Máquina.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que o método principal utilizado para estimar o deslocamento das linhas de cultivo é um algoritmo de regressão baseado em Support Vector Machine (SVM). SVM pertence à categoria de aprendizado de máquina, não sendo um algoritmo clássico de visão computacional puro nem uma rede neural. Portanto, a classificação correta é a de Aprendizado de Máquina.\",\n  \"Área Computacional\": \"(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera estéreo"
+                ],
+                "actual": [
+                    "câmera estéreo",
+                    "gps"
+                ],
+                "reasoning": "O artigo descreve que a localização das linhas de cultivo é estimada a partir de descritores de cor, textura e estrutura 3D obtidos de uma câmera estéreo frontal (par de câmeras estereoscópicas). Além disso, para avaliação do erro de offset, o caminho do robô foi comparado com dados de um sistema GNSS/INS (Novatel). Assim, os sensores mencionados no documento são a câmera estéreo e o GPS (GNSS).",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que a localização das linhas de cultivo é estimada a partir de descritores de cor, textura e estrutura 3D obtidos de uma câmera estéreo frontal (par de câmeras estereoscópicas). Além disso, para avaliação do erro de offset, o caminho do robô foi comparado com dados de um sistema GNSS/INS (Novatel). Assim, os sensores mencionados no documento são a câmera estéreo e o GPS (GNSS).\",\n  \"Sensores Utilizados\": [\n    \"câmera estéreo\",\n    \"gps\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "OpenCV",
+                    "SVM"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "Nos trechos fornecidos não há informações que respondam a uma pergunta específica, pois a pergunta em si não foi apresentada no contexto. Dessa forma, não é possível extrair uma resposta baseada no texto disponível.",
+                "raw_response": "{\n  \"raciocinio\": \"Nos trechos fornecidos não há informações que respondam a uma pergunta específica, pois a pergunta em si não foi apresentada no contexto. Dessa forma, não é possível extrair uma resposta baseada no texto disponível.\",\n  \"Resposta\": \"Não informado no contexto\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "detecção"
+                ],
+                "reasoning": "O artigo descreve um método visual que aprende um modelo de linhas de cultivo e o usa para estimar o deslocamento das linhas, permitindo ao robô seguir uma trajetória entre as fileiras sem danificar a cultura. Dessa forma, a aplicação central é a orientação/autonomia de veículos agrícolas (navegação de trajeto). Para obter essa orientação, o sistema primeiro localiza e rastreia as linhas de cultivo, o que corresponde a uma tarefa de detecção de elementos relevantes no ambiente. Assim, as aplicações principais mapeiam-se aos domínios \"navegação (trajeto)\" e \"detecção\".",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um método visual que aprende um modelo de linhas de cultivo e o usa para estimar o deslocamento das linhas, permitindo ao robô seguir uma trajetória entre as fileiras sem danificar a cultura. Dessa forma, a aplicação central é a orientação/autonomia de veículos agrícolas (navegação de trajeto). Para obter essa orientação, o sistema primeiro localiza e rastreia as linhas de cultivo, o que corresponde a uma tarefa de detecção de elementos relevantes no ambiente. Assim, as aplicações principais mapeiam-se aos domínios \\\"navegação (trajeto)\\\" e \\\"detecção\\\".\",\n  \"Aplicações Principais\": [\n    \"navegação (trajeto)\",\n    \"detecção\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "45",
+        "original_filename": "(45) SLAM in the Field- An Evaluation of Monocular Mapping and Localization on Challenging Dynamic Agricultural Environment.pdf",
+        "log_file": "45_slam_in_the_field_an_evaluation_of_mo_250c_50o_20260611_193218.json",
+        "timestamp": "20260611_193218",
+        "overall_score": 33,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(AM) Aprendizado de Máquina",
+                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "reasoning": "O artigo descreve o uso de Monodepth2, que é um modelo baseado em U‑Net (rede convolucional) para estimativa de profundidade auto‑supervisionada. Essa abordagem de aprendizado profundo está no cerne da contribuição principal (estimativa de profundidade para simular RGB‑D SLAM) e se enquadra na categoria de Redes Neurais Convolucionais.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve o uso de Monodepth2, que é um modelo baseado em U‑Net (rede convolucional) para estimativa de profundidade auto‑supervisionada. Essa abordagem de aprendizado profundo está no cerne da contribuição principal (estimativa de profundidade para simular RGB‑D SLAM) e se enquadra na categoria de Redes Neurais Convolucionais.\",\n  \"Área Computacional\": \"(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)\"\n}",
+                "score": 34,
+                "status": "Parcial"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera",
+                    "câmera estéreo"
+                ],
+                "reasoning": "O artigo descreve um sistema de SLAM baseado em visão monocular, usando imagens de uma única câmera para rastreamento e poses. Para gerar a profundidade de referência, o conjunto de dados Rosario fornece pares estéreo (câmera esquerda e direita) que são usados para criar o ground‑truth via SGBM. Não há menção a outros sensores como IMU, GPS, LIDAR etc. Assim, os sensores efetivamente utilizados são a câmera monocular (câmera) e a configuração estéreo (câmera estéreo) presente no dataset.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema de SLAM baseado em visão monocular, usando imagens de uma única câmera para rastreamento e poses. Para gerar a profundidade de referência, o conjunto de dados Rosario fornece pares estéreo (câmera esquerda e direita) que são usados para criar o ground‑truth via SGBM. Não há menção a outros sensores como IMU, GPS, LIDAR etc. Assim, os sensores efetivamente utilizados são a câmera monocular (câmera) e a configuração estéreo (câmera estéreo) presente no dataset.\",\n  \"Sensores Utilizados\": [\n    \"câmera\",\n    \"câmera estéreo\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "OpenVSLAM"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "A pergunta específica não foi apresentada no prompt, portanto não há como identificar qual informação da pesquisa deve ser extraída do contexto fornecido. Sem a definição da pergunta, não é possível localizar ou inferir a resposta nos trechos disponíveis.",
+                "raw_response": "{\n  \"raciocinio\": \"A pergunta específica não foi apresentada no prompt, portanto não há como identificar qual informação da pesquisa deve ser extraída do contexto fornecido. Sem a definição da pergunta, não é possível localizar ou inferir a resposta nos trechos disponíveis.\",\n  \"Resposta\": \"Não informado no contexto\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (mapa)"
+                ],
+                "actual": [
+                    "navegação (mapa)",
+                    "navegação (trajeto)"
+                ],
+                "reasoning": "O artigo descreve um sistema que combina SLAM monocular com reconstrução densa para gerar mapas detalhados do campo e estimar a pose da câmera. Esses mapas são utilizados para tarefas de navegação do robô (autonomous steering, guidance) e para criar representações espaciais que permitem o planejamento de trajetórias. Assim, as aplicações principais apontadas no texto são a navegação baseada em mapa e a navegação ao longo de trajetos planejados.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema que combina SLAM monocular com reconstrução densa para gerar mapas detalhados do campo e estimar a pose da câmera. Esses mapas são utilizados para tarefas de navegação do robô (autonomous steering, guidance) e para criar representações espaciais que permitem o planejamento de trajetórias. Assim, as aplicações principais apontadas no texto são a navegação baseada em mapa e a navegação ao longo de trajetos planejados.\",\n  \"Aplicações Principais\": [\n    \"navegação (mapa)\",\n    \"navegação (trajeto)\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "46",
+        "original_filename": "(46) Real-time object detection in agricultural_remote environments using the multiple-expert colour feature extreme learning machine (MEC-ELM).pdf",
+        "log_file": "46_realtime_object_detection_in_agricult_250c_50o_20260611_192818.json",
+        "timestamp": "20260611_192818",
+        "overall_score": 66,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(RN) Redes Neurais",
+                "actual": "(RN) Redes Neurais (ex: ELM, RNAs tradicionais)",
+                "reasoning": "O artigo descreve o uso do Extreme Learning Machine (ELM) e suas extensões (CF‑ELM, MEC‑ELM) como algoritmo principal para extração de características e classificação de objetos. O ELM é uma rede neural de camada única feed‑forward, portanto se enquadra na categoria de Redes Neurais tradicionais, não envolvendo redes convolucionais nem técnicas clássicas de visão computacional pura, nem algoritmos de aprendizado de máquina genéricos como SVM ou Random Forest.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve o uso do Extreme Learning Machine (ELM) e suas extensões (CF‑ELM, MEC‑ELM) como algoritmo principal para extração de características e classificação de objetos. O ELM é uma rede neural de camada única feed‑forward, portanto se enquadra na categoria de Redes Neurais tradicionais, não envolvendo redes convolucionais nem técnicas clássicas de visão computacional pura, nem algoritmos de aprendizado de máquina genéricos como SVM ou Random Forest.\",\n  \"Área Computacional\": \"(RN) Redes Neurais (ex: ELM, RNAs tradicionais)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera"
+                ],
+                "reasoning": "O artigo descreve a captura de imagens e vídeos por diferentes tipos de câmeras (câmera manual de 10 MP, câmera DJI Phantom, GoPro, câmera Scoutguard SG860C) para gerar os conjuntos de dados de detecção. Não há menção a outros sensores como IMU, GPS, LIDAR etc., apenas a possibilidade de integrar GPS no futuro, mas sem uso efetivo descrito. Assim, o único sensor efetivamente utilizado é a câmera.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve a captura de imagens e vídeos por diferentes tipos de câmeras (câmera manual de 10 MP, câmera DJI Phantom, GoPro, câmera Scoutguard SG860C) para gerar os conjuntos de dados de detecção. Não há menção a outros sensores como IMU, GPS, LIDAR etc., apenas a possibilidade de integrar GPS no futuro, mas sem uso efetivo descrito. Assim, o único sensor efetivamente utilizado é a câmera.\",\n  \"Sensores Utilizados\": [\n    \"câmera\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "algoritmo MEC-ELM"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "O texto fornecido contém detalhes sobre o algoritmo MEC-ELM, sua implementação, conjuntos de dados e resultados, mas a pergunta específica a ser respondida não foi incluída na mensagem. Sem conhecer o conteúdo da pergunta, não há como extrair uma resposta direta dos trechos disponíveis.",
+                "raw_response": "{\n  \"raciocinio\": \"O texto fornecido contém detalhes sobre o algoritmo MEC-ELM, sua implementação, conjuntos de dados e resultados, mas a pergunta específica a ser respondida não foi incluída na mensagem. Sem conhecer o conteúdo da pergunta, não há como extrair uma resposta direta dos trechos disponíveis.\",\n  \"Pergunta\": \"Não informado no contexto\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "detecção",
+                    "classificação"
+                ],
+                "actual": [
+                    "detecção",
+                    "classificação",
+                    "navegação (obstáculos)"
+                ],
+                "reasoning": "O artigo descreve que o sistema MEC‑ELM foi implementado para detecção de três tipos de objetos de interesse na agricultura: (i) plantas invasoras (Bull Thistle) para aplicação localizada de herbicidas; (ii) gado, visando monitoramento e contagem não invasiva; e (iii) veículos off‑road (quad bike) para segurança e prevenção de acidentes. Estas aplicações se encaixam nas categorias de 'detecção' (identificação de objetos em imagens), 'classificação' (diferenciação entre tipos de objetos – erva daninha, gado, veículo) e, ao serem empregadas em UAVs/UGVs, podem ser usadas para evitar obstáculos, o que corresponde a 'navegação (obstáculos)'. Não há menção a segmentação de imagens, navegação de trajeto ou mapa, nem a estimativas de produção.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que o sistema MEC‑ELM foi implementado para detecção de três tipos de objetos de interesse na agricultura: (i) plantas invasoras (Bull Thistle) para aplicação localizada de herbicidas; (ii) gado, visando monitoramento e contagem não invasiva; e (iii) veículos off‑road (quad bike) para segurança e prevenção de acidentes. Estas aplicações se encaixam nas categorias de 'detecção' (identificação de objetos em imagens), 'classificação' (diferenciação entre tipos de objetos – erva daninha, gado, veículo) e, ao serem empregadas em UAVs/UGVs, podem ser usadas para evitar obstáculos, o que corresponde a 'navegação (obstáculos)'. Não há menção a segmentação de imagens, navegação de trajeto ou mapa, nem a estimativas de produção.\",\n  \"Aplicações Principais\": [\n    \"detecção\",\n    \"classificação\",\n    \"navegação (obstáculos)\"\n  ]\n}",
+                "score": 66,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "47",
+        "original_filename": "(47) Using Deep Learning to Challenge Safety Standard for Highly Autonomous Machines in Agriculture.pdf",
+        "log_file": "47_using_deep_learning_to_challenge_safe_250c_50o_20260611_193726.json",
+        "timestamp": "20260611_193726",
+        "overall_score": 45,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(CNN) Redes Neurais Convolucionais",
+                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "reasoning": "O artigo descreve que o algoritmo de deteção de obstáculos foi implementado ao fine‑tunar a AlexNet, que é uma rede neural convolucional previamente treinada e adaptada para detectar o obstáculo padronizado ISO. Essa abordagem caracteriza‑se como uso de redes neurais convolucionais (CNN) para visão computacional, não envolvendo técnicas clássicas de visão, métodos genéricos de aprendizado de máquina ou redes neurais tradicionais.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que o algoritmo de deteção de obstáculos foi implementado ao fine‑tunar a AlexNet, que é uma rede neural convolucional previamente treinada e adaptada para detectar o obstáculo padronizado ISO. Essa abordagem caracteriza‑se como uso de redes neurais convolucionais (CNN) para visão computacional, não envolvendo técnicas clássicas de visão, métodos genéricos de aprendizado de máquina ou redes neurais tradicionais.\",\n  \"Área Computacional\": \"(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera",
+                    "térmica",
+                    "LIDAR",
+                    "câmera estéreo"
+                ],
+                "reasoning": "O texto descreve que o kit de sensores utilizado nas experiências inclui uma câmera térmica, um LiDAR 3D, uma HD‑webcam e uma câmera estéreo. Mapeando cada um para os valores exatos do domínio fornecido, temos: a câmera térmica corresponde a \"térmica\"; o LiDAR 3D corresponde a \"LIDAR\"; a HD‑webcam é uma câmera convencional e corresponde a \"câmera\"; a câmera estéreo corresponde a \"câmera estéreo\". Portanto, os sensores utilizados são listados conforme essas categorias.",
+                "raw_response": "{\n  \"raciocinio\": \"O texto descreve que o kit de sensores utilizado nas experiências inclui uma câmera térmica, um LiDAR 3D, uma HD‑webcam e uma câmera estéreo. Mapeando cada um para os valores exatos do domínio fornecido, temos: a câmera térmica corresponde a \\\"térmica\\\"; o LiDAR 3D corresponde a \\\"LIDAR\\\"; a HD‑webcam é uma câmera convencional e corresponde a \\\"câmera\\\"; a câmera estéreo corresponde a \\\"câmera estéreo\\\". Portanto, os sensores utilizados são listados conforme essas categorias.\",\n  \"Sensores Utilizados\": [\n    \"câmera\",\n    \"térmica\",\n    \"LIDAR\",\n    \"câmera estéreo\"\n  ]\n}",
+                "score": 25,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "AlexNet",
+                    "TL"
+                ],
+                "actual": [
+                    "MATLAB",
+                    "AlexNet",
+                    "CNNs"
+                ],
+                "reasoning": "O artigo descreve que o algoritmo foi implementado usando a interface MATLAB para o framework Caffe e que a rede neural utilizada foi o AlexNet, previamente treinado e então afinado. Como AlexNet é um modelo de rede convolucional profunda, isso também se enquadra na categoria de CNNs. Essas são as únicas tecnologias listadas que coincidem exatamente com os valores permitidos no domínio fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que o algoritmo foi implementado usando a interface MATLAB para o framework Caffe e que a rede neural utilizada foi o AlexNet, previamente treinado e então afinado. Como AlexNet é um modelo de rede convolucional profunda, isso também se enquadra na categoria de CNNs. Essas são as únicas tecnologias listadas que coincidem exatamente com os valores permitidos no domínio fornecido.\",\n  \"Bibliotecas, Frameworks ou Arquiteturas\": [\n    \"MATLAB\",\n    \"AlexNet\",\n    \"CNNs\"\n  ]\n}",
+                "score": 25,
+                "status": "Parcial"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "detecção",
+                    "classificação"
+                ],
+                "actual": [
+                    "detecção",
+                    "navegação (obstáculos)"
+                ],
+                "reasoning": "O artigo descreve um sistema baseado em redes neurais convolucionais que tem como objetivo principal detectar o obstáculo padronizado (um barril) definido na norma ISO/DIS 18497. Essa detecção é utilizada para garantir a segurança de máquinas agrícolas autônomas, permitindo que o sistema reconheça o obstáculo e, assim, evite colisões. Portanto, as aplicações centrais são a detecção do obstáculo e o suporte à navegação segura evitando obstáculos.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema baseado em redes neurais convolucionais que tem como objetivo principal detectar o obstáculo padronizado (um barril) definido na norma ISO/DIS 18497. Essa detecção é utilizada para garantir a segurança de máquinas agrícolas autônomas, permitindo que o sistema reconheça o obstáculo e, assim, evite colisões. Portanto, as aplicações centrais são a detecção do obstáculo e o suporte à navegação segura evitando obstáculos.\",\n  \"Aplicações Principais\": [\n    \"detecção\",\n    \"navegação (obstáculos)\"\n  ]\n}",
+                "score": 33,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "48",
+        "original_filename": "(48) DeepAnomaly_ Combining Background Subtraction_and Deep Learning for Detecting Obstacles and_Anomalies in an Agricultural Field.pdf",
+        "log_file": "48_deepanomaly_combining_background_subt_250c_50o_20260611_193243.json",
+        "timestamp": "20260611_193243",
+        "overall_score": 41,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(CNN) Redes Neurais Convolucionais",
+                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "reasoning": "O método principal descrito no artigo combina extração de características de uma rede convolucional pré‑treinada (AlexNet/Caffe) com um módulo de subtração de fundo e detecção de anomalias. Toda a abordagem depende de mapas de características gerados por CNNs e de um classificador baseado em distância (kNN, GMM) aplicado a esses mapas. Não há uso de técnicas de visão computacional clássica nem de algoritmos de aprendizado de máquina genéricos sem convolução. Portanto, a categoria que melhor descreve o método central é a de Redes Neurais Convolucionais.",
+                "raw_response": "{\n  \"raciocinio\": \"O método principal descrito no artigo combina extração de características de uma rede convolucional pré‑treinada (AlexNet/Caffe) com um módulo de subtração de fundo e detecção de anomalias. Toda a abordagem depende de mapas de características gerados por CNNs e de um classificador baseado em distância (kNN, GMM) aplicado a esses mapas. Não há uso de técnicas de visão computacional clássica nem de algoritmos de aprendizado de máquina genéricos sem convolução. Portanto, a categoria que melhor descreve o método central é a de Redes Neurais Convolucionais.\",\n  \"Área Computacional\": \"(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera estéreo"
+                ],
+                "actual": [
+                    "câmera",
+                    "câmera estéreo",
+                    "gps",
+                    "imu",
+                    "LIDAR",
+                    "térmica"
+                ],
+                "reasoning": "Nos trechos fornecidos (especialmente no Chunk 7) são descritos os sensores presentes na plataforma de teste: GPS antennas, IMU, LiDAR, Stereo camera, RGB camera e Thermal camera. Cada um desses itens pode ser mapeado aos rótulos do domínio especificado: GPS → \"gps\", IMU → \"imu\", LiDAR → \"LIDAR\", Stereo camera → \"câmera estéreo\", as câmeras RGB e a câmera geral são categorizadas como \"câmera\", e a câmera térmica corresponde ao rótulo \"térmica\". Não foram encontrados outros sensores que coincidam com os valores do domínio.",
+                "raw_response": "{\n  \"raciocinio\": \"Nos trechos fornecidos (especialmente no Chunk 7) são descritos os sensores presentes na plataforma de teste: GPS antennas, IMU, LiDAR, Stereo camera, RGB camera e Thermal camera. Cada um desses itens pode ser mapeado aos rótulos do domínio especificado: GPS → \\\"gps\\\", IMU → \\\"imu\\\", LiDAR → \\\"LIDAR\\\", Stereo camera → \\\"câmera estéreo\\\", as câmeras RGB e a câmera geral são categorizadas como \\\"câmera\\\", e a câmera térmica corresponde ao rótulo \\\"térmica\\\". Não foram encontrados outros sensores que coincidam com os valores do domínio.\",\n  \"Sensores Utilizados\": [\n    \"câmera\",\n    \"câmera estéreo\",\n    \"gps\",\n    \"imu\",\n    \"LIDAR\",\n    \"térmica\"\n  ]\n}",
+                "score": 16,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "MATLAB",
+                    "CNN modificada"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "Não informado no contexto",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"Não informado no contexto\",\n  \"Resposta\": \"Não informado no contexto\"\n}\n```",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "detecção"
+                ],
+                "actual": [
+                    "navegação (obstáculos)",
+                    "detecção"
+                ],
+                "reasoning": "O artigo descreve o DeepAnomaly como um algoritmo que combina subtração de fundo e redes neurais convolucionais para detectar anomalias e obstáculos em campos agrícolas. Seu objetivo principal é identificar obstáculos (pessoas, manequins, barris, casas etc.) que podem estar distantes, fortemente ocluídos ou ser de tipo desconhecido, auxiliando na segurança da navegação de tratores. Assim, as aplicações centrais são a detecção de obstáculos e o suporte à navegação ao evitar colisões, sem mencionar funcionalidades de segmentação ou classificação de imagens gerais.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve o DeepAnomaly como um algoritmo que combina subtração de fundo e redes neurais convolucionais para detectar anomalias e obstáculos em campos agrícolas. Seu objetivo principal é identificar obstáculos (pessoas, manequins, barris, casas etc.) que podem estar distantes, fortemente ocluídos ou ser de tipo desconhecido, auxiliando na segurança da navegação de tratores. Assim, as aplicações centrais são a detecção de obstáculos e o suporte à navegação ao evitar colisões, sem mencionar funcionalidades de segmentação ou classificação de imagens gerais.\",\n  \"Aplicações Principais\": [\n    \"navegação (obstáculos)\",\n    \"detecção\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "49",
+        "original_filename": "(49) Fruit Detection and Segmentation for Apple Harvesting Using Visual Sensor in Orchards.pdf",
+        "log_file": "49_fruit_detection_and_segmentation_for__250c_50o_20260611_193509.json",
+        "timestamp": "20260611_193509",
+        "overall_score": 62,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(CNN) Redes Neurais Convolucionais",
+                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "reasoning": "O artigo descreve o desenvolvimento de uma rede profunda (DaSNet) que utiliza Backbone leve baseado em arquitetura residual, bem como componentes como GFPN, ASPP e compara‑se com backbones ResNet‑50/101, Darknet‑53 e YOLO‑V3. Todas estas são arquiteturas de redes neurais convolucionais, portanto o método principal empregado é CNN.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve o desenvolvimento de uma rede profunda (DaSNet) que utiliza Backbone leve baseado em arquitetura residual, bem como componentes como GFPN, ASPP e compara‑se com backbones ResNet‑50/101, Darknet‑53 e YOLO‑V3. Todas estas são arquiteturas de redes neurais convolucionais, portanto o método principal empregado é CNN.\",\n  \"Área Computacional\": \"(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "kinect-v2"
+                ],
+                "actual": [
+                    "kinect-v2",
+                    "câmera RGB-D"
+                ],
+                "reasoning": "Nos trechos do documento são mencionados o uso de um sensor visual RGB-D e, especificamente, a câmera Kinect‑v2. O Kinect‑v2 combina uma câmera RGB e uma câmera de profundidade infravermelha, sendo classificado como 'câmera RGB-D' e também identificado pelo nome do dispositivo 'kinect-v2', que constam exatamente nas opções do domínio fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"Nos trechos do documento são mencionados o uso de um sensor visual RGB-D e, especificamente, a câmera Kinect‑v2. O Kinect‑v2 combina uma câmera RGB e uma câmera de profundidade infravermelha, sendo classificado como 'câmera RGB-D' e também identificado pelo nome do dispositivo 'kinect-v2', que constam exatamente nas opções do domínio fornecido.\",\n  \"Sensores Utilizados\": [\n    \"kinect-v2\",\n    \"câmera RGB-D\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "DaSNet (Deep CNN)"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "O contexto apresentado descreve detalhadamente o sensor RGB-D Kinect‑v2, a arquitetura de rede DaSNet (com variações DaSNet‑A/B/C) e os backbones utilizados (ResNet‑50, ResNet‑101, Darknet‑53, lw‑net). Contudo, a pergunta específica a ser respondida não foi fornecida no enunciado. Como não há informação sobre qual informação está sendo solicitada, não é possível extrair uma resposta direta dos trechos disponíveis.",
+                "raw_response": "{\n  \"raciocinio\": \"O contexto apresentado descreve detalhadamente o sensor RGB-D Kinect‑v2, a arquitetura de rede DaSNet (com variações DaSNet‑A/B/C) e os backbones utilizados (ResNet‑50, ResNet‑101, Darknet‑53, lw‑net). Contudo, a pergunta específica a ser respondida não foi fornecida no enunciado. Como não há informação sobre qual informação está sendo solicitada, não é possível extrair uma resposta direta dos trechos disponíveis.\",\n  \"Não informado no contexto\": \"Não informado no contexto\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "segmentação",
+                    "detecção"
+                ],
+                "actual": [
+                    "detecção",
+                    "segmentação"
+                ],
+                "reasoning": "No contexto, o artigo descreve o desenvolvimento de uma rede (DaSNet) que realiza detecção e segmentação semântica de maçãs e galhos em tempo real para apoiar a colheita autônoma. As aplicações mencionadas incluem a extração de informações de pose da fruta e localização do ponto de junção caule‑galho, que são necessárias para a operação de robôs colhedores. Nenhuma informação sobre navegação (trajeto, mapa ou obstáculos) ou classificação ou estimativas de produção é apresentada como objetivo direto do sistema. Portanto, as aplicações principais do sistema, segundo o texto, correspondem aos domínios de detecção e segmentação.",
+                "raw_response": "{\n  \"raciocinio\": \"No contexto, o artigo descreve o desenvolvimento de uma rede (DaSNet) que realiza detecção e segmentação semântica de maçãs e galhos em tempo real para apoiar a colheita autônoma. As aplicações mencionadas incluem a extração de informações de pose da fruta e localização do ponto de junção caule‑galho, que são necessárias para a operação de robôs colhedores. Nenhuma informação sobre navegação (trajeto, mapa ou obstáculos) ou classificação ou estimativas de produção é apresentada como objetivo direto do sistema. Portanto, as aplicações principais do sistema, segundo o texto, correspondem aos domínios de detecção e segmentação.\",\n  \"Aplicações Principais\": [\n    \"detecção\",\n    \"segmentação\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            }
+        }
+    },
+    {
+        "article_id": "50",
+        "original_filename": "(50) Deep Learning Framework for Vehicle and Pedestrian Detection in Rural Roads on an Embedded GPU.pdf",
+        "log_file": "50_deep_learning_framework_for_vehicle_a_250c_50o_20260611_192948.json",
+        "timestamp": "20260611_192948",
+        "overall_score": 33,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(CNN) Redes Neurais Convolucionais",
+                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "reasoning": "O artigo descreve o uso de modelos de deep learning como SSD‑MobileNet v1/v2, SSD‑Inception v2, Pednet e Multiped, que são arquiteturas baseadas em convoluções para detecção de objetos. Essas redes são exemplos claros de Redes Neurais Convolucionais, portanto a classificação principal é CNN.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve o uso de modelos de deep learning como SSD‑MobileNet v1/v2, SSD‑Inception v2, Pednet e Multiped, que são arquiteturas baseadas em convoluções para detecção de objetos. Essas redes são exemplos claros de Redes Neurais Convolucionais, portanto a classificação principal é CNN.\",\n  \"Área Computacional\": \"(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "O texto descreve o uso de imagens para detecção de veículos e pedestres em estradas rurais, mas não especifica quais sensores foram empregados para capturar essas imagens. Não há menção direta a câmeras, LIDAR ou outros dispositivos listados no domínio fornecido.",
+                "raw_response": "```json\n{\n  \"raciocinio\": \"O texto descreve o uso de imagens para detecção de veículos e pedestres em estradas rurais, mas não especifica quais sensores foram empregados para capturar essas imagens. Não há menção direta a câmeras, LIDAR ou outros dispositivos listados no domínio fornecido.\",\n  \"Sensores Utilizados\": \"Não informado no contexto\"\n}\n```",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "TensorRT"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "O texto da pergunta não foi fornecido, portanto não há como identificar qual informação está sendo solicitada nem o título da pergunta. Sem essa informação não é possível extrair uma resposta do contexto apresentado.",
+                "raw_response": "{\n  \"raciocinio\": \"O texto da pergunta não foi fornecido, portanto não há como identificar qual informação está sendo solicitada nem o título da pergunta. Sem essa informação não é possível extrair uma resposta do contexto apresentado.\",\n  \"Resposta\": \"Não informado no contexto\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "detecção",
+                    "classificação"
+                ],
+                "actual": [
+                    "detecção",
+                    "navegação (obstáculos)"
+                ],
+                "reasoning": "O artigo descreve um sistema implementado no Jetson Nano para detecção de objetos (veículos e pedestres) em estradas rurais. Essa capacidade de identificar obstáculos (veículos, pedestres) é central para a aplicação principal do sistema, que é apoiar a navegação segura em ambientes rurais, especialmente em veículos autônomos. Assim, as aplicações principais mapeiam‑se para a detecção de objetos e para a navegação que requer reconhecimento de obstáculos.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema implementado no Jetson Nano para detecção de objetos (veículos e pedestres) em estradas rurais. Essa capacidade de identificar obstáculos (veículos, pedestres) é central para a aplicação principal do sistema, que é apoiar a navegação segura em ambientes rurais, especialmente em veículos autônomos. Assim, as aplicações principais mapeiam‑se para a detecção de objetos e para a navegação que requer reconhecimento de obstáculos.\",\n  \"Aplicações Principais\": [\n    \"detecção\",\n    \"navegação (obstáculos)\"\n  ]\n}",
+                "score": 33,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "51",
+        "original_filename": "(51) Towards Semantic Scene Segmentation for Autonomous Agricultural Vehicles.pdf",
+        "log_file": "51_towards_semantic_scene_segmentation_f_250c_50o_20260611_192758.json",
+        "timestamp": "20260611_192758",
+        "overall_score": 70,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(CNN) Redes Neurais Convolucionais",
+                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "reasoning": "O artigo descreve a aplicação da arquitetura SegNet, que é uma rede encoder‑decoder totalmente convolucional usada para segmentação semântica de imagens agrícolas. Como SegNet se baseia em camadas convolucionais e foi treinada como uma CNN, o método principal se enquadra na categoria de Redes Neurais Convolucionais.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve a aplicação da arquitetura SegNet, que é uma rede encoder‑decoder totalmente convolucional usada para segmentação semântica de imagens agrícolas. Como SegNet se baseia em camadas convolucionais e foi treinada como uma CNN, o método principal se enquadra na categoria de Redes Neurais Convolucionais.\",\n  \"Área Computacional\": \"(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera"
+                ],
+                "reasoning": "O texto descreve que o sistema de segmentação recebe imagens RGB de uma câmera montada no veículo. Não há menção a outros tipos de sensores (IMU, GPS, LIDAR, etc.). Portanto, o único sensor mencionado que se enquadra nos valores do domínio fornecido é a câmera padrão de cor, que corresponde ao termo \"câmera\".",
+                "raw_response": "{\n  \"raciocinio\": \"O texto descreve que o sistema de segmentação recebe imagens RGB de uma câmera montada no veículo. Não há menção a outros tipos de sensores (IMU, GPS, LIDAR, etc.). Portanto, o único sensor mencionado que se enquadra nos valores do domínio fornecido é a câmera padrão de cor, que corresponde ao termo \\\"câmera\\\".\",\n  \"Sensores Utilizados\": [\n    \"câmera\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "SegNet"
+                ],
+                "actual": [
+                    "SegNet",
+                    "TL",
+                    "CNNs"
+                ],
+                "reasoning": "O artigo descreve que a arquitetura de rede profunda empregada foi o SegNet, que foi inicializado com pesos pré‑treinados (transfer learning – TL) e que, por sua natureza, se trata de uma CNN. Não há menção a outras bibliotecas ou frameworks listados no domínio fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que a arquitetura de rede profunda empregada foi o SegNet, que foi inicializado com pesos pré‑treinados (transfer learning – TL) e que, por sua natureza, se trata de uma CNN. Não há menção a outras bibliotecas ou frameworks listados no domínio fornecido.\",\n  \"Bibliotecas, Frameworks ou Arquiteturas\": [\n    \"SegNet\",\n    \"TL\",\n    \"CNNs\"\n  ]\n}",
+                "score": 33,
+                "status": "Parcial"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "segmentação"
+                ],
+                "actual": [
+                    "segmentação",
+                    "navegação (obstáculos)"
+                ],
+                "reasoning": "O artigo descreve um sistema que utiliza SegNet para segmentação semântica de imagens capturadas por veículos agrícolas autonomos. A segmentação pixel‑wise dos classes vegetação, grama, solo, campo de cultura e obstáculos fornece informação detalhada do ambiente, essencial para a compreensão espacial e para a tomada de decisões de navegação segura. Dessa forma, as aplicações principais do sistema são a segmentação da cena e o suporte à navegação ao identificar obstáculos que precisam ser evitados.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema que utiliza SegNet para segmentação semântica de imagens capturadas por veículos agrícolas autonomos. A segmentação pixel‑wise dos classes vegetação, grama, solo, campo de cultura e obstáculos fornece informação detalhada do ambiente, essencial para a compreensão espacial e para a tomada de decisões de navegação segura. Dessa forma, as aplicações principais do sistema são a segmentação da cena e o suporte à navegação ao identificar obstáculos que precisam ser evitados.\",\n  \"Aplicações Principais\": [\n    \"segmentação\",\n    \"navegação (obstáculos)\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "52",
+        "original_filename": "(52) Real-Time Fruit Recognition and Grasping Estimationfor Robotic Apple Harvesting.pdf",
+        "log_file": "52_realtime_fruit_recognition_and_graspi_250c_50o_20260611_193620.json",
+        "timestamp": "20260611_193620",
+        "overall_score": 75,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(CNN) Redes Neurais Convolucionais",
+                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "reasoning": "O artigo apresenta um método de visão totalmente baseado em redes neurais profundas, incluindo um detector de instâncias de uma só etapa chamado Mobile-DasNet, que é uma arquitetura de detecção/segmentação baseada em convoluções, e uma rede PointNet modificada para estimativa de preensão. O componente de reconhecimento de frutos, que constitui a parte principal do pipeline, utiliza Mobile-DasNet, que se enquadra na categoria de Redes Neurais Convolucionais (CNN). Portanto, a classificação mais adequada para o método principal é (CNN).",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo apresenta um método de visão totalmente baseado em redes neurais profundas, incluindo um detector de instâncias de uma só etapa chamado Mobile-DasNet, que é uma arquitetura de detecção/segmentação baseada em convoluções, e uma rede PointNet modificada para estimativa de preensão. O componente de reconhecimento de frutos, que constitui a parte principal do pipeline, utiliza Mobile-DasNet, que se enquadra na categoria de Redes Neurais Convolucionais (CNN). Portanto, a classificação mais adequada para o método principal é (CNN).\",\n  \"Área Computacional\": \"(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera RGB-D"
+                ],
+                "actual": [
+                    "câmera RGB-D"
+                ],
+                "reasoning": "O texto menciona que o sistema de visão utiliza uma câmera RGB‑D Intel RealSense D‑435 fixada no braço robótico para capturar imagens e nuvens de pontos. Não há referência a outros sensores como IMU, GPS, LIDAR etc. Portanto, dentre os valores do domínio fornecido, o único que corresponde ao sensor descrito é \"câmera RGB-D\".",
+                "raw_response": "{\n  \"raciocinio\": \"O texto menciona que o sistema de visão utiliza uma câmera RGB‑D Intel RealSense D‑435 fixada no braço robótico para capturar imagens e nuvens de pontos. Não há referência a outros sensores como IMU, GPS, LIDAR etc. Portanto, dentre os valores do domínio fornecido, o único que corresponde ao sensor descrito é \\\"câmera RGB-D\\\".\",\n  \"Sensores Utilizados\": [\n    \"câmera RGB-D\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "mobile-DaSNet",
+                    "TL"
+                ],
+                "actual": "Câmera RGB‑D",
+                "reasoning": "No texto do artigo, a captura de dados de visão para o reconhecimento e estimativa de preensão de maçãs é feita mediante uma câmera RGB‑D, que fornece tanto imagens coloridas (RGB) quanto informações de profundidade (D). Essa câmera é mencionada como a origem dos dados de entrada para as redes de detecção e para a geração de nuvens de pontos usadas pelo PointNet. Não há menção a outros sensores específicos para a tarefa de reconhecimento de frutas.",
+                "raw_response": "{\n  \"raciocinio\": \"No texto do artigo, a captura de dados de visão para o reconhecimento e estimativa de preensão de maçãs é feita mediante uma câmera RGB‑D, que fornece tanto imagens coloridas (RGB) quanto informações de profundidade (D). Essa câmera é mencionada como a origem dos dados de entrada para as redes de detecção e para a geração de nuvens de pontos usadas pelo PointNet. Não há menção a outros sensores específicos para a tarefa de reconhecimento de frutas.\",\n  \"Sensores Utilizados\": \"Câmera RGB‑D\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "segmentação",
+                    "detecção"
+                ],
+                "actual": [
+                    "detecção",
+                    "segmentação"
+                ],
+                "reasoning": "O artigo descreve um sistema de colheita robótica que utiliza uma rede de detecção e segmentação de instâncias (Mobile‑DasNet) para reconhecer maçãs em imagens RGB‑D, o que corresponde às tarefas de detecção e segmentação. Embora o método também inclua estimativa de pose para a preensão (grasping estimation), essa funcionalidade não se enquadra nas categorias de domínio fornecidas (navegação, classificação ou estimativas de produção). Não há menção a navegação ou estimativas de produção no contexto, portanto as aplicações principais mapeiam‑se apenas para 'detecção' e 'segmentação'.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema de colheita robótica que utiliza uma rede de detecção e segmentação de instâncias (Mobile‑DasNet) para reconhecer maçãs em imagens RGB‑D, o que corresponde às tarefas de detecção e segmentação. Embora o método também inclua estimativa de pose para a preensão (grasping estimation), essa funcionalidade não se enquadra nas categorias de domínio fornecidas (navegação, classificação ou estimativas de produção). Não há menção a navegação ou estimativas de produção no contexto, portanto as aplicações principais mapeiam‑se apenas para 'detecção' e 'segmentação'.\",\n  \"Aplicações Principais\": [\n    \"detecção\",\n    \"segmentação\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            }
+        }
+    },
+    {
+        "article_id": "54",
+        "original_filename": "(54) A robot vision navigation method using deep learning in edge computing environment.pdf",
+        "log_file": "54_a_robot_vision_navigation_method_usin_250c_50o_20260611_193033.json",
+        "timestamp": "20260611_193033",
+        "overall_score": 58,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(CNN) Redes Neurais Convolucionais",
+                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "reasoning": "O artigo descreve uma abordagem de navegação visual que se baseia em entendimento de imagens por meio de aprendizado profundo, utilizando redes convolucionais profundas (ex.: ResNet101, módulo cascata, convoluções dilatadas). Apesar de também empregar a Transformada de Hough aprimorada, o método principal para a extração e segmentação de características de imagem é a rede convolucional, portanto a classificação corresponde ao domínio de Redes Neurais Convolucionais.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve uma abordagem de navegação visual que se baseia em entendimento de imagens por meio de aprendizado profundo, utilizando redes convolucionais profundas (ex.: ResNet101, módulo cascata, convoluções dilatadas). Apesar de também empregar a Transformada de Hough aprimorada, o método principal para a extração e segmentação de características de imagem é a rede convolucional, portanto a classificação corresponde ao domínio de Redes Neurais Convolucionais.\",\n  \"Área Computacional\": \"(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "ccd"
+                ],
+                "actual": [
+                    "ccd",
+                    "câmera estéreo"
+                ],
+                "reasoning": "O texto indica que o sistema de visão do robô utiliza um sensor de imagem CCD para converter imagens analógicas em digitais (Chunk 8) e que o equipamento de câmera empregado é o Bumbelee2, descrito como um produto de visão estéreo produzido pela Point Grey Research (PGR) (Chunk 22). Assim, os sensores mencionados correspondem aos termos \"ccd\" e \"câmera estéreo\" presentes no domínio fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"O texto indica que o sistema de visão do robô utiliza um sensor de imagem CCD para converter imagens analógicas em digitais (Chunk 8) e que o equipamento de câmera empregado é o Bumbelee2, descrito como um produto de visão estéreo produzido pela Point Grey Research (PGR) (Chunk 22). Assim, os sensores mencionados correspondem aos termos \\\"ccd\\\" e \\\"câmera estéreo\\\" presentes no domínio fornecido.\",\n  \"Sensores Utilizados\": [\n    \"ccd\",\n    \"câmera estéreo\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "ResNet101"
+                ],
+                "actual": [
+                    "ResNet101",
+                    "transformada Hough",
+                    "CNNs"
+                ],
+                "reasoning": "O artigo descreve o uso de redes convolucionais profundas, citando especificamente a arquitetura ResNet101 como rede base e a aplicação de uma Hough transform aprimorada para extração de caminhos. Essas duas tecnologias correspondem exatamente a termos presentes no domínio fornecido (ResNet101 e transformada Hough). Além disso, o método envolve aprendizado profundo baseado em redes CNN, o que permite incluir o termo genérico CNNs. Não há menção a outras tecnologias listadas no domínio, como MATLAB, OpenCV, ROS etc.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve o uso de redes convolucionais profundas, citando especificamente a arquitetura ResNet101 como rede base e a aplicação de uma Hough transform aprimorada para extração de caminhos. Essas duas tecnologias correspondem exatamente a termos presentes no domínio fornecido (ResNet101 e transformada Hough). Além disso, o método envolve aprendizado profundo baseado em redes CNN, o que permite incluir o termo genérico CNNs. Não há menção a outras tecnologias listadas no domínio, como MATLAB, OpenCV, ROS etc.\",\n  \"Bibliotecas, Frameworks ou Arquiteturas\": [\n    \"ResNet101\",\n    \"transformada Hough\",\n    \"CNNs\"\n  ]\n}",
+                "score": 33,
+                "status": "Parcial"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (trajeto)"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "segmentação"
+                ],
+                "reasoning": "O artigo descreve um algoritmo de navegação visual que, a partir de imagens de campos agrícolas, realiza segmentação de imagens, extração de caminhos (linhas de plantio) usando Hough transform aprimorado e ajuste de postura do robô. Essas funcionalidades indicam que o sistema é aplicado principalmente à segmentação de imagens agrícolas e à navegação ao longo de trajetos definidos pelos caminhos extraídos. Não há menção a criação de mapas, detecção de obstáculos, classificação de objetos ou estimativas de produção.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um algoritmo de navegação visual que, a partir de imagens de campos agrícolas, realiza segmentação de imagens, extração de caminhos (linhas de plantio) usando Hough transform aprimorado e ajuste de postura do robô. Essas funcionalidades indicam que o sistema é aplicado principalmente à segmentação de imagens agrícolas e à navegação ao longo de trajetos definidos pelos caminhos extraídos. Não há menção a criação de mapas, detecção de obstáculos, classificação de objetos ou estimativas de produção.\",\n  \"Aplicações Principais\": [\n    \"navegação (trajeto)\",\n    \"segmentação\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "55",
+        "original_filename": "(55) Obstacle Detection System for Agricultural Mobile RobotApplication Using RGB-D Cameras.pdf",
+        "log_file": "55_obstacle_detection_system_for_agricul_250c_50o_20260611_193748.json",
+        "timestamp": "20260611_193748",
+        "overall_score": 56,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(CNN) Redes Neurais Convolucionais",
+                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "reasoning": "O artigo descreve que a detecção de obstáculos é realizada através de segmentação semântica usando modelos baseados na arquitetura DeepLabv3+ com ResNet‑34 como extrator de características. DeepLabv3+ é uma rede neural convolucional projetada para tarefas de segmentação de imagens, e ResNet‑34 também é uma CNN. Assim, o método principal empregado pertence à categoria de Redes Neurais Convolucionais.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que a detecção de obstáculos é realizada através de segmentação semântica usando modelos baseados na arquitetura DeepLabv3+ com ResNet‑34 como extrator de características. DeepLabv3+ é uma rede neural convolucional projetada para tarefas de segmentação de imagens, e ResNet‑34 também é uma CNN. Assim, o método principal empregado pertence à categoria de Redes Neurais Convolucionais.\",\n  \"Área Computacional\": \"(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera RGB-D"
+                ],
+                "actual": [
+                    "câmera RGB-D"
+                ],
+                "reasoning": "No texto do artigo descreve‑se que o sistema de deteção de obstáculos foi construído com base num par de câmaras RGB‑D RealSense D435i, que fornece simultaneamente imagens RGB e mapas de profundidade. Não há menção a outros sensores (GPS, IMU, LIDAR, etc.) no escopo da própria solução proposta; as referências a GPS ou sensores inerciais pertencem a trabalhos relacionados, não ao sistema estudado. Portanto, o único sensor explicitamente mencionado e que corresponde ao domínio fornecido é a câmera RGB‑D.",
+                "raw_response": "{\n  \"raciocinio\": \"No texto do artigo descreve‑se que o sistema de deteção de obstáculos foi construído com base num par de câmaras RGB‑D RealSense D435i, que fornece simultaneamente imagens RGB e mapas de profundidade. Não há menção a outros sensores (GPS, IMU, LIDAR, etc.) no escopo da própria solução proposta; as referências a GPS ou sensores inerciais pertencem a trabalhos relacionados, não ao sistema estudado. Portanto, o único sensor explicitamente mencionado e que corresponde ao domínio fornecido é a câmera RGB‑D.\",\n  \"Sensores Utilizados\": [\n    \"câmera RGB-D\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "DeepLabV3+"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "A pergunta não foi especificada no prompt, portanto não há como identificar qual informação deve ser extraída do contexto fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"A pergunta não foi especificada no prompt, portanto não há como identificar qual informação deve ser extraída do contexto fornecido.\",\n  \"Resposta\": \"Não informado no contexto\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "navegação (obstáculos)"
+                ],
+                "actual": [
+                    "navegação (mapa)",
+                    "navegação (obstáculos)",
+                    "detecção",
+                    "segmentação"
+                ],
+                "reasoning": "O artigo descreve um sistema de detecção de obstáculos baseado em câmeras RGB-D que gera um mapa de ocupação 2D utilizado pelo algoritmo de navegação do robô. O foco principal é apoiar a navegação ao fornecer informações de mapa e de obstáculos, além de empregar segmentação semântica para detectar e classificar áreas (gramado, obstáculos). Não há menção a estimativas de produção ou classificação de culturas, portanto, as aplicações principais correspondem às categorias de navegação (mapa), navegação (obstáculos), detecção e segmentação.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema de detecção de obstáculos baseado em câmeras RGB-D que gera um mapa de ocupação 2D utilizado pelo algoritmo de navegação do robô. O foco principal é apoiar a navegação ao fornecer informações de mapa e de obstáculos, além de empregar segmentação semântica para detectar e classificar áreas (gramado, obstáculos). Não há menção a estimativas de produção ou classificação de culturas, portanto, as aplicações principais correspondem às categorias de navegação (mapa), navegação (obstáculos), detecção e segmentação.\",\n  \"Aplicações Principais\": [\n    \"navegação (mapa)\",\n    \"navegação (obstáculos)\",\n    \"detecção\",\n    \"segmentação\"\n  ]\n}",
+                "score": 25,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "56",
+        "original_filename": "(56) An Autonomous Grape-Harvester Robot_ Integrated System Architecture.pdf",
+        "log_file": "56_an_autonomous_grapeharvester_robot_in_250c_50o_20260611_193358.json",
+        "timestamp": "20260611_193358",
+        "overall_score": 48,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(CNN) Redes Neurais Convolucionais",
+                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "reasoning": "O artigo descreve o uso de diversos algoritmos de visão computacional para detecção de cachos, estimativa de maturidade, detecção de caule e outras tarefas. Esses algoritmos são baseados em modelos de redes neurais convolucionais, como ResNet50_FRRN, MobileNetV2_PSPNet, UNET_MobileNetV2, YOLOv3 e YOLOv5, que são explicitamente citados na Tabela 3. Embora também seja mencionado um classificador Random Forest, a maioria das funções principais (detecção, segmentação e reconhecimento) depende de arquiteturas CNN. Portanto, o método principal empregado é o de Redes Neurais Convolucionais.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve o uso de diversos algoritmos de visão computacional para detecção de cachos, estimativa de maturidade, detecção de caule e outras tarefas. Esses algoritmos são baseados em modelos de redes neurais convolucionais, como ResNet50_FRRN, MobileNetV2_PSPNet, UNET_MobileNetV2, YOLOv3 e YOLOv5, que são explicitamente citados na Tabela 3. Embora também seja mencionado um classificador Random Forest, a maioria das funções principais (detecção, segmentação e reconhecimento) depende de arquiteturas CNN. Portanto, o método principal empregado é o de Redes Neurais Convolucionais.\",\n  \"Área Computacional\": \"(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câm. 3D",
+                    "NIR",
+                    "térmica"
+                ],
+                "actual": [
+                    "câmera",
+                    "câmera RGB-D",
+                    "câmera estéreo",
+                    "NIR",
+                    "térmica",
+                    "LIDAR",
+                    "imu",
+                    "gps"
+                ],
+                "reasoning": "A partir dos trechos fornecidos, foram identificados diversos dispositivos de percepção. O texto menciona câmeras ZED Mini 3D (câmera estéreo e RGB-D), três câmeras auxiliares (uma RGB, uma NIR e uma térmica), a câmera ORBBEC Astra 3D (câmera RGB-D), sensores LiDAR (Velodyne VLP-16), IMU, GPS e sensores de temperatura e umidade que não pertencem ao domínio especificado. Mapeando cada sensor para os rótulos permitidos, temos: câmera genérica (câmera), câmera RGB‑D (câmera RGB-D), câmera estéreo (câmera estéreo), câmera NIR (NIR), câmera térmica (térmica), LiDAR (LIDAR), IMU (imu) e GPS (gps).",
+                "raw_response": "{\n  \"raciocinio\": \"A partir dos trechos fornecidos, foram identificados diversos dispositivos de percepção. O texto menciona câmeras ZED Mini 3D (câmera estéreo e RGB-D), três câmeras auxiliares (uma RGB, uma NIR e uma térmica), a câmera ORBBEC Astra 3D (câmera RGB-D), sensores LiDAR (Velodyne VLP-16), IMU, GPS e sensores de temperatura e umidade que não pertencem ao domínio especificado. Mapeando cada sensor para os rótulos permitidos, temos: câmera genérica (câmera), câmera RGB‑D (câmera RGB-D), câmera estéreo (câmera estéreo), câmera NIR (NIR), câmera térmica (térmica), LiDAR (LIDAR), IMU (imu) e GPS (gps).\",\n  \"Sensores Utilizados\": [\n    \"câmera\",\n    \"câmera RGB-D\",\n    \"câmera estéreo\",\n    \"NIR\",\n    \"térmica\",\n    \"LIDAR\",\n    \"imu\",\n    \"gps\"\n  ]\n}",
+                "score": 22,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "CNNs"
+                ],
+                "actual": [
+                    "ResNet50",
+                    "CNNs"
+                ],
+                "reasoning": "O texto fornecido contém trechos do artigo, mas não há nenhuma pergunta explicitada após as instruções. Como a pergunta não foi apresentada, não há como extrair uma resposta específica a partir do contexto. Portanto, a resposta correta é indicar que a informação solicitada não consta no contexto.",
+                "raw_response": "{\n  \"raciocinio\": \"O texto fornecido contém trechos do artigo, mas não há nenhuma pergunta explicitada após as instruções. Como a pergunta não foi apresentada, não há como extrair uma resposta específica a partir do contexto. Portanto, a resposta correta é indicar que a informação solicitada não consta no contexto.\",\n  \"Resposta\": \"Não informado no contexto\",\n  \"Bibliotecas, Frameworks ou Arquiteturas\": [\n    \"ResNet50\",\n    \"CNNs\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "segmentação",
+                    "detecção"
+                ],
+                "actual": [
+                    "navegação (trajeto)",
+                    "navegação (mapa)",
+                    "navegação (obstáculos)",
+                    "detecção"
+                ],
+                "reasoning": "A partir dos trechos do documento, o sistema autônomo para viticultura realiza planejamento de trajetos a partir de mapas 3D gerados por um drone (navegação (mapa)), controla o deslocamento do robô ao longo dos corredores das vinhas (navegação (trajeto)) e detecta obstáculos usando câmera ORBBEC Astra e LiDAR (navegação (obstáculos)). Além disso, há menção a algoritmos de visão computacional para detectar cachos de uvas, folhas, caules, caixas de colheita, troncos de videira e nível de maturação, caracterizando a função de detecção. Não há indicação explícita de segmentação, classificação ou estimativas de produção como aplicações principais do sistema.",
+                "raw_response": "{\n  \"raciocinio\": \"A partir dos trechos do documento, o sistema autônomo para viticultura realiza planejamento de trajetos a partir de mapas 3D gerados por um drone (navegação (mapa)), controla o deslocamento do robô ao longo dos corredores das vinhas (navegação (trajeto)) e detecta obstáculos usando câmera ORBBEC Astra e LiDAR (navegação (obstáculos)). Além disso, há menção a algoritmos de visão computacional para detectar cachos de uvas, folhas, caules, caixas de colheita, troncos de videira e nível de maturação, caracterizando a função de detecção. Não há indicação explícita de segmentação, classificação ou estimativas de produção como aplicações principais do sistema.\",\n  \"Aplicações Principais\": [\n    \"navegação (trajeto)\",\n    \"navegação (mapa)\",\n    \"navegação (obstáculos)\",\n    \"detecção\"\n  ]\n}",
+                "score": 20,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "58",
+        "original_filename": "(58) A novel vision-based weakly supervised framework for autonomous yield estimation in agricultural applications.pdf",
+        "log_file": "58_a_novel_visionbased_weakly_supervised_250c_50o_20260611_193308.json",
+        "timestamp": "20260611_193308",
+        "overall_score": 42,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(CNN) Redes Neurais Convolucionais",
+                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "reasoning": "O artigo propõe um método de detecção frutífera que utiliza uma arquitetura baseada em CNN (U‑Net com encoder ResNet50 e decoder de up‑convoluções). A descrição enfatiza o uso de redes convolucionais para gerar mapas de alta resolução que localizam os frutos, distinguindo‑se de abordagens clássicas ou de aprendizado de máquina tradicional. Assim, a categoria que melhor descreve o método principal é Redes Neurais Convolucionais.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo propõe um método de detecção frutífera que utiliza uma arquitetura baseada em CNN (U‑Net com encoder ResNet50 e decoder de up‑convoluções). A descrição enfatiza o uso de redes convolucionais para gerar mapas de alta resolução que localizam os frutos, distinguindo‑se de abordagens clássicas ou de aprendizado de máquina tradicional. Assim, a categoria que melhor descreve o método principal é Redes Neurais Convolucionais.\",\n  \"Área Computacional\": \"(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera",
+                    "câmera multiespectral",
+                    "câmera estéreo",
+                    "LIDAR",
+                    "gps"
+                ],
+                "reasoning": "Nos trechos fornecidos, o artigo descreve que sistemas de estimativa de rendimento utilizam três tipos de sensores: sensores de alcance (LIDAR e sonar), sensores de localização (GPS e GPS‑RTK) e sistemas de visão (câmeras monoculares, câmeras multiespectrais e câmeras estéreo). Além disso, nas seções experimentais são citadas câmeras RGB. Mapeando esses sensores para os termos do domínio especificado, temos: LIDAR → \"LIDAR\", GPS → \"gps\", câmeras monoculares e RGB → \"câmera\", câmeras multiespectrais → \"câmera multiespectral\", câmeras estéreo → \"câmera estéreo\".",
+                "raw_response": "{\n  \"raciocinio\": \"Nos trechos fornecidos, o artigo descreve que sistemas de estimativa de rendimento utilizam três tipos de sensores: sensores de alcance (LIDAR e sonar), sensores de localização (GPS e GPS‑RTK) e sistemas de visão (câmeras monoculares, câmeras multiespectrais e câmeras estéreo). Além disso, nas seções experimentais são citadas câmeras RGB. Mapeando esses sensores para os termos do domínio especificado, temos: LIDAR → \\\"LIDAR\\\", GPS → \\\"gps\\\", câmeras monoculares e RGB → \\\"câmera\\\", câmeras multiespectrais → \\\"câmera multiespectral\\\", câmeras estéreo → \\\"câmera estéreo\\\".\",\n  \"Sensores Utilizados\": [\n    \"câmera\",\n    \"câmera multiespectral\",\n    \"câmera estéreo\",\n    \"LIDAR\",\n    \"gps\"\n  ]\n}",
+                "score": 20,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "ResNet50",
+                    "TL"
+                ],
+                "actual": [],
+                "reasoning": "O contexto fornecido descreve diversas técnicas, módulos e arquiteturas utilizadas no artigo, mas não contém uma pergunta específica a ser respondida. Como a pergunta não está presente no texto, não há como extrair uma resposta direta.",
+                "raw_response": "{\n  \"raciocinio\": \"O contexto fornecido descreve diversas técnicas, módulos e arquiteturas utilizadas no artigo, mas não contém uma pergunta específica a ser respondida. Como a pergunta não está presente no texto, não há como extrair uma resposta direta.\",\n  \"Resposta\": \"Não informado no contexto\",\n  \"Bibliotecas, Frameworks ou Arquiteturas\": []\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "estimativas de produção"
+                ],
+                "actual": [
+                    "detecção",
+                    "estimativas de produção"
+                ],
+                "reasoning": "O artigo descreve um sistema que detecta, localiza e mapeia frutas e copas de árvores usando apenas uma câmera monocular. O objetivo central do método é estimar o rendimento total da cultura, ou seja, fornecer estimativas de produção. Para isso, realiza a detecção de frutos e a construção de um mapa 3D global que permite contar os frutos. Assim, as aplicações principais do sistema correspondem às tarefas de detecção de objetos (frutos) e de estimativas de produção.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um sistema que detecta, localiza e mapeia frutas e copas de árvores usando apenas uma câmera monocular. O objetivo central do método é estimar o rendimento total da cultura, ou seja, fornecer estimativas de produção. Para isso, realiza a detecção de frutos e a construção de um mapa 3D global que permite contar os frutos. Assim, as aplicações principais do sistema correspondem às tarefas de detecção de objetos (frutos) e de estimativas de produção.\",\n  \"Aplicações Principais\": [\n    \"detecção\",\n    \"estimativas de produção\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    },
+    {
+        "article_id": "59",
+        "original_filename": "(59) Computers and Electronics in Agriculture.pdf",
+        "log_file": "59_computers_and_electronics_in_agricult_250c_50o_20260611_194028.json",
+        "timestamp": "20260611_194028",
+        "overall_score": 70,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(CNN) Redes Neurais Convolucionais",
+                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "reasoning": "O artigo descreve a utilização de deep learning com redes neurais convolucionais (CNN) para classificação de imagens agrícolas. Especificamente, adota a arquitetura MobileNet, que pertence à família de CNNs. Portanto, o método principal se enquadra na categoria de Redes Neurais Convolucionais.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve a utilização de deep learning com redes neurais convolucionais (CNN) para classificação de imagens agrícolas. Especificamente, adota a arquitetura MobileNet, que pertence à família de CNNs. Portanto, o método principal se enquadra na categoria de Redes Neurais Convolucionais.\",\n  \"Área Computacional\": \"(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera",
+                    "gps"
+                ],
+                "reasoning": "No texto são descritos os equipamentos de captura de imagens: duas action cameras Sony HDR‑AS300R e duas câmeras reflex Nikon D80, todas instaladas no veículo e usadas para coletar imagens laterais. Cada imagem contém informação de localização GPS, indicando que o posicionamento foi obtido via receptor GPS. Não há menção a outros tipos de sensores (IMU, LIDAR, etc.). Assim, os sensores citados correspondem aos tipos \"câmera\" e \"gps\" presentes no domínio fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"No texto são descritos os equipamentos de captura de imagens: duas action cameras Sony HDR‑AS300R e duas câmeras reflex Nikon D80, todas instaladas no veículo e usadas para coletar imagens laterais. Cada imagem contém informação de localização GPS, indicando que o posicionamento foi obtido via receptor GPS. Não há menção a outros tipos de sensores (IMU, LIDAR, etc.). Assim, os sensores citados correspondem aos tipos \\\"câmera\\\" e \\\"gps\\\" presentes no domínio fornecido.\",\n  \"Sensores Utilizados\": [\n    \"câmera\",\n    \"gps\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "tensorflow MobileNet"
+                ],
+                "actual": [
+                    "tensorflow MobileNet",
+                    "TL",
+                    "CNNs"
+                ],
+                "reasoning": "A partir dos trechos do documento constata‑se que a pesquisa utilizou a plataforma TensorFlow com o modelo MobileNet, aplicando aprendizagem por transferência (transfer learning – TL) e redes neurais convolucionais (CNNs). Esses são os únicos itens que coincidem exatamente com os valores listados no domínio fornecido.",
+                "raw_response": "{\n  \"raciocinio\": \"A partir dos trechos do documento constata‑se que a pesquisa utilizou a plataforma TensorFlow com o modelo MobileNet, aplicando aprendizagem por transferência (transfer learning – TL) e redes neurais convolucionais (CNNs). Esses são os únicos itens que coincidem exatamente com os valores listados no domínio fornecido.\",\n  \"Tecnologias Utilizadas\": [\n    \"tensorflow MobileNet\",\n    \"TL\",\n    \"CNNs\"\n  ]\n}",
+                "score": 33,
+                "status": "Parcial"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "classificação"
+                ],
+                "actual": "classificação",
+                "reasoning": "O artigo descreve um método que utiliza imagens de nível de rua (SLI) combinadas com deep learning para identificar o tipo de cultura e o estágio fenológico das plantas. Essas atividades correspondem à atribuição de rótulos a imagens, ou seja, à tarefa de classificar (e também detectar) os cultivos presentes nas imagens. Não há menção a tarefas de navegação, segmentação de imagens ou estimativas de produção; portanto, a aplicação principal mapeada ao domínio fornecido é 'classificação'.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve um método que utiliza imagens de nível de rua (SLI) combinadas com deep learning para identificar o tipo de cultura e o estágio fenológico das plantas. Essas atividades correspondem à atribuição de rótulos a imagens, ou seja, à tarefa de classificar (e também detectar) os cultivos presentes nas imagens. Não há menção a tarefas de navegação, segmentação de imagens ou estimativas de produção; portanto, a aplicação principal mapeada ao domínio fornecido é 'classificação'.\",\n  \"Aplicações Principais\": \"classificação\"\n}",
+                "score": 100,
+                "status": "Correto"
+            }
+        }
+    },
+    {
+        "article_id": "60",
+        "original_filename": "(60) Anomaly Detection for Agricultural Vehicles Using Autoencoders.pdf",
+        "log_file": "60_anomaly_detection_for_agricultural_ve_250c_50o_20260611_193159.json",
+        "timestamp": "20260611_193159",
+        "overall_score": 62,
+        "evaluation": {
+            "Área Computacional": {
+                "expected": "(CNN) Redes Neurais Convolucionais",
+                "actual": "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)",
+                "reasoning": "O artigo descreve o uso de autoencoders convolutionais (AE, VQ‑VAE, DAE, SSAE) para detecção de anomalias em imagens de veículos agrícolas. Autoencoders são redes neurais que utilizam camadas convolucionais para codificar e decodificar imagens, enquadrando‑se na categoria de Redes Neurais Convolucionais.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve o uso de autoencoders convolutionais (AE, VQ‑VAE, DAE, SSAE) para detecção de anomalias em imagens de veículos agrícolas. Autoencoders são redes neurais que utilizam camadas convolucionais para codificar e decodificar imagens, enquadrando‑se na categoria de Redes Neurais Convolucionais.\",\n  \"Área Computacional\": \"(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)\"\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Sensores Utilizados": {
+                "expected": [
+                    "câmera"
+                ],
+                "actual": [
+                    "câmera"
+                ],
+                "reasoning": "O artigo descreve que os dados de entrada para o treinamento e teste dos modelos foram coletados pela câmera frontal do veículo agrícola. Não há menção a outros sensores como IMU, GPS, LIDAR ou demais tipos listados no domínio. Portanto, o único sensor explicitamente citado no contexto é a câmera.",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que os dados de entrada para o treinamento e teste dos modelos foram coletados pela câmera frontal do veículo agrícola. Não há menção a outros sensores como IMU, GPS, LIDAR ou demais tipos listados no domínio. Portanto, o único sensor explicitamente citado no contexto é a câmera.\",\n  \"Sensores Utilizados\": [\n    \"câmera\"\n  ]\n}",
+                "score": 100,
+                "status": "Correto"
+            },
+            "Bibliotecas, Frameworks ou Arquiteturas": {
+                "expected": [
+                    "Autoencoders VGG19"
+                ],
+                "actual": "Não informado no contexto",
+                "reasoning": "Não informado no contexto",
+                "raw_response": "{\n  \"raciocinio\": \"Não informado no contexto\",\n  \"Pergunta\": \"Não informado no contexto\"\n}",
+                "score": 0,
+                "status": "Incorreto"
+            },
+            "Solução / Tarefa Principal": {
+                "expected": [
+                    "detecção"
+                ],
+                "actual": [
+                    "navegação (obstáculos)",
+                    "detecção"
+                ],
+                "reasoning": "O artigo descreve que o sistema de detecção de anomalias pode ser integrado como ferramenta assistida para alertar o operador sobre objetos anômalos próximos ao veículo, ajudando na detecção de obstáculos e reforçando a percepção do ambiente para a navegação de veículos agrícolas. Essas funções correspondem à aplicação de detecção de objetos desconhecidos (detecção) e à utilização para melhorar a navegação em relação a obstáculos (navegação (obstáculos)).",
+                "raw_response": "{\n  \"raciocinio\": \"O artigo descreve que o sistema de detecção de anomalias pode ser integrado como ferramenta assistida para alertar o operador sobre objetos anômalos próximos ao veículo, ajudando na detecção de obstáculos e reforçando a percepção do ambiente para a navegação de veículos agrícolas. Essas funções correspondem à aplicação de detecção de objetos desconhecidos (detecção) e à utilização para melhorar a navegação em relação a obstáculos (navegação (obstáculos)).\",\n  \"Aplicações Principais\": [\n    \"navegação (obstáculos)\",\n    \"detecção\"\n  ]\n}",
+                "score": 50,
+                "status": "Parcial"
+            }
+        }
+    }
+]
