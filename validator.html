@@ -677,10 +677,6 @@
                     <button class="btn btn-danger" onclick="deleteSelectedRun()" title="Deletar Run Selecionado">🗑️</button>
                 </div>
             </div>
-            <div class="form-group" style="flex: 1;" id="compareSelectorGroup">
-                <label for="compareSelector">Comparar Configurações Com</label>
-                <select id="compareSelector" class="form-control" onchange="compareRuns()"></select>
-            </div>
         </div>
 
         <div class="main-container">
@@ -691,10 +687,80 @@
                 </div>
             </div>
             <div class="content" id="content">
-                <div class="dashboard-state" style="justify-content: center;">
-                    <div class="empty-icon">📊</div>
-                    <h2 style="color: var(--text-secondary);">Nenhum dado auditado</h2>
-                    <p style="color: var(--text-secondary); font-size: 1.1rem;">Selecione uma execução no menu ou faça o upload de um arquivo JSON.</p>
+                <!-- Active Run Metadata Card (Dynamic Test Details) -->
+                <div id="activeRunMetadataCard" class="card" style="display: none; margin-bottom: 25px; animation: fadeIn 0.4s ease;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; margin-bottom: 18px;">
+                        <h3 style="color: #fff; font-size: 1.1rem; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 8px;">
+                            📋 Dados do Teste (Configurações RAG)
+                        </h3>
+                        <span class="overall-badge" style="font-size: 0.8rem; padding: 4px 12px; background: rgba(56, 189, 248, 0.1); border-color: rgba(56, 189, 248, 0.2); color: var(--accent); font-weight: 600;" id="metaRunId">
+                            ID: N/A
+                        </span>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                        <!-- Model Card -->
+                        <div class="comp-box" style="padding: 12px 18px; background: rgba(0, 0, 0, 0.25); border-color: rgba(255, 255, 255, 0.03);">
+                            <h4 style="font-size: 0.65rem; color: var(--text-secondary); margin-bottom: 6px;">🤖 Modelo Utilizado</h4>
+                            <div id="metaModelName" style="font-size: 0.95rem; font-weight: 700; color: #fff;">-</div>
+                        </div>
+                        
+                        <!-- Chunks and Overlap Card -->
+                        <div class="comp-box" style="padding: 12px 18px; background: rgba(0, 0, 0, 0.25); border-color: rgba(255, 255, 255, 0.03);">
+                            <h4 style="font-size: 0.65rem; color: var(--text-secondary); margin-bottom: 6px;">📐 Chunks & Overlap</h4>
+                            <div id="metaChunksOverlap" style="font-size: 0.95rem; font-weight: 700; color: #fff;">-</div>
+                        </div>
+                        
+                        <!-- Execution Date Card -->
+                        <div class="comp-box" style="padding: 12px 18px; background: rgba(0, 0, 0, 0.25); border-color: rgba(255, 255, 255, 0.03);">
+                            <h4 style="font-size: 0.65rem; color: var(--text-secondary); margin-bottom: 6px;">📅 Data de Execução</h4>
+                            <div id="metaExecDate" style="font-size: 0.95rem; font-weight: 700; color: #fff;">-</div>
+                        </div>
+                        
+                        <!-- Average Success Rate Card -->
+                        <div class="comp-box" style="padding: 12px 18px; background: rgba(0, 0, 0, 0.25); border-color: rgba(255, 255, 255, 0.03);">
+                            <h4 style="font-size: 0.65rem; color: var(--text-secondary); margin-bottom: 6px;">🏆 Média de Sucesso Geral</h4>
+                            <div id="metaSuccessRate" style="font-size: 1.1rem; font-weight: 800; color: var(--success);">-</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Advanced Configurations Accordion -->
+                    <div style="margin-top: 15px;">
+                        <details style="background: rgba(0, 0, 0, 0.15); border: 1px solid rgba(255,255,255,0.03); border-radius: 8px; padding: 10px 14px;">
+                            <summary style="font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: space-between;">
+                                <span>🛠️ Detalhes Adicionais da Configuração</span>
+                                <span style="font-size: 0.65rem; color: var(--accent);">Visualizar</span>
+                            </summary>
+                            
+                            <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 12px;">
+                                <div style="font-size: 0.8rem;">
+                                    <strong style="color: var(--text-secondary);">🗄️ Bancos de Dados Usados:</strong>
+                                    <span id="metaDbsList" style="color: #e2e8f0; margin-left: 5px;">-</span>
+                                </div>
+                                <div style="font-size: 0.8rem;">
+                                    <strong style="color: var(--text-secondary);">🔍 N Results (Busca Vetorial):</strong>
+                                    <span id="metaNResults" style="color: #e2e8f0; margin-left: 5px;">-</span>
+                                </div>
+                                <div>
+                                    <strong style="color: var(--text-secondary); font-size: 0.8rem; display: block; margin-bottom: 5px;">❓ Perguntas do Teste:</strong>
+                                    <div id="metaQuestionsList" style="font-size: 0.8rem; color: #cbd5e1; max-height: 200px; overflow-y: auto; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; display: flex; flex-direction: column; gap: 10px;">-</div>
+                                </div>
+                                <div>
+                                    <strong style="color: var(--text-secondary); font-size: 0.8rem; display: block; margin-bottom: 5px;">💬 Template de Prompt Usado:</strong>
+                                    <pre id="metaPromptTemplate" style="white-space: pre-wrap; font-size: 0.75rem; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; max-height: 150px; overflow-y: auto; color: #cbd5e1; font-family: monospace;"></pre>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Run Details View (Charts/Individual validations go here) -->
+                <div id="runDetailsView">
+                    <div class="dashboard-state" style="justify-content: center;">
+                        <div class="empty-icon">📊</div>
+                        <h2 style="color: var(--text-secondary);">Nenhum dado auditado</h2>
+                        <p style="color: var(--text-secondary); font-size: 1.1rem;">Selecione uma execução no menu ou faça o upload de um arquivo JSON.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -825,7 +891,6 @@
         const content = document.getElementById('content');
         const btnDashboard = document.getElementById('btnDashboard');
         const runSelector = document.getElementById('runSelector');
-        const compareSelector = document.getElementById('compareSelector');
         
         let chartInstance = null;
         let validationData = [];
@@ -833,6 +898,10 @@
         let isServerMode = false;
         let runningTask = false;
         let runsCache = {};
+        
+        // Active Run Metadata variables
+        let activeConfig = null;
+        let activeRunId = null;
 
         // Default template contents
         const DEFAULT_PROMPT = "Você é um classificador especializado em análise de artigos científicos de robótica e inteligência artificial aplicados à agricultura.\n\nUse estritamente as passagens de texto fornecidas abaixo como contexto para responder à pergunta. Não invente nenhuma informação.\n\n[CONTEXTO]\n{context}\n\n[PERGUNTA]\n{question}\n\nResponda estritamente no formato JSON, contendo apenas as chaves 'raciocinio' e a chave correspondente à pergunta.";
@@ -948,7 +1017,6 @@
                 const data = await res.json();
                 
                 runSelector.innerHTML = '<option value="">-- Selecione uma Execução --</option>';
-                compareSelector.innerHTML = '<option value="">-- Sem Comparação --</option>';
                 
                 runsCache = {};
                 
@@ -977,11 +1045,6 @@
                     opt1.value = run.id;
                     opt1.textContent = optionText;
                     runSelector.appendChild(opt1);
-
-                    const opt2 = document.createElement('option');
-                    opt2.value = run.id;
-                    opt2.textContent = optionText;
-                    compareSelector.appendChild(opt2);
                 });
             } catch (err) {
                 console.error("Erro ao listar runs:", err);
@@ -992,8 +1055,14 @@
             const runId = runSelector.value;
             if (!runId) {
                 validationData = [];
+                activeConfig = null;
+                activeRunId = null;
                 renderSidebar();
-                content.innerHTML = `
+                
+                // Hide metadata card
+                document.getElementById('activeRunMetadataCard').style.display = 'none';
+                
+                document.getElementById('runDetailsView').innerHTML = `
                     <div class="dashboard-state" style="justify-content: center;">
                         <div class="empty-icon">📊</div>
                         <h2 style="color: var(--text-secondary);">Nenhum dado selecionado</h2>
@@ -1006,13 +1075,16 @@
                 const res = await fetch(`/api/runs/${runId}`);
                 const data = await res.json();
                 validationData = data.validation_results;
+                activeConfig = data.config;
+                activeRunId = data.id;
                 
                 btnDashboard.style.display = 'block';
                 renderSidebar();
-                renderDashboard();
                 
-                // Close any open configuration comparison when loading a new run
-                removeConfigComparisonUI();
+                // Update and show metadata card
+                updateRunMetadataUI(activeRunId, activeConfig);
+                
+                renderDashboard();
             } catch (err) {
                 alert("Erro ao carregar os dados desta execução.");
             }
@@ -1461,87 +1533,140 @@
             }
         }
 
-        // --- COMPARATOR VIEW ---
-        
-        function removeConfigComparisonUI() {
-            const comp = document.getElementById('comparisonContainer');
-            if (comp) comp.remove();
+        // --- HELPER FUNCTIONS FOR TEST DETAILS ---
+
+        function parseChunksAndOverlap(databases) {
+            if (!databases || !Array.isArray(databases) || databases.length === 0) {
+                return "N/A";
+            }
+            const results = [];
+            databases.forEach(db => {
+                const match = db.match(/_(\d+)c_(\d+)o/);
+                if (match) {
+                    results.push(`${match[1]} palavras (Overlap: ${match[2]})`);
+                } else {
+                    results.push(db);
+                }
+            });
+            return results.join(', ');
         }
 
-        function compareRuns() {
-            const runAId = runSelector.value;
-            const runBId = compareSelector.value;
+        function formatTimestamp(timestampStr) {
+            if (!timestampStr) return "N/A";
+            try {
+                const date = new Date(timestampStr);
+                if (isNaN(date.getTime())) {
+                    const match = timestampStr.match(/^(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})$/);
+                    if (match) {
+                        return `${match[3]}/${match[2]}/${match[1]} ${match[4]}:${match[5]}:${match[6]}`;
+                    }
+                    return timestampStr;
+                }
+                return date.toLocaleDateString('pt-BR') + " " + date.toLocaleTimeString('pt-BR', [], {hour: '2-digit', minute:'2-digit'});
+            } catch (e) {
+                return timestampStr;
+            }
+        }
 
-            if (!runAId) return;
-
-            if (!runBId) {
-                removeConfigComparisonUI();
+        function updateRunMetadataUI(runId, config) {
+            const metaCard = document.getElementById('activeRunMetadataCard');
+            if (!validationData || validationData.length === 0) {
+                metaCard.style.display = 'none';
                 return;
             }
-
-            const runA = runsCache[runAId];
-            const runB = runsCache[runBId];
-
-            if (!runA || !runB) return;
-
-            // Remove any previous comparison UI before creating a new one
-            removeConfigComparisonUI();
-
-            // Create comparison table element dynamically
-            const comparisonHTML = `
-            <div id="comparisonContainer" class="card" style="margin-top: 30px; animation: fadeIn 0.4s ease;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
-                    <h3 style="color: #fff; font-size: 1.1rem; font-weight: 700;">🔍 Comparação Detalhada de Configurações</h3>
-                    <button class="btn" style="padding: 4px 10px; font-size: 11px;" onclick="removeConfigComparisonUI()">Fechar Comparação</button>
-                </div>
-                <div class="comparison-table-wrapper">
-                    <table class="comparison-table">
-                        <thead>
-                            <tr>
-                                <th>Parâmetro</th>
-                                <th style="color: var(--accent);">${runA.id} (Atual)</th>
-                                <th>${runB.id} (Comparado)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Data de Execução</strong></td>
-                                <td>${new Date(runA.config.timestamp).toLocaleString()}</td>
-                                <td>${new Date(runB.config.timestamp).toLocaleString()}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Modelo Chat</strong></td>
-                                <td class="${runA.config.chat_model !== runB.config.chat_model ? 'highlight' : ''}">${runA.config.chat_model}</td>
-                                <td>${runB.config.chat_model}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>N Results (RAG)</strong></td>
-                                <td class="${runA.config.n_results !== runB.config.n_results ? 'highlight' : ''}">${runA.config.n_results}</td>
-                                <td>${runB.config.n_results}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Bancos de Dados</strong></td>
-                                <td class="${JSON.stringify(runA.config.databases) !== JSON.stringify(runB.config.databases) ? 'highlight' : ''}">${runA.config.databases.join(', ')}</td>
-                                <td>${runB.config.databases.join(', ')}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Precisão Média Auditada</strong></td>
-                                <td style="font-weight:700; color: ${getScoreColor(runA.overall_score)};">${runA.overall_score !== null ? runA.overall_score + '%' : 'N/A'}</td>
-                                <td style="font-weight:700; color: ${getScoreColor(runB.overall_score)};">${runB.overall_score !== null ? runB.overall_score + '%' : 'N/A'}</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Template de Prompt</strong></td>
-                                <td><pre style="white-space: pre-wrap; font-size: 0.75rem; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; max-height: 150px; overflow-y: auto;">${runA.config.prompt_template || 'N/A'}</pre></td>
-                                <td><pre style="white-space: pre-wrap; font-size: 0.75rem; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; max-height: 150px; overflow-y: auto;">${runB.config.prompt_template || 'N/A'}</pre></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>`;
-
-            // Insert comparison matrix just above the details cards
-            const parent = content.parentElement;
-            content.insertAdjacentHTML('afterbegin', comparisonHTML);
+            
+            metaCard.style.display = 'block';
+            
+            // Calc Overall Average
+            let totalAvg = 0;
+            validationData.forEach(item => {
+                totalAvg += item.overall_score || 0;
+            });
+            const avgScore = validationData.length > 0 ? Math.round(totalAvg / validationData.length) : 0;
+            
+            // Set Run ID
+            document.getElementById('metaRunId').textContent = `ID: ${runId}`;
+            
+            // Success Rate element style update
+            const successRateEl = document.getElementById('metaSuccessRate');
+            successRateEl.textContent = `${avgScore}%`;
+            successRateEl.style.color = getScoreColor(avgScore);
+            
+            if (config) {
+                // Populate server run configuration
+                document.getElementById('metaModelName').textContent = config.chat_model || "Não especificado";
+                
+                // Parse Chunks & Overlap from database folders
+                document.getElementById('metaChunksOverlap').textContent = parseChunksAndOverlap(config.databases);
+                
+                // Format Date
+                document.getElementById('metaExecDate').textContent = formatTimestamp(config.timestamp);
+                
+                // Details
+                document.getElementById('metaDbsList').textContent = config.databases ? config.databases.join(', ') : "Nenhum";
+                document.getElementById('metaNResults').textContent = config.n_results || "N/A";
+                document.getElementById('metaPromptTemplate').textContent = config.prompt_template || "N/A";
+                
+                // Render Questions
+                const questionsListEl = document.getElementById('metaQuestionsList');
+                if (config.question_json && config.question_json.questions) {
+                    let questionsHTML = '';
+                    config.question_json.questions.forEach((q, idx) => {
+                        const optionsList = q.options ? q.options.map(opt => `<span style="display: inline-block; font-size: 0.7rem; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.08); color: #cbd5e1; padding: 2px 8px; border-radius: 4px; margin-right: 4px; margin-top: 4px;">${opt}</span>`).join('') : '';
+                        questionsHTML += `
+                            <div style="padding-bottom: 10px; border-bottom: 1px dashed rgba(255,255,255,0.05); margin-bottom: 8px;">
+                                <div style="font-weight: 600; color: var(--accent); margin-bottom: 2px;">P${idx+1}: ${q.title}</div>
+                                <div style="font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 4px;">${q.instruction || ''}</div>
+                                <div style="display: flex; flex-wrap: wrap;">${optionsList}</div>
+                            </div>
+                        `;
+                    });
+                    questionsListEl.innerHTML = questionsHTML;
+                } else {
+                    questionsListEl.innerHTML = `<i style="color: var(--text-secondary);">Nenhuma pergunta registrada nesta run.</i>`;
+                }
+            } else {
+                // Standalone / Manual Upload mode
+                document.getElementById('metaModelName').textContent = "Upload Manual (Config Inexistente)";
+                
+                // Try to estimate date and chunk size
+                let dateStr = "N/A";
+                let chunksOverlapStr = "N/A";
+                if (validationData.length > 0) {
+                    const firstItem = validationData[0];
+                    if (firstItem.timestamp) {
+                        dateStr = formatTimestamp(firstItem.timestamp);
+                    }
+                    if (firstItem.log_file) {
+                        const match = firstItem.log_file.match(/_b_(\d+)c_(\d+)o_/);
+                        if (match) {
+                            chunksOverlapStr = `${match[1]} palavras (Overlap: ${match[2]})`;
+                        }
+                    }
+                }
+                
+                document.getElementById('metaChunksOverlap').textContent = chunksOverlapStr;
+                document.getElementById('metaExecDate').textContent = dateStr;
+                
+                document.getElementById('metaDbsList').textContent = "Upload Manual";
+                document.getElementById('metaNResults').textContent = "Desconhecido";
+                document.getElementById('metaPromptTemplate').textContent = "Não disponível no arquivo JSON de validação.";
+                
+                // Reconstruct questions from evaluation keys if possible
+                const questionsListEl = document.getElementById('metaQuestionsList');
+                let questionsHTML = '';
+                if (validationData.length > 0 && validationData[0].evaluation) {
+                    const keys = Object.keys(validationData[0].evaluation);
+                    keys.forEach((keys, idx) => {
+                        questionsHTML += `
+                            <div style="padding-bottom: 6px; border-bottom: 1px dashed rgba(255,255,255,0.05); margin-bottom: 6px;">
+                                <div style="font-weight: 600; color: var(--accent);">P${idx+1}: ${keys}</div>
+                            </div>
+                        `;
+                    });
+                }
+                questionsListEl.innerHTML = questionsHTML || `<i style="color: var(--text-secondary);">Perguntas não identificadas.</i>`;
+            }
         }
 
         // --- FALLBACK MANUALLY UPLOAD ---
@@ -1553,8 +1678,11 @@
             reader.onload = function(evt) {
                 try {
                     validationData = JSON.parse(evt.target.result);
+                    activeConfig = null;
+                    activeRunId = file.name;
                     btnDashboard.style.display = 'block';
                     renderSidebar();
+                    updateRunMetadataUI(activeRunId, activeConfig);
                     renderDashboard();
                 } catch (err) {
                     alert("Erro ao processar arquivo JSON.");
@@ -1646,7 +1774,7 @@
                 }
             }
 
-            content.innerHTML = `
+            document.getElementById('runDetailsView').innerHTML = `
                 <div class="dashboard-state">
                     <h2 style="color: #fff;">Performance Geral do Pipeline: <span style="color: ${getScoreColor(totalAvg)}">${totalAvg}%</span></h2>
                     
@@ -1774,7 +1902,7 @@
                 `;
             }
 
-            content.innerHTML = html;
+            document.getElementById('runDetailsView').innerHTML = html;
         }
     </script>
 </body>
