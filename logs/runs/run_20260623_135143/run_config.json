@@ -1,0 +1,96 @@
+{
+    "timestamp": "2026-06-23T13:51:43.838065",
+    "chat_model": "gemma4:31b-cloud",
+    "n_results": 18,
+    "prompt_template": "Você é um classificador especializado em análise de artigos científicos de robótica e inteligência artificial aplicados à agricultura.\n\nUse estritamente as passagens de texto fornecidas abaixo como contexto para responder à pergunta. Não invente nenhuma informação.\n\n[CONTEXTO]\n{context}\n\n[PERGUNTA]\n{question}\n\nResponda estritamente no formato JSON, contendo apenas as chaves 'raciocinio' e a chave correspondente à pergunta.",
+    "question_json": {
+        "intro": "Com base no contexto fornecido, responda estritamente a pergunta abaixo sobre a pesquisa do artigo. Não extraia outras informações extras. Caso a informação não conste no contexto, responda com \"Não informado no contexto\".\n\nIMPORTANTE: Apresente sua resposta unicamente de forma estruturada em um arquivo JSON válido contendo exatamente duas chaves:\n1. \"raciocinio\": Uma string onde você deduz e explica sua lógica.\n2. \"<TITULO_DA_PERGUNTA>\": Substitua por (ex: 'Área Computacional', 'Sensores Utilizados', etc). O valor desta chave deve ser a sua resposta final extraída estritamente das opções listadas.",
+        "questions": [
+            {
+                "id": 1,
+                "title": "Área Computacional",
+                "instruction": "Classifique o método principal em UMA das opções exatas abaixo:",
+                "options": [
+                    "(VC) Visão Computacional Clássica (ex: Transformada de Hough, filtros, cor, limiarização, morfologia)",
+                    "(AM) Aprendizado de Máquina (ex: SVM, Random Forest, K-Means, Expectation-Maximization)",
+                    "(RN) Redes Neurais (ex: ELM, RNAs tradicionais)",
+                    "(CNN) Redes Neurais Convolucionais (ex: ResNet, VGG, YOLO, MobileNet, DeepLab, Autoencoders)"
+                ]
+            },
+            {
+                "id": 2,
+                "title": "Sensores Utilizados",
+                "instruction": "Liste os sensores utilizados mapeando-os estritamente para UM OU MAIS dos valores exatos do seguinte domínio:",
+                "options": [
+                    "câmera",
+                    "imu",
+                    "gps",
+                    "ccd filtro Bayer GR",
+                    "câmera binocular",
+                    "câmera binocular IR",
+                    "LIDAR",
+                    "câmera ToF",
+                    "câmera estéreo",
+                    "scanner laser",
+                    "câmera multiespectral",
+                    "kinect-v2",
+                    "câmera RGB-D",
+                    "ccd",
+                    "câm. 3D",
+                    "NIR",
+                    "térmica"
+                ]
+            },
+            {
+                "id": 3,
+                "title": "Bibliotecas, Frameworks ou Arquiteturas",
+                "instruction": "Liste as tecnologias computacionais mapeando-as estritamente para UM OU MAIS dos valores exatos do seguinte domínio:",
+                "options": [
+                    "MATLAB",
+                    "transformada Hough",
+                    "OpenCV",
+                    "NI LabView",
+                    "transformada Census",
+                    "código próprio",
+                    "ORB-SLAM2",
+                    "filtro Gabor",
+                    "K-means",
+                    "ROS",
+                    "SVM",
+                    "OpenVSLAM",
+                    "algoritmo MEC-ELM",
+                    "AlexNet",
+                    "TL",
+                    "CNN modificada",
+                    "DaSNet (Deep CNN)",
+                    "TensorRT",
+                    "SegNet",
+                    "mobile-DaSNet",
+                    "ResNet101",
+                    "DeepLabV3+",
+                    "CNNs",
+                    "ResNet50",
+                    "tensorflow MobileNet",
+                    "Autoencoders VGG19"
+                ]
+            },
+            {
+                "id": 4,
+                "title": "Solução / Tarefa Principal",
+                "instruction": "Identifique as aplicações principais do sistema mapeando-as estritamente para UM OU MAIS dos valores do seguinte domínio:",
+                "options": [
+                    "navegação (trajeto)",
+                    "navegação (mapa)",
+                    "navegação (obstáculos)",
+                    "detecção",
+                    "segmentação",
+                    "classificação",
+                    "estimativas de produção"
+                ]
+            }
+        ]
+    },
+    "databases": [
+        "db_350c_100o"
+    ]
+}
