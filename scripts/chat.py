@@ -2,7 +2,6 @@ import sys
 import os
 sys.stdout.reconfigure(encoding='utf-8')
 
-import ollama
 from ollama import Client
 import chromadb
 import json
@@ -156,7 +155,7 @@ def get_context(collection, query):
 
     # ---------------- EMBEDDING ---------------- #
 
-    embedding = ollama.embeddings(
+    embedding = ollama_client.embeddings(
         model=EMBEDDING_MODEL,
         prompt=query
     )["embedding"]

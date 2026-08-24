@@ -143,7 +143,7 @@ def main():
     logs_dir = Path(env_logs_dir) if env_logs_dir else resolve_path(paths_cfg.get("logs"), "logs")
     
     env_gt_path = os.environ.get("VALIDATE_GT_PATH")
-    gt_path = Path(env_gt_path) if env_gt_path else base_dir / "ground_truth.json"
+    gt_path = Path(env_gt_path) if env_gt_path else base_dir / "configs" / "ground_truth.json"
     
     env_out_path = os.environ.get("VALIDATE_OUT_PATH")
     out_path = Path(env_out_path) if env_out_path else logs_dir / "validation_results.json"

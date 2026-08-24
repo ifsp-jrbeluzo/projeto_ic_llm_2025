@@ -1,4 +1,4 @@
-import ollama
+from ollama import Client
 import chromadb
 from pathlib import Path
 import json
@@ -45,14 +45,14 @@ def generate_collection_name(file_path, chunk_size, overlap):
 def generate_database(db_path="./database"):
     return chromadb.PersistentClient(path=db_path)
 
-def add_chunks(collection, text_chunks, file_name, model_name):
+def add_chunks(collection, text_chunks, file_name, model_name, ollama_client):
     ids = []
     embeddings = []
     documents = []
     metadatas = []
-    
+
     for i, chunk in enumerate(text_chunks):
-        embedding = ollama.embeddings(
+        embedding = ollama_client.embeddings(
             model=model_name,
             prompt=chunk
         )["embedding"]
@@ -141,6 +141,14 @@ def main():
     paths_cfg = config.get("paths", {})
     ingest_cfg = config.get("ingest", {})
     models_cfg = config.get("models", {})
+    ollama_cfg = config.get("ollama", {})
+
+    ollama_client = Client(
+        host=ollama_cfg.get("host", "http://localhost:11434"),
+        headers={
+            "Authorization": "Bearer " + ollama_cfg.get("api_key", "")
+        }
+    )
 
     # Check environment variables for chunking params
     env_chunk_size = os.environ.get("INGEST_CHUNK_SIZE")
@@ -184,7 +192,7 @@ def main():
 
         text = pdf_to_text(file_path)
         chunks = chunkify(text, chunk_size, chunk_overlap)
-        add_chunks(collection, chunks, file_path.name, model_name)
+        add_chunks(collection, chunks, file_path.name, model_name, ollama_client)
 
     print("\nAll databases created successfully!")
 

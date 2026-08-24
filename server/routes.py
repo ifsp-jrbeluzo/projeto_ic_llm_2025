@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, BackgroundTasks, Body
 from fastapi.responses import HTMLResponse, FileResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, model_validator
 from pathlib import Path
 import json
 import os
@@ -50,6 +50,16 @@ class IngestRequest(BaseModel):
     chunk_size: int
     chunk_overlap: int
     selected_pdfs: list[str]  # filenames or ["all"]
+
+    @model_validator(mode="after")
+    def check_chunk_bounds(self):
+        if self.chunk_size <= 0:
+            raise ValueError("chunk_size deve ser maior que zero.")
+        if self.chunk_overlap < 0:
+            raise ValueError("chunk_overlap nao pode ser negativo.")
+        if self.chunk_overlap >= self.chunk_size:
+            raise ValueError(f"O Overlap ({self.chunk_overlap}) nao pode ser maior ou igual ao Chunk Size ({self.chunk_size}).")
+        return self
 
 class ChatRequest(BaseModel):
     selected_databases: list[str]  # list of folder names, e.g. ["db_100c_50o"]
@@ -303,48 +313,7 @@ async def trigger_chat(req: ChatRequest):
     with open(target_run_dir / "run_config.json", "w", encoding="utf-8") as f:
         json.dump(run_config, f, indent=4, ensure_ascii=False)
 
-    # Resolve DB paths and collections
-    # Since we can select multiple databases, we will loop through them.
-    # To do this programmatically while running `chat.py` as a subprocess, we can trigger a loop in runner or
-    # execute `chat.py` sequentially for each database.
-    # Running them sequentially in a helper task loop inside TaskRunner is very easy!
-    # Let's write a sequence runner that triggers for each DB.
-    # We can pass the settings:
-    async def run_sequence():
-        for db_name in req.selected_databases:
-            db_path = DATABASE_DIR / db_name
-            env_vars = {
-                "RAG_DB_PATH": str(db_path),
-                "RAG_COLLECTIONS": "all",
-                "RAG_LOG_DIR": str(target_run_dir),
-                "RAG_PROMPT_PATH": str(temp_prompt_path),
-                "RAG_QUESTION_PATH": str(temp_question_path),
-                "RAG_N_RESULTS": str(req.n_results),
-                "RAG_CHAT_MODEL": req.chat_model
-            }
-            # We want runner.run_process to complete first, but since it launches a task in background,
-            # we should update TaskRunner to support sequential execution or wait for it.
-            # Actually, we can run them in a custom script or just let chat.py process it.
-            # Wait, can we pass a custom environment to chat.py that points to a specific database?
-            # Yes! But chat.py normally runs on ONE database (calculated from chunk_size/overlap, or overridden by RAG_DB_PATH).
-            # If the user selected MULTIPLE databases, we can run chat.py multiple times!
-            # Let's adjust routes.py to launch a background sequence loop that executes chat.py for each database.
-            pass
-
-    # Actually, we can build a small custom wrapper script or handle it directly in TaskRunner.
-    # Let's do it in routes.py using background tasks or by updating TaskRunner to handle list of env_overrides.
-    # Wait, the easiest and cleanest way is to trigger a background function in FastAPI that runs the subprocesses sequentially!
-    # Let's define a background worker in routes.py that runs the processes:
-    
-    # We can define a list of database paths to run sequentially
-    db_paths = [str(DATABASE_DIR / db) for db in req.selected_databases]
-    
-    # Trigger RAG pipeline. Since TaskRunner only manages one subprocess at a time, we will run the sequence.
-    # Let's invoke runner.run_process in a loop. To do this, let's create a custom runner flow.
-    # Actually, let's create a new method `run_pipeline_sequence` in TaskRunner that takes the list of DB env overrides.
-    # That is extremely clean!
-    
-    # Let's construct env list
+    # Executa chat.py uma vez por banco selecionado, sequencialmente
     env_sequence = []
     for db_name in req.selected_databases:
         db_path = DATABASE_DIR / db_name
