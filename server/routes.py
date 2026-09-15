@@ -32,6 +32,19 @@ def resolve_path(cfg_val, default_rel):
         return path
     return BASE_DIR / path
 
+def resolve_safe_child(base_dir: Path, name: str) -> Path:
+    """
+    Resolve `name` como um filho direto de `base_dir`, recusando qualquer
+    tentativa de escapar da pasta (ex: "..", separadores de path). Usado nos
+    endpoints de delete, que recebem o nome direto da URL.
+    """
+    if not name or name in (".", "..") or "/" in name or "\\" in name:
+        raise HTTPException(status_code=400, detail="Nome inválido.")
+    candidate = (base_dir / name).resolve()
+    if candidate.parent != base_dir.resolve():
+        raise HTTPException(status_code=400, detail="Nome inválido.")
+    return candidate
+
 PAPERS_DIR = resolve_path(paths_cfg.get("papers"), "papers")
 DATABASE_DIR = resolve_path(paths_cfg.get("database"), "database")
 LOGS_DIR = resolve_path(paths_cfg.get("logs"), "logs")
@@ -224,7 +237,7 @@ async def get_run(run_id: str):
 # API: Delete a run
 @router.delete("/api/runs/{run_id}")
 async def delete_run(run_id: str):
-    run_path = RUNS_DIR / run_id
+    run_path = resolve_safe_child(RUNS_DIR, run_id)
     if not run_path.exists() or not run_path.is_dir():
         raise HTTPException(status_code=404, detail="Run não encontrado")
     try:
@@ -236,7 +249,7 @@ async def delete_run(run_id: str):
 # API: Delete a database
 @router.delete("/api/databases/{db_name}")
 async def delete_database(db_name: str):
-    db_path = DATABASE_DIR / db_name
+    db_path = resolve_safe_child(DATABASE_DIR, db_name)
     if not db_path.exists() or not db_path.is_dir():
         raise HTTPException(status_code=404, detail="Banco de dados não encontrado")
     try:
