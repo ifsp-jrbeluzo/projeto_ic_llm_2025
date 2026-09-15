@@ -84,3 +84,85 @@ Caso queira rodar operações diretamente pelo terminal (sem a UI), você pode r
 - `python scripts/ingest.py`: Processa PDFs e gera bancos vetoriais.
 - `python scripts/chat.py`: Interface de linha de comando (CLI) simples para fazer perguntas avulsas.
 - `python scripts/validate.py`: Script para avaliar a eficácia dos testes do pipeline RAG.
+
+---
+
+## Como a Pipeline Funciona (passo a passo)
+
+A pipeline tem três etapas independentes, cada uma disparada por um script em
+`scripts/` (via CLI ou pelo painel web, que roda os mesmos scripts como
+subprocesso através do `TaskRunner` em `server/runner.py`).
+
+### 1. Ingestão (`scripts/ingest.py`)
+
+Transforma os PDFs de `papers/` em um banco vetorial pesquisável.
+
+1. **Extração de texto** (`scripts/core/pdf_extractor.py`): cada página do PDF
+   é lida com `pypdf`.
+2. **Remoção da bibliografia:** o texto extraído é enviado para a LLM de chat
+   configurada em `config.json` (`models.chat`), que analisa o final do
+   documento e aponta em que linha começa a lista de referências - a LLM
+   recebe só a "cauda" do texto (últimos ~30.000 caracteres, onde a
+   bibliografia sempre está) numerada linha a linha, e responde com o índice
+   da linha onde a seção começa, ou `NONE` se não achar nenhuma. Isso troca
+   um regex que procurava o título da seção ("References", "Bibliography"...)
+   por uma decisão semântica da própria LLM, porque PDFs frequentemente
+   quebram esse título em várias linhas ou fontes diferentes, o que fazia o
+   regex passar reto e deixar a bibliografia inteira dentro do texto
+   analisado depois. Se a chamada à LLM falhar por qualquer motivo (rede,
+   timeout), a ingestão não é interrompida: o texto completo é mantido sem
+   corte, e um aviso é impresso no console.
+3. **Chunking** (`scripts/core/chunker.py`): o texto (já sem bibliografia) é
+   dividido em pedaços de `chunk_size` palavras, com sobreposição de
+   `chunk_overlap` palavras entre pedaços vizinhos, para não perder contexto
+   nas bordas.
+4. **Embeddings:** cada chunk vira um vetor usando o modelo de embedding
+   configurado (`models.embedding`, padrão `embeddinggemma`). Embeddings
+   **sempre** rodam num Ollama local (`http://localhost:11434`) - o endpoint
+   cloud do Ollama (`https://ollama.com`) não serve `/api/embeddings` nem
+   hospeda `embeddinggemma`, só modelos de chat.
+5. **Armazenamento:** os vetores, os textos e os metadados (`source`, número
+   do chunk) são gravados no ChromaDB, numa pasta isolada por configuração de
+   particionamento (`database/db_{chunk_size}c_{chunk_overlap}o/`), com uma
+   coleção por PDF.
+
+### 2. Execução RAG / Perguntas (`scripts/chat.py`)
+
+Para cada banco de dados selecionado e cada pergunta definida em
+`question.json`:
+
+1. A pergunta vira um embedding (mesmo modelo local usado na ingestão).
+2. O ChromaDB retorna os `n_results` chunks mais similares à pergunta.
+3. Os chunks recuperados são agrupados por documento de origem e formatados
+   como contexto (limitado a `rag.max_context_chars` caracteres).
+4. O template em `prompt.txt` é preenchido com a pergunta e o contexto e
+   enviado para o modelo de chat configurado (local ou cloud, com retry
+   automático em caso de falha de API).
+5. A LLM responde em JSON estruturado, sempre incluindo um campo
+   `"raciocinio"` explicando a escolha, além do valor extraído.
+6. Cada interação (pergunta, chunks usados, prompt final, resposta) é
+   registrada num log JSON por coleção/execução, em `logs/` (ou
+   `logs/runs/<run>/` quando disparado pela UI).
+
+### 3. Validação (`scripts/validate.py`)
+
+Compara os logs gerados na etapa anterior com o gabarito em
+`ground_truth.json`:
+
+1. Identifica o artigo de cada log pelo número entre parênteses no nome do
+   arquivo original (ex: `(23) Automatic detection...`).
+2. Faz o parse da resposta JSON de cada interação e compara o valor extraído
+   com o valor esperado no gabarito, usando comparação por conjunto de
+   palavras (com um limiar de similaridade) para tolerar pequenas variações
+   de escrita.
+3. Calcula um score por campo (Correto/Parcial/Incorreto) e uma média geral
+   por artigo, salvando tudo em `validation_results.json` dentro da mesma
+   pasta de logs.
+
+### 4. Painel Web (`app.py`, `server/`)
+
+Um FastAPI (`app.py` + `server/routes.py`) expõe essas três etapas como
+tarefas assíncronas disparadas via `TaskRunner` (`server/runner.py`), que
+roda os scripts acima como subprocessos e transmite o log de execução em
+tempo real para a interface (`validator.html`), junto com telas de auditoria
+dos resultados e gerenciamento dos bancos/execuções salvas.
